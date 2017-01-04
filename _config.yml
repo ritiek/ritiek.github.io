@@ -1,2 +1,4 @@
 theme: jekyll-theme-midnight
 gem "github-pages", group: :jekyll_plugins
+title: 'Does it Work?'
+description: 'Can you read this?'
