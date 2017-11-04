@@ -10,4 +10,4 @@ redirect_from:
 
 Hello! My name is Ritiek Malhotra.
 
-I am 17 year old, currently a 1st year college student. I spend most of my time tinkering with electronics and writing code.
+I am 17 years old, currently a 1st year college student. I spend most of my time tinkering with electronics and writing code.

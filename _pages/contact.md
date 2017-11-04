@@ -1,16 +1,10 @@
 ---
 layout: archive
-title: "Contact me"
+title: "Contact Me"
 permalink: /contact/
 author_profile: true
 ---
 
-{% if author.googlescholar %}
-  You can also find my articles on <u><a href="{{author.googlescholar}}">my Google Scholar profile</a>.</u>
-{% endif %}
+I'd love to get in touch with you.
 
-{% include base_path %}
-
-{% for post in site.publications reversed %}
-  {% include archive-single.html %}
-{% endfor %}
+Send an email to [<u>ritiekmalhotra123@gmail.com</u>](mailto:ritiekmalhotra123@gmail.com).
