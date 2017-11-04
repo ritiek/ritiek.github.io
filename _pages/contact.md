@@ -5,6 +5,8 @@ permalink: /contact/
 author_profile: true
 ---
 
-I'd love to get in touch with you.
+That's all folks.
 
-Send an email to [<u>ritiekmalhotra123@gmail.com</u>](mailto:ritiekmalhotra123@gmail.com).
+Want to get in touch with me personally?
+
+Send an email to [<u>ritiekmalhotra123@gmail.com</u>](mailto:ritiekmalhotra123@gmail.com). I'll try to respond as soon as possible.

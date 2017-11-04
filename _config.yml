@@ -14,6 +14,7 @@ description              : &description "17 y/o. I like open-source and cookies.
 url                      : https://ritiek.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "ritiek/ritiek.github.io"
+github                   : [metadata]
 teaser                   :  # filename of teaser fallback teaser image placed in /images/, .e.g. "500x300.png"
 breadcrumbs              : false # true, false (default)
 words_per_minute         : 95
