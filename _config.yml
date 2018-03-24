@@ -10,7 +10,7 @@ locale                   : "en-US"
 title                    : "Ritiek Malhotra"
 title_separator          : "-"
 name                     : &name "Ritiek Malhotra"
-description              : &description "17 y/o. I like open-source and cookies."
+description              :
 url                      : https://ritiek.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "ritiek/ritiek.github.io"
