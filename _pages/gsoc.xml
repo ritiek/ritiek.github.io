@@ -20,6 +20,10 @@ author_profile: true
 					  <pubDate>{{ post.date | date_to_xmlschema }}</pubDate>
 					  <link>{{ post.url | prepend: site.url }}</link>
 					  <guid isPermaLink="true">{{ post.url | prepend: site.url }}</guid>
+            <author>
+              <name>{{ site.author.name }}</name>
+              <email>{{ site.author.email }}</email>
+            </author>
 				  </item>
 				{% endif %}
 			{% endfor %}
