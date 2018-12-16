@@ -10,7 +10,7 @@ redirect_from:
 
 Hello! My name is Ritiek Malhotra.
 
-I am an 18 years old guy and a college sophmore. I spend most of my time tinkering with electronics and toying with code.
+I am an 19 years old guy and a college sophmore. I spend most of my time tinkering with electronics and toying with code.
 
 I began coding at the age of 10. Those days were nothing more than a couple if-then statements in BASIC. Later on, I began writing small automation tools in [AutoIT](https://www.autoitscript.com/site/autoit/) to gain advantage in online-gaming. Oh, did I even mention I played computer games all day?
 It wasn't until I turned 15, I somehow got myself a Raspberry Pi and got serious with code. No one around me had much experience with programming, so I had to learn all the good stuff on my own. I completely shifted from playing computer games to playing with silicon. For some reason, I found it more engaging than gaming. It felt amazing to know about technologies like SSH, when nobody even used linux, hehe. I remember myself shutting down my Pi (which lights up the red LED on it) via SSH to confirm the commands I wrote via SSH really did work.
