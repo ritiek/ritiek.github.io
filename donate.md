@@ -6,7 +6,7 @@ permalink: /donate/
 
 If you've made it this far, you probably like me. :)
 
-wish to help open-source as much as possible but since I'm a college student and unfortunately
+I wish to help open-source as much as possible but since I'm a college student and unfortunately
 with limited savings, I'll have to find a job to pay my bills sooner or later.
 
 That is, unless I find a way to live off through my open-source work. If my work has helped you
