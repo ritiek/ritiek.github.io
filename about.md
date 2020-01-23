@@ -6,7 +6,7 @@ permalink: /about/
 
 Hello! My name is Ritiek Malhotra.
 
-I am a 19 years old guy and in my junior year. I spend most of my time tinkering with electronics and code.
+I am a 20 years old guy and in my junior year. I spend most of my time tinkering with electronics and code.
 Otherwise I play video games.
 
 ### Contact me
