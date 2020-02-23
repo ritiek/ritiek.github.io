@@ -11,4 +11,4 @@ Otherwise I play video games.
 
 ### Contact me
 
-[ritiekmalhotra123@gmail.com](mailto:ritiekmalhotra123@gmail.com)
+[ritiekmalhotra123+github@gmail.com](mailto:ritiekmalhotra123+github@gmail.com)
