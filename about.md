@@ -1,14 +1,9 @@
 ---
-layout: page
 title: About
-permalink: /about/
+layout: page
 ---
 
 Hello! My name is Ritiek Malhotra.
 
 I am a 21 years old guy and in my senior year. I spend most of my time tinkering with electronics and code.
 Otherwise I play video games.
-
-### Contact me
-
-[ritiekmalhotra123+github@gmail.com](mailto:ritiekmalhotra123+github@gmail.com)

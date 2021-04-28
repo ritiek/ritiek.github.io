@@ -1,0 +1,57 @@
+<!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox" checked>
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <br>
+  <div class="sidebar-item" style="text-align: center;">
+    <div class="nav-header-image">
+        <div class="header-logo-wrap">
+            <span class="header-logo">
+                <img src="https://www.gravatar.com/avatar/732754d4a00e6a8e4a486c097360348b?size=128" class="profileimage" alt="">
+            </span>
+        </div>
+    </div>
+    <br>
+    <p>{{ site.description }}</p>
+    <div class="social-links-wrapper">
+        <ul class="social-links">
+            <li><a href="https://github.com/ritiek"><i class="fa fa-github fa-inverse"></i> </a></li>
+            <li><a href="https://stackoverflow.com/users/6554943/ritiek"><i class="fa fa-stack-overflow fa-inverse"></i> </a></li>
+            <li><a href="https://www.reddit.com/user/Ritiek"><i class="fa fa-reddit fa-inverse"></i> </a></li>
+            <li><a href="https://www.linkedin.com/in/ritiek"><i class="fa fa-linkedin fa-inverse"></i></a></li>
+            <li><a href="mailto:ritiekmalhotra123@gmail.com"><i class="fa fa-envelope fa-inverse"></i></a></li>
+            <li><a href="{{ site.baseurl }}/atom.xml"><i class="fa fa-rss fa-inverse"></i></a></li>
+        </ul>
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item{% if page.title == 'Home' %} active{% endif %}" href="{{ '/' | absolute_url }}">Home</a>
+
+    {% comment %}
+      The code below dynamically generates a sidebar nav of pages with
+      `layout: page` in the front-matter. See readme for usage.
+    {% endcomment %}
+
+    {% assign pages_list = site.pages | sort:"url" %}
+    {% for node in pages_list %}
+      {% if node.title != null %}
+        {% if node.layout == "page" %}
+          <a class="sidebar-nav-item{% if page.url == node.url %} active{% endif %}" href="{{ node.url | absolute_url }}">{{ node.title }}</a>
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+
+    <!-- <a class="sidebar-nav-item" href="{{ site.github.repo }}/archive/v{{ site.version }}.zip">Download</a> -->
+    <!-- <a class="sidebar-nav-item" href="{{ site.github.repo }}">GitHub project</a> -->
+    <span class="sidebar-nav-item">{{ site.title }}</span>
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; {{ site.time | date: '%Y' }}. All rights reserved.
+    </p>
+  </div>
+</div>
