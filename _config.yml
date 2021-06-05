@@ -28,4 +28,4 @@ plugins:
   - jekyll-paginate
 
 # Custom vars
-google_analytics_id: #UA-XXXX-Y
+google_analytics_id: UA-195594970-1
