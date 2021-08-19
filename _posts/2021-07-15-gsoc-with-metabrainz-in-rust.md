@@ -133,7 +133,7 @@ work on my part to figure out what include parameters are accepted by what entit
 and I couldn't find it anywhere else either). Anyway, requests to relationship
 includes can now be made simliar to how subquery includes are requested for:
 
-- (This hasn't been merged into the main codebase yet, we'll get there soon!)
+- ~~(This hasn't been merged into the main codebase yet, we'll get there soon!)~~ We're there now!
 ```swift
     let ninja_tune = Label::fetch()
         .id("dc940013-b8a8-4362-a465-291026c04b42")
