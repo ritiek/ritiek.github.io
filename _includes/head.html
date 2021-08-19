@@ -13,20 +13,20 @@
   </title>
 
   {% if page.url and site.baseurl %}
-  <link rel="canonical" href="{{ page.url | absolute_url }}">
+  <link rel="canonical" href="{{ page.url | site.baseurl }}">
   {% endif %}
 
-  <link rel="stylesheet" href="{{ '/public/css/poole.css' | absolute_url }}">
-  <link rel="stylesheet" href="{{ '/public/css/syntax.css' | absolute_url }}">
-  <link rel="stylesheet" href="{{ '/public/css/lanyon.css' | absolute_url }}">
-  <link rel="stylesheet" href="{{ '/public/css/custom.css' | absolute_url }}">
+  <link rel="stylesheet" href="{{ '/public/css/poole.css' | site.baseurl }}">
+  <link rel="stylesheet" href="{{ '/public/css/syntax.css' | site.baseurl }}">
+  <link rel="stylesheet" href="{{ '/public/css/lanyon.css' | site.baseurl }}">
+  <link rel="stylesheet" href="{{ '/public/css/custom.css' | site.baseurl }}">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ '/public/apple-touch-icon-precomposed.png' | absolute_url }}">
-  <link rel="shortcut icon" href="{{ '/public/favicon.ico' | absolute_url }}">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ '/public/apple-touch-icon-precomposed.png' | site.baseurl }}">
+  <link rel="shortcut icon" href="{{ '/public/favicon.ico' | site.baseurl }}">
 
-  <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ '/atom.xml' | absolute_url }}">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ '/atom.xml' | site.baseurl }}">
 
   {% if site.google_analytics_id %}
   <script>
