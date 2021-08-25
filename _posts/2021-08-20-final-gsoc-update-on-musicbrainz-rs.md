@@ -71,7 +71,6 @@ our library, improved docs, and a little bit of refactoring.
 
 All of my PRs made during the GSoC period can be found [here](https://github.com/oknozor/musicbrainz_rs/pulls?q=is%3Apr+author%3Aritiek+created%3A%3C%3D2021-08-23).
 
-
 ## Wrapping up
 
 There are still quite a few things that could be done in musicbrainz_rs as detailed in the
@@ -83,3 +82,9 @@ a tiny bit more confident in Rust now.
 
 I'd love to contribute to musicbrainz_rs if I get the chance in future, but for now I've got to focus
 on other things. My college is over and I'm yet to find out what awaits for the future next!
+
+--------
+
+You can also read an alternate version of this post and about my final work submission at:
+
+[https://blog.metabrainz.org/2021/08/23/gsoc-2021-complete-rust-binding-for-the-musicbrainz-api/](https://blog.metabrainz.org/2021/08/23/gsoc-2021-complete-rust-binding-for-the-musicbrainz-api/).
