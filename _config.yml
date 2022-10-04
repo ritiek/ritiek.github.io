@@ -1,6 +1,6 @@
 # Setup
 title:               Ritiek Malhotra
-tagline:             'Pieces on technology and personal thoughts!'
+tagline:             'Just some of my adventures!'
 
 # description:         '<a href="https://github.com/ritiek" target="_blank">GitHub</a>,
 #                       <a href="https://stackoverflow.com/users/6554943/ritiek">Stack Overflow</a>,
@@ -10,7 +10,7 @@ tagline:             'Pieces on technology and personal thoughts!'
 #                       Reach me at<br>
 #                       <a href="mailto:ritiekmalhotra123@gmail.com">ritiekmalhotra123@gmail.com</a><br>'
 # description:         Peices on technology!
-description:         Posts ranging from technology to my personal thoughts on various topics
+description:         Just some of my adventures!
 
 url:                 https://ritiek.github.io
 baseurl:             ''
