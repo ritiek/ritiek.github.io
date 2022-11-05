@@ -207,3 +207,12 @@ Experimenting further with the unused GPIO pins, it seems like the bulb also sup
   <img src="https://i.imgur.com/rT6EEPQ.png" width="700">
   <i>Final Configuration</i>
 </p>
+
+
+Last thing I noticed was the bulb wouldn't retain its last colors and would stay off when powered off and powered on
+back. This was resolved after executing following commands under Tasmota:
+```
+SetOption0 1
+PowerRetain 1
+PowerOnState 3
+```

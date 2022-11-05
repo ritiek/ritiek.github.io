@@ -85,6 +85,6 @@ on other things. My college is over and I'm yet to find out what awaits for the 
 
 --------
 
-You can also read an alternate version of this post and about my final work submission at:
+You can also read a more detailed version of this post and about my final work submission at:
 
 [https://blog.metabrainz.org/2021/08/23/gsoc-2021-complete-rust-binding-for-the-musicbrainz-api/](https://blog.metabrainz.org/2021/08/23/gsoc-2021-complete-rust-binding-for-the-musicbrainz-api/).
