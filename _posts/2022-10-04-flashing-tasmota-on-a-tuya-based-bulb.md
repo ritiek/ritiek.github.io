@@ -160,7 +160,7 @@ the current latest version (v12.1.1) while I was at it.
 
 --------------------------------------
 
-## Template Configuration
+## Module and Template Configuration
 
 Tasmota is a generic firmware and it doesn't know what GPIO pins on the ESP microcontroller should do what.
 Heck it doesn't even know whether the device is a switch, fan, bulb or something else.
@@ -179,7 +179,7 @@ that some of the pins from the template serve some function (albeit different) o
   <i>Color Changer on Tasmota</i>
 </p>
 
-This template showed up for manual configuration in "Configuration -> Configure Template".
+This template showed up for manual configuration in "Configuration -> Configure Module".
 On checking [Tasmota's docs on different lights](https://tasmota.github.io/docs/Lights/#pwm-lights), it seems
 if only one of the pin is set to PWM while all others are set to None, this only pin will allow for brightness
 control.
@@ -201,6 +201,9 @@ and voila now Tasmota's UI had the RGB color bar show up and work as expected!
 
 Experimenting further with the unused GPIO pins, it seems like the bulb also supports Cold White and Warm White
 (check the docs what they mean!) which is really a nice bonus to have!
+
+I'm not sure of the purpose of Template Configuration and if it would have been helpful for my case. Nonetheless,
+I copied my Module Configuration over to my Template Configuration as well.
 
 
 <p align="center">
