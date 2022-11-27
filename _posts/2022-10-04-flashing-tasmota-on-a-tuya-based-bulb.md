@@ -219,3 +219,5 @@ SetOption0 1
 PowerRetain 1
 PowerOnState 3
 ```
+
+**UPDATE (27/11/2022):** There's [ClapLights](https://github.com/ritiek/ClapLights) that goes well along with it!
