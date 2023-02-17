@@ -8,7 +8,7 @@ tags:
 ---
 
 
-You mostly require three components to put up non-smart home lights and other home electronics on a network:
+It seems we mostly require three components to put up non-smart home lights and other home electronics on a network:
 1. Relay
 2. A microcontroller with Wi-Fi capabilities
 3. AC to DC converter (to supply power to the microcontroller and relay)
