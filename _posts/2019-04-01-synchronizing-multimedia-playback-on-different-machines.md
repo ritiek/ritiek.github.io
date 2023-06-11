@@ -87,4 +87,4 @@ a fun thing to do so in my spare time.
 I also found out [Snapcast](https://github.com/badaix/snapcast) (especially tailored to sync audio) to work pretty well
 might like it even more than Syncplay for audio syncing purposes! Although, I'll still stick to Syncplay for anything video
 syncing.
-I've done a revised section on syncing audio playback in [this post](/2023-06-23-capturing-and-piping-audio-output-from-a-process-in-linux/).
+I've done a revised section on syncing audio playback in [this post](/2023/06/11/capturing-and-piping-audio-output-from-a-process-in-linux/).
