@@ -362,7 +362,7 @@ That is all! You should now be able to reboot, disconnect all attached USB stick
 should show up in your hard disk's boot menu! Try booting it! Although I still face the same
 aftermath issues as I did in Linux Mint.
 
-**UPDATE:** I was able to atleast fix my freezing issue from here [https://askubuntu.com/a/796484/694881](https://askubuntu.com/a/796484/694881).
+**Update:** I was able to atleast fix my freezing issue from here [https://askubuntu.com/a/796484/694881](https://askubuntu.com/a/796484/694881).
 This seems to be an issue in lower kernel versions. Like the linked answer mentions, I had to
 append `intel_idle.max_cstate=1` to `GRUB_CMDLINE_LINUX_DEFAULT` section in `/etc/default/grub`.
 And then update my boot configuration:
