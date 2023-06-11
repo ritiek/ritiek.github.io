@@ -50,7 +50,8 @@ work reliably with this approach.
 
 So I gave up, and a bit of looking up on the Internet for external utilities. I tried out one such software mentioned -
 [Syncplay](https://github.com/Syncplay/syncplay/) which supports multiple players and mpv being one of them. `make`
-went without problems. Although, I initially had trouble to get audio-only output working on my headless Raspberry Pi,
+went without problems. Although, I initially had trouble to get audio-only (since Syncplay is more tailored to video syncing)
+output working on my headless Raspberry Pi,
 but I found out you could pass additional parameters to the player and disabled the video output (I also created an issue
 [#229](https://github.com/Syncplay/syncplay/issues/229)):
 ```
@@ -82,3 +83,8 @@ Either way, I'll keep Syncplay.
 
 I still haven't dug in the Syncplay codebase deep enough to understand how everything works yet. It might be
 a fun thing to do so in my spare time.
+
+I also found out [Snapcast](https://github.com/badaix/snapcast) (especially tailored to sync audio) to work pretty well
+might like it even more than Syncplay for audio syncing purposes! Although, I'll still stick to Syncplay for anything video
+syncing.
+I've done a revised section on syncing audio playback in [this post](/2023-06-23-capturing-and-piping-audio-output-from-a-process-in-linux/).
