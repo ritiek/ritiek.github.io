@@ -41,7 +41,7 @@ with [this $5 RGB Bulb](https://www.flipkart.com/ontube-9-watt-b22-wi-fi-smart-l
 On receiving the bulb, the box in which the bulb came in was branded by JBT, while the one on the retailer's
 website mentioned ONTUBE. It wasn't problem to me since specifications seemed to match on paper. A few things
 I found interesting was that the mobile app's UI that the manual mentioned to install
-([Lumary](https://play.google.com/store/apps/details?id=com.lumary.smart&hl=en&gl=US)] seemed awfully similar
+([Lumary](https://play.google.com/store/apps/details?id=com.lumary.smart&hl=en&gl=US)) seemed awfully similar
 to [Smart Life](https://play.google.com/store/apps/details?id=com.tuya.smartlife&hl=en&gl=US) which is pretty
 popluar with Tuya based devices! This and along with how the bulb entered into pairing mode (ON-OFF-ON-OFF-ON)
 seems to be in-sync with Tuya. At this point, I was almost certain the bulb's based on Tuya.
