@@ -120,6 +120,8 @@ We can also do multiple pipes for a bit more complexy stuff:
 $ pw-record --target alsa_output.platform-snd_aloop.0.analog-stereo - | ffmpeg -ar 48000 -f s16le -ac 2 -i - -filter:a "asetrate=48000*1.1" -f wav - | mpv --audio-buffer=5 -
 ```
 
+----------------------------------------
+
 ## Synchronizing audio output from a process to multiple machines
 
 A few years ago, I wrote a [post on synchronizing multimedia plaback (and Syncplay)](/2019/04/01/synchronizing-multimedia-playback-on-different-machines/).
