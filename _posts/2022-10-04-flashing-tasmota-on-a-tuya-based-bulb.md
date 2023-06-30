@@ -57,12 +57,15 @@ with my native machine.
 
 This method had a slight problem as I use my Pi in headless mode and I won't be able
 to stay connected via SSH if tuya-convert messes up with Pi's network settings. I worked around this by
-connecting through the micro-USB data port on the Pi to my native machine with USB A,
-[setting up my Pi to be usable as an Ethernet gadget](https://learn.adafruit.com/turning-your-raspberry-pi-zero-into-a-usb-gadget/ethernet-gadget),
-and changing Etheret network settings on my native machine to "Shared to other computers".
-Connecting to Pi through the Ethernet interface seemed to work, and now tuya-convert could have the built-in
-WiFi all for itself. Following the steps to [use tuya-convert](https://github.com/ct-Open-Source/tuya-convert#installation):
+setting up my Pi to be usable as an Ethernet gadget which can be done by adding `dtoverlay=dwc2` to Pi's
+`/boot/config.txt` (make sure to comment out any previous lines with `dtoverlay`) and appending `modules-load=dwc2,g_ether`
+to Pi's `/boot/cmdline.txt`. Now connecting through the micro-USB data port on the Pi to my native machine with USB A,
+and changing Ethernet network settings on my native machine to "Shared to other computers" should show a new
+Ethernet interface on your native machine when the Pi boots up. If you also entered a WiFi SSID, then you can SSH
+into the Pi and get the IP address our Pi got assigned on the USB gadget interface from running `hostname -I`.
+Then you can reconnect SSH using this USB gadget interface's IP address.
 
+Tuya-convert can now have the built-in WiFi all for itself. Following the steps to [use tuya-convert](https://github.com/ct-Open-Source/tuya-convert#installation):
 ```
 pi@raspberrypi:~/tuya-convert $ sudo ./start_flash.sh
 tuya-convert v2.4.5
