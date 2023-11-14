@@ -21,7 +21,7 @@ Lanyon is an unassuming [Jekyll](http://jekyllrb.com) theme that places content 
 ## Usage
 
 ```bash
-$ docker run -p 4000:4000 -v $(pwd):/site bretfisher/jekyll-serve
+$ docker run -p 4000:4000 -v $(pwd):/site bretfisher/jekyll-serve:stable-20220916052939
 ```
 
 > Lanyon is a theme built on top of [Poole](https://github.com/poole/poole), which provides a fully furnished Jekyll setup—just download and start the Jekyll server. See [the Poole usage guidelines](https://github.com/poole/poole#usage) for how to install and use Jekyll.
