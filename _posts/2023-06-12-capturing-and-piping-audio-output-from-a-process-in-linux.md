@@ -151,5 +151,5 @@ Snapcast server by default also provides a little built-in client running on [ht
 can open this in a browser (which'll be writing audio output to our actual audio output device) and tap
 the play button. If you're able to hear music now, then we're good to go!
 
-Snapcast client app is also available for Android and iOS. So get 'em and connect them to your syncy
-little audio world!
+Snapcast client app is also available for Android and iOS. We can have our phones be a part of this syncy
+mesh too.
