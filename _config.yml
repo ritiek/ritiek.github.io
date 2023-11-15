@@ -14,7 +14,7 @@ description:         Just some of my adventures!
 
 url:                 https://ritiek.github.io
 baseurl:             ''
-paginate:            3
+paginate:            1
 permalink:           pretty
 
 # About/contact
