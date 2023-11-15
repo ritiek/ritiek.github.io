@@ -69,14 +69,60 @@ remotely.
 ## Doin' it!
 
 I tried plugging in a Yubikey into my Raspberry Pi located in an (imaginary) offsite location and setting up USB
-sharing with my primary machine using [USB/IP](https://wiki.archlinux.org/title/USB/IP); seems a good enough way
-to me. The linked arch wiki page should be a good starting point, so I'd like to skip over exact details (out
-of laziness) on how I got it working.
+sharing to my primary machine using [USB/IP](https://wiki.archlinux.org/title/USB/IP); seems a good enough way
+to me. The linked arch wiki page should be a good starting point.
 
-Once setup, it works as if the remote Yubikey is physically connected to my local machine. As of writing, it
-looks like USB/IP sends unencrypted data over TCP which could be a security concern. So you'd probably want to
-setup a VPN and make USB/IP connections over it securely
-([tailscale](https://github.com/tailscale/tailscale) is fun).
+Here's what I had to do on my Raspberry Pi (server):
+
+```bash
+$ sudo apt install -y usbip
+$ sudo modprobe usbip_host
+$ sudo usbip list -l
+...
+ - busid 1-1.3 (1050:0402)
+   Yubico.com : Yubikey 4/5 U2F (1050:0402)
+...
+# ^Note Yubikey's busid: 1-1.3.
+
+# Pass Yubikey's busid below in `ExecStartPost` and `ExecStop`.
+$ echo """[Unit]
+Description=USB-IP Binding
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/sbin/usbipd
+ExecStartPost=/usr/sbin/usbip bind -b 1-1.3
+ExecStop=/usr/sbin/usbip unbind -b 1-1.3
+
+[Install]
+WantedBy=multi-user.target""" | sudo tee /etc/systemd/system/usbip-yubikey.service
+
+$ sudo systemctl daemon-reload
+$ sudo systemctl start usbip-yubikey
+
+# Optional: Auto start usbip server on boot.
+$ echo usbip_host | sudo tee /etc/modules-load.d/usbip.conf
+$ sudo systemctl enable usbip-yubikey
+```
+
+And on my primary arch machine (client):
+
+```bash
+$ sudo pacman -S usbip
+$ sudo modprobe vhci-hcd
+$ sudo usbip attach -r <pi-ip-address> -b 1-1.3
+
+# Optional: Auto load vhci-hcd kernel module on boot (won't have to `modprobe vhci-hcd` on every boot).
+$ echo vhci-hcd | sudo tee /etc/modules-load.d/usbip.conf
+```
+
+Once setup, my primary machine works as if the remote Yubikey is physically connected to it.
+You can try it out by doing something that'll invoke the Yubikey for authentication. As of writing, it looks
+like USB/IP sends unencrypted data over TCP which could be a security concern. So you'd probably want to
+setup a VPN and make USB/IP connections over it securely ([tailscale](https://github.com/tailscale/tailscale)
+is fun).
 
 ------------------------------
 
