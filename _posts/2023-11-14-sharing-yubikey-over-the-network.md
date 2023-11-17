@@ -11,10 +11,7 @@ At any point in this post, whenever I mention the term
 [Yubikey](https://www.yubico.com/products/how-the-yubikey-works/), what I really mean is any hardware-based
 authentication device that supports [FIDO2](https://fidoalliance.org/fido2/).
 
-To the reader who somehow reached this corner of the Internet; the views presented below are written mostly
-for the future me, based on my current understanding as of writing this. It doesn't represent any solid advice,
-and is open to criticism; sharing Yubikeys over the network sounds silly. I think writings here'll mostly
-interest people who are considering Yubikey as a part of their threat model.
+I think writings here'll mostly interest people who consider Yubikey in their threat model.
 
 ------------------------------
 
@@ -123,6 +120,11 @@ You can try it out by doing something that'll invoke the Yubikey for authenticat
 like USB/IP sends unencrypted data over TCP which could be a security concern. So you'd probably want to
 setup a VPN and make USB/IP connections over it securely ([tailscale](https://github.com/tailscale/tailscale)
 is fun).
+
+------------------------------
+
+**There could be more implications behind the entire idea, as well as setting up something like this.
+It'll be wise to research more before pushing something like this into production.**
 
 ------------------------------
 
