@@ -385,4 +385,4 @@ somewhere as soon as possible.
 I know that 4.16.18 is a pretty old kernel but I'd still be willing for the compromise with using
 it than having stayed put with the Windows that came pre-installed with this machine.
 
-TL;DR Do not a buy a baytrail machine if you can.
+TL;DR Do not a get yourself a baytrail machine if you can avoid it.
