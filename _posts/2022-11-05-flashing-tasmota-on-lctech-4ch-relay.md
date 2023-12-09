@@ -133,7 +133,19 @@ If you like, you can also make the following connection:
 
 Plug in and out the RST jumper cable whenever you want to hard reset/reboot your chip (this won't erase the
 flash memory). If you don't setup this RST connection, I think re-plugging the 3V3 pin should have the same effect
-([happy to accept PR if you have an ESP-01S around to confirm](https://github.com/ritiek/ritiek.github.io)).
+([happy to accept PR if you have an ESP-01S around at the moment to confirm](https://github.com/ritiek/ritiek.github.io)).
+
+<p align="center">
+  <img src="https://i.imgur.com/0prNvYl.jpg" width="650">
+  <i>Connecting to pins on the relay board</i>
+  <br>
+  <br>
+  <br>
+  <img src="https://i.imgur.com/Q0YK7i8.jpg" width="650">
+  <i>Connecting to pins directly on the ESP8266 ESP-01S</i>
+  <br>
+  <i>(Ignore the Pi Pico in above pics)</i>
+</p>
 
 Now you should be able to read and write programs to flash memory. Let's start by taking a dump of what's already
 present on the flash memory using [`esptool.py`](https://github.com/espressif/esptool):
