@@ -197,7 +197,7 @@ example stack configurations that can be plugged into portainer (or directly int
 learning to manage volumes in docker to get an idea about how persistent storage works. Losing important
 data when a running container goes down is no good.
 
-I also like having this section in my docker stack configuration:
+I also like having this section for my docker compose configurations:
 ```conf
     extra_hosts:
     - "host.docker.internal:host-gateway"
