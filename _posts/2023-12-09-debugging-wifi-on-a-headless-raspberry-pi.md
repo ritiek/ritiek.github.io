@@ -15,7 +15,13 @@ with laziness didn't help debugging in what could've been going wrong.
 
 Initial few times I shrugged it off about WiFi being WiFi, as rebooting my router/Pi would usually bring my Pi
 back online. It was annoying nonetheless, say I was outside and wanted to monitor some sensors in my house, a
-lil power trip would end up causing problem with this. Giving some thought, I realized I have a USB to TTL
+lil power trip would end up causing problem with this. I tried disabling WiFi power saving settings on my
+Pi. There's resources on this issue, such as
+[this](https://photobyte.org/raspberry-pi-unreliable-wifi-power-saving/).
+The problem still remained but I can't say for sure if it may or may have not have helped with a different
+but a related problem.
+
+Giving some thought, I realized I have a USB to TTL
 adapter and few jumper cables around which'll allow me to access Pi's serial console through my lappy, all
 without having my Pi on network. This seemed like a good enough first step to figure out what could've been
 going wrong with my Pi not connecting back to my home WiFi after a power outage.
@@ -44,6 +50,8 @@ I tried scanning for WiFi networks around me using:
 ```
 $ sudo nmcli device wifi list --rescan yes
 ```
+I think `nmcli` `nmtui` commands do not work unless you're using `NetworkManager`. So make sure to switch
+to `NetworkManager` from `dhcpcd` (which is the default as of writing) using `sudo raspi-config`.
 
 And my home WiFi doesn't show up.
 
