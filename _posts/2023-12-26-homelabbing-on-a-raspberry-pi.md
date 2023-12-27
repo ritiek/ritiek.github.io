@@ -142,8 +142,8 @@ to be hogging up all the CPU. And then sometimes the OOM killer kicked in and ev
 
 I set aside 16 GB swap space on my SSD and freezes went away, but soon I learned about zram (a Linux kernel
 module for compressing data before storing it on RAM) and I decided to set it up to reduce SSD wear as well
-as coming across convincing-enough claims about it improving read/write speeds (despite the de/compression
-CPU overhead).
+as coming across convincing-enough claims about it having better read/write speeds when compared to swapping
+on SSD (despite the de/compression CPU overhead).
 
 #### ZRAM
 
