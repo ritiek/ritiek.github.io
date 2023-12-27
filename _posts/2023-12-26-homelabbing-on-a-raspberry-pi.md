@@ -33,7 +33,7 @@ to tailscale around too weighing up and down worth an explore.
 I now self-host a couple more services besides Immich, few of them I'll mention later.
 As of late, my setup seems to be stable enough for everyday use, has increased my quality of life, and now
 feels legal to call it teeny-bit my own "homelab" given how far I think it has come. I've made rough pointers
-on technical considerations/ramifications I've had to deal with during the process, that I'd wanted to
+on technical considerations/ramifications I've had to deal with during the process, that I wanted to
 archive here in more detail.
 
 <!--It'll be a good idea to the read the entire post first. Otherwise one might take away specific parts which
