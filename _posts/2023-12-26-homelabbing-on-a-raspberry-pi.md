@@ -7,8 +7,6 @@ tags:
   - linux
 ---
 
-## The Push
-
 I've had to constantly declutter my photos and documents stored on Google Drive as I've been running
 low on the 15 GB free-tier storage since a while. Doing so has bought me a few weeks each time, but isn't fun.
 
@@ -18,9 +16,10 @@ That said, 15 GB doesn't seem much at all in the first place as of writing this;
 inflating and there are growing number of other services that like to store backups on Google Drive, leaving
 less for everything else. Getting a premium-tier should help, but it doesn't seem like a long term solution to
 me (I'm sure I'll exhaust 100 GB tier too after a while, if given the freedom) and all of this also seems to
-contribute to vendor lock-in.
+contribute to vendor lock-in. I'd also like to avoid a 3rd party service perform face recognition or deduce
+other things from my photo collections.
 
-## What I wanted
+## What I've been looking for
 
 So I decided to look out for self-hostable FOSS alternatives to Google Photos and I liked
 [Immich](https://github.com/immich-app/immich). With self-hosting things there come a plethora of other
@@ -139,7 +138,7 @@ Immich alone mentions these requirements as of writing this:
 After hosting quite a a few services besides Immich; the 4GB RAM on RPi4 did turn out to be a bottleneck after
 a while. Pi would start to freeze up and in the scenario it did let me SSH into it (I didn't had the USB to
 TTL thing set up yet) and do `btop`, it indeed seemed to be struggling with RAM while `kswapd` was seen
-to be hogging up all the CPU. And then sometimes the OOM killer kicked in and everything as a mess.
+to be hogging up all the CPU. And then sometimes the OOM killer kicked in and everything was a mess.
 
 I set aside 16 GB swap space on my SSD and freezes went away, but soon I learned about zram (a Linux kernel
 module for compressing data before storing it on RAM) and I decided to set it up to reduce SSD wear as well
@@ -165,11 +164,11 @@ mentioning lz4 being suspectible to OOM.
 
 Later on, I moved to zstd and used 1/3 out of the 4GB RAM (so 1.33 GB RAM as zram) with this sysctl config:
 ```
-vm.vfs_cache_pressure=500
-vm.swappiness=100
-vm.dirty_background_ratio=1
-vm.dirty_ratio=50
-vm.page-cluster=0
+vm.vfs_cache_pressure = 500
+vm.swappiness = 100
+vm.dirty_background_ratio = 1
+vm.dirty_ratio = 50
+vm.page-cluster = 0
 ```
 zstd has better compression ratio with lower speeds
 than lz4 on paper. I've noticed when self-hosting CPU mostly stays on idle workload most of the time and
@@ -178,7 +177,7 @@ on disk). Interestingly, CPU hogging problem that I faced with lz4 went away wit
 
 ### Overheating
 
-Without any way to control heat. On load, my Pi would quickly reach temperatures around 85°C which seems
+Without any way to control heat, my Pi would quickly reach temperatures around 85°C on load which seems
 to kick-in thermal throttling. The official RPi4 case made it worse.
 
 I then got a aluminium passive cooling case. The temperatures still get around 80° on load but now take
