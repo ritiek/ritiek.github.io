@@ -42,7 +42,7 @@ may not be as accurate, as my reasonings don't necessarily read in chronological
 ## Hardware
 
 I recently got a Raspberry Pi 4 (4GB model) and reading up seems like Immich worked fine on one. So I decided
-to get into this with my RPi4
+to get into this with my RPi4.
 
 ### Architecture
 
@@ -76,7 +76,7 @@ damaged, I could get a new USB enclosure and get back to normal working immediat
 
 • It can be re-used as internal storage in machines with PCIe slot.
 
-• NVMe is faster (though in my case, USB 3.0 speeds will probably bottleneck before anything else)
+• NVMe is faster (though in my case, USB 3.0 speeds will probably bottleneck before anything else).
 
 • My old SSD couldn't store as much and the combination of getting a reputable NVMe SSD + USB enclosure
 was cheaper to get than a USB 3.0 external SSD with the same amount of storage in my place. 
@@ -124,7 +124,6 @@ to `rpi-update`.
 
 I used ext4 with `/var/lib/docker/` as it looks to be a place with high rate of read and writes, something
 BTRFS to me still seems dicey with after researching around.
-
 
 ### Low-RAM Issues
 
@@ -220,5 +219,5 @@ and mounts the decrypted partitions with my favourite mount options.
 
 [Borg](https://github.com/borgbackup/borg) or [Kopia](https://github.com/kopia/kopia) both work decent
 for me with both onsite and offsite backups. I run them in Docker too, both on my Pi and the secondary
-machines that keep the backups. I've found that Kopia needs HTTPS set up at least on the offsite repository
-server to work correctly. `tailscale serve` worked nice when setting this up on my private tailscale network.
+machines that keep the backups. I've found that Kopia needs https set up at least on the offsite repository
+server to work correctly. `tailscale serve` worked nice when setting up https on my private tailscale network.
