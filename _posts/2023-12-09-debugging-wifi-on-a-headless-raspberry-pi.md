@@ -7,6 +7,9 @@ tags:
   - linux
 ---
 
+
+### Unsupported WiFi channels
+
 My place gets minor power outages time to time and without having a power backup to rely on, my home router
 and machines tend to go off. One peculiar thing I noticed is that about half the times when power did come
 back, my Raspberry Pi 4 would fail to connect back to my WiFi router, even when my other machines connected to
@@ -35,7 +38,7 @@ There's lots of resources out there on how to set up UART to access the serial c
 
 <!-- -------------------- -->
 
-## The Culprit
+#### The Culprit
 
 Once I got the above all set up. The next time Pi refused to connect to my home WiFi, I logged into my Pi and
 tried doing the usual network checkups.
@@ -133,5 +136,32 @@ skimming in my router settings to find something similar but no avail here. But 
 me to bind it to listen on a specific WiFi channel, and anything that the Pi is capable of listening on
 should be fine for my case. So I did it. And having me closely keep a track of this for about a week or a two,
 didn't notice the problem of my Pi not connecting my WiFi after a power outage cycle happen again.
+
+
+### Conflicting Docker Interfaces
+
+After I set up some Docker stacks, I noticed a similar problem of my Pi losing WiFi connection would happen
+randomly at times. Looking up, it seems Docker is notorious for this problem where it messes with the default
+network routes (that provide actual Internet). It seemed the problem went away once I replaced my
+`NetworkManager.conf` to ignore virtual network interfaces created by Docker and Tailscale, using the following
+contents:
+
+```yaml
+# /etc/NetworkManager/NetworkManager.conf
+
+[main]
+plugins=ifupdown,keyfile
+
+[ifupdown]
+managed=true
+
+[keyfile]
+unmanaged-devices=interface-name:docker0;interface-name:veth*;interface-name:br*;interface-name:tailscale0
+```
+
+Make sure you're using `NetworkManager` to manager network interfaces (and not `dhcpcd` or anything else)
+for this to work.
+
+--------------------
 
 WiFi is still WiFi, so until next time.
