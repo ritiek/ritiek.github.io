@@ -179,9 +179,9 @@ on disk). Interestingly, CPU hogging problem that I faced with lz4 went away wit
 Without any way to control heat, my Pi would quickly reach temperatures around 85°C on load which seems
 to kick-in thermal throttling. The official RPi4 case made it worse.
 
-I then got a aluminium passive cooling case. The temperatures still get around 80° on load but now take
+I then got a aluminium passive cooling case. The temperatures still get around 80° but now take
 couple minutes on constant load to get there, and I haven't come across any noticeable throttling so far.
-So I've been keeping this so far.
+So I've been keeping this.
 
 
 ## Software
