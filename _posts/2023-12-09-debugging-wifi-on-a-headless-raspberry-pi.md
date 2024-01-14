@@ -40,8 +40,12 @@ There's lots of resources out there on how to set up UART to access the serial c
 
 #### The Culprit
 
-Once I got the above all set up. The next time Pi refused to connect to my home WiFi, I logged into my Pi and
-tried doing the usual network checkups.
+Once I got the above all set up. The next time Pi refused to connect to my home WiFi, I logged into my Pi using:
+```bash
+$ screen /dev/ttyUSB0 115200
+```
+
+and tried doing the usual network checkups.
 
 `ping google.com` fails.
 
