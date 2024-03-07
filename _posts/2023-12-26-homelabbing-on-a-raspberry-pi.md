@@ -211,7 +211,7 @@ recently.
 
 ### Decrypting LUKS
 
-This is a preference on how someone'd like to mount their decrypt their encrypted partitions when mounting.
+This is a preference on how someone'd like to decrypt their encrypted partitions when mounting.
 I've done a little shell script that I need to manually call that asks me for my LUKS passphrase/passfile
 and mounts the decrypted partitions with my favourite mount options.
 
