@@ -194,7 +194,7 @@ That's it! Now when Process A completes its sleep: it should look something like
 Yay, The value just got to 20. Awesome!!
 
 
-Now if you see the last few lines, you'll noticed this weird error I dunno much about:
+Now if you see the last few lines, you'll notice this weird error I dunno much about:
 ```console
 *** stack smashing detected ***: <unknown> terminated
 [1]  + 32555 abort      ./process_a
