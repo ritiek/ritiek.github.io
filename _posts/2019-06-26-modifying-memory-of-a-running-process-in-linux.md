@@ -70,10 +70,14 @@ int main() {
 ```
 
 All it does is:
-  - assign a variable a value
-  - display the variable's value and its location in memory
-  - sleep the main thread for a while
-  - display the variable's value and its location in memory again
+
+1. Assign a variable a value
+
+2. Display the variable's value and its location in memory
+
+3. Sleep the main thread for a while
+
+4. Display the variable's value and its location in memory again
 
 
 Let's run it:

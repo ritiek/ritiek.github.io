@@ -1,5 +1,5 @@
 ---
-title: "Homelabbing on a Raspberry Pi"
+title: "Homelabbing on a Raspberry Pi 4"
 date: 2023-12-26
 layout: post
 comments: false
@@ -195,13 +195,13 @@ example stack configurations that can be plugged into portainer (or directly int
 learning to manage volumes in docker to get an idea about how persistent storage works. Losing important
 data when a running container goes down is no good.
 
-I also like having this section for my docker compose configurations:
+I also like having this section for my docker compose configurations whenever necessary:
 ```conf
     extra_hosts:
     - "host.docker.internal:host-gateway"
 ```
-It lets a service to interact with other services on my private tailscale network through MagicDNS domain
-names.
+It lets this docker compose service access services bound on my host OS's network interfaces, from within
+the container.
 
 ### WiFi Issues
 

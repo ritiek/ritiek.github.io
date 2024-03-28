@@ -163,5 +163,5 @@ Anyway, this is such a cool tool! I wonder why not more people know about it?
 
 **CAUTION!** If any of you wish to try the stuff above, be very careful! You are root and mistakenly moving
 or deleting any system file could put you in real trouble as you can't live boot or use other recovery
-utilities available on a usual full-fledged Linux machine with Android and Kindles (especially the
-Paperwhite 3 which doesn't even offer a fastboot mode!). A small mistake and you could end up in a void.
+utilities on Android and Kindles (especially the Paperwhite 3 which doesn't even offer a fastboot mode!).
+A small mistake and you could end up in a void.
