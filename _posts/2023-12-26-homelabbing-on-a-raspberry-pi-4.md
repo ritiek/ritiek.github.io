@@ -112,6 +112,13 @@ Here's the mount options that I've been using with BTRFS as of writing:
 $ sudo mount -o defaults,noatime,nodiscard,noautodefrag,ssd,space_cache=v2,compress-force=zstd:3 /dev/mapper/media /media
 ```
 
+It's also a good idea to make our mount point read-only when nothing's mounted to it. To do so, make sure nothing's
+mounted to our mount point and then set `+i` attribute on the mount point directory:
+```bash
+$ sudo umount /media
+$ sudo chattr +i /media
+```
+
 At the time of writing mainline kernel for RPi4 points to the `6.1.y` tree. I read around there were BTRFS
 related improvements made in the newer kernels, so I was able to update my kernel with to the `6.6.y` tree with:
 ```bash
@@ -195,6 +202,24 @@ example stack configurations that can be plugged into portainer (or directly int
 learning to manage volumes in docker to get an idea about how persistent storage works. Losing important
 data when a running container goes down is no good.
 
+--------------------
+
+#### Security Note
+
+Give special emphasis to running containers only with non-root users, and only
+make very specific host OS's volumes accessible from within the container whenever required. Say, if we
+want to use [syncthing](https://github.com/syncthing/syncthing) to sync your music from the directory
+`/media/files/music/` between other syncthing hosts, then only provide this very specific path
+`/media/files/music/` to syncthing's docker container. Do not provide access to blanket volumes such as
+`/media/` or `/media/files/` when creating the container (either with `docker run` or with docker compose).
+
+If a bad actor exploits a vulnerability in a service running inside our container, the best (worst) they
+could do is gain a reverse shell into our container. At the moment, it seems very difficult to break outside
+of a docker container (through the container's shell or anything) to gain access to the host OS. So it's
+important to minimize the level of access the user has from within the container.
+
+--------------------
+
 I also like having this section for my docker compose configurations whenever necessary:
 ```conf
     extra_hosts:
@@ -202,6 +227,10 @@ I also like having this section for my docker compose configurations whenever ne
 ```
 It lets this docker compose service access services bound on my host OS's network interfaces, from within
 the container.
+
+I think it's a good idea to make portainer's data persistent on filesystem. It helps preserve
+docker compose files for all the services which've been set up using portainer. So make sure to set
+the volume correctly when installing portainer.
 
 ### WiFi Issues
 
@@ -213,11 +242,49 @@ recently.
 
 This is a preference on how someone'd like to decrypt their encrypted partitions when mounting.
 I've done a little shell script that I need to manually call that asks me for my LUKS passphrase/passfile
-and mounts the decrypted partitions with my favourite mount options.
+and mounts the decrypted partitions with my favourite mount options:
+```sh
+#!/bin/sh
+
+sudo cryptsetup open /dev/disk/by-uuid/4v4d4k3d-4vr4-k3d4-v444-f00b4r424242 media
+sudo mount -o defaults,noatime,nodiscard,noautodefrag,ssd,space_cache=v2,compress-force=zstd:3 /dev/mapper/media /media
+
+# Setup any private stuff now
+/media/start.sh
+```
 
 ### Backups
 
 [Borg](https://github.com/borgbackup/borg) or [Kopia](https://github.com/kopia/kopia) both work decent
-for me with both onsite and offsite backups. I run them in Docker too, both on my Pi and the secondary
-machines that keep the backups. I've found that Kopia needs https set up at least on the offsite repository
-server to work correctly. `tailscale serve` worked nice when setting up https on my private tailscale network.
+for me with both onsite and offsite backups. I've set them up through portainer as well, both on my Pi and
+the secondary machines that keep the backups. I've found that Kopia needs https set up at least on the
+offsite repository server to work correctly. `tailscale cert` worked nice when setting up https for services
+running inside my private tailscale network.
+
+I was also interested in "backing up" docker compose files for the services running on my offsite backup
+machine. I was able to get this done by setting up [syncthing](https://github.com/syncthing/syncthing)
+for my backup machine's persistent portainer data volume directory, between my main machine and my offsite
+backup machine. This keeps my offiste backup machine's docker compose files synced up with my main machine.
+
+I like to keep my personal stuff and docker specific persistent data separately. Since, for my usecases,
+docker specific data is a place of more frequent write rates when compared to my personal stuff which I
+don't mess with as frequently. 
+
+This is how my directory tree looks like:
+```
+/media
+├── files
+│   ├── my-stuff
+│   ├── my-more-stuff
+│   └── offsite-docker-compose-yamls
+└── services
+    ├── immich
+    ├── pihole
+    ├── portainer
+    ├── syncthing
+    ├── tubearchivist
+    └── uptime-kuma
+```
+
+This makes setting up different backup policies for different directories a bit easier, such as I like to
+take automated backup snapshots of my docker data directory more often than the my personal stuff directory.
