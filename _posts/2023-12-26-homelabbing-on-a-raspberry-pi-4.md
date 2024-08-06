@@ -246,7 +246,7 @@ and mounts the decrypted partitions with my favourite mount options:
 ```sh
 #!/bin/sh
 
-sudo cryptsetup open /dev/disk/by-uuid/4v4d4k3d-4vr4-k3d4-v444-f00b4r424242 media
+sudo cryptsetup --perf-no_read_workqueue --perf-no_write_workqueue --persistent open /dev/disk/by-uuid/4v4d4k3d-4vr4-k3d4-v444-f00b4r424242 media
 sudo mount -o defaults,noatime,nodiscard,noautodefrag,ssd,space_cache=v2,compress-force=zstd:3 /dev/mapper/media /media
 
 # Setup any private stuff now
