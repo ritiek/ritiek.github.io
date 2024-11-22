@@ -89,6 +89,7 @@ fit for your case.
 ```bash
 $ pw-record --target alsa_output.platform-snd_aloop.0.analog-stereo - | pw-play --target alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi__hw_sofhdadsp__sink -
 ```
+(You may have to also pass in `-P stream.capture.sink=true` to `pw-record`, thanks @pkgmvd as reported on 23rd November, 2024!)
 ```bash
 $ pw-loopback -C alsa_output.platform-snd_aloop.0.analog-stereo -P alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi__hw_sofhdadsp__sink
 ```
