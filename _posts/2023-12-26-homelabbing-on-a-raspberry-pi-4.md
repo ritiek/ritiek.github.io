@@ -16,7 +16,7 @@ That said, 15 GB doesn't seem much at all in the first place as of writing this;
 inflating and there are growing number of other services that like to store backups on Google Drive, leaving
 less for everything else. Getting a premium-tier should help, but it doesn't seem like a long term solution to
 me (I'm sure I'll exhaust 100 GB tier too after a while, if given the freedom) and all of this also seems to
-contribute to vendor lock-in. I'd also like to avoid a 3rd party service perform face recognition or deduce
+contribute to vendor lock-in. I'd also like to avoid a 3rd party service perform face recognition or infer
 other things from my photo collections.
 
 ## What I've been looking for
