@@ -22,8 +22,11 @@ other things from my photo collections.
 ## What I've been looking for
 
 So I decided to look out for self-hostable FOSS alternatives to Google Photos and I liked
-[Immich](https://github.com/immich-app/immich). With self-hosting things there come a plethora of other
-things that need to be taken care of. I don't
+[Immich](https://github.com/immich-app/immich). As a side note, the process of migrating from Google Photos is
+a bit of a pain because of how Google Takeout structures the export data (metadata is stored in a separate JSON file
+whose structure Google seems to change frequently).
+
+With self-hosting things there come a plethora of other things that need to be taken care of. I don't
 want my server to be accessible only locally and my ISP puts me behind a NAT which makes port forwarding
 not work for me. Although, putting personal photos behind a public address doesn't seem like a good idea
 anyway. There are many ways to get my server accessible from the outside Internet securely.
