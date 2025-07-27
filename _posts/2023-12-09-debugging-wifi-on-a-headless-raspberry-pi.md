@@ -30,7 +30,7 @@ without having my Pi on network. This seemed like a good enough first step to fi
 going wrong with my Pi not connecting back to my home WiFi after a power outage.
 
 <p align="center">
-  <img src="https://i.imgur.com/l2HYjdi.png" width="200">
+  <img src="/public/assets/l2HYjdi.png" width="200">
   <i>USB to TTL adapter</i>
 </p>
 
@@ -121,11 +121,11 @@ wlan0     32 channels in total; available frequencies :
 and comparing these what my router provides:
 
 <p align="center">
-  <img src="https://i.imgur.com/tqz4TMn.png" width="500">
+  <img src="/public/assets/tqz4TMn.png" width="500">
   <i>2.4GHz channels</i>
   <br>
   <br>
-  <img src="https://i.imgur.com/Gsg2Wty.png" width="500">
+  <img src="/public/assets/Gsg2Wty.png" width="500">
   <i>5GHz channels</i>
 </p>
 

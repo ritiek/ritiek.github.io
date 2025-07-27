@@ -179,7 +179,7 @@ in "Configuration -> Configure Other" and restarted my bulb. Turns out it requir
 color bar on the Tasmota UI was giving me different colors than what it should have, but at least now I knew
 that some of the pins from the template serve some function (albeit different) on the same pins on my bulb.
 <p align="center">
-  <img src="https://i.imgur.com/YMka25p.png" width="350">
+  <img src="/public/assets/YMka25p.png" width="350">
   <i>Color Changer on Tasmota</i>
 </p>
 
@@ -211,7 +211,7 @@ I copied my Module Configuration over to my Template Configuration as well.
 
 
 <p align="center">
-  <img src="https://i.imgur.com/rT6EEPQ.png" width="700">
+  <img src="/public/assets/rT6EEPQ.png" width="700">
   <i>Final Configuration</i>
 </p>
 

@@ -36,7 +36,7 @@ $ sudo modprobe snd-aloop
 
 We should now see two new virtual audio devices: `Analog Output` and `Analog Input`.
 <p align="center">
-  <img src="https://i.imgur.com/ByNqPIR.png">
+  <img src="/public/assets/ByNqPIR.png">
   <i>Audio Devices</i>
 </p>
 
@@ -48,7 +48,7 @@ on other distros (try looking for it under Settings -> Audio), or install and us
 
 Haven't looked around for a CLI alternative for this purpose yet.
 <p align="center">
-  <img src="https://i.imgur.com/jbgu6C2.png">
+  <img src="/public/assets/jbgu6C2.png">
   <i>Switching playback device to virtual output device</i>
 </p>
 

@@ -19,9 +19,9 @@ My original project - to create a factory based implementation for unifying hand
 
   | PR                                                    | Status                                     | Description                                                                                                   |
   |-------------------------------------------------------|--------------------------------------------|---------------------------------------------------------------------------------------------------------------|
-  | [#501](https://github.com/PlasmaPy/PlasmaPy/pull/501) | ![Merged](https://i.imgur.com/YnDnRzm.jpg) | Raise more fitting `NotImplementedError` for functions that are yet to be implemented in our Plasma metaclass |
-  | [#489](https://github.com/PlasmaPy/PlasmaPy/pull/489) | ![Merged](https://i.imgur.com/YnDnRzm.jpg) | Independent tests for our Plasma subclasses                                                                   |
-  | [#459](https://github.com/PlasmaPy/PlasmaPy/pull/459) | ![Merged](https://i.imgur.com/YnDnRzm.jpg) | Implement a Plasma factory interface to unify handling different Plasma types                                 |
+  | [#501](https://github.com/PlasmaPy/PlasmaPy/pull/501) | ![Merged](/public/assets/YnDnRzm.jpeg) | Raise more fitting `NotImplementedError` for functions that are yet to be implemented in our Plasma metaclass |
+  | [#489](https://github.com/PlasmaPy/PlasmaPy/pull/489) | ![Merged](/public/assets/YnDnRzm.jpeg) | Independent tests for our Plasma subclasses                                                                   |
+  | [#459](https://github.com/PlasmaPy/PlasmaPy/pull/459) | ![Merged](/public/assets/YnDnRzm.jpeg) | Implement a Plasma factory interface to unify handling different Plasma types                                 |
 
 
 Hail `plasmapy.classes.Plasma`! A glimpse of how it looks like
@@ -60,7 +60,7 @@ So, h5py it was then.
 
   | PR                                                    | Status                                     | Description                                                                                                   |
   |-------------------------------------------------------|--------------------------------------------|---------------------------------------------------------------------------------------------------------------|
-  | [#500](https://github.com/PlasmaPy/PlasmaPy/pull/500) | ![Merged](https://i.imgur.com/YnDnRzm.jpg) | Implement a prototype to read attributes from HDF5 datasets based on OpenPMD standards                        |
+  | [#500](https://github.com/PlasmaPy/PlasmaPy/pull/500) | ![Merged](/public/assets/YnDnRzm.jpeg) | Implement a prototype to read attributes from HDF5 datasets based on OpenPMD standards                        |
 
 However, It still isn’t very efficient to work with larger datasets and should rather be considered a prototype at the moment.
 It currently only supports reading mesh data from an HDF5 dataset.
@@ -75,25 +75,25 @@ We ended up making our `atomic.Particle` class and `@atomic.particle_input` deco
 
   | PR                                                    | Status                                     | Description                                                                                                   |
   |-------------------------------------------------------|--------------------------------------------|---------------------------------------------------------------------------------------------------------------|
-  | [#528](https://github.com/PlasmaPy/PlasmaPy/pull/528) | ![Merged](https://i.imgur.com/YnDnRzm.jpg) | Functions decorated with `@particle_input` now accept default Particle value                                  |
-  | [#527](https://github.com/PlasmaPy/PlasmaPy/pull/527) | ![Merged](https://i.imgur.com/YnDnRzm.jpg) | Typo fixes in `@particle_input` error messages                                                                |
-  | [#510](https://github.com/PlasmaPy/PlasmaPy/pull/510) | ![Merged](https://i.imgur.com/YnDnRzm.jpg) | Add an `isotope_name` property on `Particle` class                                                            |
-  | [#504](https://github.com/PlasmaPy/PlasmaPy/pull/504) | ![Merged](https://i.imgur.com/YnDnRzm.jpg) | Add a `roman_symbol` property which returns integer Particle charge in Roman notation                         |
-  | [#493](https://github.com/PlasmaPy/PlasmaPy/pull/493) | ![Merged](https://i.imgur.com/YnDnRzm.jpg) | Decorate functions in `collisions.py` with `@particle_input` decorator                                        |
-  | [#483](https://github.com/PlasmaPy/PlasmaPy/pull/483) | ![Merged](https://i.imgur.com/YnDnRzm.jpg) | Accept a tuple or list of Particles for a parameter in a function decorated by `@particle_input`              |
-  | [#290](https://github.com/PlasmaPy/PlasmaPy/pull/290) | ![Merged](https://i.imgur.com/YnDnRzm.jpg) | [Pre-GSoC] Optionally accept integer charges in Roman notations                                               |
-  | [#265](https://github.com/PlasmaPy/PlasmaPy/pull/265) | ![Merged](https://i.imgur.com/YnDnRzm.jpg) | [Pre-GSoC] Move `Particle.reduced_mass` to a module level function                                            |
+  | [#528](https://github.com/PlasmaPy/PlasmaPy/pull/528) | ![Merged](/public/assets/YnDnRzm.jpeg) | Functions decorated with `@particle_input` now accept default Particle value                                  |
+  | [#527](https://github.com/PlasmaPy/PlasmaPy/pull/527) | ![Merged](/public/assets/YnDnRzm.jpeg) | Typo fixes in `@particle_input` error messages                                                                |
+  | [#510](https://github.com/PlasmaPy/PlasmaPy/pull/510) | ![Merged](/public/assets/YnDnRzm.jpeg) | Add an `isotope_name` property on `Particle` class                                                            |
+  | [#504](https://github.com/PlasmaPy/PlasmaPy/pull/504) | ![Merged](/public/assets/YnDnRzm.jpeg) | Add a `roman_symbol` property which returns integer Particle charge in Roman notation                         |
+  | [#493](https://github.com/PlasmaPy/PlasmaPy/pull/493) | ![Merged](/public/assets/YnDnRzm.jpeg) | Decorate functions in `collisions.py` with `@particle_input` decorator                                        |
+  | [#483](https://github.com/PlasmaPy/PlasmaPy/pull/483) | ![Merged](/public/assets/YnDnRzm.jpeg) | Accept a tuple or list of Particles for a parameter in a function decorated by `@particle_input`              |
+  | [#290](https://github.com/PlasmaPy/PlasmaPy/pull/290) | ![Merged](/public/assets/YnDnRzm.jpeg) | [Pre-GSoC] Optionally accept integer charges in Roman notations                                               |
+  | [#265](https://github.com/PlasmaPy/PlasmaPy/pull/265) | ![Merged](/public/assets/YnDnRzm.jpeg) | [Pre-GSoC] Move `Particle.reduced_mass` to a module level function                                            |
 
 
 And we fought against code coverage problems to make CodeCov happy!
 
   | PR                                                    | Status                                     | Description                                                                                                   |
   |-------------------------------------------------------|--------------------------------------------|---------------------------------------------------------------------------------------------------------------|
-  | [#506](https://github.com/PlasmaPy/PlasmaPy/pull/506) | ![Merged](https://i.imgur.com/YnDnRzm.jpg) | Write tests to improve coverage in various packages                                                           |
-  | [#502](https://github.com/PlasmaPy/PlasmaPy/pull/502) | ![Merged](https://i.imgur.com/YnDnRzm.jpg) | Move `coveragerc` file to expected default location so that it can be read correctly                          |
-  | [#498](https://github.com/PlasmaPy/PlasmaPy/pull/498) | ![Merged](https://i.imgur.com/YnDnRzm.jpg) | Add tests to improve coverage in our langmuir package                                                         |
-  | [#494](https://github.com/PlasmaPy/PlasmaPy/pull/494) | ![Merged](https://i.imgur.com/YnDnRzm.jpg) | Include `__init__.py` in our diagnostics package, so that any tests placed aren't skipped                     |
-  | [#320](https://github.com/PlasmaPy/PlasmaPy/pull/320) | ![Merged](https://i.imgur.com/YnDnRzm.jpg) | Write tests for `PlasmaBlob.regimes()`                                                                        |
+  | [#506](https://github.com/PlasmaPy/PlasmaPy/pull/506) | ![Merged](/public/assets/YnDnRzm.jpeg) | Write tests to improve coverage in various packages                                                           |
+  | [#502](https://github.com/PlasmaPy/PlasmaPy/pull/502) | ![Merged](/public/assets/YnDnRzm.jpeg) | Move `coveragerc` file to expected default location so that it can be read correctly                          |
+  | [#498](https://github.com/PlasmaPy/PlasmaPy/pull/498) | ![Merged](/public/assets/YnDnRzm.jpeg) | Add tests to improve coverage in our langmuir package                                                         |
+  | [#494](https://github.com/PlasmaPy/PlasmaPy/pull/494) | ![Merged](/public/assets/YnDnRzm.jpeg) | Include `__init__.py` in our diagnostics package, so that any tests placed aren't skipped                     |
+  | [#320](https://github.com/PlasmaPy/PlasmaPy/pull/320) | ![Merged](/public/assets/YnDnRzm.jpeg) | Write tests for `PlasmaBlob.regimes()`                                                                        |
 
 We have an astonishing code coverage - 98%! It's great that we were able to keep with our code coverage even after so much going in and out of PlasmaPy.
 
@@ -101,11 +101,11 @@ Then comes the list of all the other stuff I tinkered with during the season!
 
   | PR                                                    | Status                                     | Description                                                                                                   |
   |-------------------------------------------------------|--------------------------------------------|---------------------------------------------------------------------------------------------------------------|
-  | [#513](https://github.com/PlasmaPy/PlasmaPy/pull/513) | ![Merged](https://i.imgur.com/YnDnRzm.jpg) | Fix conda recipe by including LICENSE.md in MANIFEST.in                                                       |
-  | [#511](https://github.com/PlasmaPy/PlasmaPy/pull/511) | ![Merged](https://i.imgur.com/YnDnRzm.jpg) | Load correct URLs when using `online_help()`                                                                  |
-  | [#509](https://github.com/PlasmaPy/PlasmaPy/pull/509) | ![Open](https://i.imgur.com/Mjp2nr7.jpg)   | Some refactoring of [@tulasinandan's](https://github.com/tulasinandan) work on two fluid dispersion relations |
-  | [#360](https://github.com/PlasmaPy/PlasmaPy/pull/360) | ![Merged](https://i.imgur.com/YnDnRzm.jpg) | Mention `RelativityError` in docstrings when input velocity is same or greater than the speed of light        |
-  | [#358](https://github.com/PlasmaPy/PlasmaPy/pull/358) | ![Merged](https://i.imgur.com/YnDnRzm.jpg) | Return `Quantity` objects correctly formatted when passed to `call_string()`                                  |
+  | [#513](https://github.com/PlasmaPy/PlasmaPy/pull/513) | ![Merged](/public/assets/YnDnRzm.jpeg) | Fix conda recipe by including LICENSE.md in MANIFEST.in                                                       |
+  | [#511](https://github.com/PlasmaPy/PlasmaPy/pull/511) | ![Merged](/public/assets/YnDnRzm.jpeg) | Load correct URLs when using `online_help()`                                                                  |
+  | [#509](https://github.com/PlasmaPy/PlasmaPy/pull/509) | ![Open](/public/assets/Mjp2nr7.jpeg)   | Some refactoring of [@tulasinandan's](https://github.com/tulasinandan) work on two fluid dispersion relations |
+  | [#360](https://github.com/PlasmaPy/PlasmaPy/pull/360) | ![Merged](/public/assets/YnDnRzm.jpeg) | Mention `RelativityError` in docstrings when input velocity is same or greater than the speed of light        |
+  | [#358](https://github.com/PlasmaPy/PlasmaPy/pull/358) | ![Merged](/public/assets/YnDnRzm.jpeg) | Return `Quantity` objects correctly formatted when passed to `call_string()`                                  |
 
 
 During these months, I also got the chance to contribute to [astropy](https://github.com/astropy/astropy/) and [poliastro](https://github.com/poliastro/poliastro) which are also sub-organizations under the the OpenAstronomy umbrella organization.
@@ -114,22 +114,22 @@ During these months, I also got the chance to contribute to [astropy](https://gi
 
   | PR                                                    | Status                                     | Description                                                                                                   |
   |-------------------------------------------------------|--------------------------------------------|---------------------------------------------------------------------------------------------------------------|
-  | [#7673](https://github.com/astropy/astropy/pull/7673) | ![Open](https://i.imgur.com/YnDnRzm.jpg)   | [Upstream] Fix string Python code to test coverage on Windows which would otherwise result in `SyntaxError`   |
-  | [#7672](https://github.com/astropy/astropy/pull/7672) | ![Open](https://i.imgur.com/YnDnRzm.jpg)   | Accept non-unit type annotations in functions decorated with`@quantity_input` decorator                       |
-  | [#7284](https://github.com/astropy/astropy/pull/7284) | ![Closed](https://i.imgur.com/ksGNF55.jpg) | [Pre-GSoC] Override `HDUList.__add__()` to return a sum of two `HDUList` instances                            |
-  | [#7218](https://github.com/astropy/astropy/pull/7218) | ![Open](https://i.imgur.com/YnDnRzm.jpg)   | [Pre-GSoC] Implement shallow copy and deep copy on an `HDUList` instance                                      |
+  | [#7673](https://github.com/astropy/astropy/pull/7673) | ![Open](/public/assets/YnDnRzm.jpeg)   | [Upstream] Fix string Python code to test coverage on Windows which would otherwise result in `SyntaxError`   |
+  | [#7672](https://github.com/astropy/astropy/pull/7672) | ![Open](/public/assets/YnDnRzm.jpeg)   | Accept non-unit type annotations in functions decorated with`@quantity_input` decorator                       |
+  | [#7284](https://github.com/astropy/astropy/pull/7284) | ![Closed](/public/assets/ksGNF55.jpeg) | [Pre-GSoC] Override `HDUList.__add__()` to return a sum of two `HDUList` instances                            |
+  | [#7218](https://github.com/astropy/astropy/pull/7218) | ![Open](/public/assets/YnDnRzm.jpeg)   | [Pre-GSoC] Implement shallow copy and deep copy on an `HDUList` instance                                      |
 
 ### poliastro
 
   | PR                                                      | Status                                     | Description                                                                                                   |
   |---------------------------------------------------------|--------------------------------------------|---------------------------------------------------------------------------------------------------------------|
-  | [#312](https://github.com/poliastro/poliastro/pull/312) | ![Open](https://i.imgur.com/YnDnRzm.jpg)   | [Pre-GSoC] Return a tuple (`Time`, `CartesianRepresentation`) in `Orbit.sample()`                             |
+  | [#312](https://github.com/poliastro/poliastro/pull/312) | ![Open](/public/assets/YnDnRzm.jpeg)   | [Pre-GSoC] Return a tuple (`Time`, `CartesianRepresentation`) in `Orbit.sample()`                             |
 
 -------------------------------
 
 A lot of other cool stuff happened in these past few months. We went from a [new logo](https://github.com/PlasmaPy/PlasmaPy-logo),
 
-<img src="https://raw.githubusercontent.com/PlasmaPy/PlasmaPy-logo/master/exports/with-text-dark.png" width="350">
+<img src="/public/assets/with-text-dark.png" width="350">
 
 from no releases to releasing v0.1.1 [on PyPi](https://pypi.org/project/plasmapy/) ([coming soon on conda!](https://github.com/conda-forge/staged-recipes/pull/4793)), from [Coveralls to CodeCov](https://github.com/PlasmaPy/PlasmaPy/pull/490), confirmed that PlasmaPy works great with Python 3.7, to [submitting an abstract](https://agu.confex.com/agu/fm18/preliminaryview.cgi/Paper401465) for the AGU Fall Meeting!
 

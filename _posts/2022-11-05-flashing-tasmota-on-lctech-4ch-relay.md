@@ -15,7 +15,7 @@ It seems we mostly require three components to put up non-smart home lights and 
 3. AC to DC converter (to supply power to the microcontroller and relay)
 
 <p align="center">
-  <img src="https://i.imgur.com/TinmvJg.png" width="300">
+  <img src="/public/assets/TinmvJg.png" width="300">
   <i>LC Tech 5V 4CH Relay</i>
 </p>
 
@@ -51,7 +51,7 @@ The pre-flashed firmware had a couple of issues which are summarized nicely in a
 There are some most commonly used scenarios when wiring up the ESP-01S using a USB to TTL adapter:
 
 <p align="center">
-  <img src="https://i.imgur.com/l2HYjdi.png" width="200">
+  <img src="/public/assets/l2HYjdi.png" width="200">
   <i>USB to TTL adapter</i>
 </p>
 
@@ -120,7 +120,7 @@ paired up with RX/TX connections.
 | TX     	| RX        	|
 
 <p align="center">
-  <img src="https://i.imgur.com/lBijlVB.png" width="800">
+  <img src="/public/assets/lBijlVB.png" width="800">
   <a href="https://www.diyhobi.com/flash-program-esp-01-using-usb-serial-adapter/">
   <i>Wiring up to boot into Flash Mode with access to Serial Console</i>
   </a>
@@ -137,12 +137,12 @@ flash memory). If you don't setup this RST connection, I think re-plugging the 3
 ([happy to accept PR if you have an ESP-01S around at the moment to confirm](https://github.com/ritiek/ritiek.github.io)).
 
 <p align="center">
-  <img src="https://i.imgur.com/0prNvYl.jpg" width="650">
+  <img src="/public/assets/0prNvYl.jpeg" width="650">
   <i>Connecting to pins on the relay board</i>
   <br>
   <br>
   <br>
-  <img src="https://i.imgur.com/Q0YK7i8.jpg" width="650">
+  <img src="/public/assets/Q0YK7i8.jpeg" width="650">
   <i>Connecting to pins directly on the ESP8266 ESP-01S</i>
   <br>
   <i>(Ignore the Pi Pico in above pics)</i>

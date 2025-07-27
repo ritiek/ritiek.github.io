@@ -35,7 +35,7 @@ We're currently in the community bonding phase where I am getting to know more a
 our community and my GSoC project. By the way, we also had our v0.1.0 release and
 a brand new logo for our organization during this phase. Here is the glimpse of it!
 
-<img src="https://raw.githubusercontent.com/PlasmaPy/PlasmaPy-logo/master/exports/graphic-circular.png" width="100">
+<img src="/public/assets/graphic-circular.png" width="100">
 
 As for the GSoC project, since PlasmaPy only supports Python 3.6+, it was suggested that
 we use a base class that is a subclass of

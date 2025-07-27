@@ -22,7 +22,7 @@ all hardware peripherals correctly. Since, I had same issues (as I mention later
 I manually re-installed Windows 10, as I did with Linux distros.
 
 <p align="center">
-  <img src="https://i.imgur.com/aiIVZGN.png" width="350">
+  <img src="/public/assets/aiIVZGN.png" width="350">
   <br><i>Here's how the machine looks like</i>
 </p>
 
@@ -93,7 +93,7 @@ RAM disk. The first step is to recognize the drive and partition where you insta
 Mint to. This can be done by using `ls`:
 
 <p align="center">
-  <img src="https://i.imgur.com/rxACrpQ.jpg" width="350">
+  <img src="/public/assets/rxACrpQ.jpeg" width="350">
   <br><i>The GRUB command-line</i>
 </p>
 
