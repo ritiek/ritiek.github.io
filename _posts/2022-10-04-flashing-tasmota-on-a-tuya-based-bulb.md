@@ -4,8 +4,9 @@ date: 2022-10-04
 layout: post
 comments: false
 tags:
-  - linux
+  - electronics
   - raspberry pi
+  - linux
 ---
 
 I've lately wanting to try out fancy bulbs controllable through my android phone so I don't have to get up

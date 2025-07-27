@@ -4,6 +4,7 @@ date: 2022-11-05
 layout: post
 comments: false
 tags:
+  - electronics
   - linux
 ---
 
