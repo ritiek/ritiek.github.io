@@ -85,7 +85,7 @@ Interesting points to note on the page:
 > ESP8685-WROOM-03 Pin compatible
 
 Digging further into these points, it looks like the SoC isn't an ESP MCU (which I'm
-previously familiar with). It also looks like Tasmota doesn't support BK2378 at the time
+previously familiar with). It also looks like Tasmota doesn't support BK7238 at the time
 of writing this. However, it does mention about pins being compatible with
 ESP8685-WROOM-03 and there's a Tasmota-like alternative called
 [OpenBeken](https://github.com/openshwprojects/OpenBK7231T_App) available for
