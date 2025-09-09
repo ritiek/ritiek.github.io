@@ -7,7 +7,7 @@ tags:
   - linux
 ---
 
-It's been slightly over 2 years since my earlier homelab post ([here](/2023/12/26/homelabbing-on-a-raspberry-pi-4/)).
+It's been close to 2 years since my earlier homelab post ([here](/2023/12/26/homelabbing-on-a-raspberry-pi-4/)).
 I moved onto a shiny Raspberry Pi 5 shortly afterwards (from an RPi4) and worked on a few things. This
 post is a continuity to how things have evolved in terms of my requirements and the solutions I now see
 as a better fit.
@@ -162,7 +162,7 @@ My current setup includes three SSDs attached to my RPi5 and a few other periphe
 2. Second NVMe in a USB enclosure via USB 3.0  
 3. Third external SSD via USB 3.0
 4. Official active cooler (minimal power draw)
-5. USB 2.0 Wi-Fi dongle
+5. USB 2.0 Wi-Fi dongle (for experimental Wi-Fi router functionality)
 
 This entire setup consumes about 7.5-8.0W at idle (measured with a local Kill-A-Watt equivalent) and peaks at 11-13W under load.
 
