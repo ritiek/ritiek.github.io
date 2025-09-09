@@ -291,3 +291,8 @@ This is how my directory tree looks like:
 
 This makes setting up different backup policies for different directories a bit easier, such as I like to
 take automated backup snapshots of my docker data directory more often than the my personal stuff directory.
+
+<p align="center">
+  <img src="/public/assets/IMG_20230904_144125_preview.jpeg" width="700">
+  <i>See it's chilling now</i>
+</p>
