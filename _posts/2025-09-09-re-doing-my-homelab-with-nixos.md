@@ -64,7 +64,7 @@ The process looks like this:
 
 3. **Initial boot setup**: Plug the microSD into my Pi and power it up.
 
-4. **Add the encryption key**: Wait 3-4 minutes for the Pi to set up its directory structure, then power off and mount the microSD on another machine to place my private SSH key into Pi's `/etc/ssh/ssh_host_ed25519_key` (I wonder if it's possible to automate this step by inserting in a Yubikey at boot).
+4. **Add the decryption key**: Wait 3-4 minutes for the Pi to set up its directory structure, then power off and mount the microSD on another machine to place my private SSH key into Pi's `/etc/ssh/ssh_host_ed25519_key` (I wonder if it's possible to automate this step by inserting in a Yubikey at boot).
 
 5. **Final boot**: Plug the microSD back into the Pi and boot it up.
 
@@ -74,7 +74,7 @@ No more spending hours trying to remember how I configured something months ago.
 
 ## Automating software updates safely
 
-One challenge I faced early on was keeping my NixOS system updated. I initially started with NixOS stable channels, but quickly realized my favorite new features in tools like Hyprland (a window manager) sometimes take a while to hit stable releases. I also had issues with screen-sharing.
+One challenge I faced early on was keeping my NixOS system updated. I initially started with NixOS stable channels, but quickly realized my favorite new features in tools like Hyprland (a tiling window manager) sometimes take a while to hit stable channels. I also had issues with screen-sharing.
 
 I moved to unstable channels, but had a similar feeling of being a bit behind. Eventually, I decided to track nixpkgs master branch directly for the latest everything.
 
@@ -103,7 +103,7 @@ You can see an example of this automated process in [this PR](https://github.com
 
 This setup gives me bleeding-edge packages with confidence that they'll actually work. Since implementing this system a few months ago, I haven't come across pushing any failing updates onto my machines.
 
-## Smart backups with Restic
+## Backups with Restic
 
 I moved from Kopia to Restic for backups because a single Kopia instance doesn't support backing up to multiple repositories, and I didn't want to maintain multiple Kopia instances. NixOS has a native Restic module that gives fine control over backup schedules, snapshot pruning, compression levels, and more.
 
@@ -158,9 +158,9 @@ This appeals to me because I have a basic router and would rather avoid buying n
 
 My current setup includes three SSDs attached to my RPi5 and a few other peripherals:
 
-1. First NVMe using the Pimoroni NVMe Base
-2. Second NVMe in a USB enclosure via USB 3.0  
-3. Third external SSD via USB 3.0
+1. First NVMe using the Pimoroni NVMe Base (for primary data storage)
+2. Second NVMe in a USB enclosure via USB 3.0 (for on-site backups)
+3. Third external SSD via USB 3.0 (for storing Attic build cache)
 4. Official active cooler (minimal power draw)
 5. USB 2.0 Wi-Fi dongle (for experimental Wi-Fi router functionality)
 
