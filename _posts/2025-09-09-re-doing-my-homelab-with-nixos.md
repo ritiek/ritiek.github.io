@@ -59,7 +59,7 @@ The process looks like this:
 
 2. **Write the image to microSD**:
    ```console
-   $ pv ./result/sd-image/*.img.zst | sudo tee /dev/sdc > /dev/null
+   $ pv ./result/sd-image/*.img.zst | unzstd | sudo tee /dev/sdc > /dev/null
    ```
 
 3. **Initial boot setup**: Plug the microSD into my Pi and power it up.
