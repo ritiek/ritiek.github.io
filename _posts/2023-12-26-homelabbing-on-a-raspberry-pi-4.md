@@ -294,5 +294,5 @@ take automated backup snapshots of my docker data directory more often than the 
 
 <p align="center">
   <img src="/public/assets/IMG_20230904_144125_preview.jpeg" width="700">
-  <i>See it's chilling now</i>
+  <i>See? it's chilling now</i>
 </p>

@@ -5,7 +5,7 @@ layout: page
 
 Hwello, wild hooman! My name is Ritiek Malhotra. I'm mostly into software and
 electronics. I completed my Bachelor's degree in Computer Science in 2021.
-I also play video games and a little bit of piano. Cats are fun.
+I also play video games and a little bit of piano. Aaaaand cats are fun!
 
 Happy expluwuring!
 
