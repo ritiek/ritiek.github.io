@@ -172,4 +172,4 @@ When the two external drives suspend after periods of inactivity, power consumpt
 
 Simple things that used to require research and manual setup are now just configuration options. Take zram (memory compression) as an example: on other distributions, I'd need to find a userspace program, set up systemd services, and hope it all works together.
 
-With NixOS, zram is a simple `zramSwap.enable = true;` in my configuration. Although, this is not to say it's all glitters. It definitely has it quirks, but those somewhat make sense too when looking at them through the lens of NixOS trying to be as reproducible as possible.
+With NixOS, zram is a simple `zramSwap.enable = true;` or watchdog is `systemd.settings.Manager.RuntimeWatchdogSec = 360;` in my configuration. Although, this is not to say it's all glitters. It definitely has it quirks, but those somewhat make sense too when looking at them through the lens of NixOS trying to be as reproducible as possible.
