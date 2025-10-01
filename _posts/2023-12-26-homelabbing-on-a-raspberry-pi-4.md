@@ -296,3 +296,9 @@ take automated backup snapshots of my docker data directory more often than the 
   <img src="/public/assets/IMG_20230904_144125_preview.jpeg" width="700">
   <i>See? it's chilling now</i>
 </p>
+
+#### Random Freezes
+
+There are very good chances that my machine could freeze up tinkering around if I happen to run anything
+memory intensive or a running process ends up doing something funny. I've watchdog setup to reboot my machine
+automatically after 10 minutes in case it detects an anomly.
