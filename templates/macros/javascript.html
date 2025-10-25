@@ -1,0 +1,27 @@
+{% macro javascript() %}
+<script type="text/javascript" src="{{ get_url(path="js/main.js") | safe }}" defer></script>
+{% if config.build_search_index %}
+  <script type="text/javascript" src="{{ get_url(path="plugins/elasticlunr.min.js") | safe }}"></script>
+  <script type="text/javascript">
+    console.log("Loading search index...");
+    fetch("{{ config.base_url | safe }}/search_index.{{ lang }}.json")
+      .then(response => {
+        console.log("Search index response:", response.status);
+        if (!response.ok) {
+          throw new Error('Search index not found');
+        }
+        return response.json();
+      })
+      .then(data => { 
+        console.log("Search index loaded successfully");
+        window.searchIndex = data;
+        var script = document.createElement('script');
+        script.src = "{{ get_url(path="js/search.js") | safe }}";
+        document.body.appendChild(script);
+      })
+      .catch(error => {
+        console.error("Error loading search index:", error);
+      });
+  </script>
+{% endif %}
+{% endmacro %}
