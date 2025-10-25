@@ -1,3 +1,4 @@
 .direnv/
 .jekyll-cache/
 _site/
+public/
