@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block seo %}
+  {{ super() }}
+
+  {% if config.title %}
+    {% set title = config.title %}
+  {% else %}
+    {% set title = "" %}
+  {% endif %}
+  
+  {% if config.extra.title_addition and title %}
+    {% set title_addition = title_separator ~ config.extra.title_addition %}
+  {% elif config.extra.title_addition %}
+    {% set title_addition = config.extra.title_addition %}
+  {% else %}
+    {% set title_addition = "" %}
+  {% endif %}
+  
+  {% set description = config.description %}
+  
+  {{ macros_head::seo(title=title, title_addition=title_addition, description=description, is_home=true) }}
+{% endblock seo %}
+
+{% block content %}
+{# {% if config.extra.social_links %}
+<div class="social-links-bar">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <ul class="list-inline social-links">
+          {% for social in config.extra.social_links %}
+            <li class="list-inline-item">
+              <a href="{{ social.url | safe }}" aria-label="{{ social.name }}" title="{{ social.name }}">
+                <i class="fa fa-{{ social.icon }} fa-lg"></i>
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %} #}
+<div class="wrap container" role="document">
+  <div class="content">
+    {% set blog_section = get_section(path="posts/_index.md") %}
+    {% if blog_section.pages %}
+    <section class="section container-fluid mt-1 pb-5">
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <div class="mb-4">
+            <h2>Recent Posts</h2>
+          </div>
+          <div class="card-list">
+            {% for page in blog_section.pages | slice(end=3) %}
+            <div class="card my-3">
+              <div class="card-body">
+                <h3 class="h4"><a href="{{ page.path | safe }}">{{ page.title }}</a></h3>
+                <p class="text-muted">{{ page.date | date(format="%d %b %Y") }}</p>
+                {% if page.summary %}
+                  <p>{{ page.summary | safe | truncate(length=200) }}</p>
+                {% elif page.description %}
+                  <p>{{ page.description | safe | truncate(length=200) }}</p>
+                {% else %}
+                  <p>{{ page.content | safe | striptags | truncate(length=200) }}</p>
+                {% endif %}
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </section>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
