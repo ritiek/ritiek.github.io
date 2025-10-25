@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="preload" as="font" href="https://ritiek.github.io/fonts/vendor/jost/jost-v4-latin-regular.woff2" type="font/woff2" crossorigin>
+  <link rel="preload" as="font" href="https://ritiek.github.io/fonts/vendor/jost/jost-v4-latin-700.woff2"  type="font/woff2" crossorigin>
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://ritiek.github.io/main.css">
+<link rel="stylesheet" href="https://ritiek.github.io/custom.css">
+
+
+
+  
+  
+    
+  
+
+  
+  
+    
+    
+  
+  
+  
+    
+  
+  
+  
+  
+    
+  
+  
+  
+
+
+  <meta name="robots" content="index, follow">
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
+
+	
+
+
+	
+
+<title>Re-doing my Homelab with NixOS | Ritiek Malhotra</title>
+<meta name="description" content="Just some of my adventures!">
+<link rel="canonical" href="https://ritiek.github.io/2025/09/09/re-doing-my-homelab-with-nixos/">
+
+
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <meta name="twitter:title" content="Re-doing my Homelab with NixOS">
+  <meta name="twitter:description" content="Just some of my adventures!">
+  <meta name="twitter:site" content="@">
+  <meta name="twitter:creator" content="@">
+  
+  <meta property="og:title" content="Re-doing my Homelab with NixOS">
+  <meta property="og:description" content="Just some of my adventures!">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://ritiek.github.io/2025/09/09/re-doing-my-homelab-with-nixos/">
+
+  
+
+  <meta property="og:updated_time" content="">
+  <meta property="og:site_name" content="Re-doing my Homelab with NixOS">
+
+  
+
+  
+
+  
+  <meta property="article:publisher" content="https://www.facebook.com/">
+  <meta property="article:author" content="https://www.facebook.com/">
+  <meta property="og:locale" content="en_US">
+
+
+
+
+
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BreadcrumbList",
+    
+      
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          {
+            "@type": "ListItem",
+            "position":  1 ,
+            "name": "Home",
+            "item": "https://ritiek.github.io/"
+          },
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  2 ,
+            "name": "2025",
+            "item": "https://ritiek.github.io/2025/"
+          },
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  3 ,
+            "name": "09",
+            "item": "https://ritiek.github.io/2025/09/"
+          },
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  4 ,
+            "name": "09",
+            "item": "https://ritiek.github.io/2025/09/09/"
+          },
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  5 ,
+            "name": "Re Doing My Homelab With Nixos",
+            "item": "https://ritiek.github.io/2025/09/09/re-doing-my-homelab-with-nixos/"
+          },
+        
+      
+    
+  }
+</script>
+
+
+
+
+
+
+  <meta name="theme-color" content="#fff">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://ritiek.github.io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://ritiek.github.io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://ritiek.github.io/favicon-16x16.png">
+  
+    <link rel="manifest" href="https://ritiek.github.io/site.webmanifest" crossorigin>
+  
+
+
+  
+
+</head>
+
+  
+    
+  
+
+<body class="page single">
+  
+    
+<div class="header-bar fixed-top"></div>
+<header class="navbar fixed-top navbar-expand-md navbar-light">
+	<div class="container">
+		<input class="menu-btn order-0" type="checkbox" id="menu-btn">
+		<label class="menu-icon d-md-none" for="menu-btn"><span class="navicon"></span></label>
+		<a class="navbar-brand order-1 order-md-0 me-auto" href="https://ritiek.github.io">Ritiek Malhotra</a>
+		<button id="mode" class="btn btn-link order-2 order-md-4" type="button" aria-label="Toggle mode">
+			<span class="toggle-dark"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></span>
+			<span class="toggle-light"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg></span>
+		</button>
+		<ul class="navbar-nav fork-me order-3 order-md-5">
+			
+				
+					<li class="nav-item">
+						<a class="nav-link" href="https://github.com/ritiek"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg><span class="ms-2 visually-hidden">GitHub</span></a>
+					</li>
+				
+			
+		</ul>
+		<div class="collapse navbar-collapse order-4 order-md-1">
+			<ul class="navbar-nav main-nav me-auto order-5 order-md-2">
+				
+					
+				
+				
+				
+					
+						<li class="nav-item">
+							<a class="nav-link" href="/posts/">Archive</a>
+						</li>
+					
+						<li class="nav-item">
+							<a class="nav-link" href="/about/">About</a>
+						</li>
+					
+				
+			</ul>
+			<div class="break order-6 d-md-none"></div>
+			
+				<form class="navbar-form flex-grow-1 order-7 order-md-3">
+					<input id="userinput" class="form-control is-search" type="search" placeholder="Search posts..."
+						aria-label="Search posts..." autocomplete="off">
+					<div id="suggestions" class="shadow bg-white rounded"></div>
+				</form>
+			
+		</div>
+	</div>
+
+</header>
+
+  
+
+  
+<div class="wrap container" role="document">
+  <div class="content">
+    <div class="row justify-content-center">
+      <div class="col-md-12 col-lg-10 col-xxl-8">
+        <article>
+          <div class="page-header">
+            <h1>Re-doing my Homelab with NixOS</h1>
+          </div>
+          
+          <p>It's been close to 2 years since my earlier homelab post (<a href="/2023/12/26/homelabbing-on-a-raspberry-pi-4/">here</a>).
+I moved onto a shiny Raspberry Pi 5 shortly afterwards (from an RPi4) and worked on a few things. This
+post is a continuity to how things have evolved in terms of my requirements and the solutions I now see
+as a better fit.</p>
+<p>The biggest change has been me migrating everything to NixOS, and it's been transformative for how I think about managing my homelab infrastructure.</p>
+<h2 id="why-nixos-for-a-homelab">Why NixOS for a homelab?</h2>
+<p>When I first started self-hosting, I was managing services the traditional way: installing packages directly on the system, editing config files scattered across <code>/etc/</code>, and hoping I'd remember all the changes I made when something broke.</p>
+<p>NixOS seems to help with this. Instead of imperatively configuring your system, you declare what you want in a configuration file, and NixOS builds the entire system through it. This means I can completely recreate my homelab setup on a fresh Raspberry Pi just by copying over my configuration files.</p>
+<p>I've slowly migrated most of my machines to run NixOS, including my RPi5 role-playing as homelab. Diving
+into NixOS has been one of the few significant investments that I'm really happy about. Beyond the obvious reproducibility benefits, NixOS fundamentally changes how I think about system complexity.</p>
+<p>My current NixOS configuration can be found <a href="https://github.com/ritiek/dotfiles/tree/f5b87e8fcd23ca6eb05ac79a2143319dbd9967a6">here</a>. All the techniques I discuss below are implemented in this config, so you can see exactly how they work in practice.</p>
+<h2 id="my-approach-to-self-hosting">My approach to self-hosting</h2>
+<p>I got into self-hosting mostly because it seemed fun and tinkerable. However, with time it's become
+pretty important to me, more so to resist stashing away more of my digital identity within walled gardens.</p>
+<p>I tend to approach hosting services for personal use with a very long-term perspective. I've got services
+like Immich (photo management) and paperless-ngx (document organization) that I've spent time curating carefully. They hold important paperwork and memories of loved ones. Lately I try to approach preserving them in a way I hope will outlive me, at least for a while.</p>
+<p>I mainly run a few scheduled jobs and otherwise host services that tend to run idle most of the time, so
+a low-powered and power-efficient machine like Raspberry Pis seems like a good deal to me. In the cases I
+could use more power (such as AI inference or gaming with Sunshine game streaming), I'm okay with a little bit of wait and
+offloading processing to a beefier machine.</p>
+<h2 id="setting-up-a-nixos-homelab-from-scratch">Setting up a NixOS homelab from scratch</h2>
+<p>One of the most satisfying aspects of NixOS is how I can generate a complete system image from my configuration. Here's my typical workflow when setting up or rebuilding my homelab:</p>
+<h3 id="building-and-deploying-the-system">Building and deploying the system</h3>
+<p>NixOS lets me generate an image file of my entire configuration that I can
+then write directly to a microSD card. It'll boot up on my Pi with all my
+favorite packages pre-installed and my environment exactly as defined. However, since I use sops-nix to
+store encrypted secrets directly in my config, there are a few additional steps I need to perform to get my homelab-specific private SSH key in place (this key allows sops-nix to decrypt my secrets).</p>
+<p>The process looks like this:</p>
+<ol>
+<li>
+<p><strong>Build the system image</strong> (preferably using an ARM64 machine for native compilation):</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> cd /etc/nixos
+</span><span style="color:#bf616a;">$</span><span> nix build .#pilab-sd
+</span></code></pre>
+</li>
+<li>
+<p><strong>Write the image to microSD</strong>:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> pv ./result/sd-image/*.img.zst | </span><span style="color:#bf616a;">unzstd </span><span>| </span><span style="color:#bf616a;">sudo</span><span> tee /dev/sdc &gt; /dev/null
+</span></code></pre>
+</li>
+<li>
+<p><strong>Initial boot setup</strong>: Plug the microSD into my Pi and power it up.</p>
+</li>
+<li>
+<p><strong>Add the decryption key</strong>: Wait 3-4 minutes for the Pi to set up its directory structure, then power off and mount the microSD on another machine to place my private SSH key into Pi's <code>/etc/ssh/ssh_host_ed25519_key</code> (I wonder if it's possible to automate this step by inserting in a Yubikey at boot).</p>
+</li>
+<li>
+<p><strong>Final boot</strong>: Plug the microSD back into the Pi and boot it up.</p>
+</li>
+</ol>
+<p>That's it! I can now SSH into my Pi and be greeted with my complete environment. I can start my services using <code>sudo homelab-start</code>, which I've defined in my flake config.</p>
+<p>No more spending hours trying to remember how I configured something months ago.</p>
+<h2 id="automating-software-updates-safely">Automating software updates safely</h2>
+<p>One challenge I faced early on was keeping my NixOS system updated. I initially started with NixOS stable channels, but quickly realized my favorite new features in tools like Hyprland (a tiling window manager) sometimes take a while to hit stable channels. I also had issues with screen-sharing.</p>
+<p>I moved to unstable channels, but had a similar feeling of being a bit behind. Eventually, I decided to track nixpkgs master branch directly for the latest everything.</p>
+<p>This created three problems I needed to solve:</p>
+<ol>
+<li><strong>Staying current</strong>: Updates should track upstream as closely as possible</li>
+<li><strong>Avoiding broken updates</strong>: Don't start an update if packages will break halfway through</li>
+<li><strong>Reducing compilation time</strong>: Avoid compiling everything on my local machines (since NixOS builds up official cache only once the packages reach unstable channels)</li>
+</ol>
+<h3 id="my-automated-update-solution">My automated update solution</h3>
+<p>Here's the system I've developed and it's been running rock-solid for months:</p>
+<p><strong>Daily automated testing</strong>: GitHub Actions creates a pull request to my dotfiles repository every day with the most up-to-date package versions in my <code>flake.lock</code> file. For every such update, GitHub Actions attempts to build all packages for all my machines and pushes the resulting build cache to my RPi5.</p>
+<p><strong>Binary cache hosting</strong>: My RPi5 hosts an <a href="https://github.com/zhaofengli/attic">Attic</a> server (think of it as a self-hosted binary cache for Nix packages). GitHub Actions can reach my RPi5 through my Headscale network (my personal VPN control server hosted on a VPS).</p>
+<p><strong>Checks</strong>: The PR only gets a green checkmark if all packages build successfully on all my machines. This means the update will go through successfully everywhere since I share my <code>flake.lock</code> between machines.</p>
+<p>You can see an example of this automated process in <a href="https://github.com/ritiek/dotfiles/pull/33">this PR</a>.</p>
+<p><strong>Manual approval</strong>: I only accept updates by merging green PRs. After merging, I manually run <code>git pull</code> and <code>sudo nixos-rebuild switch --flake .#my-machine</code> on each machine. The build cache gets pulled from my RPi5's Attic server, so updates are fast.</p>
+<p><strong>Recovery options</strong>: If there's a runtime bug (not caught at compile time), I have two options:</p>
+<ol>
+<li>Rollback to the previous NixOS generation and wait for the bug to be fixed upstream</li>
+<li>Revert just the problematic package by pinning it to an older nixpkgs version</li>
+</ol>
+<p>This setup gives me bleeding-edge packages with confidence that they'll actually work. Since implementing this system a few months ago, I haven't come across pushing any failing updates onto my machines.</p>
+<h2 id="backups-with-restic">Backups with Restic</h2>
+<p>I moved from Kopia to Restic for backups because a single Kopia instance doesn't support backing up to multiple repositories, and I didn't want to maintain multiple Kopia instances. NixOS has a native Restic module that gives fine control over backup schedules, snapshot pruning, compression levels, and more.</p>
+<h3 id="why-restic-works-well-in-my-setup">Why Restic works well in my setup</h3>
+<p><strong>Version compatibility</strong>: My Restic backup servers and clients run on different machines, but they stay compatible because they use the same <code>flake.lock</code> file. All my machines run the same Restic version, so I never worry about client-server version mismatches.</p>
+<p><strong>Encrypted credentials</strong>: I store backup passwords and repository credentials encrypted using sops-nix, so they're version-controlled but secure.</p>
+<p><strong>Monitoring integration</strong>: My backup jobs send success/failure notifications to my self-hosted Uptime Kuma monitoring server (also running on the RPi5).</p>
+<h3 id="testing-system-recovery">Testing system recovery</h3>
+<p>For the system itself (not just data), I periodically test my disaster recovery process. I'll use my RPi4 to build a fresh image for my RPi5, flash it to a new microSD card, and boot my RPi5 from the new card. This simulates a "the microSD died" scenario and ensures I can actually recover my complete system setup.</p>
+<p>My Restic configuration files are available in my dotfiles: <a href="https://github.com/ritiek/dotfiles/blob/f5b87e8fcd23ca6eb05ac79a2143319dbd9967a6/machines/pilab/services/restic.nix">client config</a> and <a href="https://github.com/ritiek/dotfiles/blob/f5b87e8fcd23ca6eb05ac79a2143319dbd9967a6/machines/pilab/services/restic-server.nix">server config</a>.</p>
+<h2 id="on-demand-services-to-save-memory">On-demand services to save memory</h2>
+<p>Running lots of containers on my RPi5's 8GB of RAM eventually became a bottleneck, even with zram compression. Rather than buying more hardware, I researched running non-essential services on-demand (when someone actually tries to access them).</p>
+<h3 id="how-on-demand-services-work">How on-demand services work</h3>
+<p>Services like Navidrome (music streaming), TubeArchivist (YouTube archival), and Memos (note-taking) don't need to run 24/7. I'm okay waiting a few seconds for these to start up when I want to use them.</p>
+<p>Here's the technique I developed:</p>
+<ol>
+<li><strong>Port monitoring</strong>: socat listens for connections on the service's normal port</li>
+<li><strong>Service startup</strong>: When a connection is detected, the actual service launches on an internal port</li>
+<li><strong>Proxy mode</strong>: socat forwards requests to the now-running service</li>
+<li><strong>Automatic shutdown</strong>: A monitor checks for active connections every ~10 minutes. If there are none, the service stops and socat resumes listening</li>
+</ol>
+<p>You can see this implemented for Navidrome <a href="https://github.com/ritiek/dotfiles/blob/f5b87e8fcd23ca6eb05ac79a2143319dbd9967a6/machines/pilab/compose/navidrome.nix">here</a>.</p>
+<p>This setup has freed up 1-2GB of physical memory (or 7-8GB accounting for zram compression) when services are idle. That's significant on an 8GB machine. I've extended this pattern to several other services like Mealie (recipe management) and HomeBox (inventory tracking).</p>
+<p>The user experience is alrightish. These services usually start fast enough.</p>
+<h2 id="exposing-services-securely">Exposing services securely</h2>
+<p>Sometimes I need to share a service running on my RPi5 with friends or family who aren't part of my Tailscale network. For these cases, I run a reverse proxy using Nginx on my personal VPS, which routes requests through my RPi5 over my Headscale connection.</p>
+<p>The VPS also runs NixOS. I can hand out a subdomain to friends, and they can access my service without needing special software or VPN access. More details about my VPS setup and how I use nixos-anywhere to install NixOS on providers that don't officially support it are <a href="https://github.com/ritiek/dotfiles/tree/f5b87e8fcd23ca6eb05ac79a2143319dbd9967a6/machines/clawsiecats">here</a> (Vultr and HostVDS for now).</p>
+<h2 id="future-plans-wi-fi-router-functionality">Future plans: Wi-Fi router functionality</h2>
+<p>This is still an idea needing research, but I'm considering running a wireless access point from my RPi5. The goal would be to route all connected devices through a VPN automatically, avoiding the need to configure VPN on each device individually. I'd also like to explore OpenWrt-style features like VLANs for isolating sketchy IoT devices.</p>
+<p>This appeals to me because I have a basic router and would rather avoid buying new hardware if I can integrate something like this into my RPi5 itself. It's currently connected to the Internet via an Ethernet cable anyway, so an access point off with this setup shouldn't be so bad I guess. NixOS on top should help me keep router-specific configuration manageable. I might do a post if this ever happens.</p>
+<h2 id="power-consumption-and-hardware-setup">Power consumption and hardware setup</h2>
+<p>My current setup includes three SSDs attached to my RPi5 and a few other peripherals:</p>
+<ol>
+<li>First NVMe using the Pimoroni NVMe Base (for primary data storage)</li>
+<li>Second NVMe in a USB enclosure via USB 3.0 (for on-site backups)</li>
+<li>Third external SSD via USB 3.0 (for storing Attic build cache)</li>
+<li>Official active cooler (minimal power draw)</li>
+<li>USB 2.0 Wi-Fi dongle (for experimental Wi-Fi router functionality)</li>
+</ol>
+<p>This entire setup consumes about 7.5-8.0W at idle (measured with a local Kill-A-Watt equivalent) and peaks at 11-13W under load.</p>
+<p>When the two external drives suspend after periods of inactivity, power consumption further drops to around 6.5-7.2W at idle. I haven't seen it exceed 14W under load in real-world usage, which I'm happy with for the compute it provides.</p>
+<h2 id="the-nixos-advantage-for-homelabs">The NixOS advantage for homelabs</h2>
+<p>Simple things that used to require research and manual setup are now just configuration options. Take zram (memory compression) as an example: on other distributions, I'd need to find a userspace program, set up systemd services, and hope it all works together.</p>
+<p>With NixOS, zram is a simple <code>zramSwap.enable = true;</code> or watchdog is <code>systemd.settings.Manager.RuntimeWatchdogSec = 360;</code> in my configuration. Although, this is not to say it's all glitters. It definitely has it quirks, but those somewhat make sense too when looking at them through the lens of NixOS trying to be as reproducible as possible.</p>
+
+        </article>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  
+    
+<footer class="footer text-muted">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 order-last order-lg-first">
+				<ul class="list-inline">
+					
+						<li class="list-inline-item">Powered by <a href="https://www.getzola.org/">Zola</a></li>
+					
+				</ul>
+			</div>
+			<div class="col-lg-8 order-first order-lg-last text-lg-end">
+				<ul class="list-inline">
+					
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+  
+
+  
+<script type="text/javascript" src="https://ritiek.github.io/js/main.js" defer></script>
+
+  <script type="text/javascript" src="https://ritiek.github.io/plugins/elasticlunr.min.js" defer></script>
+  <script type="text/javascript" src="https://ritiek.github.io/search_index.en.js" defer></script>
+  <script type="text/javascript" src="https://ritiek.github.io/js/search.js" defer></script>
+
+  
+</body>
+</html>

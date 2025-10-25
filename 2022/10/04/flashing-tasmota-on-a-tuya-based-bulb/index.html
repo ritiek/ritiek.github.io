@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="preload" as="font" href="https://ritiek.github.io/fonts/vendor/jost/jost-v4-latin-regular.woff2" type="font/woff2" crossorigin>
+  <link rel="preload" as="font" href="https://ritiek.github.io/fonts/vendor/jost/jost-v4-latin-700.woff2"  type="font/woff2" crossorigin>
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://ritiek.github.io/main.css">
+<link rel="stylesheet" href="https://ritiek.github.io/custom.css">
+
+
+
+  
+  
+    
+  
+
+  
+  
+    
+    
+  
+  
+  
+    
+  
+  
+  
+  
+    
+  
+  
+  
+
+
+  <meta name="robots" content="index, follow">
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
+
+	
+
+
+	
+
+<title>Flashing Tasmota on a Tuya based Bulb | Ritiek Malhotra</title>
+<meta name="description" content="Just some of my adventures!">
+<link rel="canonical" href="https://ritiek.github.io/2022/10/04/flashing-tasmota-on-a-tuya-based-bulb/">
+
+
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <meta name="twitter:title" content="Flashing Tasmota on a Tuya based Bulb">
+  <meta name="twitter:description" content="Just some of my adventures!">
+  <meta name="twitter:site" content="@">
+  <meta name="twitter:creator" content="@">
+  
+  <meta property="og:title" content="Flashing Tasmota on a Tuya based Bulb">
+  <meta property="og:description" content="Just some of my adventures!">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://ritiek.github.io/2022/10/04/flashing-tasmota-on-a-tuya-based-bulb/">
+
+  
+
+  <meta property="og:updated_time" content="">
+  <meta property="og:site_name" content="Flashing Tasmota on a Tuya based Bulb">
+
+  
+
+  
+
+  
+  <meta property="article:publisher" content="https://www.facebook.com/">
+  <meta property="article:author" content="https://www.facebook.com/">
+  <meta property="og:locale" content="en_US">
+
+
+
+
+
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BreadcrumbList",
+    
+      
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          {
+            "@type": "ListItem",
+            "position":  1 ,
+            "name": "Home",
+            "item": "https://ritiek.github.io/"
+          },
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  2 ,
+            "name": "2022",
+            "item": "https://ritiek.github.io/2022/"
+          },
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  3 ,
+            "name": "10",
+            "item": "https://ritiek.github.io/2022/10/"
+          },
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  4 ,
+            "name": "04",
+            "item": "https://ritiek.github.io/2022/10/04/"
+          },
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  5 ,
+            "name": "Flashing Tasmota On A Tuya Based Bulb",
+            "item": "https://ritiek.github.io/2022/10/04/flashing-tasmota-on-a-tuya-based-bulb/"
+          },
+        
+      
+    
+  }
+</script>
+
+
+
+
+
+
+  <meta name="theme-color" content="#fff">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://ritiek.github.io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://ritiek.github.io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://ritiek.github.io/favicon-16x16.png">
+  
+    <link rel="manifest" href="https://ritiek.github.io/site.webmanifest" crossorigin>
+  
+
+
+  
+
+</head>
+
+  
+    
+  
+
+<body class="page single">
+  
+    
+<div class="header-bar fixed-top"></div>
+<header class="navbar fixed-top navbar-expand-md navbar-light">
+	<div class="container">
+		<input class="menu-btn order-0" type="checkbox" id="menu-btn">
+		<label class="menu-icon d-md-none" for="menu-btn"><span class="navicon"></span></label>
+		<a class="navbar-brand order-1 order-md-0 me-auto" href="https://ritiek.github.io">Ritiek Malhotra</a>
+		<button id="mode" class="btn btn-link order-2 order-md-4" type="button" aria-label="Toggle mode">
+			<span class="toggle-dark"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></span>
+			<span class="toggle-light"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg></span>
+		</button>
+		<ul class="navbar-nav fork-me order-3 order-md-5">
+			
+				
+					<li class="nav-item">
+						<a class="nav-link" href="https://github.com/ritiek"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg><span class="ms-2 visually-hidden">GitHub</span></a>
+					</li>
+				
+			
+		</ul>
+		<div class="collapse navbar-collapse order-4 order-md-1">
+			<ul class="navbar-nav main-nav me-auto order-5 order-md-2">
+				
+					
+				
+				
+				
+					
+						<li class="nav-item">
+							<a class="nav-link" href="/posts/">Archive</a>
+						</li>
+					
+						<li class="nav-item">
+							<a class="nav-link" href="/about/">About</a>
+						</li>
+					
+				
+			</ul>
+			<div class="break order-6 d-md-none"></div>
+			
+				<form class="navbar-form flex-grow-1 order-7 order-md-3">
+					<input id="userinput" class="form-control is-search" type="search" placeholder="Search posts..."
+						aria-label="Search posts..." autocomplete="off">
+					<div id="suggestions" class="shadow bg-white rounded"></div>
+				</form>
+			
+		</div>
+	</div>
+
+</header>
+
+  
+
+  
+<div class="wrap container" role="document">
+  <div class="content">
+    <div class="row justify-content-center">
+      <div class="col-md-12 col-lg-10 col-xxl-8">
+        <article>
+          <div class="page-header">
+            <h1>Flashing Tasmota on a Tuya based Bulb</h1>
+          </div>
+          
+          <p>I've lately wanting to try out fancy bulbs controllable through my android phone so I don't have to get up
+to switch them off while I'm sleepy.</p>
+<p>A big push back to me from trying out such bulbs is the lack of control. I didn't want to get too fancy
+and most bulbs that just do the job have a cloud server acting as middle-man between the bulb and its
+corresponding mobile app, which sounds really uncomfortable.</p>
+<p>I came to know about <a href="https://github.com/arendst/Tasmota">Tasmota</a> while looking for bulbs that work over
+local network and don't have to depend on a 3rd party's cloud server. Looking around for such bulbs, it seems
+bulbs with pre-installed Tasmota aren't as common, especially with local vendors. One of the few I stumbled
+upon was <a href="https://www.athom.tech/wled">Athom Bulbs</a> but these would come out to be pretty expensive considering
+import duties and all. Nope, won't work.</p>
+<p>Researching a bit more, I came across <a href="https://github.com/ct-Open-Source/tuya-convert">tuya-convert</a> for ESP
+micro-controllers. So, it seems like most bulbs which connect over the 3rd party cloud are based on Tuya but
+re-branded, and most Tuya based bulbs if not all use some kinda ESP micro-controller to communicate to the
+GPIOs and connect to WiFi. These Tuya based devices seemed to have a vulnerability in the past where you
+could install a custom firmware over-the-air and take it off the 3rd party cloud. This vulnerability seems
+to have been fixed by Tuya as of 2020 and the newer devices need to ripped apart and have to be connected
+via serial port through the RX/TX GPIO pins present on the micro-controller to install a custom firmware.</p>
+<p>However, there are still re-branded Tuya devices around as 2022 that have this vulnerability.
+I started to look for never-heard-of-before brands on local retailer websites, since it felt like those would
+be based on Tuya, as well as pre-loaded with a vulnerable firmware. And it seems I did get lucky
+with <a href="https://www.flipkart.com/ontube-9-watt-b22-wi-fi-smart-led-bulb-16-million-colors-voice-control/p/itm3c874c05e4a74">this $5 RGB Bulb</a>.</p>
+<hr />
+<h2 id="installation">Installation</h2>
+<p>On receiving the bulb, the box in which the bulb came in was branded by JBT, while the one on the retailer's
+website mentioned ONTUBE. It wasn't problem to me since specifications seemed to match on paper. A few things
+I found interesting was that the mobile app's UI that the manual mentioned to install
+(<a href="https://play.google.com/store/apps/details?id=com.lumary.smart&amp;hl=en&amp;gl=US">Lumary</a>) seemed awfully similar
+to <a href="https://play.google.com/store/apps/details?id=com.tuya.smartlife&amp;hl=en&amp;gl=US">Smart Life</a> which is pretty
+popluar with Tuya based devices! This and along with how the bulb entered into pairing mode (ON-OFF-ON-OFF-ON)
+seems to be in-sync with Tuya. At this point, I was almost certain the bulb's based on Tuya.</p>
+<p>I was careful to not feed in my WiFi's SSID anywhere on the mobile app as I've read around that Tuya devices
+tend to auto-update their firmware on the smell of Internet, which would be a problem if the bulb updated to
+a not-vulnerable firmware.</p>
+<p>Looking more into how I can experiment with tuya-convert, it seemed like installing it on my native machine
+isn't a good idea as it tends to mess up with network settings to get up working. I have a Raspberry Pi
+Zero W around which I loaded up with fresh Raspberry Pi OS off the Internet as a means to not having to mess
+with my native machine.</p>
+<p>This method had a slight problem as I use my Pi in headless mode and I won't be able
+to stay connected via SSH if tuya-convert messes up with Pi's network settings. I worked around this by
+setting up my Pi to be usable as an Ethernet gadget which can be done by adding <code>dtoverlay=dwc2</code> to Pi's
+<code>/boot/config.txt</code> (make sure to comment out any previous lines with <code>dtoverlay</code>) and appending <code>modules-load=dwc2,g_ether</code>
+to Pi's <code>/boot/cmdline.txt</code>. Now connecting through the micro-USB data port on the Pi to my native machine with USB A,
+and changing Ethernet network settings on my native machine to "Shared to other computers" should show a new
+Ethernet interface on your native machine when the Pi boots up. If you also entered a WiFi SSID, then you can SSH
+into the Pi and get the IP address our Pi got assigned on the USB gadget interface from running <code>hostname -I</code>.
+Then you can reconnect SSH using this USB gadget interface's IP address.</p>
+<p>Tuya-convert can now have the built-in WiFi all for itself. Following the steps to <a href="https://github.com/ct-Open-Source/tuya-convert#installation">use tuya-convert</a>:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>pi@raspberrypi:~/tuya-convert $ sudo ./start_flash.sh
+</span><span>tuya-convert v2.4.5
+</span><span>Checking for network interface wlan0... Found.
+</span><span>Checking UDP port 53... Available.
+</span><span>Checking UDP port 67... Available.
+</span><span>Checking TCP port 80... Available.
+</span><span>Checking TCP port 443... Available.
+</span><span>Checking UDP port 6666... Available.
+</span><span>Checking UDP port 6667... Available.
+</span><span>Checking TCP port 1883... Available.
+</span><span>Checking TCP port 8886... Available.
+</span><span>======================================================
+</span><span>  Starting AP in a screen
+</span><span>  Starting web server in a screen
+</span><span>  Starting Mosquitto in a screen
+</span><span>  Starting PSK frontend in a screen
+</span><span>  Starting Tuya Discovery in a screen
+</span><span>
+</span><span>======================================================
+</span><span>
+</span><span>IMPORTANT
+</span><span>1. Connect any other device (a smartphone or something) to the WIFI vtrust-flash
+</span><span>   This step is IMPORTANT otherwise the smartconfig may not work!
+</span><span>2. Put your IoT device in autoconfig/smartconfig/pairing mode (LED will blink fast). This is usually done by pressing and holding the primary button of the device
+</span><span>   Make sure nothing else is plugged into your IoT device while attempting to flash.
+</span><span>3. Press ENTER to continue
+</span><span>
+</span><span>
+</span><span>======================================================
+</span><span>Starting smart config pairing procedure
+</span><span>Waiting for the device to install the intermediate firmware
+</span><span>
+</span><span>IoT-device is online with ip 10.42.42.42
+</span><span>Stopping smart config
+</span><span>Fetching firmware backup
+</span><span>  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+</span><span>                                 Dload  Upload   Total   Spent    Left  Speed
+</span><span>100 1024k  100 1024k    0     0  46886      0  0:00:22  0:00:22 --:--:-- 17747
+</span><span>======================================================
+</span><span>Getting Info from IoT-device
+</span><span>VTRUST-FLASH 1.5
+</span><span>(c) VTRUST GMBH https://www.vtrust.de/35c3/
+</span><span>READ FLASH: http://10.42.42.42/backup
+</span><span>ChipID: c29fce
+</span><span>MAC: D8:F1:5B:C2:9F:CE
+</span><span>BootVersion: 7
+</span><span>BootMode: normal
+</span><span>FlashMode: 1M DOUT @ 40MHz
+</span><span>FlashChipId: 144051
+</span><span>FlashChipRealSize: 1024K
+</span><span>Active Userspace: user2 0x81000
+</span><span>======================================================
+</span><span>Ready to flash third party firmware!
+</span><span>
+</span><span>For your convenience, the following firmware images are already included in this repository:
+</span><span>  Tasmota v8.1.0.2 (wifiman)
+</span><span>  ESPurna 1.13.5 (base)
+</span><span>
+</span><span>You can also provide your own image by placing it in the /files directory
+</span><span>Please ensure the firmware fits the device and includes the bootloader
+</span><span>MAXIMUM SIZE IS 512KB
+</span><span>
+</span><span>Available options:
+</span><span>  0) return to stock
+</span><span>  1) flash espurna.bin
+</span><span>  2) flash tasmota.bin
+</span><span>  q) quit; do nothing
+</span><span>Please select 0-2: 2
+</span><span>Are you sure you want to flash tasmota.bin? This is the point of no return [y/N] y
+</span><span>Attempting to flash tasmota.bin, this may take a few seconds...
+</span><span>Flashed http://10.42.42.1/files/tasmota.bin successfully in 21124ms, rebooting...
+</span><span>Look for a tasmota-xxxx SSID to which you can connect and configure
+</span><span>Be sure to configure your device for proper function!
+</span><span>
+</span><span>HAVE FUN!
+</span><span>======================================================
+</span><span>Do you want to flash another device? [y/N] n
+</span><span>======================================================
+</span><span>Cleaning up...
+</span><span>No screen session found.
+</span><span>Closing AP
+</span><span>Exiting..
+</span></code></pre>
+<p>It worked out fine and now I have Tasmota on my bulb!
+This means the bulb I received was pre-loaded with a vulnerable firmware.
+Checking out the <code>backups</code> directory created by tuya-convert, the bulb seems to be using ESP8266 chip.
+Save the .bin file for your firmware somewhere in case you decide to revert back to stock firmware.
+However, reverting back to stock firmware only seems possible by ripping the bulb apart and connecting
+to a serial console.</p>
+<p>I found out my bulb's IP and experimented with Tasmota's web interface a bit. I also updated Tasmota to
+the current latest version (v12.1.1) while I was at it.</p>
+<hr />
+<h2 id="module-and-template-configuration">Module and Template Configuration</h2>
+<p>Tasmota is a generic firmware and it doesn't know what GPIO pins on the ESP microcontroller should do what.
+Heck it doesn't even know whether the device is a switch, fan, bulb or something else.
+It needs to be explicitly stated what GPIO pins need to do what. If you're luckier you can find a pre-existing
+template compatible with your device from <a href="https://templates.blakadder.com/">https://templates.blakadder.com/</a>
+or get some leads checking around the Internet.</p>
+<p>In my case, I couldn't find a fully compatible template as is. However, I stumbled upon
+<a href="https://gist.github.com/en4rab/2424500bc998ecb8687a8848bbbfaa15">this gist</a>
+which gave me a headstart on figuring out the pins. I copied the template code and pasted it in my Tasmota UI
+in "Configuration -&gt; Configure Other" and restarted my bulb. Turns out it required a few changes such as the
+color bar on the Tasmota UI was giving me different colors than what it should have, but at least now I knew
+that some of the pins from the template serve some function (albeit different) on the same pins on my bulb.</p>
+<p align="center">
+  <img src="/assets/YMka25p.png" width="350">
+  <i>Color Changer on Tasmota</i>
+</p>
+<p>This template showed up for manual configuration in "Configuration -&gt; Configure Module".
+On checking <a href="https://tasmota.github.io/docs/Lights/#pwm-lights">Tasmota's docs on different lights</a>, it seems
+if only one of the pin is set to PWM while all others are set to None, this only pin will allow for brightness
+control.</p>
+<p>Experimenting with this; I figured if I set some pin to PWM1 while setting all the other pins to None. If
+restarting the bulb and moving the brightness slider on the UI emits and changes brightness only for the
+Red color, then this pin corresponds to the R channel in the RGB combination. If the pin only emits and allows
+control for white color, then move on to the next pin since it's not a part of the RGB combination.
+I made a note of what pin emits the Red color. Proceeding further, I set this Red pin back to None and continued
+the process to find pins responsible for emitting Green and then for Blue colors. Once I had the RGB pins
+figured out individually, I set all of them together to their corresponding PWM number as stated in the above
+linked docs, which is:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>Red   - GPIO5  - PWM1
+</span><span>Green - GPIO4  - PWM2
+</span><span>Blue  - GPIO13 - PWM3
+</span></code></pre>
+<p>and voila now Tasmota's UI had the RGB color bar show up and work as expected!</p>
+<p>Experimenting further with the unused GPIO pins, it seems like the bulb also supports Cold White and Warm White
+(check the docs what they mean!) which is really a nice bonus to have!</p>
+<p>I'm not sure of the purpose of Template Configuration and if it would have been helpful for my case. Nonetheless,
+I copied my Module Configuration over to my Template Configuration as well.</p>
+<p align="center">
+  <img src="/assets/rT6EEPQ.png" width="700">
+  <i>Final Configuration</i>
+</p>
+<p>Last thing I noticed was the bulb wouldn't retain its last colors and would stay off when powered off and powered on
+back. This was resolved after executing following commands under Tasmota:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>SetOption0 1
+</span><span>PowerRetain 1
+</span><span>PowerOnState 3
+</span></code></pre>
+<p>There's <a href="https://github.com/ritiek/ClapLights">ClapLights</a> that goes well along with it!</p>
+
+        </article>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  
+    
+<footer class="footer text-muted">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 order-last order-lg-first">
+				<ul class="list-inline">
+					
+						<li class="list-inline-item">Powered by <a href="https://www.getzola.org/">Zola</a></li>
+					
+				</ul>
+			</div>
+			<div class="col-lg-8 order-first order-lg-last text-lg-end">
+				<ul class="list-inline">
+					
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+  
+
+  
+<script type="text/javascript" src="https://ritiek.github.io/js/main.js" defer></script>
+
+  <script type="text/javascript" src="https://ritiek.github.io/plugins/elasticlunr.min.js" defer></script>
+  <script type="text/javascript" src="https://ritiek.github.io/search_index.en.js" defer></script>
+  <script type="text/javascript" src="https://ritiek.github.io/js/search.js" defer></script>
+
+  
+</body>
+</html>

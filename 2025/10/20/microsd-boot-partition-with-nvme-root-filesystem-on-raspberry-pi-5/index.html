@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="preload" as="font" href="https://ritiek.github.io/fonts/vendor/jost/jost-v4-latin-regular.woff2" type="font/woff2" crossorigin>
+  <link rel="preload" as="font" href="https://ritiek.github.io/fonts/vendor/jost/jost-v4-latin-700.woff2"  type="font/woff2" crossorigin>
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://ritiek.github.io/main.css">
+<link rel="stylesheet" href="https://ritiek.github.io/custom.css">
+
+
+
+  
+  
+    
+  
+
+  
+  
+    
+    
+  
+  
+  
+    
+  
+  
+  
+  
+    
+  
+  
+  
+
+
+  <meta name="robots" content="index, follow">
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
+
+	
+
+
+	
+
+<title>MicroSD Boot Partition with NVMe Root Filesystem on Raspberry Pi 5 | Ritiek Malhotra</title>
+<meta name="description" content="Just some of my adventures!">
+<link rel="canonical" href="https://ritiek.github.io/2025/10/20/microsd-boot-partition-with-nvme-root-filesystem-on-raspberry-pi-5/">
+
+
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <meta name="twitter:title" content="MicroSD Boot Partition with NVMe Root Filesystem on Raspberry Pi 5">
+  <meta name="twitter:description" content="Just some of my adventures!">
+  <meta name="twitter:site" content="@">
+  <meta name="twitter:creator" content="@">
+  
+  <meta property="og:title" content="MicroSD Boot Partition with NVMe Root Filesystem on Raspberry Pi 5">
+  <meta property="og:description" content="Just some of my adventures!">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://ritiek.github.io/2025/10/20/microsd-boot-partition-with-nvme-root-filesystem-on-raspberry-pi-5/">
+
+  
+
+  <meta property="og:updated_time" content="">
+  <meta property="og:site_name" content="MicroSD Boot Partition with NVMe Root Filesystem on Raspberry Pi 5">
+
+  
+
+  
+
+  
+  <meta property="article:publisher" content="https://www.facebook.com/">
+  <meta property="article:author" content="https://www.facebook.com/">
+  <meta property="og:locale" content="en_US">
+
+
+
+
+
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BreadcrumbList",
+    
+      
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          {
+            "@type": "ListItem",
+            "position":  1 ,
+            "name": "Home",
+            "item": "https://ritiek.github.io/"
+          },
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  2 ,
+            "name": "2025",
+            "item": "https://ritiek.github.io/2025/"
+          },
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  3 ,
+            "name": "10",
+            "item": "https://ritiek.github.io/2025/10/"
+          },
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  4 ,
+            "name": "20",
+            "item": "https://ritiek.github.io/2025/10/20/"
+          },
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  5 ,
+            "name": "Microsd Boot Partition With Nvme Root Filesystem On Raspberry Pi 5",
+            "item": "https://ritiek.github.io/2025/10/20/microsd-boot-partition-with-nvme-root-filesystem-on-raspberry-pi-5/"
+          },
+        
+      
+    
+  }
+</script>
+
+
+
+
+
+
+  <meta name="theme-color" content="#fff">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://ritiek.github.io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://ritiek.github.io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://ritiek.github.io/favicon-16x16.png">
+  
+    <link rel="manifest" href="https://ritiek.github.io/site.webmanifest" crossorigin>
+  
+
+
+  
+
+</head>
+
+  
+    
+  
+
+<body class="page single">
+  
+    
+<div class="header-bar fixed-top"></div>
+<header class="navbar fixed-top navbar-expand-md navbar-light">
+	<div class="container">
+		<input class="menu-btn order-0" type="checkbox" id="menu-btn">
+		<label class="menu-icon d-md-none" for="menu-btn"><span class="navicon"></span></label>
+		<a class="navbar-brand order-1 order-md-0 me-auto" href="https://ritiek.github.io">Ritiek Malhotra</a>
+		<button id="mode" class="btn btn-link order-2 order-md-4" type="button" aria-label="Toggle mode">
+			<span class="toggle-dark"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></span>
+			<span class="toggle-light"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg></span>
+		</button>
+		<ul class="navbar-nav fork-me order-3 order-md-5">
+			
+				
+					<li class="nav-item">
+						<a class="nav-link" href="https://github.com/ritiek"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg><span class="ms-2 visually-hidden">GitHub</span></a>
+					</li>
+				
+			
+		</ul>
+		<div class="collapse navbar-collapse order-4 order-md-1">
+			<ul class="navbar-nav main-nav me-auto order-5 order-md-2">
+				
+					
+				
+				
+				
+					
+						<li class="nav-item">
+							<a class="nav-link" href="/posts/">Archive</a>
+						</li>
+					
+						<li class="nav-item">
+							<a class="nav-link" href="/about/">About</a>
+						</li>
+					
+				
+			</ul>
+			<div class="break order-6 d-md-none"></div>
+			
+				<form class="navbar-form flex-grow-1 order-7 order-md-3">
+					<input id="userinput" class="form-control is-search" type="search" placeholder="Search posts..."
+						aria-label="Search posts..." autocomplete="off">
+					<div id="suggestions" class="shadow bg-white rounded"></div>
+				</form>
+			
+		</div>
+	</div>
+
+</header>
+
+  
+
+  
+<div class="wrap container" role="document">
+  <div class="content">
+    <div class="row justify-content-center">
+      <div class="col-md-12 col-lg-10 col-xxl-8">
+        <article>
+          <div class="page-header">
+            <h1>MicroSD Boot Partition with NVMe Root Filesystem on Raspberry Pi 5</h1>
+          </div>
+          
+          <p>I run NixOS on my Raspberry Pi 5. For a while I've been running everything off a microSD card, but
+I wanted to migrate to an NVMe drive connected through a M.2 HAT via the PCIe slot for better performance
+and reliability.</p>
+<p>I currently use the now deprecated <a href="https://github.com/nix-community/raspberry-pi-nix">raspberry-pi-nix</a>
+flake to build an image for my RPi5. While I'd like to migrate to the actively maintained
+<a href="https://github.com/nvmd/nixos-raspberrypi">nixos-raspberrypi</a> flake, I haven't gotten around to it yet.
+When using u-boot with this flake, it's currently unable to boot directly off NVMe on the Pi 5, so a
+hybrid boot approach with the microSD card is necessary.</p>
+<p>I found it's possible to set up a hybrid boot configuration - boot from the microSD card initially,
+then mount the NVMe drive as the root filesystem. This gives me the performance benefits of NVMe
+while working around the u-boot limitations.</p>
+<h2 id="updating-the-firmware">Updating the firmware</h2>
+<p>Before attempting the hybrid boot setup, I updated my Raspberry Pi 5's firmware to the latest version.
+Newer firmware versions have better NVMe support and handle drive detection more reliably. For example,
+<a href="https://github.com/raspberrypi/firmware/issues/1833">this issue</a> tracks recently released improvements
+for booting off NVMe drives connected through PCIe switches.</p>
+<p>I flashed Raspberry Pi OS to a separate microSD card, booted from it, and updated the bootloader
+firmware directly from the command line:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> sudo rpi-eeprom-update</span><span style="color:#bf616a;"> -a
+</span></code></pre>
+<p>Alternatively, the bootloader can be updated through the interactive menu:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> sudo raspi-config
+</span></code></pre>
+<p>Then navigate to <strong>Advanced Options → Bootloader Version → Latest</strong>.</p>
+<p>After the update completed, I rebooted and verified the firmware version:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> sudo rpi-eeprom-update
+</span></code></pre>
+<p>Once confirmed the firmware was up to date, I proceeded with setting up the hybrid boot configuration.</p>
+<h2 id="the-hybrid-boot-approach">The hybrid boot approach</h2>
+<p>The idea is simple: the Raspberry Pi 5 reads the boot partition from the microSD card to load the
+kernel and initial boot configuration, but then switches to using the NVMe drive for the actual
+root filesystem.</p>
+<p>The boot process works like this:</p>
+<ol>
+<li>RPi5 firmware reads the FAT32 boot partition on the microSD card (<code>/dev/mmcblk0p1</code>).</li>
+<li>It loads the kernel and reads <code>cmdline.txt</code> which specifies the root partition.</li>
+<li>The root partition specified in <code>cmdline.txt</code> points to the NVMe drive instead of the microSD card.</li>
+<li>System boots with NVMe as the root filesystem.</li>
+</ol>
+<h2 id="setting-up-the-hybrid-boot">Setting up the hybrid boot</h2>
+<h3 id="step-1-prepare-cmdline-txt-for-delayed-boot">Step 1: Prepare cmdline.txt for delayed boot</h3>
+<p>First, I needed to give the system enough time to detect the NVMe drive during boot. I mounted the
+boot partition and modified <code>cmdline.txt</code> before cloning:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> sudo mount /dev/mmcblk0p1 /mnt
+</span><span style="color:#bf616a;">$</span><span> sudo vi /mnt/cmdline.txt
+</span></code></pre>
+<p>I added <code>rootwait rootdelay=30</code> to the end of the existing parameters. The <code>rootdelay=30</code> gives the
+system 30 seconds to detect and initialize the NVMe drive before attempting to mount the root partition.</p>
+<p>Once done, I unmounted the partition:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> sudo umount /mnt
+</span></code></pre>
+<h3 id="step-2-clone-the-microsd-card-to-nvme">Step 2: Clone the microSD card to NVMe</h3>
+<p>Next, I cloned the entire microSD card contents to the NVMe drive (dangerous! this will wipe off the
+NVMe drive).</p>
+<p>I switched to a root shell to avoid permission issues with block device operations:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> sudo su
+</span><span style="color:#65737e;"># pv /dev/mmcblk0 &gt; /dev/sda
+</span></code></pre>
+<p>This took a while since it's copying everything bit-by-bit to the NVMe drive. The result is an exact
+duplicate of the microSD card on the NVMe.</p>
+<h3 id="step-3-modify-partition-identifiers-to-avoid-conflicts">Step 3: Modify partition identifiers to avoid conflicts</h3>
+<p>Here's the tricky part - both the microSD card and NVMe now have identical partition UUIDs and labels,
+which would confuse the system about which partition to mount. Since I'm using the microSD card's boot
+partition and the NVMe's root partition, I needed to change identifiers to avoid conflicts.</p>
+<p><strong>Important:</strong> Before making any changes, note down the current UUIDs, PARTUUIDs, and labels of all
+partitions on both the drive as well as the microSD card:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> sudo blkid /dev/mmcblk0p1 /dev/mmcblk0p2 /dev/sda1 /dev/sda2
+</span></code></pre>
+<p>Save this output somewhere safe. If something goes wrong, we'll need these values to revert the changes.</p>
+<p>Since the system will use the microSD card's boot partition and the NVMe's root partition, I needed
+to change identifiers on the unused partitions to avoid conflicts.</p>
+<p><strong>For the ext4 root partition on the microSD card</strong> (<code>/dev/mmcblk0p2</code>):</p>
+<p>I changed the microSD card's root partition identifiers so it won't conflict with the NVMe's root
+partition:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;"># Change the label
+</span><span style="color:#bf616a;">$</span><span> sudo e2label /dev/mmcblk0p2 NIXOS_SD_UNUSED
+</span><span>
+</span><span style="color:#65737e;"># Change filesystem UUID
+</span><span style="color:#bf616a;">$</span><span> sudo tune2fs /dev/mmcblk0p2</span><span style="color:#bf616a;"> -U</span><span> random
+</span><span>
+</span><span style="color:#65737e;"># Verify changes
+</span><span style="color:#bf616a;">$</span><span> sudo blkid /dev/mmcblk0p2
+</span></code></pre>
+<p>This partition can be kept as a backup root filesystem in case the NVMe fails, or repurposed for
+other storage needs.</p>
+<p><strong>For the FAT32 boot partition on the NVMe</strong> (<code>/dev/sda1</code>):</p>
+<p>I also changed the NVMe's boot partition identifiers so it won't conflict with the microSD card's
+boot partition:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;"># Change the label
+</span><span style="color:#bf616a;">$</span><span> sudo fatlabel /dev/sda1 FIRMWARE_UNUSED
+</span><span>
+</span><span style="color:#65737e;"># Change filesystem UUID using mlabel
+</span><span style="color:#bf616a;">$</span><span> echo &quot;</span><span style="color:#a3be8c;">drive x: file=</span><span style="color:#96b5b4;">\&quot;</span><span style="color:#a3be8c;">/dev/sda1</span><span style="color:#96b5b4;">\&quot;</span><span>&quot; &gt; /tmp/mtoolsrc
+</span><span style="color:#bf616a;">$</span><span> MTOOLS_SKIP_CHECK=1 sudo env MTOOLSRC=/tmp/mtoolsrc mlabel</span><span style="color:#bf616a;"> -N</span><span> ABCDEF01 x:
+</span><span>
+</span><span style="color:#65737e;"># Verify changes
+</span><span style="color:#bf616a;">$</span><span> sudo blkid /dev/sda1
+</span></code></pre>
+<p><strong>Note:</strong> The <code>mlabel -N</code> command takes an 8-digit hexadecimal value for the FAT32 volume serial number.
+We only change the filesystem UUID of the NVMe boot partition, not the disk signature, because changing
+the disk signature would alter the PARTUUID of <code>/dev/sda2</code> which needs to remain stable for <code>cmdline.txt</code>
+to reference it correctly.</p>
+<h3 id="step-4-verify-cmdline-txt-points-to-the-correct-partition">Step 4: Verify cmdline.txt points to the correct partition</h3>
+<p>The <code>cmdline.txt</code> on the microSD card's boot partition should reference the NVMe's root partition.
+Mine looks like this:</p>
+<pre data-lang="txt" style="background-color:#2b303b;color:#c0c5ce;" class="language-txt "><code class="language-txt" data-lang="txt"><span>root=PARTUUID=2178694e-02 rootfstype=ext4 fsck.repair=yes rootwait rootdelay=30 console=tty1 console=serial0,115200n8 init=/sbin/init loglevel=7 lsm=landlock,yama,bpf
+</span></code></pre>
+<p>The <code>root=PARTUUID=2178694e-02</code> should match the PARTUUID of the NVMe's root partition (<code>/dev/sda2</code>),
+not the microSD card's root partition.</p>
+<p>The PARTUUID of NVMe root partition can be verified with:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> sudo blkid /dev/sda2
+</span></code></pre>
+<p>The output will show both the filesystem UUID and partition PARTUUID. Make sure the PARTUUID in
+<code>cmdline.txt</code> matches what you see for <code>/dev/sda2</code>.</p>
+<h3 id="step-5-boot-with-both-drives-connected">Step 5: Boot with both drives connected</h3>
+<p>I connected both the microSD card and NVMe drive back into my RPi5 and powered it on. The system now:</p>
+<ol>
+<li>Reads the boot partition from the microSD card.</li>
+<li>Mounts the root filesystem from the NVMe drive.</li>
+<li>Runs NixOS entirely off the NVMe for all file operations.</li>
+</ol>
+<p>Success! My NixOS root partition now runs off the NVMe drive, giving me the performance and reliability
+I was looking for.</p>
+<h2 id="expanding-the-nvme-storage">Expanding the NVMe storage</h2>
+<p>After getting the hybrid boot working, I realized the NVMe drive had much more space than the microSD
+card I cloned from. The cloned root partition was only using the same amount of space as the original
+microSD card, leaving the rest of the NVMe drive unused.</p>
+<p>The root partition on the NVMe can be resized to use all available space, or new partitions can be
+created for additional storage.</p>
+
+        </article>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  
+    
+<footer class="footer text-muted">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 order-last order-lg-first">
+				<ul class="list-inline">
+					
+						<li class="list-inline-item">Powered by <a href="https://www.getzola.org/">Zola</a></li>
+					
+				</ul>
+			</div>
+			<div class="col-lg-8 order-first order-lg-last text-lg-end">
+				<ul class="list-inline">
+					
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+  
+
+  
+<script type="text/javascript" src="https://ritiek.github.io/js/main.js" defer></script>
+
+  <script type="text/javascript" src="https://ritiek.github.io/plugins/elasticlunr.min.js" defer></script>
+  <script type="text/javascript" src="https://ritiek.github.io/search_index.en.js" defer></script>
+  <script type="text/javascript" src="https://ritiek.github.io/js/search.js" defer></script>
+
+  
+</body>
+</html>

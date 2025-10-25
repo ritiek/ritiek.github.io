@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="preload" as="font" href="https://ritiek.github.io/fonts/vendor/jost/jost-v4-latin-regular.woff2" type="font/woff2" crossorigin>
+  <link rel="preload" as="font" href="https://ritiek.github.io/fonts/vendor/jost/jost-v4-latin-700.woff2"  type="font/woff2" crossorigin>
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://ritiek.github.io/main.css">
+<link rel="stylesheet" href="https://ritiek.github.io/custom.css">
+
+
+
+  
+  
+    
+  
+
+  
+  
+    
+    
+  
+  
+  
+    
+  
+  
+  
+  
+    
+  
+  
+  
+
+
+  <meta name="robots" content="index, follow">
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
+
+	
+
+
+	
+
+<title>Flashing Tasmota on LC Tech 5V 4CH Relay | Ritiek Malhotra</title>
+<meta name="description" content="Just some of my adventures!">
+<link rel="canonical" href="https://ritiek.github.io/2022/11/05/flashing-tasmota-on-lctech-4ch-relay/">
+
+
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <meta name="twitter:title" content="Flashing Tasmota on LC Tech 5V 4CH Relay">
+  <meta name="twitter:description" content="Just some of my adventures!">
+  <meta name="twitter:site" content="@">
+  <meta name="twitter:creator" content="@">
+  
+  <meta property="og:title" content="Flashing Tasmota on LC Tech 5V 4CH Relay">
+  <meta property="og:description" content="Just some of my adventures!">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://ritiek.github.io/2022/11/05/flashing-tasmota-on-lctech-4ch-relay/">
+
+  
+
+  <meta property="og:updated_time" content="">
+  <meta property="og:site_name" content="Flashing Tasmota on LC Tech 5V 4CH Relay">
+
+  
+
+  
+
+  
+  <meta property="article:publisher" content="https://www.facebook.com/">
+  <meta property="article:author" content="https://www.facebook.com/">
+  <meta property="og:locale" content="en_US">
+
+
+
+
+
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BreadcrumbList",
+    
+      
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          {
+            "@type": "ListItem",
+            "position":  1 ,
+            "name": "Home",
+            "item": "https://ritiek.github.io/"
+          },
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  2 ,
+            "name": "2022",
+            "item": "https://ritiek.github.io/2022/"
+          },
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  3 ,
+            "name": "11",
+            "item": "https://ritiek.github.io/2022/11/"
+          },
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  4 ,
+            "name": "05",
+            "item": "https://ritiek.github.io/2022/11/05/"
+          },
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  5 ,
+            "name": "Flashing Tasmota On Lctech 4ch Relay",
+            "item": "https://ritiek.github.io/2022/11/05/flashing-tasmota-on-lctech-4ch-relay/"
+          },
+        
+      
+    
+  }
+</script>
+
+
+
+
+
+
+  <meta name="theme-color" content="#fff">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://ritiek.github.io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://ritiek.github.io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://ritiek.github.io/favicon-16x16.png">
+  
+    <link rel="manifest" href="https://ritiek.github.io/site.webmanifest" crossorigin>
+  
+
+
+  
+
+</head>
+
+  
+    
+  
+
+<body class="page single">
+  
+    
+<div class="header-bar fixed-top"></div>
+<header class="navbar fixed-top navbar-expand-md navbar-light">
+	<div class="container">
+		<input class="menu-btn order-0" type="checkbox" id="menu-btn">
+		<label class="menu-icon d-md-none" for="menu-btn"><span class="navicon"></span></label>
+		<a class="navbar-brand order-1 order-md-0 me-auto" href="https://ritiek.github.io">Ritiek Malhotra</a>
+		<button id="mode" class="btn btn-link order-2 order-md-4" type="button" aria-label="Toggle mode">
+			<span class="toggle-dark"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></span>
+			<span class="toggle-light"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg></span>
+		</button>
+		<ul class="navbar-nav fork-me order-3 order-md-5">
+			
+				
+					<li class="nav-item">
+						<a class="nav-link" href="https://github.com/ritiek"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg><span class="ms-2 visually-hidden">GitHub</span></a>
+					</li>
+				
+			
+		</ul>
+		<div class="collapse navbar-collapse order-4 order-md-1">
+			<ul class="navbar-nav main-nav me-auto order-5 order-md-2">
+				
+					
+				
+				
+				
+					
+						<li class="nav-item">
+							<a class="nav-link" href="/posts/">Archive</a>
+						</li>
+					
+						<li class="nav-item">
+							<a class="nav-link" href="/about/">About</a>
+						</li>
+					
+				
+			</ul>
+			<div class="break order-6 d-md-none"></div>
+			
+				<form class="navbar-form flex-grow-1 order-7 order-md-3">
+					<input id="userinput" class="form-control is-search" type="search" placeholder="Search posts..."
+						aria-label="Search posts..." autocomplete="off">
+					<div id="suggestions" class="shadow bg-white rounded"></div>
+				</form>
+			
+		</div>
+	</div>
+
+</header>
+
+  
+
+  
+<div class="wrap container" role="document">
+  <div class="content">
+    <div class="row justify-content-center">
+      <div class="col-md-12 col-lg-10 col-xxl-8">
+        <article>
+          <div class="page-header">
+            <h1>Flashing Tasmota on LC Tech 5V 4CH Relay</h1>
+          </div>
+          
+          <p>It seems we mostly require three components to put up non-smart home lights and other home electronics on a network:</p>
+<ol>
+<li>Relay</li>
+<li>A microcontroller with Wi-Fi capabilities</li>
+<li>AC to DC converter (to supply power to the microcontroller and relay)</li>
+</ol>
+<p align="center">
+  <img src="/assets/TinmvJg.png" width="300">
+  <i>LC Tech 5V 4CH Relay</i>
+</p>
+<p>This relay has all other components except for a built-in AC to DC converter. It uses ESP8266 ESP-01S as a
+microcontroller and came pre-flashed with some firmware whose dump is <a href="https://drive.google.com/file/d/1HtVP_Ys4VVpu8Qo8VJgHN0PDdGJIQ7Qf/view?usp=sharing">available here</a>.
+The ESP-01S on this board receives commands through the network and simply passes them (making use of RX/TX
+pins through a serial connection) to another chip present on this board which in turn actually controls the
+relays.</p>
+<p>The pre-flashed firmware had a couple of issues which are summarized nicely in alternate firmware called <a href="https://github.com/nagius/RemoteRelay#why-another-firmware-">RemoteRelay</a>:</p>
+<blockquote>
+<h2 id="why-another-firmware">Why another firmware ?</h2>
+<p>This board is not using the ESP8266 to manage the relays but instead another onboard MCU. The ESP8266 module is just used as a WiFi interface with its default AT firmware. The two chips are using serial (115200-8-1) to communicate.</p>
+<p>The original user experience is pretty clunky and no really usable. On power up, the board start an access point you need to connect your phone to in order to send commands. This is only usefull for testing as it's isolated from your main network.</p>
+<p>To switch to station mode, you need to push a button on the board (S1), install an app on your phone and then use this app to feed your SSID and password to the board. The app will then display its IP.
+Once connected, you need to send a binary payload over a plain TCP socket. No HTTP, no protocol of any kind, just plain binary.</p>
+<p>For example, you can run this command from Linux to switch on the first relay :</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>echo -ne &quot;\xA0\x01\x01\xA2&quot; | nc 192.168.0.9 8080
+</span></code></pre>
+<p>There is no way to get a feedback of the current state of the relay (beside looking at the leds on the board).</p>
+<p>On power loss, the board switch back to access point and you have to push the S1 button again to reconnect.</p>
+</blockquote>
+<h2 id="wiring-up">Wiring up</h2>
+<p>There are some most commonly used scenarios when wiring up the ESP-01S using a USB to TTL adapter:</p>
+<p align="center">
+  <img src="/assets/l2HYjdi.png" width="200">
+  <i>USB to TTL adapter</i>
+</p>
+<h4 id="runs-the-program-present-in-flash">Runs the program present in flash:</h4>
+<p>| ESP-01S 	| USB to TTL 	|
+|---------	|------------	|
+| 3V3     	| 3V3        	|
+| GND     	| GND        	|</p>
+<h4 id="runs-the-program-present-in-flash-and-gain-access-to-the-serial-console">Runs the program present in flash and gain access to the serial console:</h4>
+<p>| ESP-01S 	| USB to TTL 	|
+|---------	|------------	|
+| 3V3     	| 3V3        	|
+| GND     	| GND        	|
+| RX     	| TX        	|
+| TX     	| RX        	|</p>
+<p>Serial console can now be accessed using <a href="https://linux.die.net/man/8/picocom"><code>picocom</code></a>:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> picocom</span><span style="color:#bf616a;"> -b</span><span> 76800 /dev/ttyUSB0
+</span></code></pre>
+<p>ESP-01S uses the default baud rate of 76800 to display boot messages. This may later be overridden by the program
+present in flash, if any.</p>
+<p>Make sure you specify the correct baud rate otherwise you'll be sending and receiving garbled data. Experiment with
+these common baud rates used with ESP-01S if you're not sure of the expected baud rate:</p>
+<p>9600
+14400
+19200
+115200</p>
+<p>If you're still getting garbled data, you'll have to do some research on the baud rate used by the firmware
+currently flashed on the microcontroller.</p>
+<h4 id="booting-into-flash-mode">Booting into Flash Mode:</h4>
+<p>| ESP-01S 	| USB to TTL 	|
+|---------	|------------	|
+| 3V3     	| 3V3        	|
+| GND     	| GND        	|
+| EN     	| 3V3        	|
+| IO0     	| GND        	|</p>
+<p>You'll have to make a few connections in parallel to boot into this mode. A breadboard might help.</p>
+<p>Also there's no point booting into flash mode when you can't read and write to the flash. So, this mode is usually
+paired up with RX/TX connections.</p>
+<h4 id="booting-into-flash-mode-with-access-to-serial-console">Booting into Flash Mode with access to Serial Console:</h4>
+<p>| ESP-01S 	| USB to TTL 	|
+|---------	|------------	|
+| 3V3     	| 3V3        	|
+| GND     	| GND        	|
+| EN     	| 3V3        	|
+| IO0     	| GND        	|
+| RX     	| TX        	|
+| TX     	| RX        	|</p>
+<p align="center">
+  <img src="/assets/lBijlVB.png" width="800">
+  <a href="https://www.diyhobi.com/flash-program-esp-01-using-usb-serial-adapter/">
+  <i>Wiring up to boot into Flash Mode with access to Serial Console</i>
+  </a>
+</p>
+<p>If you like, you can also make the following connection:</p>
+<p>| ESP-01S 	| USB to TTL 	|
+|---------	|------------	|
+| RST     	| GND        	|</p>
+<p>Plug in and out the RST jumper cable whenever you want to hard reset/reboot your chip (this won't erase the
+flash memory). If you don't setup this RST connection, I think re-plugging the 3V3 pin should have the same effect
+(<a href="https://github.com/ritiek/ritiek.github.io">happy to accept PR if you have an ESP-01S around at the moment to confirm</a>).</p>
+<p align="center">
+  <img src="/assets/0prNvYl.jpeg" width="650">
+  <i>Connecting to pins on the relay board</i>
+  <br>
+  <br>
+  <br>
+  <img src="/assets/Q0YK7i8.jpeg" width="650">
+  <i>Connecting to pins directly on the ESP8266 ESP-01S</i>
+  <br>
+  <i>(Ignore the Pi Pico in above pics)</i>
+</p>
+<p>Now you should be able to read and write programs to flash memory. Let's start by taking a dump of what's already
+present on the flash memory using <a href="https://github.com/espressif/esptool"><code>esptool.py</code></a>:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> esptool.py</span><span style="color:#bf616a;"> --port</span><span> /dev/ttyUSB0</span><span style="color:#bf616a;"> --baud</span><span> 115200 read_flash 0x00000 0x100000 /path/to/backup.bin
+</span></code></pre>
+<p>This will backup the first 1 MB from the flash memory. If you're using any other chip besides ESP-01S that has
+a different flash size, adjust <code>0x100000</code> accordingly (e.g. set it to <code>0x400000</code> if chip has a flash size of 4 MB).</p>
+<h2 id="flashing-a-custom-firmware">Flashing a custom firmware</h2>
+<h3 id="remoterelay"><a href="https://github.com/nagius/RemoteRelay">RemoteRelay</a></h3>
+<p>I first flashed the chip with RemoteRelay as it it's made specifically
+for LC Tech Relays. You can compile and flash it using <a href="https://www.arduino.cc/en/software">Arudino IDE</a>. However,
+this firmware had an issue where it won't save the last relay state if the chip were to be rebooted. All relays
+would be set to OFF state after a reboot. This causes a problem that peripherals connected in relay under NO
+would always start as OFF and peripherals connected in relay under NC would always start as ON whenever the
+power goes off and comes back on, irrespective of the last relay state. Also, if you want to integrate RemoteRelay
+with HomeAssistant, you'll have to manually add API endpoints.</p>
+<h3 id="tasmota"><a href="https://github.com/arendst/Tasmota">Tasmota</a></h3>
+<p>Next I went with Tasmota mostly in an attempt to load relay's last state in case of power reset that didn't seem
+possible with RemoteRelay. Digging a bit, one way that worked for me is to compile Tasmota (using
+<a href="https://github.com/tasmota/docker-tasmota">tasmota-docker</a>) with support for <code>if</code> logic conditions:</p>
+<pre data-lang="c" style="background-color:#2b303b;color:#c0c5ce;" class="language-c "><code class="language-c" data-lang="c"><span style="color:#65737e;">// user_config_override.h
+</span><span style="color:#b48ead;">#define </span><span>USE_EXPRESSION         </span><span style="color:#65737e;">// Add support for expression evaluation in rules (+3k2 code, +64 bytes mem)
+</span><span style="color:#b48ead;">#define </span><span>SUPPORT_IF_STATEMENT   </span><span style="color:#65737e;">// Add support for IF statement in rules (+4k2 code, -332 bytes mem)
+</span></code></pre>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> docker run</span><span style="color:#bf616a;"> -ti --rm -v </span><span>$(</span><span style="color:#bf616a;">pwd</span><span>)/Tasmota:/tasmota</span><span style="color:#bf616a;"> -u </span><span>$</span><span style="color:#bf616a;">UID</span><span>:$</span><span style="color:#bf616a;">GID</span><span> blakadder/docker-tasmota</span><span style="color:#bf616a;"> -e</span><span> tasmota-PT
+</span></code></pre>
+<p>This will output a .bin we can use to flash on the chip.</p>
+<p>Let's erase the flash on the chip:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> esptool.py</span><span style="color:#bf616a;"> --port</span><span> /dev/ttyUSB0 erase_flash
+</span></code></pre>
+<p>and now write the generated .bin onto the chip:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> esptool.py</span><span style="color:#bf616a;"> --port</span><span> /dev/ttyUSB0 write_flash 0x00000 /path/to/tasmota.bin
+</span></code></pre>
+<p>Connect the ESP-01S back to the relay and power it on.</p>
+<p>Now to make the ESP8266 communicate with the seconday chip which controls the actual realys, we'll
+add some serial commands in Tasmota GUI. Applying the configuration and setting up rules from the 12V variant
+seems to also work for my 5V variant:<br>
+<a href="https://templates.blakadder.com/LC-ESP01-4R-12V.html">https://templates.blakadder.com/LC-ESP01-4R-12V.html</a></p>
+<p>Now to save and load relay's last state, create another rule:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">rule2
+</span><span style="color:#bf616a;">on</span><span> Power1#State=0 do mem1 0 endon
+</span><span style="color:#bf616a;">on</span><span> Power2#State=0 do mem2 0 endon
+</span><span style="color:#bf616a;">on</span><span> Power3#State=0 do mem3 0 endon
+</span><span style="color:#bf616a;">on</span><span> Power4#State=0 do mem4 0 endon
+</span><span style="color:#bf616a;">on</span><span> Power1#State=1 do mem1 1 endon
+</span><span style="color:#bf616a;">on</span><span> Power2#State=1 do mem2 1 endon
+</span><span style="color:#bf616a;">on</span><span> Power3#State=1 do mem3 1 endon
+</span><span style="color:#bf616a;">on</span><span> Power4#State=1 do mem4 1 endon
+</span><span style="color:#bf616a;">on</span><span> System#Boot do if (mem1==1) </span><span style="color:#bf616a;">SerialSend5</span><span> A00101A2 endif endon
+</span><span style="color:#bf616a;">on</span><span> System#Boot do if (mem2==1) </span><span style="color:#bf616a;">SerialSend5</span><span> A00201A3 endif endon
+</span><span style="color:#bf616a;">on</span><span> System#Boot do if (mem3==1) </span><span style="color:#bf616a;">SerialSend5</span><span> A00301A4 endif endon
+</span><span style="color:#bf616a;">on</span><span> System#Boot do if (mem4==1) </span><span style="color:#bf616a;">SerialSend5</span><span> A00401A5 endif endon
+</span><span style="color:#bf616a;">on</span><span> System#Boot do if (mem4==1) </span><span style="color:#bf616a;">SerialSend5</span><span> A00401A5 endif endon
+</span></code></pre>
+<p>And enable it with:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">rule2</span><span> 1
+</span></code></pre>
+<p>The rules in the linked template and loading/saving statesmake sense if you connect all your peripherals to NO
+on the relays.
+If you'll be connecting all of them to NC, swap <code>State=0</code> with <code>State=1</code> and vice-versa in both rules like below:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">rule1
+</span><span style="color:#bf616a;">on</span><span> System#Boot do Baudrate 115200 endon
+</span><span style="color:#bf616a;">on</span><span> SerialReceived#Data=41542B5253540D0A do SerialSend5 5749464920434f4e4e45435445440a5749464920474f542049500a41542b4349504d55583d310a41542b4349505345525645523d312c383038300a41542b43495053544f3d333630 endon
+</span><span style="color:#bf616a;">on</span><span> Power1#State=0 do SerialSend5 A00101A2 endon
+</span><span style="color:#bf616a;">on</span><span> Power1#State=1 do SerialSend5 A00100A1 endon
+</span><span style="color:#bf616a;">on</span><span> Power2#State=0 do SerialSend5 A00201A3 endon
+</span><span style="color:#bf616a;">on</span><span> Power2#State=1 do SerialSend5 A00200A2 endon
+</span><span style="color:#bf616a;">on</span><span> Power3#State=0 do SerialSend5 A00301A4 endon
+</span><span style="color:#bf616a;">on</span><span> Power3#State=1 do SerialSend5 A00300A3 endon
+</span><span style="color:#bf616a;">on</span><span> Power4#State=0 do SerialSend5 A00401A5 endon
+</span><span style="color:#bf616a;">on</span><span> Power4#State=1 do SerialSend5 A00400A4 endon
+</span><span>
+</span><span style="color:#bf616a;">rule2
+</span><span style="color:#bf616a;">on</span><span> Power1#State=0 do mem1 1 endon
+</span><span style="color:#bf616a;">on</span><span> Power2#State=0 do mem2 1 endon
+</span><span style="color:#bf616a;">on</span><span> Power3#State=0 do mem3 1 endon
+</span><span style="color:#bf616a;">on</span><span> Power4#State=0 do mem4 1 endon
+</span><span style="color:#bf616a;">on</span><span> Power1#State=1 do mem1 0 endon
+</span><span style="color:#bf616a;">on</span><span> Power2#State=1 do mem2 0 endon
+</span><span style="color:#bf616a;">on</span><span> Power3#State=1 do mem3 0 endon
+</span><span style="color:#bf616a;">on</span><span> Power4#State=1 do mem4 0 endon
+</span><span style="color:#bf616a;">on</span><span> System#Boot do if (mem1==1) </span><span style="color:#bf616a;">SerialSend5</span><span> A00101A2 endif endon
+</span><span style="color:#bf616a;">on</span><span> System#Boot do if (mem2==1) </span><span style="color:#bf616a;">SerialSend5</span><span> A00201A3 endif endon
+</span><span style="color:#bf616a;">on</span><span> System#Boot do if (mem3==1) </span><span style="color:#bf616a;">SerialSend5</span><span> A00301A4 endif endon
+</span><span style="color:#bf616a;">on</span><span> System#Boot do if (mem4==1) </span><span style="color:#bf616a;">SerialSend5</span><span> A00401A5 endif endon
+</span><span style="color:#bf616a;">on</span><span> System#Boot do if (mem4==1) </span><span style="color:#bf616a;">SerialSend5</span><span> A00401A5 endif endon
+</span></code></pre>
+<p>Make sure to enable both these rules:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">rule1</span><span> 1
+</span><span style="color:#bf616a;">rule2</span><span> 1
+</span></code></pre>
+<p>If you noticed above in <code>rule2</code>, for some reason I had to repeat the last line:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">on</span><span> System#Boot do if (mem4==1) </span><span style="color:#bf616a;">SerialSend5</span><span> A00401A5 endif endon
+</span></code></pre>
+<p>otherwise Tasmota 12.2.0.2 didn't seem to pick it up.</p>
+<p>Still need to verify if it's me messing something up or if this seems a bug in Tasmota.</p>
+
+        </article>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  
+    
+<footer class="footer text-muted">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 order-last order-lg-first">
+				<ul class="list-inline">
+					
+						<li class="list-inline-item">Powered by <a href="https://www.getzola.org/">Zola</a></li>
+					
+				</ul>
+			</div>
+			<div class="col-lg-8 order-first order-lg-last text-lg-end">
+				<ul class="list-inline">
+					
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+  
+
+  
+<script type="text/javascript" src="https://ritiek.github.io/js/main.js" defer></script>
+
+  <script type="text/javascript" src="https://ritiek.github.io/plugins/elasticlunr.min.js" defer></script>
+  <script type="text/javascript" src="https://ritiek.github.io/search_index.en.js" defer></script>
+  <script type="text/javascript" src="https://ritiek.github.io/js/search.js" defer></script>
+
+  
+</body>
+</html>

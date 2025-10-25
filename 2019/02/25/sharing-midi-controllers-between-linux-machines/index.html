@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="preload" as="font" href="https://ritiek.github.io/fonts/vendor/jost/jost-v4-latin-regular.woff2" type="font/woff2" crossorigin>
+  <link rel="preload" as="font" href="https://ritiek.github.io/fonts/vendor/jost/jost-v4-latin-700.woff2"  type="font/woff2" crossorigin>
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://ritiek.github.io/main.css">
+<link rel="stylesheet" href="https://ritiek.github.io/custom.css">
+
+
+
+  
+  
+    
+  
+
+  
+  
+    
+    
+  
+  
+  
+    
+  
+  
+  
+  
+    
+  
+  
+  
+
+
+  <meta name="robots" content="index, follow">
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
+
+	
+
+
+	
+
+<title>Sharing MIDI controllers between Linux machines | Ritiek Malhotra</title>
+<meta name="description" content="Just some of my adventures!">
+<link rel="canonical" href="https://ritiek.github.io/2019/02/25/sharing-midi-controllers-between-linux-machines/">
+
+
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <meta name="twitter:title" content="Sharing MIDI controllers between Linux machines">
+  <meta name="twitter:description" content="Just some of my adventures!">
+  <meta name="twitter:site" content="@">
+  <meta name="twitter:creator" content="@">
+  
+  <meta property="og:title" content="Sharing MIDI controllers between Linux machines">
+  <meta property="og:description" content="Just some of my adventures!">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://ritiek.github.io/2019/02/25/sharing-midi-controllers-between-linux-machines/">
+
+  
+
+  <meta property="og:updated_time" content="">
+  <meta property="og:site_name" content="Sharing MIDI controllers between Linux machines">
+
+  
+
+  
+
+  
+  <meta property="article:publisher" content="https://www.facebook.com/">
+  <meta property="article:author" content="https://www.facebook.com/">
+  <meta property="og:locale" content="en_US">
+
+
+
+
+
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BreadcrumbList",
+    
+      
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          {
+            "@type": "ListItem",
+            "position":  1 ,
+            "name": "Home",
+            "item": "https://ritiek.github.io/"
+          },
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  2 ,
+            "name": "2019",
+            "item": "https://ritiek.github.io/2019/"
+          },
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  3 ,
+            "name": "02",
+            "item": "https://ritiek.github.io/2019/02/"
+          },
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  4 ,
+            "name": "25",
+            "item": "https://ritiek.github.io/2019/02/25/"
+          },
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  5 ,
+            "name": "Sharing Midi Controllers Between Linux Machines",
+            "item": "https://ritiek.github.io/2019/02/25/sharing-midi-controllers-between-linux-machines/"
+          },
+        
+      
+    
+  }
+</script>
+
+
+
+
+
+
+  <meta name="theme-color" content="#fff">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://ritiek.github.io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://ritiek.github.io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://ritiek.github.io/favicon-16x16.png">
+  
+    <link rel="manifest" href="https://ritiek.github.io/site.webmanifest" crossorigin>
+  
+
+
+  
+
+</head>
+
+  
+    
+  
+
+<body class="page single">
+  
+    
+<div class="header-bar fixed-top"></div>
+<header class="navbar fixed-top navbar-expand-md navbar-light">
+	<div class="container">
+		<input class="menu-btn order-0" type="checkbox" id="menu-btn">
+		<label class="menu-icon d-md-none" for="menu-btn"><span class="navicon"></span></label>
+		<a class="navbar-brand order-1 order-md-0 me-auto" href="https://ritiek.github.io">Ritiek Malhotra</a>
+		<button id="mode" class="btn btn-link order-2 order-md-4" type="button" aria-label="Toggle mode">
+			<span class="toggle-dark"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></span>
+			<span class="toggle-light"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg></span>
+		</button>
+		<ul class="navbar-nav fork-me order-3 order-md-5">
+			
+				
+					<li class="nav-item">
+						<a class="nav-link" href="https://github.com/ritiek"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg><span class="ms-2 visually-hidden">GitHub</span></a>
+					</li>
+				
+			
+		</ul>
+		<div class="collapse navbar-collapse order-4 order-md-1">
+			<ul class="navbar-nav main-nav me-auto order-5 order-md-2">
+				
+					
+				
+				
+				
+					
+						<li class="nav-item">
+							<a class="nav-link" href="/posts/">Archive</a>
+						</li>
+					
+						<li class="nav-item">
+							<a class="nav-link" href="/about/">About</a>
+						</li>
+					
+				
+			</ul>
+			<div class="break order-6 d-md-none"></div>
+			
+				<form class="navbar-form flex-grow-1 order-7 order-md-3">
+					<input id="userinput" class="form-control is-search" type="search" placeholder="Search posts..."
+						aria-label="Search posts..." autocomplete="off">
+					<div id="suggestions" class="shadow bg-white rounded"></div>
+				</form>
+			
+		</div>
+	</div>
+
+</header>
+
+  
+
+  
+<div class="wrap container" role="document">
+  <div class="content">
+    <div class="row justify-content-center">
+      <div class="col-md-12 col-lg-10 col-xxl-8">
+        <article>
+          <div class="page-header">
+            <h1>Sharing MIDI controllers between Linux machines</h1>
+          </div>
+          
+          <p>In the <a href="/2019/02/18/sharing-linux-event-devices-with-other-linux-machines/">last post</a> - I talked about how one can
+share input event devices available as <code>/dev/input/event*</code>. Lately, I've been also wanting to share my
+MIDI keyboard (Yamaha P-45 Digital Piano) so that I can receive and send MIDI events to my Linux machine
+without using a cable.</p>
+<p>A problem with MIDI keyboards is that they do not show up as an event device in <code>/dev/input/</code>. Instead
+on my machine, it is picked up by ALSA and is available via the event file <code>/dev/snd/midiC1D0</code>.</p>
+<p>This is the kind of output I get when I hit some keys on my MIDI keyboard:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ cat /dev/snd/midiC1D0
+</span><span>2%2242G0H.Q.HGO&#39;M#QOJLMH#JLQ%HQOOTTX*Y/V&#39;YVXS,Q0SQJ0H+G,HJGF7D3DFB=D1DB&lt;5&gt;/?,@+=+?@=&gt;&lt;&lt;3;&lt;9&lt;9;&lt;
+</span></code></pre>
+<p>For some reason, the netevent tool also fails to read this file:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ netevent show /dev/snd/midiC1D0
+</span><span>error: failed to query device name: Inappropriate ioctl for device
+</span></code></pre>
+<p>I tried some stuff and there's this one thing that worked - Piping the output of <code>/dev/snd/midiC1D0</code> from
+the host machine to a virtual MIDI device on the client machine.</p>
+<h3 id="client-machine-run-the-commands-on-the-machine-with-whom-you-want-to-share-midi-controller-with">Client Machine (Run the commands on the machine with whom you want to share MIDI controller with)</h3>
+<p>You'll need to install timidity on client machine which allows us to create virtual MIDI devices.</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ sudo apt install timidity
+</span></code></pre>
+<p>The documentation on <a href="https://wiki.archlinux.org/index.php/timidity">https://wiki.archlinux.org/index.php/timidity</a> is pretty good. I'll repeating the
+parts useful to us here:</p>
+<p>Now let's try playing some MIDI file to make sure timidity is installed correctly. Download this sample
+www.angelfire.com/fl/herky/images/because.mid and call timidity to play it:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ timidity because.mid
+</span></code></pre>
+<p>You should hear the sound from your computer speakers.</p>
+<p>Let's create a timidity server:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ timidity -iA
+</span></code></pre>
+<p>The output of the above command should contain the port it is listening on, something like:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>...
+</span><span>Opening sequencer port: 128:0 128:1 128:2 128:3
+</span><span>...
+</span></code></pre>
+<p>You should now also able to see timidity's software MIDI ports with:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ aconnect -o
+</span><span>client 14: &#39;Midi Through&#39; [type=kernel]
+</span><span>    0 &#39;Midi Through Port-0&#39;
+</span><span>client 128: &#39;TiMidity&#39; [type=user,pid=3373]
+</span><span>    0 &#39;TiMidity port 0 &#39;
+</span><span>    1 &#39;TiMidity port 1 &#39;
+</span><span>    2 &#39;TiMidity port 2 &#39;
+</span><span>    3 &#39;TiMidity port 3 &#39;
+</span></code></pre>
+<p>Let's again play the MIDI file to make sure the MIDI ports are listening properly:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ aplaymidi -p 128:0 because.mid
+</span></code></pre>
+<p>You should hear the MIDI play via your computer speakers.</p>
+<p>So far, so good.</p>
+<p>We'll now create a virtual MIDI device which will allow us to pipe MIDI data from the host machine.</p>
+<p>Insert the <code>snd-virmidi</code> kernel module:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ sudo modprobe snd-virmidi
+</span></code></pre>
+<p>Use aconnect to verify the virtual MIDI device:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ aconnect -o
+</span><span>client 14: &#39;Midi Through&#39; [type=kernel]
+</span><span>    0 &#39;Midi Through Port-0&#39;
+</span><span>client 20: &#39;Virtual Raw MIDI 1-0&#39; [type=kernel,card=1]
+</span><span>    0 &#39;VirMIDI 1-0     &#39;
+</span><span>client 21: &#39;Virtual Raw MIDI 1-1&#39; [type=kernel,card=1]
+</span><span>    0 &#39;VirMIDI 1-1     &#39;
+</span><span>client 22: &#39;Virtual Raw MIDI 1-2&#39; [type=kernel,card=1]
+</span><span>    0 &#39;VirMIDI 1-2     &#39;
+</span><span>client 23: &#39;Virtual Raw MIDI 1-3&#39; [type=kernel,card=1]
+</span><span>    0 &#39;VirMIDI 1-3     &#39;
+</span><span>client 128: &#39;TiMidity&#39; [type=user,pid=3373]
+</span><span>    0 &#39;TiMidity port 0 &#39;
+</span><span>    1 &#39;TiMidity port 1 &#39;
+</span><span>    2 &#39;TiMidity port 2 &#39;
+</span><span>    3 &#39;TiMidity port 3 &#39;
+</span></code></pre>
+<p>We can see some Virtual Raw MIDI devices indicating things are working properly.</p>
+<p>Now, connect timidity's software port with this virtual MIDI device:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ aconnect 20:0 128:0
+</span></code></pre>
+<p>We should now have this virtual device file as <code>/dev/snd/midiC1D0</code>.</p>
+<p>Let's try piping the MIDI data from the host machine to this client machine.</p>
+<p>Make sure you have a MIDI controller attached to the host machine. We'll try to share that MIDI
+controller with our client machine.</p>
+<p>Run these two commands in separate terminals:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span># Output data being written to local device file to the host machine
+</span><span>cat /dev/snd/midiC1D0 | ssh user@hostmachine &quot;cat &gt; /dev/snd/midiC1D0&quot;
+</span></code></pre>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span># Output data being written to host device file to local machine
+</span><span>ssh user@hostmachine &quot;cat /dev/snd/midiC1D0&quot; &gt; /dev/snd/midiC1D0
+</span></code></pre>
+<p>This way you can both send and receive MIDI events.</p>
+<p>Let's test whether this setup works.</p>
+<p>Install <a href="https://github.com/linthesia/linthesia">linthesia</a> (A synthesia-like software for Linux):</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ sudo apt install linthesia
+</span></code></pre>
+<p>If it isn't available in your apt repositories, you might have to build it from source.
+Their GitHub repo page has instructions on compiling.</p>
+<p>Add</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>deb http://cz.archive.ubuntu.com/ubuntu xenial main universe
+</span></code></pre>
+<p>to <code>/etc/apt/sources.list</code>.</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ sudo apt install libgtkglextmm-x11-1.2-dev
+</span><span>$ sudo apt install libgconfmm-2.6-dev
+</span><span>$ sudo apt install libasound2-dev
+</span><span>$ sudo apt install libsqlite3-dev
+</span></code></pre>
+<p>and play the sample MIDI file with linthesia:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ linthesia because.mid
+</span></code></pre>
+<p>This will open the Linthesia GUI. Select <code>VirMIDI 1-0</code> as both Output Device and Input Device and play
+the song.</p>
+<p>The sound should now be output from your MIDI controller. Also, try hitting some keys on your MIDI
+controller and you should see them being represented in gray color on Linthesia. The delay is very
+little even when I tested only on WiFi.</p>
+
+        </article>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  
+    
+<footer class="footer text-muted">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 order-last order-lg-first">
+				<ul class="list-inline">
+					
+						<li class="list-inline-item">Powered by <a href="https://www.getzola.org/">Zola</a></li>
+					
+				</ul>
+			</div>
+			<div class="col-lg-8 order-first order-lg-last text-lg-end">
+				<ul class="list-inline">
+					
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+  
+
+  
+<script type="text/javascript" src="https://ritiek.github.io/js/main.js" defer></script>
+
+  <script type="text/javascript" src="https://ritiek.github.io/plugins/elasticlunr.min.js" defer></script>
+  <script type="text/javascript" src="https://ritiek.github.io/search_index.en.js" defer></script>
+  <script type="text/javascript" src="https://ritiek.github.io/js/search.js" defer></script>
+
+  
+</body>
+</html>

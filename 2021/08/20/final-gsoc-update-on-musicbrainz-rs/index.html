@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="preload" as="font" href="https://ritiek.github.io/fonts/vendor/jost/jost-v4-latin-regular.woff2" type="font/woff2" crossorigin>
+  <link rel="preload" as="font" href="https://ritiek.github.io/fonts/vendor/jost/jost-v4-latin-700.woff2"  type="font/woff2" crossorigin>
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://ritiek.github.io/main.css">
+<link rel="stylesheet" href="https://ritiek.github.io/custom.css">
+
+
+
+  
+  
+    
+  
+
+  
+  
+    
+    
+  
+  
+  
+    
+  
+  
+  
+  
+    
+  
+  
+  
+
+
+  <meta name="robots" content="index, follow">
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
+
+	
+
+
+	
+
+<title>Final GSoC update on musicbrainz_rs | Ritiek Malhotra</title>
+<meta name="description" content="Just some of my adventures!">
+<link rel="canonical" href="https://ritiek.github.io/2021/08/20/final-gsoc-update-on-musicbrainz-rs/">
+
+
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <meta name="twitter:title" content="Final GSoC update on musicbrainz_rs">
+  <meta name="twitter:description" content="Just some of my adventures!">
+  <meta name="twitter:site" content="@">
+  <meta name="twitter:creator" content="@">
+  
+  <meta property="og:title" content="Final GSoC update on musicbrainz_rs">
+  <meta property="og:description" content="Just some of my adventures!">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://ritiek.github.io/2021/08/20/final-gsoc-update-on-musicbrainz-rs/">
+
+  
+
+  <meta property="og:updated_time" content="">
+  <meta property="og:site_name" content="Final GSoC update on musicbrainz_rs">
+
+  
+
+  
+
+  
+  <meta property="article:publisher" content="https://www.facebook.com/">
+  <meta property="article:author" content="https://www.facebook.com/">
+  <meta property="og:locale" content="en_US">
+
+
+
+
+
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BreadcrumbList",
+    
+      
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          {
+            "@type": "ListItem",
+            "position":  1 ,
+            "name": "Home",
+            "item": "https://ritiek.github.io/"
+          },
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  2 ,
+            "name": "2021",
+            "item": "https://ritiek.github.io/2021/"
+          },
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  3 ,
+            "name": "08",
+            "item": "https://ritiek.github.io/2021/08/"
+          },
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  4 ,
+            "name": "20",
+            "item": "https://ritiek.github.io/2021/08/20/"
+          },
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  5 ,
+            "name": "Final Gsoc Update On Musicbrainz Rs",
+            "item": "https://ritiek.github.io/2021/08/20/final-gsoc-update-on-musicbrainz-rs/"
+          },
+        
+      
+    
+  }
+</script>
+
+
+
+
+
+
+  <meta name="theme-color" content="#fff">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://ritiek.github.io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://ritiek.github.io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://ritiek.github.io/favicon-16x16.png">
+  
+    <link rel="manifest" href="https://ritiek.github.io/site.webmanifest" crossorigin>
+  
+
+
+  
+
+</head>
+
+  
+    
+  
+
+<body class="page single">
+  
+    
+<div class="header-bar fixed-top"></div>
+<header class="navbar fixed-top navbar-expand-md navbar-light">
+	<div class="container">
+		<input class="menu-btn order-0" type="checkbox" id="menu-btn">
+		<label class="menu-icon d-md-none" for="menu-btn"><span class="navicon"></span></label>
+		<a class="navbar-brand order-1 order-md-0 me-auto" href="https://ritiek.github.io">Ritiek Malhotra</a>
+		<button id="mode" class="btn btn-link order-2 order-md-4" type="button" aria-label="Toggle mode">
+			<span class="toggle-dark"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></span>
+			<span class="toggle-light"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg></span>
+		</button>
+		<ul class="navbar-nav fork-me order-3 order-md-5">
+			
+				
+					<li class="nav-item">
+						<a class="nav-link" href="https://github.com/ritiek"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg><span class="ms-2 visually-hidden">GitHub</span></a>
+					</li>
+				
+			
+		</ul>
+		<div class="collapse navbar-collapse order-4 order-md-1">
+			<ul class="navbar-nav main-nav me-auto order-5 order-md-2">
+				
+					
+				
+				
+				
+					
+						<li class="nav-item">
+							<a class="nav-link" href="/posts/">Archive</a>
+						</li>
+					
+						<li class="nav-item">
+							<a class="nav-link" href="/about/">About</a>
+						</li>
+					
+				
+			</ul>
+			<div class="break order-6 d-md-none"></div>
+			
+				<form class="navbar-form flex-grow-1 order-7 order-md-3">
+					<input id="userinput" class="form-control is-search" type="search" placeholder="Search posts..."
+						aria-label="Search posts..." autocomplete="off">
+					<div id="suggestions" class="shadow bg-white rounded"></div>
+				</form>
+			
+		</div>
+	</div>
+
+</header>
+
+  
+
+  
+<div class="wrap container" role="document">
+  <div class="content">
+    <div class="row justify-content-center">
+      <div class="col-md-12 col-lg-10 col-xxl-8">
+        <article>
+          <div class="page-header">
+            <h1>Final GSoC update on musicbrainz_rs</h1>
+          </div>
+          
+          <p>This post is a follow-up of what I've been working on since my <a href="/2021/07/15/gsoc-with-metabrainz-in-rust/">last post</a>,
+for my involvement as a GSoC student with <a href="https://github.com/oknozor/musicbrainz_rs">musicbrainz_rs</a>.</p>
+<h2 id="what-we-ve-achieved-since-then">What we've achieved since then</h2>
+<h4 id="relationship-level-includes">Relationship Level Includes</h4>
+<ul>
+<li>We now support requesting for relationship level includes from the web-api.
+These can requested similar to the way how other includes are requested for.</li>
+</ul>
+<pre data-lang="swift" style="background-color:#2b303b;color:#c0c5ce;" class="language-swift "><code class="language-swift" data-lang="swift"><span>    </span><span style="color:#b48ead;">let</span><span> polly = Recording::fetch()
+</span><span>        .id(</span><span style="color:#a3be8c;">&quot;af40d6b8-58e8-4ca5-9db8-d4fca0b899e2&quot;</span><span>)
+</span><span>        .with_work_relations()
+</span><span>        .with_work_level_relations()
+</span><span>        .execute()
+</span><span>        .unwrap();
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">let</span><span> relations = polly.relations.unwrap();
+</span><span>
+</span><span>    assert!(relations.iter().any(|rel| rel.target_type == </span><span style="color:#a3be8c;">&quot;work&quot;</span><span>));
+</span></code></pre>
+<h4 id="search">Search</h4>
+<ul>
+<li>We now also have search implemented on most of the entities supported by musicbrainz.</li>
+</ul>
+<pre data-lang="swift" style="background-color:#2b303b;color:#c0c5ce;" class="language-swift "><code class="language-swift" data-lang="swift"><span>    use musicbrainz_rs::entity::area::AreaType::*;
+</span><span>    use musicbrainz_rs::entity::area::*;
+</span><span>    use musicbrainz_rs::Search;
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">let</span><span> query = AreaSearchQuery::query_builder()
+</span><span>        .area(</span><span style="color:#a3be8c;">&quot;London&quot;</span><span>)
+</span><span>        .and()
+</span><span>        .tag(</span><span style="color:#a3be8c;">&quot;place&quot;</span><span>)
+</span><span>        .build();
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">let</span><span> result = Area::search(query).execute().unwrap();
+</span><span>
+</span><span>    assert!(result
+</span><span>        .entities
+</span><span>        .iter()
+</span><span>        .any(|area| area.area_type.as_ref().unwrap() == &amp;City));
+</span></code></pre>
+<p>The ones still missing the search implementation are the <code>Place</code> and <code>Tag</code> entity.</p>
+<p>There's some inconsistency in the API response for the <code>Place</code> entity which I reported
+<a href="https://tickets.metabrainz.org/browse/SEARCH-664">here</a>. We should probably wait before implementing
+search on the <code>Place</code> entity and see maybe see if this can be resolved from the musicbrainz side
+itself otherwise we'll have to workaround this in our library as
+<a href="https://github.com/oknozor/musicbrainz_rs/blob/ae0fd81fecb8897514d9c211ba52650cd1512ab1/src/entity/place.rs#L45-L49">we currently parse the coordinates as <code>f64</code></a>
+which fails when attempting to use the same coordinate struct to also parse the search response.</p>
+<p>On the other hand <code>Tag</code> entity <a href="https://musicbrainz.org/doc/MusicBrainz_API#Misc_inc.3D_arguments">requires http digest authentication</a>
+which isn't implemented in musicbrainz_rs at the moment. <code>Tag</code> search will need to be implemented once
+we have authentication up.</p>
+<p>These are the main things we worked upon last month. I also fixed some mis-matches with the web-api in
+our library, improved docs, and a little bit of refactoring.</p>
+<p>All of my PRs made during the GSoC period can be found <a href="https://github.com/oknozor/musicbrainz_rs/pulls?q=is%3Apr+author%3Aritiek+created%3A%3C%3D2021-08-23">here</a>.</p>
+<h2 id="wrapping-up">Wrapping up</h2>
+<p>There are still quite a few things that could be done in musicbrainz_rs as detailed in the
+<a href="https://github.com/oknozor/musicbrainz_rs/issues">issues section</a>. Overall, I had a great time working on
+musicbrainz_rs these few months and would like to thank <a href="https://metabrainz.org/">MetaBrainz Foundation</a>
+and my mentor, <a href="https://github.com/oknozor/">Paul</a> for providing me with this opportunity, letting me
+take the wheel for a while, and dealing with my cute questions all along the way! I'm starting to feel
+a tiny bit more confident in Rust now.</p>
+<p>I'd love to contribute to musicbrainz_rs if I get the chance in future, but for now I've got to focus
+on other things. My college is over and I'm yet to find out what awaits for the future next!</p>
+<hr />
+<p>You can also read a more detailed version of this post and about my final work submission at:</p>
+<p><a href="https://blog.metabrainz.org/2021/08/23/gsoc-2021-complete-rust-binding-for-the-musicbrainz-api/">https://blog.metabrainz.org/2021/08/23/gsoc-2021-complete-rust-binding-for-the-musicbrainz-api/</a>.</p>
+
+        </article>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  
+    
+<footer class="footer text-muted">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 order-last order-lg-first">
+				<ul class="list-inline">
+					
+						<li class="list-inline-item">Powered by <a href="https://www.getzola.org/">Zola</a></li>
+					
+				</ul>
+			</div>
+			<div class="col-lg-8 order-first order-lg-last text-lg-end">
+				<ul class="list-inline">
+					
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+  
+
+  
+<script type="text/javascript" src="https://ritiek.github.io/js/main.js" defer></script>
+
+  <script type="text/javascript" src="https://ritiek.github.io/plugins/elasticlunr.min.js" defer></script>
+  <script type="text/javascript" src="https://ritiek.github.io/search_index.en.js" defer></script>
+  <script type="text/javascript" src="https://ritiek.github.io/js/search.js" defer></script>
+
+  
+</body>
+</html>

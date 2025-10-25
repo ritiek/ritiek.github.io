@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="preload" as="font" href="https://ritiek.github.io/fonts/vendor/jost/jost-v4-latin-regular.woff2" type="font/woff2" crossorigin>
+  <link rel="preload" as="font" href="https://ritiek.github.io/fonts/vendor/jost/jost-v4-latin-700.woff2"  type="font/woff2" crossorigin>
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://ritiek.github.io/main.css">
+<link rel="stylesheet" href="https://ritiek.github.io/custom.css">
+
+
+
+  
+  
+    
+  
+
+  
+  
+    
+    
+  
+  
+  
+    
+  
+  
+  
+  
+    
+  
+  
+  
+
+
+  <meta name="robots" content="index, follow">
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
+
+	
+
+
+	
+
+<title>Capturing and piping audio output from a process in Linux | Ritiek Malhotra</title>
+<meta name="description" content="Just some of my adventures!">
+<link rel="canonical" href="https://ritiek.github.io/2023/06/12/capturing-and-piping-audio-output-from-a-process-in-linux/">
+
+
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <meta name="twitter:title" content="Capturing and piping audio output from a process in Linux">
+  <meta name="twitter:description" content="Just some of my adventures!">
+  <meta name="twitter:site" content="@">
+  <meta name="twitter:creator" content="@">
+  
+  <meta property="og:title" content="Capturing and piping audio output from a process in Linux">
+  <meta property="og:description" content="Just some of my adventures!">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://ritiek.github.io/2023/06/12/capturing-and-piping-audio-output-from-a-process-in-linux/">
+
+  
+
+  <meta property="og:updated_time" content="">
+  <meta property="og:site_name" content="Capturing and piping audio output from a process in Linux">
+
+  
+
+  
+
+  
+  <meta property="article:publisher" content="https://www.facebook.com/">
+  <meta property="article:author" content="https://www.facebook.com/">
+  <meta property="og:locale" content="en_US">
+
+
+
+
+
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BreadcrumbList",
+    
+      
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          {
+            "@type": "ListItem",
+            "position":  1 ,
+            "name": "Home",
+            "item": "https://ritiek.github.io/"
+          },
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  2 ,
+            "name": "2023",
+            "item": "https://ritiek.github.io/2023/"
+          },
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  3 ,
+            "name": "06",
+            "item": "https://ritiek.github.io/2023/06/"
+          },
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  4 ,
+            "name": "12",
+            "item": "https://ritiek.github.io/2023/06/12/"
+          },
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  5 ,
+            "name": "Capturing And Piping Audio Output From A Process In Linux",
+            "item": "https://ritiek.github.io/2023/06/12/capturing-and-piping-audio-output-from-a-process-in-linux/"
+          },
+        
+      
+    
+  }
+</script>
+
+
+
+
+
+
+  <meta name="theme-color" content="#fff">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://ritiek.github.io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://ritiek.github.io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://ritiek.github.io/favicon-16x16.png">
+  
+    <link rel="manifest" href="https://ritiek.github.io/site.webmanifest" crossorigin>
+  
+
+
+  
+
+</head>
+
+  
+    
+  
+
+<body class="page single">
+  
+    
+<div class="header-bar fixed-top"></div>
+<header class="navbar fixed-top navbar-expand-md navbar-light">
+	<div class="container">
+		<input class="menu-btn order-0" type="checkbox" id="menu-btn">
+		<label class="menu-icon d-md-none" for="menu-btn"><span class="navicon"></span></label>
+		<a class="navbar-brand order-1 order-md-0 me-auto" href="https://ritiek.github.io">Ritiek Malhotra</a>
+		<button id="mode" class="btn btn-link order-2 order-md-4" type="button" aria-label="Toggle mode">
+			<span class="toggle-dark"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></span>
+			<span class="toggle-light"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg></span>
+		</button>
+		<ul class="navbar-nav fork-me order-3 order-md-5">
+			
+				
+					<li class="nav-item">
+						<a class="nav-link" href="https://github.com/ritiek"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg><span class="ms-2 visually-hidden">GitHub</span></a>
+					</li>
+				
+			
+		</ul>
+		<div class="collapse navbar-collapse order-4 order-md-1">
+			<ul class="navbar-nav main-nav me-auto order-5 order-md-2">
+				
+					
+				
+				
+				
+					
+						<li class="nav-item">
+							<a class="nav-link" href="/posts/">Archive</a>
+						</li>
+					
+						<li class="nav-item">
+							<a class="nav-link" href="/about/">About</a>
+						</li>
+					
+				
+			</ul>
+			<div class="break order-6 d-md-none"></div>
+			
+				<form class="navbar-form flex-grow-1 order-7 order-md-3">
+					<input id="userinput" class="form-control is-search" type="search" placeholder="Search posts..."
+						aria-label="Search posts..." autocomplete="off">
+					<div id="suggestions" class="shadow bg-white rounded"></div>
+				</form>
+			
+		</div>
+	</div>
+
+</header>
+
+  
+
+  
+<div class="wrap container" role="document">
+  <div class="content">
+    <div class="row justify-content-center">
+      <div class="col-md-12 col-lg-10 col-xxl-8">
+        <article>
+          <div class="page-header">
+            <h1>Capturing and piping audio output from a process in Linux</h1>
+          </div>
+          
+          <p>I've been looking to intercept audio data from specific processes so I can tinker with this audio
+data in real time. Vaguely <code>capture</code> audio output from a process, tinker with it, and <code>play</code>
+this tinkered audio through my hardware, something similar to this pseudocode:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;"># Resample music from my Spotify desktop app to a higher sample rate (nightcore) in near real-time.
+</span><span style="color:#bf616a;">$</span><span> capture</span><span style="color:#bf616a;"> --sample-rate</span><span> 48000 spotify | </span><span style="color:#bf616a;">play --buffer-time-in-secs</span><span> 5</span><span style="color:#bf616a;"> --sample-rate</span><span> 52000 -
+</span></code></pre>
+<p>I think I got something pretty close to this figured here.</p>
+<p>A little while ago, I moved to <a href="https://pipewire.org/">PipeWire</a> from <a href="https://www.freedesktop.org/wiki/Software/PulseAudio/">PulseAudio</a>.
+The stuff below will only work if you're using PipeWire yourself. It might also be possible to
+adjust this to work with PulseAudio but it isn't something I'm looking to explore at the moment.</p>
+<h2 id="setup">Setup</h2>
+<p>The plan is to create a new virtual audio output device. We'll be redirecting the audio
+output from our target process to this virtual audio output device, so that we're able to isolate
+this process's audio output from all other processes. We'll then capture all audio data being
+sent to this virtual output device. Once captured, we can tinker with the audio data and then
+redirect this tinkered audio output to our actual audio output device(s).</p>
+<p>We'll begin by inserting a kernel module to create a virtual audio loopback device:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> sudo modprobe snd-aloop
+</span></code></pre>
+<p>We should now see two new virtual audio devices: <code>Analog Output</code> and <code>Analog Input</code>.</p>
+<p align="center">
+  <img src="/assets/ByNqPIR.png">
+  <i>Audio Devices</i>
+</p>
+<p>Launch some application, say Spotify desktop, put some music on, and have Spotify send the audio data
+to this new virtual audio output <code>Analog Output</code>.
+In Manjaro, I got it working as in the screenshot below, but it should be similar
+on other distros (try looking for it under Settings -&gt; Audio), or install and use <code>pavucontrol</code> gui.</p>
+<p>Haven't looked around for a CLI alternative for this purpose yet.</p>
+<p align="center">
+  <img src="/assets/jbgu6C2.png">
+  <i>Switching playback device to virtual output device</i>
+</p>
+<p>Once you switch the audio output device for Spotify to the dummy output device, you'll no longer
+hear your music from your actual speakers.</p>
+<p>Now let's see the node names given by PipeWire to our currently existing audio devices.</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> pw-cli list-objects | </span><span style="color:#bf616a;">grep</span><span> node.name
+</span><span style="color:#bf616a;">node.name</span><span> = &quot;</span><span style="color:#a3be8c;">Dummy-Driver</span><span>&quot;
+</span><span style="color:#bf616a;">node.name</span><span> = &quot;</span><span style="color:#a3be8c;">Freewheel-Driver</span><span>&quot;
+</span><span style="color:#bf616a;">node.name</span><span> = &quot;</span><span style="color:#a3be8c;">Midi-Bridge</span><span>&quot;
+</span><span style="color:#bf616a;">node.name</span><span> = &quot;</span><span style="color:#a3be8c;">v4l2_input.pci-0000_00_14.0-usb-0_5_1.0</span><span>&quot;
+</span><span style="color:#bf616a;">node.name</span><span> = &quot;</span><span style="color:#a3be8c;">v4l2_input.pci-0000_00_14.0-usb-0_5_1.2</span><span>&quot;
+</span><span style="color:#bf616a;">node.name</span><span> = &quot;</span><span style="color:#a3be8c;">alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi__hw_sofhdadsp_5__sink</span><span>&quot;
+</span><span style="color:#bf616a;">node.name</span><span> = &quot;</span><span style="color:#a3be8c;">alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi__hw_sofhdadsp_4__sink</span><span>&quot;
+</span><span style="color:#bf616a;">node.name</span><span> = &quot;</span><span style="color:#a3be8c;">alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi__hw_sofhdadsp_3__sink</span><span>&quot;
+</span><span style="color:#bf616a;">node.name</span><span> = &quot;</span><span style="color:#a3be8c;">alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi__hw_sofhdadsp__sink</span><span>&quot;
+</span><span style="color:#bf616a;">node.name</span><span> = &quot;</span><span style="color:#a3be8c;">alsa_input.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi__hw_sofhdadsp__source</span><span>&quot;
+</span><span style="color:#bf616a;">node.name</span><span> = &quot;</span><span style="color:#a3be8c;">alsa_input.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi__hw_sofhdadsp_6__source</span><span>&quot;
+</span><span style="color:#bf616a;">node.name</span><span> = &quot;</span><span style="color:#a3be8c;">plasmashell</span><span>&quot;
+</span><span style="color:#bf616a;">node.name</span><span> = &quot;</span><span style="color:#a3be8c;">alsa_playback.aplay</span><span>&quot;
+</span><span style="color:#bf616a;">node.name</span><span> = &quot;</span><span style="color:#a3be8c;">alsa_input.platform-snd_aloop.0.analog-stereo</span><span>&quot;
+</span><span style="color:#bf616a;">node.name</span><span> = &quot;</span><span style="color:#a3be8c;">alsa_output.platform-snd_aloop.0.analog-stereo</span><span>&quot;
+</span><span style="color:#bf616a;">node.name</span><span> = &quot;</span><span style="color:#a3be8c;">spotify</span><span>&quot;
+</span><span style="color:#bf616a;">...
+</span></code></pre>
+<p>(<code>pw-*</code> commands are only available with PipeWire)</p>
+<p>After some speculation, I figured out my dummy audio output device is called <code>alsa_output.platform-snd_aloop.0.analog-stereo</code>
+and my actual audio output device is called <code>alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi__hw_sofhdadsp__sink</code>.</p>
+<p>Confirm yours by running any of the following commands (added all that I figured out in the moment
+here for documenting purpose) to redirect audio from your dummy audio output device to your actual
+audio output device. Make sure to replace the <code>--target</code> param with the node names that seemingly
+fit for your case.</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> pw-record</span><span style="color:#bf616a;"> --target</span><span> alsa_output.platform-snd_aloop.0.analog-stereo - | </span><span style="color:#bf616a;">pw-play --target</span><span> alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi__hw_sofhdadsp__sink -
+</span></code></pre>
+<p>(You may have to also pass in <code>-P stream.capture.sink=true</code> to <code>pw-record</code>, thanks @pkgmvd as reported on 23rd November, 2024!)</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> pw-loopback</span><span style="color:#bf616a;"> -C</span><span> alsa_output.platform-snd_aloop.0.analog-stereo</span><span style="color:#bf616a;"> -P</span><span> alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi__hw_sofhdadsp__sink
+</span></code></pre>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> pw-link alsa_output.platform-snd_aloop.0.analog-stereo alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi__hw_sofhdadsp__sink
+</span><span style="color:#bf616a;">$</span><span> pw-link</span><span style="color:#bf616a;"> --disconnect</span><span> alsa_output.platform-snd_aloop.0.analog-stereo alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi__hw_sofhdadsp__sink
+</span></code></pre>
+<p>You should be able to hear your Spotify music if both the dummy audio output device and the
+actual audio output device you selected are the right ones.</p>
+<p>Wohoo! We can now mess with this audio. As an example, we'll attempt to increase sample rate for
+whatever's playing in Spotify to make it sound nightcorish:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> pw-record</span><span style="color:#bf616a;"> --target</span><span> alsa_output.platform-snd_aloop.0.analog-stereo - | </span><span style="color:#bf616a;">aplay -B</span><span> 5000000</span><span style="color:#bf616a;"> -r</span><span> 52000</span><span style="color:#bf616a;"> -f</span><span> S16_LE</span><span style="color:#bf616a;"> -c</span><span> 2 -
+</span></code></pre>
+<p>At the time of writing, <code>pw-record</code> captures audio at a sample rate of 44.8KHz. In the above example
+we resampled it to 52KHz (<code>-r 52000</code>). Since we'll be playing audio at a higher sample rate than what we'll be
+receiving from <code>pw-record</code>, our dummy audio output will have to play catch up with our actual audio
+output. This means our actual audio output will stutter every now and then.</p>
+<p>As a little workaround, we passed <code>-B 5000000</code> to let Spotify fill up the audio buffer for 5s everytime
+it starts to play catch up after which <code>aplay</code> would attempt to begin resampling.</p>
+<p>We can also do multiple pipes for a bit more complexy stuff:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ pw-record --target alsa_output.platform-snd_aloop.0.analog-stereo - | ffmpeg -ar 48000 -f s16le -ac 2 -i - -filter:a &quot;asetrate=48000*1.1&quot; -f wav - | mpv --audio-buffer=5 -
+</span></code></pre>
+<hr />
+<h2 id="synchronizing-audio-output-from-a-process-to-multiple-machines">Synchronizing audio output from a process to multiple machines</h2>
+<p>A few years ago, I wrote a <a href="/2019/04/01/synchronizing-multimedia-playback-on-different-machines/">post on synchronizing multimedia plaback (and Syncplay)</a>.
+Quite a while after writing it, I discovered <a href="https://github.com/badaix/snapcast">Snapcast</a> which is
+more tailored to audio syncing and seems to work better than <a href="https://github.com/Syncplay/syncplay">Syncplay</a> in that regard.
+(although, I'll still stick to Syncplay for video syncing stuff)</p>
+<p>Install Snapcast and edit <code>/etc/snapserver.conf</code> to have your <code>source</code> line as:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>source = pipe:///tmp/snapfifo?name=default
+</span></code></pre>
+<p>Launch the Snapcast server:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> snapserver
+</span></code></pre>
+<p>In another terminal, we'll write the audio output from the dummy audio output device to this named pipe
+which'll be used by snapcast server to broadcast audio to connected clients:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ pw-record --target alsa_output.platform-snd_aloop.0.analog-stereo - &gt; /tmp/snapfifo
+</span></code></pre>
+<p>Have some application writing audio output to this dummy audio output device (Spotify as we talked about
+in the previous section, anything else works fine too).</p>
+<p>Snapcast server by default also provides a little built-in client running on <a href="http://0.0.0.0:1780">http://0.0.0.0:1780</a>, you
+can open this in a browser (which'll be writing audio output to our actual audio output device) and tap
+the play button. If you're able to hear music now, then we're good to go!</p>
+<p>Snapcast client app is also available for Android and iOS. We can have our phones be a part of this syncy
+mesh too.</p>
+
+        </article>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  
+    
+<footer class="footer text-muted">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 order-last order-lg-first">
+				<ul class="list-inline">
+					
+						<li class="list-inline-item">Powered by <a href="https://www.getzola.org/">Zola</a></li>
+					
+				</ul>
+			</div>
+			<div class="col-lg-8 order-first order-lg-last text-lg-end">
+				<ul class="list-inline">
+					
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+  
+
+  
+<script type="text/javascript" src="https://ritiek.github.io/js/main.js" defer></script>
+
+  <script type="text/javascript" src="https://ritiek.github.io/plugins/elasticlunr.min.js" defer></script>
+  <script type="text/javascript" src="https://ritiek.github.io/search_index.en.js" defer></script>
+  <script type="text/javascript" src="https://ritiek.github.io/js/search.js" defer></script>
+
+  
+</body>
+</html>

@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="preload" as="font" href="https://ritiek.github.io/fonts/vendor/jost/jost-v4-latin-regular.woff2" type="font/woff2" crossorigin>
+  <link rel="preload" as="font" href="https://ritiek.github.io/fonts/vendor/jost/jost-v4-latin-700.woff2"  type="font/woff2" crossorigin>
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://ritiek.github.io/main.css">
+<link rel="stylesheet" href="https://ritiek.github.io/custom.css">
+
+
+
+  
+  
+    
+  
+
+  
+  
+    
+    
+  
+  
+  
+    
+  
+  
+  
+  
+    
+  
+  
+  
+
+
+  <meta name="robots" content="index, follow">
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
+
+	
+
+
+	
+
+<title>Modifying memory of a running process in Linux | Ritiek Malhotra</title>
+<meta name="description" content="Just some of my adventures!">
+<link rel="canonical" href="https://ritiek.github.io/2019/06/26/modifying-memory-of-a-running-process-in-linux/">
+
+
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <meta name="twitter:title" content="Modifying memory of a running process in Linux">
+  <meta name="twitter:description" content="Just some of my adventures!">
+  <meta name="twitter:site" content="@">
+  <meta name="twitter:creator" content="@">
+  
+  <meta property="og:title" content="Modifying memory of a running process in Linux">
+  <meta property="og:description" content="Just some of my adventures!">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://ritiek.github.io/2019/06/26/modifying-memory-of-a-running-process-in-linux/">
+
+  
+
+  <meta property="og:updated_time" content="">
+  <meta property="og:site_name" content="Modifying memory of a running process in Linux">
+
+  
+
+  
+
+  
+  <meta property="article:publisher" content="https://www.facebook.com/">
+  <meta property="article:author" content="https://www.facebook.com/">
+  <meta property="og:locale" content="en_US">
+
+
+
+
+
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BreadcrumbList",
+    
+      
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          {
+            "@type": "ListItem",
+            "position":  1 ,
+            "name": "Home",
+            "item": "https://ritiek.github.io/"
+          },
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  2 ,
+            "name": "2019",
+            "item": "https://ritiek.github.io/2019/"
+          },
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  3 ,
+            "name": "06",
+            "item": "https://ritiek.github.io/2019/06/"
+          },
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  4 ,
+            "name": "26",
+            "item": "https://ritiek.github.io/2019/06/26/"
+          },
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  5 ,
+            "name": "Modifying Memory Of A Running Process In Linux",
+            "item": "https://ritiek.github.io/2019/06/26/modifying-memory-of-a-running-process-in-linux/"
+          },
+        
+      
+    
+  }
+</script>
+
+
+
+
+
+
+  <meta name="theme-color" content="#fff">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://ritiek.github.io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://ritiek.github.io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://ritiek.github.io/favicon-16x16.png">
+  
+    <link rel="manifest" href="https://ritiek.github.io/site.webmanifest" crossorigin>
+  
+
+
+  
+
+</head>
+
+  
+    
+  
+
+<body class="page single">
+  
+    
+<div class="header-bar fixed-top"></div>
+<header class="navbar fixed-top navbar-expand-md navbar-light">
+	<div class="container">
+		<input class="menu-btn order-0" type="checkbox" id="menu-btn">
+		<label class="menu-icon d-md-none" for="menu-btn"><span class="navicon"></span></label>
+		<a class="navbar-brand order-1 order-md-0 me-auto" href="https://ritiek.github.io">Ritiek Malhotra</a>
+		<button id="mode" class="btn btn-link order-2 order-md-4" type="button" aria-label="Toggle mode">
+			<span class="toggle-dark"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></span>
+			<span class="toggle-light"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg></span>
+		</button>
+		<ul class="navbar-nav fork-me order-3 order-md-5">
+			
+				
+					<li class="nav-item">
+						<a class="nav-link" href="https://github.com/ritiek"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg><span class="ms-2 visually-hidden">GitHub</span></a>
+					</li>
+				
+			
+		</ul>
+		<div class="collapse navbar-collapse order-4 order-md-1">
+			<ul class="navbar-nav main-nav me-auto order-5 order-md-2">
+				
+					
+				
+				
+				
+					
+						<li class="nav-item">
+							<a class="nav-link" href="/posts/">Archive</a>
+						</li>
+					
+						<li class="nav-item">
+							<a class="nav-link" href="/about/">About</a>
+						</li>
+					
+				
+			</ul>
+			<div class="break order-6 d-md-none"></div>
+			
+				<form class="navbar-form flex-grow-1 order-7 order-md-3">
+					<input id="userinput" class="form-control is-search" type="search" placeholder="Search posts..."
+						aria-label="Search posts..." autocomplete="off">
+					<div id="suggestions" class="shadow bg-white rounded"></div>
+				</form>
+			
+		</div>
+	</div>
+
+</header>
+
+  
+
+  
+<div class="wrap container" role="document">
+  <div class="content">
+    <div class="row justify-content-center">
+      <div class="col-md-12 col-lg-10 col-xxl-8">
+        <article>
+          <div class="page-header">
+            <h1>Modifying memory of a running process in Linux</h1>
+          </div>
+          
+          <p>Everything said in this post is based on my half-understanding of how memory works,
+especially in Linux. There are certainly going to be parts in this post that are misunderstood
+by me. Don't rely on this post for your homework and take everything in this post with a
+grain of salt. However, I hope to continue to refine the content in this post as I understand
+more about how a computer works. Consider this as a disclaimer. That said, let's begin!</p>
+<p>I've been trying out 6502 and x86 Assembly to learn some basic reverse engineering and also
+to learn think in these low-level programming languages, hopefully to understand more of how
+everything works under-the-hood. So I thought what better than to pun some other process's
+memory. I figured I'll try to modify some stuff assigned to memory by one process from some second
+process. I know Windows has tools like <a href="https://github.com/cheat-engine/cheat-engine">Cheat Engine</a>
+while Linux has <a href="https://github.com/scanmem/scanmem">scanmem</a>.
+I still wanted to create my own tiny little program which would be enough to demonstrate how
+these big tools worked at their heart.</p>
+<p>Most modern Operating Systems have <a href="https://en.wikipedia.org/wiki/Address_space_layout_randomization">ASLR (Address Space Layout Randomization)</a>
+turned on
+by default which can help prevent many <a href="https://en.wikipedia.org/wiki/Buffer_overflow">buffer overflow</a>
+and code injection attacks. These
+attacks if successful could possibly allow the user to gain access to sensitive information
+not intended for access to the end user. Although, I've tried Cheat Engine and to my knowledge
+popular debuggers still allow for a way to access and modify the disassembled code of a binary
+when loaded into memory. They also have a way to watch for code whenever a specified memory
+location is accessed by the concerned process, so I'm not completely sure whether these
+debuggers somehow workaround ASLR or if this completely unrelated. Irrespective of this, to
+make things not more complicated, we'll already know the address of the memory location we wish
+to modify, as you'll see later.</p>
+<p>From now on, let's refer to a primary innocent process as Process A and the secondary process
+which attempts to hack into the memory of Process A as Process B. In Linux, we have a system call
+<a href="http://man7.org/linux/man-pages/man2/ptrace.2.html"><code>ptrace</code></a> which acts as a middle man between
+Process B and the memory of Process A. One cannot
+directly read or write to the memory of another independent process without ptrace for some
+reason I don't understand. My current guess is that it's there so that a process doesn't
+unintentionally messes up with the memory of some other process. So, if you see someone with ptrace
+it's probably because they ought to either save the world from extinction or be the very cause
+itself. Similar in Windows you have <a href="https://docs.microsoft.com/en-us/windows/desktop/api/memoryapi/nf-memoryapi-readprocessmemory"><code>ReadProcessMemory</code></a>
+and <a href="https://docs.microsoft.com/en-us/windows/desktop/api/memoryapi/nf-memoryapi-writeprocessmemory"><code>WriteProcessMemory</code></a>
+functions available in Windows API acting as the middle man.</p>
+<p>Let's say we have this simple C code:</p>
+<pre data-lang="c" style="background-color:#2b303b;color:#c0c5ce;" class="language-c "><code class="language-c" data-lang="c"><span style="color:#65737e;">// process_a.c
+</span><span style="color:#b48ead;">#include </span><span>&lt;</span><span style="color:#a3be8c;">stdio.h</span><span>&gt;
+</span><span style="color:#b48ead;">#include </span><span>&lt;</span><span style="color:#a3be8c;">unistd.h</span><span>&gt;
+</span><span>
+</span><span style="color:#b48ead;">int </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">int</span><span> n = </span><span style="color:#d08770;">10</span><span>;
+</span><span>
+</span><span>    </span><span style="color:#96b5b4;">printf</span><span>(&quot;</span><span style="color:#d08770;">%d</span><span style="color:#96b5b4;">\n</span><span>&quot;, n);
+</span><span>    </span><span style="color:#96b5b4;">printf</span><span>(&quot;</span><span style="color:#d08770;">%p</span><span style="color:#96b5b4;">\n</span><span>&quot;, &amp;n);
+</span><span>
+</span><span>    </span><span style="color:#bf616a;">sleep</span><span>(</span><span style="color:#d08770;">25</span><span>);
+</span><span>    </span><span style="color:#96b5b4;">printf</span><span>(&quot;</span><span style="color:#d08770;">%d</span><span style="color:#96b5b4;">\n</span><span>&quot;, n);
+</span><span>    </span><span style="color:#96b5b4;">printf</span><span>(&quot;</span><span style="color:#d08770;">%p</span><span style="color:#96b5b4;">\n</span><span>&quot;, &amp;n);
+</span><span>    </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">0</span><span>;
+</span><span>}
+</span></code></pre>
+<p>All it does is:</p>
+<ol>
+<li>
+<p>Assign a variable a value</p>
+</li>
+<li>
+<p>Display the variable's value and its location in memory</p>
+</li>
+<li>
+<p>Sleep the main thread for a while</p>
+</li>
+<li>
+<p>Display the variable's value and its location in memory again</p>
+</li>
+</ol>
+<p>Let's run it:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> gcc process_a.c</span><span style="color:#bf616a;"> -o</span><span> process_a &amp;&amp; </span><span style="color:#bf616a;">./process_a
+</span><span style="color:#bf616a;">10
+</span><span style="color:#bf616a;">0x7fffcfd52924
+</span><span style="color:#bf616a;">10
+</span><span style="color:#bf616a;">0x7fffcfd52924
+</span></code></pre>
+<p>This is our Process A. Our goal is to have a Process B change the value of the assigned variable to
+something like <code>20</code> while the main thread is sleeping. If we succeed, it should show us the value <code>20</code>
+after waking up from sleep while the memory location should remain the same.</p>
+<p>I've only tried this on Linux so that's what I'll be talking about. As I mentioned earlier,
+you need to fire the ptrace system call and you can do that natively via C. So, what we'll
+do is write another program which will act as Process B. To overwrite the memory of another process
+in Linux, you need to know three things - the PID of the Process A, the memory location to be
+modified, and obviously the data you need to overwrite with. It's easy to know the PID of a process
+in Linux, and we can know the memory location of the variable since our Process A prints the variable's
+memory location itself. The data can be anything, I'll use <code>20</code> for the purpose of this post.</p>
+<p>Here's how we'll use <code>ptrace</code>:</p>
+<pre data-lang="c" style="background-color:#2b303b;color:#c0c5ce;" class="language-c "><code class="language-c" data-lang="c"><span style="color:#65737e;">// process_b.c
+</span><span style="color:#b48ead;">#include </span><span>&lt;</span><span style="color:#a3be8c;">sys/ptrace.h</span><span>&gt;
+</span><span style="color:#b48ead;">#include </span><span>&lt;</span><span style="color:#a3be8c;">stdio.h</span><span>&gt;
+</span><span>
+</span><span style="color:#b48ead;">int </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">int</span><span> pid = </span><span style="color:#d08770;">5831</span><span>;
+</span><span>    </span><span style="color:#b48ead;">int </span><span>*address = (</span><span style="color:#b48ead;">int </span><span>*)</span><span style="color:#d08770;">0x7fffcfd52924</span><span>;
+</span><span>    </span><span style="color:#b48ead;">int</span><span> data = </span><span style="color:#d08770;">20</span><span>;
+</span><span>
+</span><span>    </span><span style="color:#bf616a;">ptrace</span><span>(PTRACE_ATTACH, pid, </span><span style="color:#d08770;">NULL</span><span>, </span><span style="color:#d08770;">NULL</span><span>);
+</span><span>    </span><span style="color:#96b5b4;">perror</span><span>(&quot;</span><span style="color:#a3be8c;">attach</span><span>&quot;);
+</span><span>    </span><span style="color:#bf616a;">ptrace</span><span>(PTRACE_POKEDATA, pid, address, data);
+</span><span>    </span><span style="color:#96b5b4;">perror</span><span>(&quot;</span><span style="color:#a3be8c;">pokedata</span><span>&quot;);
+</span><span>    </span><span style="color:#bf616a;">ptrace</span><span>(PTRACE_DETACH, pid, </span><span style="color:#d08770;">NULL</span><span>, </span><span style="color:#d08770;">NULL</span><span>);
+</span><span>    </span><span style="color:#96b5b4;">perror</span><span>(&quot;</span><span style="color:#a3be8c;">detach</span><span>&quot;);
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">0</span><span>;
+</span><span>}
+</span></code></pre>
+<p>The code is pretty self-explanatory - you attach to the process, write data to a memory address and
+detach.</p>
+<p>Another thing to take care is that the PID and the memory of any process A are allotted at execution.
+As far as I know, one cannot predict the PID and where in memory a process will go live, before execution
+of the concerned program. There are probably ways to automate this after the concerned process is
+executed but let's avoid complicating the code. So here's our plan, we'll execute the Process A and
+then we're going to grab its PID manually and update our Process B's source accordingly. Finally,
+we're going to compile and execute our Process B. If we are fast enough and make it through all
+of this while Process A is in the middle of its sleep, we would have successfully overwritten Process
+A's memory and it should be visible when it wakes up from sleep to display the value!</p>
+<p>Let's do it step wise:</p>
+<p>In a terminal, run:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> ./process_a &amp;; </span><span style="color:#96b5b4;">fg
+</span></code></pre>
+<p>You should get something like this:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">[1]</span><span> 32555
+</span><span style="color:#bf616a;">[1]</span><span>  + 32555 running    ./process_a
+</span><span style="color:#bf616a;">10
+</span><span style="color:#bf616a;">0x7fffcfd52924
+</span></code></pre>
+<p>The main thread will now go in sleep mode for another 25 seconds. By executing the program in
+background mode, we also get its PID, which in my case is <code>32555</code>. We could then just call it
+in the foreground with <code>fg</code>. Also, the memory address is <code>0x7fffcfd52924</code>. Now, we have
+everything we need to call <code>ptrace</code>.</p>
+<p>In a new terminal, edit <code>process_b.c</code>'s variables with what you got from above. For me, I'll replace
+the variables with:</p>
+<pre data-lang="c" style="background-color:#2b303b;color:#c0c5ce;" class="language-c "><code class="language-c" data-lang="c"><span>    </span><span style="color:#b48ead;">int</span><span> pid = </span><span style="color:#d08770;">32555</span><span>;
+</span><span>    </span><span style="color:#b48ead;">int </span><span>*address = (</span><span style="color:#b48ead;">int </span><span>*)</span><span style="color:#d08770;">0x7fffcfd52924</span><span>;
+</span><span>    </span><span style="color:#b48ead;">int</span><span> data = </span><span style="color:#d08770;">20</span><span>;
+</span></code></pre>
+<p>Now compile and execute the code with:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ gcc process_b.c -o process_b &amp;&amp; sudo ./process_b
+</span></code></pre>
+<p>Only root can modify another process's memory, so you'll need <code>sudo</code> to run the executable
+generated.</p>
+<p>If everything goes fine and you were able to make it this far while Process A was asleep, you
+should get output similar to this:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">attach:</span><span> Success
+</span><span style="color:#bf616a;">pokedata:</span><span> Success
+</span><span style="color:#bf616a;">detach:</span><span> Success
+</span></code></pre>
+<p>That's it! Now when Process A completes its sleep: it should look something like this:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">[1]</span><span> 32555
+</span><span style="color:#bf616a;">[1]</span><span>  + 32555 running    ./process_a
+</span><span style="color:#bf616a;">10
+</span><span style="color:#bf616a;">0x7fffcfd52924
+</span><span style="color:#bf616a;">20
+</span><span style="color:#bf616a;">0x7fffcfd52924
+</span><span style="color:#bf616a;">***</span><span> stack smashing detected ***: &lt;unknown&gt; terminated
+</span><span style="color:#bf616a;">[1]</span><span>  + 32555 abort      ./process_a
+</span></code></pre>
+<p>Yay, The value just got to 20. Awesome!!</p>
+<p>Now if you see the last few lines, you'll notice this weird error I dunno much about:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">***</span><span> stack smashing detected ***: &lt;unknown&gt; terminated
+</span><span style="color:#bf616a;">[1]</span><span>  + 32555 abort      ./process_a
+</span></code></pre>
+<p>Turns out I got rid of it by simply assigning a pointer to our variable in Process A.
+What I mean is replace:</p>
+<pre data-lang="c" style="background-color:#2b303b;color:#c0c5ce;" class="language-c "><code class="language-c" data-lang="c"><span>    </span><span style="color:#b48ead;">int</span><span> n = </span><span style="color:#d08770;">10</span><span>;
+</span></code></pre>
+<p>with</p>
+<pre data-lang="c" style="background-color:#2b303b;color:#c0c5ce;" class="language-c "><code class="language-c" data-lang="c"><span>    </span><span style="color:#b48ead;">int</span><span> n = </span><span style="color:#d08770;">10</span><span>;
+</span><span>    </span><span style="color:#b48ead;">int </span><span>*ptr = &amp;n;
+</span></code></pre>
+<p>For some reason, this works and I no longer smash the stack while hacking into Process A's
+memory.</p>
+<p>Well, this is the heart of how a memory editor works underneath. One could now imagine
+how this can scale into bigger beasts like Cheat Engine and scanmem as I talked in the
+first paragraph.</p>
+
+        </article>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  
+    
+<footer class="footer text-muted">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 order-last order-lg-first">
+				<ul class="list-inline">
+					
+						<li class="list-inline-item">Powered by <a href="https://www.getzola.org/">Zola</a></li>
+					
+				</ul>
+			</div>
+			<div class="col-lg-8 order-first order-lg-last text-lg-end">
+				<ul class="list-inline">
+					
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+  
+
+  
+<script type="text/javascript" src="https://ritiek.github.io/js/main.js" defer></script>
+
+  <script type="text/javascript" src="https://ritiek.github.io/plugins/elasticlunr.min.js" defer></script>
+  <script type="text/javascript" src="https://ritiek.github.io/search_index.en.js" defer></script>
+  <script type="text/javascript" src="https://ritiek.github.io/js/search.js" defer></script>
+
+  
+</body>
+</html>

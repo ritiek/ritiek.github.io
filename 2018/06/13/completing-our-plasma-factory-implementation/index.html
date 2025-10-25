@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="preload" as="font" href="https://ritiek.github.io/fonts/vendor/jost/jost-v4-latin-regular.woff2" type="font/woff2" crossorigin>
+  <link rel="preload" as="font" href="https://ritiek.github.io/fonts/vendor/jost/jost-v4-latin-700.woff2"  type="font/woff2" crossorigin>
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://ritiek.github.io/main.css">
+<link rel="stylesheet" href="https://ritiek.github.io/custom.css">
+
+
+
+  
+  
+    
+  
+
+  
+  
+    
+    
+  
+  
+  
+    
+  
+  
+  
+  
+    
+  
+  
+  
+
+
+  <meta name="robots" content="index, follow">
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
+
+	
+
+
+	
+
+<title>Completing our Plasma factory implementation | Ritiek Malhotra</title>
+<meta name="description" content="Just some of my adventures!">
+<link rel="canonical" href="https://ritiek.github.io/2018/06/13/completing-our-plasma-factory-implementation/">
+
+
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <meta name="twitter:title" content="Completing our Plasma factory implementation">
+  <meta name="twitter:description" content="Just some of my adventures!">
+  <meta name="twitter:site" content="@">
+  <meta name="twitter:creator" content="@">
+  
+  <meta property="og:title" content="Completing our Plasma factory implementation">
+  <meta property="og:description" content="Just some of my adventures!">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://ritiek.github.io/2018/06/13/completing-our-plasma-factory-implementation/">
+
+  
+
+  <meta property="og:updated_time" content="">
+  <meta property="og:site_name" content="Completing our Plasma factory implementation">
+
+  
+
+  
+
+  
+  <meta property="article:publisher" content="https://www.facebook.com/">
+  <meta property="article:author" content="https://www.facebook.com/">
+  <meta property="og:locale" content="en_US">
+
+
+
+
+
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BreadcrumbList",
+    
+      
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          {
+            "@type": "ListItem",
+            "position":  1 ,
+            "name": "Home",
+            "item": "https://ritiek.github.io/"
+          },
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  2 ,
+            "name": "2018",
+            "item": "https://ritiek.github.io/2018/"
+          },
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  3 ,
+            "name": "06",
+            "item": "https://ritiek.github.io/2018/06/"
+          },
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  4 ,
+            "name": "13",
+            "item": "https://ritiek.github.io/2018/06/13/"
+          },
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  5 ,
+            "name": "Completing Our Plasma Factory Implementation",
+            "item": "https://ritiek.github.io/2018/06/13/completing-our-plasma-factory-implementation/"
+          },
+        
+      
+    
+  }
+</script>
+
+
+
+
+
+
+  <meta name="theme-color" content="#fff">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://ritiek.github.io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://ritiek.github.io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://ritiek.github.io/favicon-16x16.png">
+  
+    <link rel="manifest" href="https://ritiek.github.io/site.webmanifest" crossorigin>
+  
+
+
+  
+
+</head>
+
+  
+    
+  
+
+<body class="page single">
+  
+    
+<div class="header-bar fixed-top"></div>
+<header class="navbar fixed-top navbar-expand-md navbar-light">
+	<div class="container">
+		<input class="menu-btn order-0" type="checkbox" id="menu-btn">
+		<label class="menu-icon d-md-none" for="menu-btn"><span class="navicon"></span></label>
+		<a class="navbar-brand order-1 order-md-0 me-auto" href="https://ritiek.github.io">Ritiek Malhotra</a>
+		<button id="mode" class="btn btn-link order-2 order-md-4" type="button" aria-label="Toggle mode">
+			<span class="toggle-dark"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></span>
+			<span class="toggle-light"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg></span>
+		</button>
+		<ul class="navbar-nav fork-me order-3 order-md-5">
+			
+				
+					<li class="nav-item">
+						<a class="nav-link" href="https://github.com/ritiek"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg><span class="ms-2 visually-hidden">GitHub</span></a>
+					</li>
+				
+			
+		</ul>
+		<div class="collapse navbar-collapse order-4 order-md-1">
+			<ul class="navbar-nav main-nav me-auto order-5 order-md-2">
+				
+					
+				
+				
+				
+					
+						<li class="nav-item">
+							<a class="nav-link" href="/posts/">Archive</a>
+						</li>
+					
+						<li class="nav-item">
+							<a class="nav-link" href="/about/">About</a>
+						</li>
+					
+				
+			</ul>
+			<div class="break order-6 d-md-none"></div>
+			
+				<form class="navbar-form flex-grow-1 order-7 order-md-3">
+					<input id="userinput" class="form-control is-search" type="search" placeholder="Search posts..."
+						aria-label="Search posts..." autocomplete="off">
+					<div id="suggestions" class="shadow bg-white rounded"></div>
+				</form>
+			
+		</div>
+	</div>
+
+</header>
+
+  
+
+  
+<div class="wrap container" role="document">
+  <div class="content">
+    <div class="row justify-content-center">
+      <div class="col-md-12 col-lg-10 col-xxl-8">
+        <article>
+          <div class="page-header">
+            <h1>Completing our Plasma factory implementation</h1>
+          </div>
+          
+          <p>As we all (probably) know now, our Plasma factory implementation got finished much
+sooner than expected. So, I've been mostly lurking around since my last blog post
+adding features in our plasma pie, discovering bugs under our plasma bed, reviewing
+plasma requests, gazing at stars made of plasma, etc.</p>
+<p>I'll talk about some of the progress that's being made in PlasmaPy. I made a PR
+(<a href="https://github.com/PlasmaPy/PlasmaPy/pull/483">#483</a>) that allows us to pass collections
+to our <code>particle_input</code> decorator. This was my first time working with decorators in real
+world programming. It seems like it turned out pretty well. Oh and
+<a href="https://github.com/PlasmaPy/PlasmaPy/pull/493">#493</a> was cute.</p>
+<p>I also moved around tests for our plasma subclasses
+(<a href="https://github.com/PlasmaPy/PlasmaPy/pull/489">#489</a>).
+One thing I noticed during this PR that it is important to have <code>__init__.py</code> in each of
+your directory, otherwise any tests in directories without <code>__init__.py</code> are not going
+to be picked up with <code>./setup.py test</code>! However, they seem to work when using <code>pytest</code>
+directly though. I found a similar problem with
+<a href="https://github.com/PlasmaPy/PlasmaPy/pull/494">#494</a> which shot up our coverage from
+93.18% and 95.38%. It is pretty surprising, a single empty <code>__init__.py</code> can do wonders.
+So, if anyone is reading this uses <code>./setup.py test</code> in their projects right now, you better
+take care of such stuff in your codebase. You really don't want to be writing tests only
+to realize it later on that they aren't even being executed.</p>
+<p>Also, we recently shifted to CodeCov instead of Coveralls. Why? No big reason except CodeCov
+apparently has a greater userbase.
+<a href="https://www.google.com/search?q=codecov+vs+coveralls">and some minor differences can be found here</a>.</p>
+<p>We are currently fighting with <code>coveragerc</code> configuration file not being picked up by <code>coverage</code>,
+which is a code coverage measurement in tool for Python.
+(<a href="https://github.com/PlasmaPy/PlasmaPy/pull/495">#495</a>,
+<a href="https://github.com/PlasmaPy/PlasmaPy/pull/496">#496</a>,
+<a href="https://github.com/PlasmaPy/PlasmaPy/pull/497">#497</a>). So, some stuff like <code># coveralls: ignore</code>
+does not get respected and <code>coverage</code> marks these lines in red (meaning that they aren't covered)
+instead of just leaving them whitish (ignoring them).</p>
+<p>We could replace <code># coveralls: ignore</code> with <code># pragma: no cover</code> since that is the
+default for <code>coverage</code> and it works with CodeCov integration
+(<a href="https://github.com/ritiek/PlasmaPy/pull/3">ritiek/PlasmaPy#3</a>), but this might
+leave other future additions to <code>coveragerc</code> file still a problem if it isn't going to be picked up
+by <code>coverage</code>. There is a workaround that seems
+to be sort of working (<a href="https://github.com/ritiek/PlasmaPy/pull/4">ritiek/PlasmaPy#4</a>, do
+notice it further shoots up our coverage from 95.38% to 96.69%!) and is probably bit ugly but
+should hopefully suffice for the moment if we can't find a better solution.</p>
+<p>The next little bit related to GSoC is that I expect to create a Plasma subclass which reads
+HDF5 files that are based upon OpenPMD format using h5py python module and then expose relevant
+attributes of information.
+I suspect it isn't going to be a big task but we'll get to shed light on further details once
+we see this little bit happen in PlasmaPy.</p>
+<p>OK that would be all for now. Happy plasma pie baking, bye!</p>
+
+        </article>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  
+    
+<footer class="footer text-muted">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 order-last order-lg-first">
+				<ul class="list-inline">
+					
+						<li class="list-inline-item">Powered by <a href="https://www.getzola.org/">Zola</a></li>
+					
+				</ul>
+			</div>
+			<div class="col-lg-8 order-first order-lg-last text-lg-end">
+				<ul class="list-inline">
+					
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+  
+
+  
+<script type="text/javascript" src="https://ritiek.github.io/js/main.js" defer></script>
+
+  <script type="text/javascript" src="https://ritiek.github.io/plugins/elasticlunr.min.js" defer></script>
+  <script type="text/javascript" src="https://ritiek.github.io/search_index.en.js" defer></script>
+  <script type="text/javascript" src="https://ritiek.github.io/js/search.js" defer></script>
+
+  
+</body>
+</html>

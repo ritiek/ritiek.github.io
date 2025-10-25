@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="preload" as="font" href="https://ritiek.github.io/fonts/vendor/jost/jost-v4-latin-regular.woff2" type="font/woff2" crossorigin>
+  <link rel="preload" as="font" href="https://ritiek.github.io/fonts/vendor/jost/jost-v4-latin-700.woff2"  type="font/woff2" crossorigin>
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://ritiek.github.io/main.css">
+<link rel="stylesheet" href="https://ritiek.github.io/custom.css">
+
+
+
+  
+  
+    
+  
+
+  
+  
+    
+    
+  
+  
+  
+    
+  
+  
+  
+  
+    
+  
+  
+  
+
+
+  <meta name="robots" content="index, follow">
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
+
+	
+
+
+	
+
+<title>Installing Pop!_OS on an unsupported 32-bit UEFI hardware | Ritiek Malhotra</title>
+<meta name="description" content="Just some of my adventures!">
+<link rel="canonical" href="https://ritiek.github.io/2020/04/18/installing-popos-on-an-unsupported-32-bit-uefi-hardware/">
+
+
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <meta name="twitter:title" content="Installing Pop!_OS on an unsupported 32-bit UEFI hardware">
+  <meta name="twitter:description" content="Just some of my adventures!">
+  <meta name="twitter:site" content="@">
+  <meta name="twitter:creator" content="@">
+  
+  <meta property="og:title" content="Installing Pop!_OS on an unsupported 32-bit UEFI hardware">
+  <meta property="og:description" content="Just some of my adventures!">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://ritiek.github.io/2020/04/18/installing-popos-on-an-unsupported-32-bit-uefi-hardware/">
+
+  
+
+  <meta property="og:updated_time" content="">
+  <meta property="og:site_name" content="Installing Pop!_OS on an unsupported 32-bit UEFI hardware">
+
+  
+
+  
+
+  
+  <meta property="article:publisher" content="https://www.facebook.com/">
+  <meta property="article:author" content="https://www.facebook.com/">
+  <meta property="og:locale" content="en_US">
+
+
+
+
+
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BreadcrumbList",
+    
+      
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          {
+            "@type": "ListItem",
+            "position":  1 ,
+            "name": "Home",
+            "item": "https://ritiek.github.io/"
+          },
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  2 ,
+            "name": "2020",
+            "item": "https://ritiek.github.io/2020/"
+          },
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  3 ,
+            "name": "04",
+            "item": "https://ritiek.github.io/2020/04/"
+          },
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  4 ,
+            "name": "18",
+            "item": "https://ritiek.github.io/2020/04/18/"
+          },
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  5 ,
+            "name": "Installing Popos On An Unsupported 32 Bit Uefi Hardware",
+            "item": "https://ritiek.github.io/2020/04/18/installing-popos-on-an-unsupported-32-bit-uefi-hardware/"
+          },
+        
+      
+    
+  }
+</script>
+
+
+
+
+
+
+  <meta name="theme-color" content="#fff">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://ritiek.github.io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://ritiek.github.io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://ritiek.github.io/favicon-16x16.png">
+  
+    <link rel="manifest" href="https://ritiek.github.io/site.webmanifest" crossorigin>
+  
+
+
+  
+
+</head>
+
+  
+    
+  
+
+<body class="page single">
+  
+    
+<div class="header-bar fixed-top"></div>
+<header class="navbar fixed-top navbar-expand-md navbar-light">
+	<div class="container">
+		<input class="menu-btn order-0" type="checkbox" id="menu-btn">
+		<label class="menu-icon d-md-none" for="menu-btn"><span class="navicon"></span></label>
+		<a class="navbar-brand order-1 order-md-0 me-auto" href="https://ritiek.github.io">Ritiek Malhotra</a>
+		<button id="mode" class="btn btn-link order-2 order-md-4" type="button" aria-label="Toggle mode">
+			<span class="toggle-dark"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></span>
+			<span class="toggle-light"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg></span>
+		</button>
+		<ul class="navbar-nav fork-me order-3 order-md-5">
+			
+				
+					<li class="nav-item">
+						<a class="nav-link" href="https://github.com/ritiek"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg><span class="ms-2 visually-hidden">GitHub</span></a>
+					</li>
+				
+			
+		</ul>
+		<div class="collapse navbar-collapse order-4 order-md-1">
+			<ul class="navbar-nav main-nav me-auto order-5 order-md-2">
+				
+					
+				
+				
+				
+					
+						<li class="nav-item">
+							<a class="nav-link" href="/posts/">Archive</a>
+						</li>
+					
+						<li class="nav-item">
+							<a class="nav-link" href="/about/">About</a>
+						</li>
+					
+				
+			</ul>
+			<div class="break order-6 d-md-none"></div>
+			
+				<form class="navbar-form flex-grow-1 order-7 order-md-3">
+					<input id="userinput" class="form-control is-search" type="search" placeholder="Search posts..."
+						aria-label="Search posts..." autocomplete="off">
+					<div id="suggestions" class="shadow bg-white rounded"></div>
+				</form>
+			
+		</div>
+	</div>
+
+</header>
+
+  
+
+  
+<div class="wrap container" role="document">
+  <div class="content">
+    <div class="row justify-content-center">
+      <div class="col-md-12 col-lg-10 col-xxl-8">
+        <article>
+          <div class="page-header">
+            <h1>Installing Pop!_OS on an unsupported 32-bit UEFI hardware</h1>
+          </div>
+          
+          <p>I've been using Linux Mint for quite a while (like past 4 years) and wanted some change.
+Pop!_OS seemed another good Ubuntu-based distro so I decided to try it out. However,
+there is a problem. Since the hardware I use is 32-bit only UEFI without legacy BIOS.
+Pop!_OS on the otherhand ships ISOs for use only with 64-bit UEFIs and legacy BIOS (but
+disregards support for 32-bit UEFI and that's bad since my hardware is 32-bit UEFI only).
+My laptop is CanvasLapbookL1160, one in baytrail series (Intel(R) Atom(TM) CPU  Z3735F @ 1.33GHz).
+It initially came with Windows 10 without any apparent issues at all, but it ran slow and
+was, well, Windows. Micromax probably had modified Windows in a way such that it detected
+all hardware peripherals correctly. Since, I had same issues (as I mention later) even if
+I manually re-installed Windows 10, as I did with Linux distros.</p>
+<p align="center">
+  <img src="/assets/aiIVZGN.png" width="350">
+  <br><i>Here's how the machine looks like</i>
+</p>
+<p>I don't really blame the developers for not supporting 32-bit UEFI. This is not just the
+case with Pop!_OS but with pretty much almost all major distributions out there. I read
+somewhere that Fedora did support such machines back in 2018, although I'm not sure of what
+the current status is. 32-bit UEFI machines are pretty rare in 2020 and I understand that
+supporting such a minority of users is not worth the developer time spent, atleast as of
+now. The situation was probably different a few years back. The more we wait to support these
+devices, the lesser sense it makes to support these devices.</p>
+<p>With what I write here, I expect to document how to get stuff working on such machines in
+the hope that this would atleast be useful to my future-self and people who are a bit familiar
+with how Linux works. Move on by assuming that there will sometimes be hardware peripherals
+that will fail to be recognized properly (such as WiFi, sound output) and random irrecoverable
+freezes.  I suffer from both these without a solution as of yet. I also happen to be hit by
+some other unexplained stuff as I'll mention later. Anyway, since I'm writing all of this
+from memory, expect some very specific details to lack in precision.</p>
+<h2 id="linux-mint-2-years-ago">Linux Mint (2 years ago)</h2>
+<p>Two years back when I installed Linux Mint 19 on this same hardware, the situation wasn't
+as bad as it is now. You'd use <code>dd</code> or <code>cat</code> from coreutils or specialized tools such as
+Rufus or UNetbootin to write the ISO image on to a USB device. When trying to boot this USB
+device on a 32-bit UEFI machine you'd notice that it won't even show up as a boot device.
+At this point, the first response would be to put a <code>bootia32.efi</code> in <code>/efi/boot/</code> on your
+EFI partition on your USB stick. However, if you wrote the ISO image on the USB in dd-mode
+(as termed in Rufus) (that is using <code>dd</code> or <code>cat</code> or dd-mode in Rufus) you now won't be
+able to add or remove files from your USB stick since the USB stick would be stuck in
+read-only mode. I haven't come across a way to make it writable again except completely
+formatting it in such a case.</p>
+<p>UEFI firmware looks for all <code>FAT</code> formatted partitions and attempts to look for boot files
+stored in <code>/EFI/boot</code> under these partitions. Now what <code>cat</code>, <code>dd</code> and Rufus do is to create
+one <code>FAT32</code> partition for UEFI boot and another one as <code>ext4</code> for core image files. This is
+because of the way how it is actually defined in most distro ISOs. I've found an easier way to
+keep the disk writable and avoid such utilities is to create a single <code>FAT32</code> partition
+consisting of both the boot and core image files.</p>
+<p>So let's only maintain a single partition making things a little easier. I'd first locally mount
+the ISO image and then simply copy-paste the mounted files on to a USB stick which has been
+first formatted as <code>FAT32</code>.
+The USB stick will still be writable at this point and you can now copy <code>bootia32.efi</code> to
+<code>/EFI/boot/</code> as previously mentioned. With this I was successfully be able to boot into live
+Linux Mint from my USB stick. At this point, one should notice all the hardware stuff that
+fails to be recognized. Some things to think of: whether battery percentage reduces when not
+plugged-in?  If charger plugged-in display indicator shows correctly? WiFi works? Brightness
+controls?  Sound output from speakers and 3.5mm jack? Is trackpad being detected as an external
+mouse (that means no two-finger scrolling and "disable mouse when typing" does not work)? Does
+deep-sleep work? If you're hitting some of these issues, I've mostly had more luck with
+learning to live with them than looking for solutions on the Internet.</p>
+<p>It might be possible to write a custom driver or a kernel module to fix an issue but that's
+beyond me.  In any case, you'd normally select the partition where you want to install Linux
+Mint and make sure that you create and EFI partition with ~200MB if it doesn't already exist,
+and next, next. Everything would go fine until at the end of the installation it mentions
+that it failed to install a boot loader. You could now reboot and see that our newly installed
+Linux Mint isn't available in the boot menu! I know of two ways to fix this from here:</p>
+<h3 id="method-1">Method 1</h3>
+<p>You'd reboot your machine when the failure message pops up. Now you'd again select your
+bootable USB drive, but this time go to advanced options and it should mention something
+about accessing the GRUB command-line by pressing <code>c</code> key on the keyboard. Do that and it
+will drop us to a shell. Here we'll attempt to manually load the kernel image and the initial
+RAM disk. The first step is to recognize the drive and partition where you installed Linux
+Mint to. This can be done by using <code>ls</code>:</p>
+<p align="center">
+  <img src="/assets/rxACrpQ.jpeg" width="350">
+  <br><i>The GRUB command-line</i>
+</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> ls (hd0)</span><span style="color:#bf616a;">/
+</span><span style="color:#65737e;"># Is this what I need? Nope.
+</span><span style="color:#bf616a;">$</span><span> ls (hd0,gpt1)</span><span style="color:#bf616a;">/
+</span><span style="color:#65737e;"># Is this what I need? Yup!
+</span></code></pre>
+<p>Once you've recognized your drive and partition, note its UUID by running <code>ls -l</code>:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> ls</span><span style="color:#bf616a;"> -l</span><span> (hd0,gpt1)</span><span style="color:#bf616a;">/
+</span><span style="color:#65737e;"># &lt;stuff&gt; UUID 46868037-2224-4887-adfe-d1db9fe93366 &lt;stuff&gt;
+</span></code></pre>
+<p>The UUID is the the alphanumeric characters such as in the above case, the UUID is:
+<code>46868037-2224-4887-adfe-d1db9fe93366</code>. Sometimes <code>ls</code> might not accept the <code>-l</code> parameter.
+In such a case, omit <code>root=UUID=6868037-2224-4887-adfe-d1db9fe93366</code> from the below command.
+Now, we load the kernel image with:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> linux (hd0,gpt1)</span><span style="color:#bf616a;">/boot/vmlinuz.efi</span><span> root=UUID=6868037-2224-4887-adfe-d1db9fe93366
+</span></code></pre>
+<p>replace the above alphanumerics with your obtained UUID.</p>
+<p>Now load the initial RAM disk:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> initrd /(hd0,gpt1)</span><span style="color:#bf616a;">/boot/initrd.gz
+</span></code></pre>
+<p>The filenames may not exactly be <code>vmlinuz.efi</code> or <code>initrd.gz</code> but should closely resemble
+them. So, try loading whatever seems the closest filename to you.</p>
+<p>Now do</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> boot
+</span></code></pre>
+<p>If your <code>ls</code> didn't support <code>-l</code> option and you omitted the UUID, the kernel will fail
+to load and will drop you into a busybox shell which can now be used to read the all the
+connected devices UUIDs by running:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> ls</span><span style="color:#bf616a;"> -l</span><span> /dev/disk/by-uuid/
+</span></code></pre>
+<p>If still not sure here what device and partition you installed Linux Mint, try <code>mkdir</code>
+and mount the device files from <code>/dev/sdXY</code> on to this directory and then <code>ls</code>. Either
+way you should now have the correct UUID. Click a picture of it or note it down and
+repeat the above mentioned steps but now by entering the UUID when loading the kernel
+image.</p>
+<p>It would now successfully boot into the installed Linux Mint and now we fix the boot menu
+so it shows up in the boot menu.</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> sudo apt install grub-efi-ia32-bin
+</span></code></pre>
+<p>Check which partition on your hard drive is your EFI partition. I'd assume <code>/dev/sda2</code>
+here:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> mkdir /boot/EFI
+</span><span style="color:#bf616a;">$</span><span> sudo mount /dev/sda2 /boot/EFI
+</span><span style="color:#bf616a;">$</span><span> sudo grub-install /dev/sda2</span><span style="color:#bf616a;"> --efi-directory</span><span>=/boot/EFI
+</span></code></pre>
+<p>Update the menus:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> sudo update-grub
+</span></code></pre>
+<p>If you get the command-not-found error on <code>update-grub</code>, run this instead:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> grub-mkconfig</span><span style="color:#bf616a;"> -o</span><span> /boot/grub/grub.cfg
+</span></code></pre>
+<p>Everything should be fixed now. Reboot and check your boot menu.</p>
+<p>This is a <a href="https://medium.com/@realzedgoat/a-sorta-beginners-guide-to-installing-ubuntu-linux-on-32-bit-uefi-machines-d39b1d1961ec">guide</a>
+that was immensly helpful to me back when I was new to this stuff and installing
+Linux Mint, so you should notice some similarities above and in the mentioned guide.</p>
+<h3 id="method-2">Method 2</h3>
+<p>That was the first way, but in such a case today I'll probably use this method.
+The second way of fixing this boot menu is via chroot.
+When Linux Mint errors on saying that the bootloader failed to install. Do not reboot.
+Or if you did reboot, boot back into the live USB again.  Now open a terminal and
+check where the new Linux Mint got installed. I'd assume in <code>/dev/sda3</code>. Do this:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> sudo mount /dev/sda3 /mnt
+</span><span style="color:#bf616a;">$</span><span> sudo mount</span><span style="color:#bf616a;"> --bind</span><span> /dev/ /mnt/dev
+</span><span style="color:#bf616a;">$</span><span> sudo mount</span><span style="color:#bf616a;"> --bind</span><span> /sys /mnt/sys
+</span><span style="color:#bf616a;">$</span><span> sudo mount</span><span style="color:#bf616a;"> --bind</span><span> /proc /mnt/proc
+</span><span style="color:#bf616a;">$</span><span> sudo chroot /mnt
+</span></code></pre>
+<p>Now you run the commands mentioned in the 1st method starting from the <code>apt install grub-efi-ia32-bin</code>
+part in the chroot jail. Ok, should be fixed after that's done. Reboot and check.</p>
+<p>At this point, I'd be able to normally boot into my installed Linux Mint. However, you'd see
+those hardware peripherals that didn't work in the live boot don't work here either. That's
+expected. However, my hardware has yet another problem. If I upgrade my kernel version to 4.17
+or anything later (I've randomly tried versions upto 5.6), my input devices such as keyboard
+and mouse won't be detected, and the USB ports aren't supplied power. The last kernel version
+that atleast allows me to keep the machine usable is 4.16.18. However, I still face other
+issues with 4.16.18 and lower versions of kernel. These issues include - trackpad offers no
+2-finger scroll or middle click capability. It simply works as a 2-button mouse. Battery
+is always stuck at 50% and shows no plugged-in indicator. There were other things as I've
+mentioned in <a href="https://github.com/ritiek/dotfiles/tree/master/CanvasLapbookL1160">here</a>.</p>
+<p>Okay, that's for the Linux Mint part from 2 years ago.</p>
+<h2 id="pop-os">Pop!_OS</h2>
+<p>I was able to successfully get Pop!_OS 19.10 working. Although, the kernel still suffers from the
+same issues I mentioned in the last paragraph. Getting Pop!_OS to work was harder in comparision
+to Linux Mint. I'd normally download the ISO and copy the files on my USB stick on a <code>FAT32</code>
+formatted partition. I've noticed that Pop!_OS contains some core image files that symlink to
+other directories in the image and <code>FAT</code> systems doesn't support symlinks. So, in such a case
+I'd create a complete copy of the file/directory and replace that by its corresponding symlink.
+Done that. Now it doesn't show up in the boot menu? Ok, put in a <code>bootia32.efi</code>. However,
+simply doing this didn't succeed this time, it kept getting stuck somewhere along doing <code>casper-prefetch</code>
+while loading the kernel and would then drop me into a busybox shell, as I could see on my screen.
+This USB did boot up on other my other machine with a 64-bit UEFI. So on such a machine, I checked
+the default kernel version that Pop!_OS comes with using:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> uname</span><span style="color:#bf616a;"> -r
+</span></code></pre>
+<p>when live booting the USB on a 64-bit UEFI. It was 5.3.
+This was higher than the maximum kernel version my 32-bit UEFI hardware is known to work with
+(4.16.18).</p>
+<p>I guessed that the reason it failed to boot on my 32-bit UEFI hardware was simply the
+unsupported kernel version having a hard time determining stuff on my machine. I tried to get an
+older version of kernel up with Pop!_OS. So going with that, I attempted to replace <code>vmlinuz</code> (the kernel image) and
+<code>initrd</code> (initial RAM disk) files that come by default in Pop!_OS's ISO, with their older versions respectively
+from the installed Linux Mint (<code>/boot/vmlinuz</code> and <code>/boot/initrd</code>) which is currently living in my hard disk
+(the one I talked about in the previous section).  Although I don't remember what error it came up
+with after the replacement when the kernel was being initialized, only that it didn't work. I thought
+perhaps there is a difference between these files in a live USB and the ones from a fully-installed
+Linux. So, I attempted to replace the kernel image and initial RAM disk image again, but this
+time from a Linux Mint 19 ISO image which by default comes with a kernel version &lt; 4.17, that means the
+kernel from such an ISO image would work with my hardware. A good friend of mine had a Linux Mint 19 ISO image
+laying around. so I asked him to send me the needed <code>vmlinuz</code> and <code>initrd</code> files from his ISO. I
+replaced them with what came with Pop!_OS and attempted to boot again. It still didn't work.</p>
+<p>I had another idea. I had an extra USB stick and I live booted Pop!_OS on a 64-bit UEFI and
+installed it on to this extra USB stick. Make sure the partition size you create for the full-usb
+installation is smaller than the space you wish to allocate when in future you install it onto
+your actual hard drive parition (this will be useful later in the post). The installation was a
+success on this 64-bit UEFI machine. I wanted to be convinced whether it was the kernel version
+issue that caused failure to boot on my 32-bit UEFI. I plugged the USB with fully-installed
+Pop!_OS which I just made (not the one with live!) into my 32-bit UEFI machine. I already had
+Linux Mint installed on the machine, so I went into the GRUB command-line by pressing <code>c</code> key
+while on the advanced boot options.  I determined the UUID of the USB stick which contained the
+full-install of Pop!_OS using <code>ls -l</code> on the available disks. Next, I loaded the kernel and initial
+RAM disk from my Linux Mint and set the root partition pointing towards my fully-installed Pop!_OS
+USB. If everything went fine I'd be using the kernel version from my Linux Mint but the root partition
+would be set to Pop!_OS meaning that I would essentially be running Pop!_OS with my
+hardware-supported kernel. I did this in GRUB command-line: (Assume <code>(hd0,gpt3)</code> to be my Linux Mint
+installation partition. Also replace the UUID below with what you got from <code>ls -l</code> above)</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> linux (hd0,gpt3)</span><span style="color:#bf616a;">/boot/vmlinuz</span><span> root=UUID=5839037-2264-4487-adfe-d1cb9fe93366
+</span><span style="color:#bf616a;">$</span><span> initrd (hd0,gpt3)</span><span style="color:#bf616a;">/boot/initrd
+</span><span style="color:#bf616a;">$</span><span> boot
+</span></code></pre>
+<p>And it worked! I was now in my USB with full-install of Pop!_OS running an older kernel version!
+WiFi and sound didn't work here since I believe the kernel was attempting to load modules from
+Pop!_OS's partition and there were none present for this kernel version in there. So, I booted
+back into my Linux Mint and chrooted into Pop!_OS's full-installed USB stick. The kernel version
+I wanted wasn't available in default apt repositories so I downloaded the
+<a href="https://kernel.ubuntu.com/~kernel-ppa/mainline/v4.16.18/">necessary packages</a> myself which were:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>linux-headers-4.16.18-041618_4.16.18-041618.201806252030_all.deb
+</span><span>linux-headers-4.16.18-041618-generic_4.16.18-041618.201806252030_amd64.deb
+</span><span>linux-image-unsigned-4.16.18-041618-generic_4.16.18-041618.201806252030_amd64.deb
+</span><span>linux-modules-4.16.18-041618-generic_4.16.18-041618.201806252030_amd64.deb
+</span></code></pre>
+<p>and installed all these packages with <code>dpkg -i</code> onto my chrooted Pop!_OS.</p>
+<p>Next to see if this older kernel did install as expected I rebooted and went into GRUB
+command-line: (<code>(hd1,gpt2)</code> is my fully-installed Pop!_OS USB stick and the one I chrooted into
+in previous step)</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> linux (hd1,gpt2)</span><span style="color:#bf616a;">/boot/vmlinuz-4.16.18</span><span> root=UUID=5839037-2264-4487-adfe-d1cb9fe93366
+</span><span style="color:#bf616a;">$</span><span> initrd (hd1,gpt2)</span><span style="color:#bf616a;">/boot/initrd.4.16.18
+</span><span style="color:#bf616a;">$</span><span> boot
+</span></code></pre>
+<p>Ok, boot was successful. WiFi and sound is working too! With all this, I think I was right in
+guessing that it was the newer kernel version that came by default with Pop!_OS that my hardware
+couldn't handle it. Either way, I still had to get Pop!_OS installed onto my main hard disk.
+The problem was still that I couldn't get the live USB to boot on my 32-bit UEFI machine
+even if I replaced the kernel image and initial RAM disk image.</p>
+<p>However, we don't need to do that now! I believed that now I could simply <code>dd</code> or <code>cat</code> the
+fully-installed Pop!_OS partition from my USB stick onto my hard disk's partition, and then fix
+up my boot menus.  This should act similar to the way as if I installed Pop!_OS onto my hard
+disk from a live USB.  So, I booted into Mint backed up anything I needed. Backups done, I then
+took another USB stick (the third one) and wrote an image from the full-usb installed to this
+third USB stick:
+(<code>/dev/sdb2</code> is your fully-installed USB)</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> cat /dev/sdb2 &gt; /media/ritiek/3rd_usb_stick/full_install.img
+</span></code></pre>
+<p>Now then I booted into my fully-installed Pop!_OS USB and wrote this image onto my Linux Mint
+partition. I wanted to replace Linux Mint with Pop!_OS so I chose the same partition, you choose
+a different one if you wish to keep Mint:
+(<code>/dev/sda3</code> is my hard disk partition I want to write Pop!_OS over to)</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> cat /media/ritiek/3rd_usb_stick/full_install.img &gt; /dev/sda3
+</span></code></pre>
+<p>This should kill my Mint installation and replace it with Pop!_OS. Now we need to fix up the
+boot menu so this Pop!_OS shows up in the boot menu. Do not reboot and instead first chroot
+into hard disk partition where you wrote the image:
+(<code>/dev/sda2</code> here is my hard disk's EFI partition)</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> sudo mount /dev/sda3 /mnt
+</span><span style="color:#bf616a;">$</span><span> sudo mount</span><span style="color:#bf616a;"> --bind</span><span> /dev/ /mnt/dev
+</span><span style="color:#bf616a;">$</span><span> sudo mount</span><span style="color:#bf616a;"> --bind</span><span> /sys /mnt/sys
+</span><span style="color:#bf616a;">$</span><span> sudo mount</span><span style="color:#bf616a;"> --bind</span><span> /proc /mnt/proc
+</span><span style="color:#bf616a;">$</span><span> sudo chroot /mnt
+</span><span style="color:#bf616a;">$</span><span> mkdir /boot/EFI
+</span><span style="color:#bf616a;">$</span><span> sudo mount /dev/sda2 /boot/EFI
+</span><span style="color:#bf616a;">$</span><span> sudo grub-install /dev/sda2</span><span style="color:#bf616a;"> --efi-directory</span><span>=/boot/EFI
+</span></code></pre>
+<p>Update the menus:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> sudo update-grub
+</span></code></pre>
+<p>If you get the command-not-found error on <code>update-grub</code>, run this instead:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> grub-mkconfig</span><span style="color:#bf616a;"> -o</span><span> /boot/grub/grub.cfg
+</span></code></pre>
+<p>That is all! You should now be able to reboot, disconnect all attached USB sticks and Pop!_OS
+should show up in your hard disk's boot menu! Try booting it! Although I still face the same
+aftermath issues as I did in Linux Mint.</p>
+<p><strong>Update:</strong> I was able to atleast fix my freezing issue from here <a href="https://askubuntu.com/a/796484/694881">https://askubuntu.com/a/796484/694881</a>.
+This seems to be an issue in lower kernel versions. Like the linked answer mentions, I had to
+append <code>intel_idle.max_cstate=1</code> to <code>GRUB_CMDLINE_LINUX_DEFAULT</code> section in <code>/etc/default/grub</code>.
+And then update my boot configuration:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ sudo grub-update
+</span></code></pre>
+<p>Whoa. This freezing issue seems to be specific to baytrail machines. There has been a kernel bug
+report filed on <a href="https://bugzilla.kernel.org/show_bug.cgi?id=109051">https://bugzilla.kernel.org/show_bug.cgi?id=109051</a>
+with a very good number of people affected! Reading the responses, it looks like Intel has been
+messing things up. I'm at this also pretty sure the other issues I face are specific to baytrail too.</p>
+<h2 id="end">End</h2>
+<p>This is how it had to be done on my laptop. It is very unlikely that the same exact procedure
+would work as it is on a different machine and for a different OS. So, it is important to understand
+what's going on above. I'll probably forget this stuff soon too so I just wanted to throw this in
+somewhere as soon as possible.</p>
+<p>I know that 4.16.18 is a pretty old kernel but I'd still be willing for the compromise with using
+it than having stayed put with the Windows that came pre-installed with this machine.</p>
+<p>TL;DR Do not a get yourself a baytrail machine if you can avoid it.</p>
+
+        </article>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  
+    
+<footer class="footer text-muted">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 order-last order-lg-first">
+				<ul class="list-inline">
+					
+						<li class="list-inline-item">Powered by <a href="https://www.getzola.org/">Zola</a></li>
+					
+				</ul>
+			</div>
+			<div class="col-lg-8 order-first order-lg-last text-lg-end">
+				<ul class="list-inline">
+					
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+  
+
+  
+<script type="text/javascript" src="https://ritiek.github.io/js/main.js" defer></script>
+
+  <script type="text/javascript" src="https://ritiek.github.io/plugins/elasticlunr.min.js" defer></script>
+  <script type="text/javascript" src="https://ritiek.github.io/search_index.en.js" defer></script>
+  <script type="text/javascript" src="https://ritiek.github.io/js/search.js" defer></script>
+
+  
+</body>
+</html>

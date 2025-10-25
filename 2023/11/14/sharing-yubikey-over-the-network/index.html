@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="preload" as="font" href="https://ritiek.github.io/fonts/vendor/jost/jost-v4-latin-regular.woff2" type="font/woff2" crossorigin>
+  <link rel="preload" as="font" href="https://ritiek.github.io/fonts/vendor/jost/jost-v4-latin-700.woff2"  type="font/woff2" crossorigin>
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://ritiek.github.io/main.css">
+<link rel="stylesheet" href="https://ritiek.github.io/custom.css">
+
+
+
+  
+  
+    
+  
+
+  
+  
+    
+    
+  
+  
+  
+    
+  
+  
+  
+  
+    
+  
+  
+  
+
+
+  <meta name="robots" content="index, follow">
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
+
+	
+
+
+	
+
+<title>Sharing Yubikey over the network | Ritiek Malhotra</title>
+<meta name="description" content="Just some of my adventures!">
+<link rel="canonical" href="https://ritiek.github.io/2023/11/14/sharing-yubikey-over-the-network/">
+
+
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <meta name="twitter:title" content="Sharing Yubikey over the network">
+  <meta name="twitter:description" content="Just some of my adventures!">
+  <meta name="twitter:site" content="@">
+  <meta name="twitter:creator" content="@">
+  
+  <meta property="og:title" content="Sharing Yubikey over the network">
+  <meta property="og:description" content="Just some of my adventures!">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://ritiek.github.io/2023/11/14/sharing-yubikey-over-the-network/">
+
+  
+
+  <meta property="og:updated_time" content="">
+  <meta property="og:site_name" content="Sharing Yubikey over the network">
+
+  
+
+  
+
+  
+  <meta property="article:publisher" content="https://www.facebook.com/">
+  <meta property="article:author" content="https://www.facebook.com/">
+  <meta property="og:locale" content="en_US">
+
+
+
+
+
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BreadcrumbList",
+    
+      
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          {
+            "@type": "ListItem",
+            "position":  1 ,
+            "name": "Home",
+            "item": "https://ritiek.github.io/"
+          },
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  2 ,
+            "name": "2023",
+            "item": "https://ritiek.github.io/2023/"
+          },
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  3 ,
+            "name": "11",
+            "item": "https://ritiek.github.io/2023/11/"
+          },
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  4 ,
+            "name": "14",
+            "item": "https://ritiek.github.io/2023/11/14/"
+          },
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  5 ,
+            "name": "Sharing Yubikey Over The Network",
+            "item": "https://ritiek.github.io/2023/11/14/sharing-yubikey-over-the-network/"
+          },
+        
+      
+    
+  }
+</script>
+
+
+
+
+
+
+  <meta name="theme-color" content="#fff">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://ritiek.github.io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://ritiek.github.io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://ritiek.github.io/favicon-16x16.png">
+  
+    <link rel="manifest" href="https://ritiek.github.io/site.webmanifest" crossorigin>
+  
+
+
+  
+
+</head>
+
+  
+    
+  
+
+<body class="page single">
+  
+    
+<div class="header-bar fixed-top"></div>
+<header class="navbar fixed-top navbar-expand-md navbar-light">
+	<div class="container">
+		<input class="menu-btn order-0" type="checkbox" id="menu-btn">
+		<label class="menu-icon d-md-none" for="menu-btn"><span class="navicon"></span></label>
+		<a class="navbar-brand order-1 order-md-0 me-auto" href="https://ritiek.github.io">Ritiek Malhotra</a>
+		<button id="mode" class="btn btn-link order-2 order-md-4" type="button" aria-label="Toggle mode">
+			<span class="toggle-dark"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></span>
+			<span class="toggle-light"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg></span>
+		</button>
+		<ul class="navbar-nav fork-me order-3 order-md-5">
+			
+				
+					<li class="nav-item">
+						<a class="nav-link" href="https://github.com/ritiek"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg><span class="ms-2 visually-hidden">GitHub</span></a>
+					</li>
+				
+			
+		</ul>
+		<div class="collapse navbar-collapse order-4 order-md-1">
+			<ul class="navbar-nav main-nav me-auto order-5 order-md-2">
+				
+					
+				
+				
+				
+					
+						<li class="nav-item">
+							<a class="nav-link" href="/posts/">Archive</a>
+						</li>
+					
+						<li class="nav-item">
+							<a class="nav-link" href="/about/">About</a>
+						</li>
+					
+				
+			</ul>
+			<div class="break order-6 d-md-none"></div>
+			
+				<form class="navbar-form flex-grow-1 order-7 order-md-3">
+					<input id="userinput" class="form-control is-search" type="search" placeholder="Search posts..."
+						aria-label="Search posts..." autocomplete="off">
+					<div id="suggestions" class="shadow bg-white rounded"></div>
+				</form>
+			
+		</div>
+	</div>
+
+</header>
+
+  
+
+  
+<div class="wrap container" role="document">
+  <div class="content">
+    <div class="row justify-content-center">
+      <div class="col-md-12 col-lg-10 col-xxl-8">
+        <article>
+          <div class="page-header">
+            <h1>Sharing Yubikey over the network</h1>
+          </div>
+          
+          <p>At any point in this post, whenever I mention the term
+<a href="https://www.yubico.com/products/how-the-yubikey-works/">Yubikey</a>, what I really mean is any hardware-based
+authentication device that supports <a href="https://fidoalliance.org/fido2/">FIDO2</a>.</p>
+<p>I think writings here'll mostly interest people who consider Yubikey in their threat model.</p>
+<hr />
+<h2 id="why-isn-t-the-major-point-about-owning-a-yubikey-is-to-make-online-passwords-a-physical-problem">Why? Isn't the major point about owning a Yubikey is to make online passwords a physical problem?</h2>
+<p>There seems to be a consensus (for good reasons) to have at least one offsite backup whenever possible for
+most things holding digital value, be it storage backups (3-2-1 backup strategy at the least) or Yubikeys.</p>
+<p>There's a problem with this, how to keep the offsite backups up to date with our primary media?
+For storage media, having an offsite server running a backup service like
+<a href="https://github.com/borgbackup/borg">borg</a> or <a href="https://github.com/kopia/kopia">kopia</a> over the network seems
+a decent choice.</p>
+<p>But what about keeping the Yubikey up to date in an offsite location?</p>
+<p>I've read some people use Yubikeys as a passkey or as a 2FA method to their password manager. So if we've
+got the offsite Yubikey setup as authentication method to unlock our password manager's vault beforehand,
+then we should be able to store any other sensitive stuff later on inside of our password manager, as the
+offsite Yubikey would only need to unlock our password manager's vault to give us back access to everything.
+If our password manager supports it, we can also store passkeys digitally for other services inside our
+password manager, and have our Yubikey act as the master passkey to unlock our vault.</p>
+<p>This is nice and in this case, people for the most part don't have to go through the hoops in order to keep
+their offsite Yubikey synced up, because they don't need to.</p>
+<p>Having an offsite Yubikey makes sense to me. But how prepared would we be to retrieve the offsite Yubikey
+when a calamity (a Tsunami?) ensues and:</p>
+<ol>
+<li>
+<p>Destroys our primary site and we lose access to not only our primary Yubikeys but also our home,
+mobile phones, paper money, and even access to the city's vehicular transport system; each of which seems
+to significantly multiply the difficulty in order for us to physically retrieve the offsite Yubikey.</p>
+</li>
+<li>
+<p>In an extreme scenario, we happen to be unfortunate enough to hit our fleshy human heads on concrete
+(memory loss) during the disaster unfolding, or fail to make it out at all.</p>
+</li>
+</ol>
+<p>For the 2nd point, life support should preceed everything else. I think it's nice to have an offsite
+<a href="https://www.reddit.com/r/Bitwarden/comments/q0m19n/on_dying_and_your_password_vault/">executor</a>,
+a trusty someone who could take their time to help us with our digital stuff as we start to gain back sense
+of self-awareness, or otherwise give the digital us a closure if we're no longer around.</p>
+<p>In scenarios similar to 1st point, where we lose our possessions but happen to be physically okay enough,
+and want to gain back access to our digital vaults; physically retrieving the offsite Yubikey may not always
+sound like a plan.</p>
+<p>What I think might work in such scenarios would be to have a trusty person under the same roof where the
+offsite Yubikey lives. We can share this offsite Yubikey over to us through the Internet in our SOS situation,
+and have our trustypie person finger tap authenticate the Yubikey for us. This way, the offsite Yubikey should
+still partially get to keep its job to make online passwords a physical problem, while also being useful to us
+remotely.</p>
+<h2 id="doin-it">Doin' it!</h2>
+<p>I tried plugging in a Yubikey into my Raspberry Pi located in an (imaginary) offsite location and setting up USB
+sharing to my primary machine using <a href="https://wiki.archlinux.org/title/USB/IP">USB/IP</a>; seems a good enough way
+to me. The linked arch wiki page should be a good starting point.</p>
+<p>Here's what I had to do on my Raspberry Pi (server):</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> sudo apt install</span><span style="color:#bf616a;"> -y</span><span> usbip
+</span><span style="color:#bf616a;">$</span><span> sudo modprobe usbip_host
+</span><span style="color:#bf616a;">$</span><span> sudo usbip list</span><span style="color:#bf616a;"> -l
+</span><span style="color:#bf616a;">...
+</span><span> </span><span style="color:#bf616a;">-</span><span> busid 1-1.3 (1050:0402)
+</span><span>   </span><span style="color:#bf616a;">Yubico.com</span><span> : Yubikey 4/5 U2F (1050:0402)
+</span><span style="color:#bf616a;">...
+</span><span style="color:#65737e;"># ^Note Yubikey&#39;s busid: 1-1.3.
+</span><span>
+</span><span style="color:#65737e;"># Pass Yubikey&#39;s busid below in `ExecStartPost` and `ExecStop`.
+</span><span style="color:#bf616a;">$</span><span> echo &quot;&quot;&quot;</span><span style="color:#a3be8c;">[Unit]
+</span><span style="color:#a3be8c;">Description=USB-IP Binding
+</span><span style="color:#a3be8c;">After=network-online.target
+</span><span style="color:#a3be8c;">Wants=network-online.target
+</span><span style="color:#a3be8c;">
+</span><span style="color:#a3be8c;">[Service]
+</span><span style="color:#a3be8c;">Type=simple
+</span><span style="color:#a3be8c;">ExecStart=/usr/sbin/usbipd
+</span><span style="color:#a3be8c;">ExecStartPost=/usr/sbin/usbip bind -b 1-1.3
+</span><span style="color:#a3be8c;">ExecStop=/usr/sbin/usbip unbind -b 1-1.3
+</span><span style="color:#a3be8c;">
+</span><span style="color:#a3be8c;">[Install]
+</span><span style="color:#a3be8c;">WantedBy=multi-user.target</span><span>&quot;&quot;&quot; | </span><span style="color:#bf616a;">sudo</span><span> tee /etc/systemd/system/usbip-yubikey.service
+</span><span>
+</span><span style="color:#bf616a;">$</span><span> sudo systemctl daemon-reload
+</span><span style="color:#bf616a;">$</span><span> sudo systemctl start usbip-yubikey
+</span><span>
+</span><span style="color:#65737e;"># Optional: Auto start usbip server on boot.
+</span><span style="color:#bf616a;">$</span><span> echo usbip_host | </span><span style="color:#bf616a;">sudo</span><span> tee /etc/modules-load.d/usbip.conf
+</span><span style="color:#bf616a;">$</span><span> sudo systemctl enable usbip-yubikey
+</span></code></pre>
+<p>And on my primary arch machine (client):</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> sudo pacman</span><span style="color:#bf616a;"> -S</span><span> usbip
+</span><span style="color:#bf616a;">$</span><span> sudo modprobe vhci-hcd
+</span><span style="color:#bf616a;">$</span><span> sudo usbip attach</span><span style="color:#bf616a;"> -r </span><span>&lt;pi-ip-address&gt; -b 1-1.3
+</span><span>
+</span><span style="color:#65737e;"># Optional: Auto load vhci-hcd kernel module on boot (won&#39;t have to `modprobe vhci-hcd` on every boot).
+</span><span style="color:#bf616a;">$</span><span> echo vhci-hcd | </span><span style="color:#bf616a;">sudo</span><span> tee /etc/modules-load.d/usbip.conf
+</span></code></pre>
+<p>Once setup, my primary machine works as if the remote Yubikey is physically connected to it.
+You can try it out by doing something that'll invoke the Yubikey for authentication. As of writing, it looks
+like USB/IP sends unencrypted data over TCP which could be a security concern. So you'd probably want to
+setup a VPN and make USB/IP connections over it securely (<a href="https://github.com/tailscale/tailscale">tailscale</a>
+is fun).</p>
+<hr />
+<p><strong>There could be more implications behind the entire idea, as well as setting up something like this.
+It'll be wise to research more before pushing something like this into production.</strong></p>
+<hr />
+<h2 id="blub-netevent">Blub/netevent</h2>
+<p>I wrote about <a href="https://github.com/Blub/netevent">Blub/netevent</a> in
+<a href="/2019/02/18/sharing-linux-event-devices-with-other-linux-machines/">one of my earlier posts</a>
+which works well with sharing <code>/dev/input/event*</code> devices, something which doesn't seem possible with
+USB/IP (I probably won't be able to share input from my mobile phone's power button to my laptop with USB/IP,
+but I got it working back then using netevent as mentioned in the linked post).</p>
+<p>On the contrary, sharing USB devices (Yubikey [shows up in <code>/dev/hidraw*</code>], USB storage devices, etc.)
+isn't possible with netevent.</p>
+<p>That said, both netevent and USB/IP still seem to have a bit of overlapping functionality (I should be able
+share my USB Mouse and USB keyboard using either of USB/IP or netevent, as this'll be detected as a USB device
+[works with USB/IP], as well as show up in <code>/dev/input/event*</code> [works with netevent]).</p>
+
+        </article>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  
+    
+<footer class="footer text-muted">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 order-last order-lg-first">
+				<ul class="list-inline">
+					
+						<li class="list-inline-item">Powered by <a href="https://www.getzola.org/">Zola</a></li>
+					
+				</ul>
+			</div>
+			<div class="col-lg-8 order-first order-lg-last text-lg-end">
+				<ul class="list-inline">
+					
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+  
+
+  
+<script type="text/javascript" src="https://ritiek.github.io/js/main.js" defer></script>
+
+  <script type="text/javascript" src="https://ritiek.github.io/plugins/elasticlunr.min.js" defer></script>
+  <script type="text/javascript" src="https://ritiek.github.io/search_index.en.js" defer></script>
+  <script type="text/javascript" src="https://ritiek.github.io/js/search.js" defer></script>
+
+  
+</body>
+</html>

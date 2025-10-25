@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="preload" as="font" href="https://ritiek.github.io/fonts/vendor/jost/jost-v4-latin-regular.woff2" type="font/woff2" crossorigin>
+  <link rel="preload" as="font" href="https://ritiek.github.io/fonts/vendor/jost/jost-v4-latin-700.woff2"  type="font/woff2" crossorigin>
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://ritiek.github.io/main.css">
+<link rel="stylesheet" href="https://ritiek.github.io/custom.css">
+
+
+
+  
+  
+    
+  
+
+  
+  
+    
+    
+  
+  
+  
+    
+  
+  
+  
+  
+    
+  
+  
+  
+
+
+  <meta name="robots" content="index, follow">
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
+
+	
+
+
+	
+
+<title>Summer past and GSoC ends | Ritiek Malhotra</title>
+<meta name="description" content="Just some of my adventures!">
+<link rel="canonical" href="https://ritiek.github.io/2018/08/10/summer-past-and-gsoc-with-plasmapy-ends/">
+
+
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <meta name="twitter:title" content="Summer past and GSoC ends">
+  <meta name="twitter:description" content="Just some of my adventures!">
+  <meta name="twitter:site" content="@">
+  <meta name="twitter:creator" content="@">
+  
+  <meta property="og:title" content="Summer past and GSoC ends">
+  <meta property="og:description" content="Just some of my adventures!">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://ritiek.github.io/2018/08/10/summer-past-and-gsoc-with-plasmapy-ends/">
+
+  
+
+  <meta property="og:updated_time" content="">
+  <meta property="og:site_name" content="Summer past and GSoC ends">
+
+  
+
+  
+
+  
+  <meta property="article:publisher" content="https://www.facebook.com/">
+  <meta property="article:author" content="https://www.facebook.com/">
+  <meta property="og:locale" content="en_US">
+
+
+
+
+
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BreadcrumbList",
+    
+      
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          {
+            "@type": "ListItem",
+            "position":  1 ,
+            "name": "Home",
+            "item": "https://ritiek.github.io/"
+          },
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  2 ,
+            "name": "2018",
+            "item": "https://ritiek.github.io/2018/"
+          },
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  3 ,
+            "name": "08",
+            "item": "https://ritiek.github.io/2018/08/"
+          },
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  4 ,
+            "name": "10",
+            "item": "https://ritiek.github.io/2018/08/10/"
+          },
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  5 ,
+            "name": "Summer Past And Gsoc With Plasmapy Ends",
+            "item": "https://ritiek.github.io/2018/08/10/summer-past-and-gsoc-with-plasmapy-ends/"
+          },
+        
+      
+    
+  }
+</script>
+
+
+
+
+
+
+  <meta name="theme-color" content="#fff">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://ritiek.github.io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://ritiek.github.io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://ritiek.github.io/favicon-16x16.png">
+  
+    <link rel="manifest" href="https://ritiek.github.io/site.webmanifest" crossorigin>
+  
+
+
+  
+
+</head>
+
+  
+    
+  
+
+<body class="page single">
+  
+    
+<div class="header-bar fixed-top"></div>
+<header class="navbar fixed-top navbar-expand-md navbar-light">
+	<div class="container">
+		<input class="menu-btn order-0" type="checkbox" id="menu-btn">
+		<label class="menu-icon d-md-none" for="menu-btn"><span class="navicon"></span></label>
+		<a class="navbar-brand order-1 order-md-0 me-auto" href="https://ritiek.github.io">Ritiek Malhotra</a>
+		<button id="mode" class="btn btn-link order-2 order-md-4" type="button" aria-label="Toggle mode">
+			<span class="toggle-dark"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></span>
+			<span class="toggle-light"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg></span>
+		</button>
+		<ul class="navbar-nav fork-me order-3 order-md-5">
+			
+				
+					<li class="nav-item">
+						<a class="nav-link" href="https://github.com/ritiek"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg><span class="ms-2 visually-hidden">GitHub</span></a>
+					</li>
+				
+			
+		</ul>
+		<div class="collapse navbar-collapse order-4 order-md-1">
+			<ul class="navbar-nav main-nav me-auto order-5 order-md-2">
+				
+					
+				
+				
+				
+					
+						<li class="nav-item">
+							<a class="nav-link" href="/posts/">Archive</a>
+						</li>
+					
+						<li class="nav-item">
+							<a class="nav-link" href="/about/">About</a>
+						</li>
+					
+				
+			</ul>
+			<div class="break order-6 d-md-none"></div>
+			
+				<form class="navbar-form flex-grow-1 order-7 order-md-3">
+					<input id="userinput" class="form-control is-search" type="search" placeholder="Search posts..."
+						aria-label="Search posts..." autocomplete="off">
+					<div id="suggestions" class="shadow bg-white rounded"></div>
+				</form>
+			
+		</div>
+	</div>
+
+</header>
+
+  
+
+  
+<div class="wrap container" role="document">
+  <div class="content">
+    <div class="row justify-content-center">
+      <div class="col-md-12 col-lg-10 col-xxl-8">
+        <article>
+          <div class="page-header">
+            <h1>Summer past and GSoC ends</h1>
+          </div>
+          
+          <p>It's that time of the year when students are supposed to submit their final
+evaluations. As Google expects students to put up their final reports somewhere
+in a stable location and as there is always a chance that I might mess up something
+on my blog, so I also made a
+<a href="https://gist.github.com/ritiek/505b696436182a4b3da027787c831edc">Gist wrap up of this blog post</a>
+of how we progressed in
+these few months and all the great stuff that happened in our community.</p>
+<p>My original project - to create a factory based implementation for unifying handling of different types of Plasmas, was completed sooner than expected. Here are the link to related pull requests I made during the summer.</p>
+<table><thead><tr><th>PR</th><th>Status</th><th>Description</th></tr></thead><tbody>
+<tr><td><a href="https://github.com/PlasmaPy/PlasmaPy/pull/501">#501</a></td><td><img src="/assets/YnDnRzm.jpeg" alt="Merged" /></td><td>Raise more fitting <code>NotImplementedError</code> for functions that are yet to be implemented in our Plasma metaclass</td></tr>
+<tr><td><a href="https://github.com/PlasmaPy/PlasmaPy/pull/489">#489</a></td><td><img src="/assets/YnDnRzm.jpeg" alt="Merged" /></td><td>Independent tests for our Plasma subclasses</td></tr>
+<tr><td><a href="https://github.com/PlasmaPy/PlasmaPy/pull/459">#459</a></td><td><img src="/assets/YnDnRzm.jpeg" alt="Merged" /></td><td>Implement a Plasma factory interface to unify handling different Plasma types</td></tr>
+</tbody></table>
+<p>Hail <code>plasmapy.classes.Plasma</code>! A glimpse of how it looks like</p>
+<pre data-lang="python" style="background-color:#2b303b;color:#c0c5ce;" class="language-python "><code class="language-python" data-lang="python"><span>&gt;&gt;&gt; </span><span style="color:#b48ead;">import </span><span>astropy.units </span><span style="color:#b48ead;">as </span><span>u
+</span><span>&gt;&gt;&gt; </span><span style="color:#b48ead;">import </span><span>numpy </span><span style="color:#b48ead;">as </span><span>np
+</span><span>&gt;&gt;&gt; </span><span style="color:#b48ead;">import </span><span>plasmapy.classes
+</span><span>
+</span><span>&gt;&gt;&gt; T_e = </span><span style="color:#d08770;">25 </span><span>* </span><span style="color:#d08770;">15e3 </span><span>* u.K
+</span><span>&gt;&gt;&gt; n_e = </span><span style="color:#d08770;">1e26 </span><span>* u.cm ** -</span><span style="color:#d08770;">3
+</span><span>&gt;&gt;&gt; Z = </span><span style="color:#d08770;">2.0
+</span><span>&gt;&gt;&gt; particle = &#39;</span><span style="color:#a3be8c;">p</span><span>&#39;
+</span><span>&gt;&gt;&gt; blob = plasmapy.classes.</span><span style="color:#bf616a;">Plasma</span><span>(</span><span style="color:#bf616a;">T_e</span><span>=T_e,
+</span><span style="color:#d08770;">...                                </span><span style="color:#bf616a;">n_e</span><span>=n_e,
+</span><span style="color:#d08770;">...                                </span><span style="color:#bf616a;">Z</span><span>=Z,
+</span><span style="color:#d08770;">...                                </span><span style="color:#bf616a;">particle</span><span>=particle)
+</span><span>
+</span><span>&gt;&gt;&gt; </span><span style="color:#96b5b4;">type</span><span>(blob)
+</span><span>plasmapy.classes.sources.plasmablob.PlasmaBlob
+</span><span>
+</span><span>&gt;&gt;&gt; three_dims = plasmapy.classes.</span><span style="color:#bf616a;">Plasma</span><span>(</span><span style="color:#bf616a;">domain_x</span><span>=np.</span><span style="color:#bf616a;">linspace</span><span>(</span><span style="color:#d08770;">0</span><span>, </span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">3</span><span>) * u.m,
+</span><span style="color:#d08770;">...                                      </span><span style="color:#bf616a;">domain_y</span><span>=np.</span><span style="color:#bf616a;">linspace</span><span>(</span><span style="color:#d08770;">0</span><span>, </span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">3</span><span>) * u.m,
+</span><span style="color:#d08770;">...                                      </span><span style="color:#bf616a;">domain_z</span><span>=np.</span><span style="color:#bf616a;">linspace</span><span>(</span><span style="color:#d08770;">0</span><span>, </span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">3</span><span>) * u.m)
+</span><span>
+</span><span>&gt;&gt;&gt; </span><span style="color:#96b5b4;">type</span><span>(three_dims)
+</span><span>plasmapy.classes.sources.plasma3d.Plasma3D
+</span></code></pre>
+<p>As my original project was completed sooner than expected. I further implemented a new Plasma subclass for reading HDF5 datasets respecting OpenPMD standards.</p>
+<p>We had to choose between <a href="https://github.com/h5py/h5py">h5py</a> and <a href="https://github.com/openPMD/openPMD-api">OpenPMD-api</a> packages for reading HDF5 dataset files.
+At that time, the OpenPMD-api had a few <a href="https://github.com/openPMD/openPMD-api/issues/279">installation issues</a> and it was hard to distribute with PlasmaPy as it isn't available on PyPi yet, not many people use <a href="https://github.com/openPMD/openPMD-api#spack">spack</a> and certainly not many people would give it a go <a href="https://github.com/openPMD/openPMD-api#from-source">building from source</a>.
+It is however, available on <a href="https://anaconda.org/conda-forge/openpmd-api">conda-forge</a> but PlasmaPy isn't (yet). :(</p>
+<p>So, h5py it was then.</p>
+<table><thead><tr><th>PR</th><th>Status</th><th>Description</th></tr></thead><tbody>
+<tr><td><a href="https://github.com/PlasmaPy/PlasmaPy/pull/500">#500</a></td><td><img src="/assets/YnDnRzm.jpeg" alt="Merged" /></td><td>Implement a prototype to read attributes from HDF5 datasets based on OpenPMD standards</td></tr>
+</tbody></table>
+<p>However, It still isn’t very efficient to work with larger datasets and should rather be considered a prototype at the moment.
+It currently only supports reading mesh data from an HDF5 dataset.
+It also reads the complete record into memory, which is certain to cause problems with big datasets.
+In the real world, heavy datasets can go into dozens of GBs, so we’re going to have to provide a way to read a part of dataset at a time from disk or provide some other way in the future instead writing all of it to memory at once.</p>
+<hr />
+<p><strong>During the summer, I also worked on implementing other functionality, bug fixes and improving test coverage in PlasmaPy.</strong></p>
+<p>We ended up making our <code>atomic.Particle</code> class and <code>@atomic.particle_input</code> decorator more pleasant to use and now works better than ever!</p>
+<table><thead><tr><th>PR</th><th>Status</th><th>Description</th></tr></thead><tbody>
+<tr><td><a href="https://github.com/PlasmaPy/PlasmaPy/pull/528">#528</a></td><td><img src="/assets/YnDnRzm.jpeg" alt="Merged" /></td><td>Functions decorated with <code>@particle_input</code> now accept default Particle value</td></tr>
+<tr><td><a href="https://github.com/PlasmaPy/PlasmaPy/pull/527">#527</a></td><td><img src="/assets/YnDnRzm.jpeg" alt="Merged" /></td><td>Typo fixes in <code>@particle_input</code> error messages</td></tr>
+<tr><td><a href="https://github.com/PlasmaPy/PlasmaPy/pull/510">#510</a></td><td><img src="/assets/YnDnRzm.jpeg" alt="Merged" /></td><td>Add an <code>isotope_name</code> property on <code>Particle</code> class</td></tr>
+<tr><td><a href="https://github.com/PlasmaPy/PlasmaPy/pull/504">#504</a></td><td><img src="/assets/YnDnRzm.jpeg" alt="Merged" /></td><td>Add a <code>roman_symbol</code> property which returns integer Particle charge in Roman notation</td></tr>
+<tr><td><a href="https://github.com/PlasmaPy/PlasmaPy/pull/493">#493</a></td><td><img src="/assets/YnDnRzm.jpeg" alt="Merged" /></td><td>Decorate functions in <code>collisions.py</code> with <code>@particle_input</code> decorator</td></tr>
+<tr><td><a href="https://github.com/PlasmaPy/PlasmaPy/pull/483">#483</a></td><td><img src="/assets/YnDnRzm.jpeg" alt="Merged" /></td><td>Accept a tuple or list of Particles for a parameter in a function decorated by <code>@particle_input</code></td></tr>
+<tr><td><a href="https://github.com/PlasmaPy/PlasmaPy/pull/290">#290</a></td><td><img src="/assets/YnDnRzm.jpeg" alt="Merged" /></td><td>[Pre-GSoC] Optionally accept integer charges in Roman notations</td></tr>
+<tr><td><a href="https://github.com/PlasmaPy/PlasmaPy/pull/265">#265</a></td><td><img src="/assets/YnDnRzm.jpeg" alt="Merged" /></td><td>[Pre-GSoC] Move <code>Particle.reduced_mass</code> to a module level function</td></tr>
+</tbody></table>
+<p>And we fought against code coverage problems to make CodeCov happy!</p>
+<table><thead><tr><th>PR</th><th>Status</th><th>Description</th></tr></thead><tbody>
+<tr><td><a href="https://github.com/PlasmaPy/PlasmaPy/pull/506">#506</a></td><td><img src="/assets/YnDnRzm.jpeg" alt="Merged" /></td><td>Write tests to improve coverage in various packages</td></tr>
+<tr><td><a href="https://github.com/PlasmaPy/PlasmaPy/pull/502">#502</a></td><td><img src="/assets/YnDnRzm.jpeg" alt="Merged" /></td><td>Move <code>coveragerc</code> file to expected default location so that it can be read correctly</td></tr>
+<tr><td><a href="https://github.com/PlasmaPy/PlasmaPy/pull/498">#498</a></td><td><img src="/assets/YnDnRzm.jpeg" alt="Merged" /></td><td>Add tests to improve coverage in our langmuir package</td></tr>
+<tr><td><a href="https://github.com/PlasmaPy/PlasmaPy/pull/494">#494</a></td><td><img src="/assets/YnDnRzm.jpeg" alt="Merged" /></td><td>Include <code>__init__.py</code> in our diagnostics package, so that any tests placed aren't skipped</td></tr>
+<tr><td><a href="https://github.com/PlasmaPy/PlasmaPy/pull/320">#320</a></td><td><img src="/assets/YnDnRzm.jpeg" alt="Merged" /></td><td>Write tests for <code>PlasmaBlob.regimes()</code></td></tr>
+</tbody></table>
+<p>We have an astonishing code coverage - 98%! It's great that we were able to keep with our code coverage even after so much going in and out of PlasmaPy.</p>
+<p>Then comes the list of all the other stuff I tinkered with during the season!</p>
+<table><thead><tr><th>PR</th><th>Status</th><th>Description</th></tr></thead><tbody>
+<tr><td><a href="https://github.com/PlasmaPy/PlasmaPy/pull/513">#513</a></td><td><img src="/assets/YnDnRzm.jpeg" alt="Merged" /></td><td>Fix conda recipe by including LICENSE.md in MANIFEST.in</td></tr>
+<tr><td><a href="https://github.com/PlasmaPy/PlasmaPy/pull/511">#511</a></td><td><img src="/assets/YnDnRzm.jpeg" alt="Merged" /></td><td>Load correct URLs when using <code>online_help()</code></td></tr>
+<tr><td><a href="https://github.com/PlasmaPy/PlasmaPy/pull/509">#509</a></td><td><img src="/assets/Mjp2nr7.jpeg" alt="Open" /></td><td>Some refactoring of <a href="https://github.com/tulasinandan">@tulasinandan's</a> work on two fluid dispersion relations</td></tr>
+<tr><td><a href="https://github.com/PlasmaPy/PlasmaPy/pull/360">#360</a></td><td><img src="/assets/YnDnRzm.jpeg" alt="Merged" /></td><td>Mention <code>RelativityError</code> in docstrings when input velocity is same or greater than the speed of light</td></tr>
+<tr><td><a href="https://github.com/PlasmaPy/PlasmaPy/pull/358">#358</a></td><td><img src="/assets/YnDnRzm.jpeg" alt="Merged" /></td><td>Return <code>Quantity</code> objects correctly formatted when passed to <code>call_string()</code></td></tr>
+</tbody></table>
+<p>During these months, I also got the chance to contribute to <a href="https://github.com/astropy/astropy/">astropy</a> and <a href="https://github.com/poliastro/poliastro">poliastro</a> which are also sub-organizations under the the OpenAstronomy umbrella organization.</p>
+<h3 id="astropy">astropy</h3>
+<table><thead><tr><th>PR</th><th>Status</th><th>Description</th></tr></thead><tbody>
+<tr><td><a href="https://github.com/astropy/astropy/pull/7673">#7673</a></td><td><img src="/assets/YnDnRzm.jpeg" alt="Open" /></td><td>[Upstream] Fix string Python code to test coverage on Windows which would otherwise result in <code>SyntaxError</code></td></tr>
+<tr><td><a href="https://github.com/astropy/astropy/pull/7672">#7672</a></td><td><img src="/assets/YnDnRzm.jpeg" alt="Open" /></td><td>Accept non-unit type annotations in functions decorated with<code>@quantity_input</code> decorator</td></tr>
+<tr><td><a href="https://github.com/astropy/astropy/pull/7284">#7284</a></td><td><img src="/assets/ksGNF55.jpeg" alt="Closed" /></td><td>[Pre-GSoC] Override <code>HDUList.__add__()</code> to return a sum of two <code>HDUList</code> instances</td></tr>
+<tr><td><a href="https://github.com/astropy/astropy/pull/7218">#7218</a></td><td><img src="/assets/YnDnRzm.jpeg" alt="Open" /></td><td>[Pre-GSoC] Implement shallow copy and deep copy on an <code>HDUList</code> instance</td></tr>
+</tbody></table>
+<h3 id="poliastro">poliastro</h3>
+<table><thead><tr><th>PR</th><th>Status</th><th>Description</th></tr></thead><tbody>
+<tr><td><a href="https://github.com/poliastro/poliastro/pull/312">#312</a></td><td><img src="/assets/YnDnRzm.jpeg" alt="Open" /></td><td>[Pre-GSoC] Return a tuple (<code>Time</code>, <code>CartesianRepresentation</code>) in <code>Orbit.sample()</code></td></tr>
+</tbody></table>
+<hr />
+<p>A lot of other cool stuff happened in these past few months. We went from a <a href="https://github.com/PlasmaPy/PlasmaPy-logo">new logo</a>,</p>
+<img src="/assets/with-text-dark.png" width="350">
+<p>from no releases to releasing v0.1.1 <a href="https://pypi.org/project/plasmapy/">on PyPi</a> (<a href="https://github.com/conda-forge/staged-recipes/pull/4793">coming soon on conda!</a>), from <a href="https://github.com/PlasmaPy/PlasmaPy/pull/490">Coveralls to CodeCov</a>, confirmed that PlasmaPy works great with Python 3.7, to <a href="https://agu.confex.com/agu/fm18/preliminaryview.cgi/Paper401465">submitting an abstract</a> for the AGU Fall Meeting!</p>
+<p>This was one hell of an awesome summer working with <a href="https://github.com/PlasmaPy/PlasmaPy">PlasmaPy</a> under Google Summer of Code 2018. I want to thank Google and OpenAstronomy (an umbrella organization for PlasmaPy) for giving me this opportunity to work with such an amazing community. A shoutout and a special thanks to my mentors
+(<a href="https://github.com/namurphy">Nick Murphy</a>, <a href="https://github.com/SolarDrew">Drew Leonard</a> and <a href="https://github.com/StanczakDominik">Dominik Stańczak</a>) for guiding me throughout the summer!</p>
+<p>And so the wonderful journey comes to an end.</p>
+
+        </article>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  
+    
+<footer class="footer text-muted">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 order-last order-lg-first">
+				<ul class="list-inline">
+					
+						<li class="list-inline-item">Powered by <a href="https://www.getzola.org/">Zola</a></li>
+					
+				</ul>
+			</div>
+			<div class="col-lg-8 order-first order-lg-last text-lg-end">
+				<ul class="list-inline">
+					
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+  
+
+  
+<script type="text/javascript" src="https://ritiek.github.io/js/main.js" defer></script>
+
+  <script type="text/javascript" src="https://ritiek.github.io/plugins/elasticlunr.min.js" defer></script>
+  <script type="text/javascript" src="https://ritiek.github.io/search_index.en.js" defer></script>
+  <script type="text/javascript" src="https://ritiek.github.io/js/search.js" defer></script>
+
+  
+</body>
+</html>

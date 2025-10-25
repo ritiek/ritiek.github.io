@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="preload" as="font" href="https://ritiek.github.io/fonts/vendor/jost/jost-v4-latin-regular.woff2" type="font/woff2" crossorigin>
+  <link rel="preload" as="font" href="https://ritiek.github.io/fonts/vendor/jost/jost-v4-latin-700.woff2"  type="font/woff2" crossorigin>
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://ritiek.github.io/main.css">
+<link rel="stylesheet" href="https://ritiek.github.io/custom.css">
+
+
+
+  
+  
+    
+  
+
+  
+  
+    
+    
+  
+  
+  
+    
+  
+  
+  
+  
+    
+  
+  
+  
+
+
+  <meta name="robots" content="index, follow">
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
+
+	
+
+
+	
+
+<title>NixOS on 1 GB Vultr VPS using nixos-anywhere | Ritiek Malhotra</title>
+<meta name="description" content="Just some of my adventures!">
+<link rel="canonical" href="https://ritiek.github.io/2025/02/10/nixos-on-1gb-vultr-vps-using-nixos-anywhere/">
+
+
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <meta name="twitter:title" content="NixOS on 1 GB Vultr VPS using nixos-anywhere">
+  <meta name="twitter:description" content="Just some of my adventures!">
+  <meta name="twitter:site" content="@">
+  <meta name="twitter:creator" content="@">
+  
+  <meta property="og:title" content="NixOS on 1 GB Vultr VPS using nixos-anywhere">
+  <meta property="og:description" content="Just some of my adventures!">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://ritiek.github.io/2025/02/10/nixos-on-1gb-vultr-vps-using-nixos-anywhere/">
+
+  
+
+  <meta property="og:updated_time" content="">
+  <meta property="og:site_name" content="NixOS on 1 GB Vultr VPS using nixos-anywhere">
+
+  
+
+  
+
+  
+  <meta property="article:publisher" content="https://www.facebook.com/">
+  <meta property="article:author" content="https://www.facebook.com/">
+  <meta property="og:locale" content="en_US">
+
+
+
+
+
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BreadcrumbList",
+    
+      
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          {
+            "@type": "ListItem",
+            "position":  1 ,
+            "name": "Home",
+            "item": "https://ritiek.github.io/"
+          },
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  2 ,
+            "name": "2025",
+            "item": "https://ritiek.github.io/2025/"
+          },
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  3 ,
+            "name": "02",
+            "item": "https://ritiek.github.io/2025/02/"
+          },
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  4 ,
+            "name": "10",
+            "item": "https://ritiek.github.io/2025/02/10/"
+          },
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  5 ,
+            "name": "Nixos On 1gb Vultr Vps Using Nixos Anywhere",
+            "item": "https://ritiek.github.io/2025/02/10/nixos-on-1gb-vultr-vps-using-nixos-anywhere/"
+          },
+        
+      
+    
+  }
+</script>
+
+
+
+
+
+
+  <meta name="theme-color" content="#fff">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://ritiek.github.io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://ritiek.github.io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://ritiek.github.io/favicon-16x16.png">
+  
+    <link rel="manifest" href="https://ritiek.github.io/site.webmanifest" crossorigin>
+  
+
+
+  
+
+</head>
+
+  
+    
+  
+
+<body class="page single">
+  
+    
+<div class="header-bar fixed-top"></div>
+<header class="navbar fixed-top navbar-expand-md navbar-light">
+	<div class="container">
+		<input class="menu-btn order-0" type="checkbox" id="menu-btn">
+		<label class="menu-icon d-md-none" for="menu-btn"><span class="navicon"></span></label>
+		<a class="navbar-brand order-1 order-md-0 me-auto" href="https://ritiek.github.io">Ritiek Malhotra</a>
+		<button id="mode" class="btn btn-link order-2 order-md-4" type="button" aria-label="Toggle mode">
+			<span class="toggle-dark"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></span>
+			<span class="toggle-light"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg></span>
+		</button>
+		<ul class="navbar-nav fork-me order-3 order-md-5">
+			
+				
+					<li class="nav-item">
+						<a class="nav-link" href="https://github.com/ritiek"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg><span class="ms-2 visually-hidden">GitHub</span></a>
+					</li>
+				
+			
+		</ul>
+		<div class="collapse navbar-collapse order-4 order-md-1">
+			<ul class="navbar-nav main-nav me-auto order-5 order-md-2">
+				
+					
+				
+				
+				
+					
+						<li class="nav-item">
+							<a class="nav-link" href="/posts/">Archive</a>
+						</li>
+					
+						<li class="nav-item">
+							<a class="nav-link" href="/about/">About</a>
+						</li>
+					
+				
+			</ul>
+			<div class="break order-6 d-md-none"></div>
+			
+				<form class="navbar-form flex-grow-1 order-7 order-md-3">
+					<input id="userinput" class="form-control is-search" type="search" placeholder="Search posts..."
+						aria-label="Search posts..." autocomplete="off">
+					<div id="suggestions" class="shadow bg-white rounded"></div>
+				</form>
+			
+		</div>
+	</div>
+
+</header>
+
+  
+
+  
+<div class="wrap container" role="document">
+  <div class="content">
+    <div class="row justify-content-center">
+      <div class="col-md-12 col-lg-10 col-xxl-8">
+        <article>
+          <div class="page-header">
+            <h1>NixOS on 1 GB Vultr VPS using nixos-anywhere</h1>
+          </div>
+          
+          <p>It seems we can override a machine's OS with a simple flake-based NixOS configuration using
+nixos-anywhere, like so:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> nix run github:nix-community/nixos-anywhere -- \
+</span><span>  --flake .#yummyflake root@12.121.212.121
+</span></code></pre>
+<p>What I mean by 'simple NixOS configuration' is - a configuration with none of these features:
+LUKS encryption, impermanence, or secrets provisioning (sops-nix, agenix, etc.). Although, the
+configuration must perform some kind of disk partitioning using disko, for nixos-anywhere to do
+its magic. Such an install should go smooth enough without the need of manual intervention at
+any step during the process.</p>
+<p>However, the flake-based NixOS configuration I'll be installing on a Vultr VPS is for a machine
+that goes by clawsiecats. This machine configuration is publicly available here:</p>
+<p><a href="https://github.com/ritiek/dotfiles/blob/2d99108/machines/clawsiecats">https://github.com/ritiek/dotfiles/blob/2d99108/machines/clawsiecats</a></p>
+<p>It enables all of the NixOS specific features mentioned above - BTRFS partitioning on LUKS,
+impermanence, and secrets provisioning using sops-nix.</p>
+<p>This is what makes things a little trickier. The rest of the post is mainly me talking about
+setting up these features in NixOS configuration so that the configuration can be deployed using
+nixos-anywhere with the least amount of manual intervention, on a Vultr VPS (adaptable to
+other hosting providers usually, only difference should be the partitioning scheme [GPT/MBR]
+used by the hosting provider).</p>
+<p>If the reader is following this guide with care then it's recommended to open
+the above link to my machine's configuration (which is Vultr ready including all these features)
+and go through it side-by-side along with this
+guide as there are a lot of references to it to help things make sense.</p>
+<h2 id="secrets-provisioning-sops-nix">Secrets Provisioning (sops-nix)</h2>
+<p>There's agenix and many more that seem nice. Up to you. I'm currently using sops-nix so I'll
+dive into it here. Start by adding sops-nix as an input in your flake:</p>
+<pre data-lang="nix" style="background-color:#2b303b;color:#c0c5ce;" class="language-nix "><code class="language-nix" data-lang="nix"><span style="color:#bf616a;">sops-nix </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> {
+</span><span>  </span><span style="color:#d08770;">url </span><span>= &quot;</span><span style="color:#a3be8c;">github:Mic92/sops-nix</span><span>&quot;;
+</span><span>  </span><span style="color:#d08770;">inputs</span><span>.</span><span style="color:#d08770;">nixpkgs</span><span>.</span><span style="color:#d08770;">follows </span><span>= &quot;</span><span style="color:#a3be8c;">nixpkgs</span><span>&quot;;
+</span><span>}</span><span style="background-color:#bf616a;color:#2b303b;">;</span><span>
+</span></code></pre>
+<p>sops-nix allows to provision machine specific secrets, and I tie my secret key to my machine's
+private SSH host key. I keep this private SSH host key unique for every machine configuration.</p>
+<pre data-lang="nix" style="background-color:#2b303b;color:#c0c5ce;" class="language-nix "><code class="language-nix" data-lang="nix"><span style="color:#bf616a;">sops </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> {
+</span><span>  </span><span style="color:#d08770;">defaultSopsFile </span><span>= </span><span style="color:#a3be8c;">./../machines</span><span>/</span><span style="font-style:italic;color:#ab7967;">${</span><span style="font-style:italic;color:#bf616a;">config</span><span style="font-style:italic;color:#c0c5ce;">.</span><span style="font-style:italic;color:#bf616a;">networking</span><span style="font-style:italic;color:#c0c5ce;">.</span><span style="font-style:italic;color:#bf616a;">hostName</span><span style="font-style:italic;color:#ab7967;">}</span><span style="color:#a3be8c;">/secrets.yaml</span><span>;
+</span><span>  </span><span style="color:#d08770;">age</span><span>.</span><span style="color:#d08770;">sshKeyPaths </span><span>= [ &quot;</span><span style="color:#a3be8c;">/etc/ssh/ssh_host_ed25519_key</span><span>&quot; ];
+</span><span>}</span><span style="background-color:#bf616a;color:#2b303b;">;</span><span>
+</span></code></pre>
+<pre data-lang="yaml" style="background-color:#2b303b;color:#c0c5ce;" class="language-yaml "><code class="language-yaml" data-lang="yaml"><span style="color:#65737e;"># ./machines/clawsiecats/secrets.yaml
+</span><span style="color:#65737e;">#
+</span><span style="color:#65737e;"># My version of this file can be found here:
+</span><span style="color:#65737e;"># https://github.com/ritiek/dotfiles/blob/2d99108/machines/clawsiecats/secrets.yaml
+</span><span>
+</span><span style="color:#bf616a;">jitsi.htpasswd</span><span>: </span><span style="color:#a3be8c;">ENC[AES256_GCM,data:abc...,iv:xy...z=,tag:qwe...type:str]
+</span><span style="color:#bf616a;">tailscale.authkey</span><span>: </span><span style="color:#a3be8c;">ENC[AES256_GCM,data:xy...z,iv:ab...c,tag:rty...,type:str]
+</span><span style="color:#bf616a;">sops</span><span>:
+</span><span>    </span><span style="color:#bf616a;">shamir_threshold</span><span>: </span><span style="color:#d08770;">1
+</span><span>    </span><span style="color:#bf616a;">kms</span><span>: []
+</span><span>    </span><span style="color:#bf616a;">gcp_kms</span><span>: []
+</span><span>    </span><span style="color:#bf616a;">azure_kv</span><span>: []
+</span><span>    </span><span style="color:#bf616a;">hc_vault</span><span>: []
+</span><span>    </span><span style="color:#bf616a;">age</span><span>:
+</span><span>    </span><span style="color:#d08770;">...
+</span></code></pre>
+<p><code>secrets.yaml</code> can be edited using the following:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> nix run nixpkgs#sops edit ./machines/clawsiecats/secrets.yaml
+</span></code></pre>
+<p>Running this may prompt for 2FA on our key, if it's set up.</p>
+<h2 id="impermanence">Impermanence</h2>
+<p>This seems mostly to be a NixOS concept mainly achieved by mounting <code>/</code> as <code>tmpfs</code>.
+The idea, is that we perform bind mounts or create symlinks inside <code>/</code> that point to the actual
+persistent files and directories mounted somewhere else (this stuff we explicitly specify to
+preserve).</p>
+<p>This is supposed to help mitigate the lingering build up of files that could potentially get
+in the way of purity of NixOS (we ideally wouldn't want a program to imperatively read and write
+its config in <code>/etc/</code> in NixOS) as any residual files that get created in <code>/</code> will automatically
+be cleaned up on reboot (since <code>/</code> is <code>tmpfs</code> living in memory or swap).</p>
+<p>I use impermanence in my configuration setup. Impermanence can be set up using custom solutions
+for syncing <code>/</code> from our persistent storage. Anyway, I'll be using the impermanence module
+which seems to solve this pretty well (through bind mounts and symlinks). Add the module as an
+input to your flake with:</p>
+<pre data-lang="nix" style="background-color:#2b303b;color:#c0c5ce;" class="language-nix "><code class="language-nix" data-lang="nix"><span style="color:#bf616a;">impermanence</span><span>.</span><span style="color:#bf616a;">url </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> &quot;</span><span style="color:#a3be8c;">github:nix-community/impermanence</span><span>&quot;</span><span style="background-color:#bf616a;color:#2b303b;">;</span><span>
+</span></code></pre>
+<p>There are a few important files present under <code>/</code> that should be persisted, such as host SSH
+keys which we'll be persisting in the next step and <code>/etc/machine-id</code> which is what many
+processes depend on to identify themselves that they're running on the same machine in the
+case the process restarts (we wouldn't want maybe ACME certificates to be re-generated on
+every reboot since <code>/etc/machine-id</code> would be re-created if we were not to persist it).</p>
+<p>For now, we'll generate a <code>/etc/machine-id</code> locally which we'll transfer to our target
+machine later under the persistent storage.
+Let's create a directory on our local machine first where we'll store all the files that we'd
+like to transfer to our target machine when nixos-anywhere gets invoked:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> export BASEDIR=&quot;$</span><span style="color:#a3be8c;">(</span><span style="color:#bf616a;">pwd</span><span style="color:#a3be8c;">)/mnt</span><span>&quot;
+</span></code></pre>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> systemd-machine-id-setup</span><span style="color:#bf616a;"> --root</span><span>=&quot;$</span><span style="color:#bf616a;">BASEDIR</span><span>&quot;/nix/persist/system/
+</span><span>
+</span><span style="color:#65737e;"># If impermanence weren&#39;t setup, then we&#39;d have moved this file
+</span><span style="color:#65737e;"># under /etc/, like so:
+</span><span style="color:#65737e;"># $ systemd-machine-id-setup --root=&quot;$BASEDIR&quot;/etc/
+</span></code></pre>
+<h2 id="btrfs-on-luks">BTRFS on LUKS</h2>
+<p>Now to set up encryption at partition level. List <code>disko</code> as an input in your flake if not
+already:</p>
+<pre data-lang="nix" style="background-color:#2b303b;color:#c0c5ce;" class="language-nix "><code class="language-nix" data-lang="nix"><span style="color:#bf616a;">disko </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> {
+</span><span>  </span><span style="color:#d08770;">url </span><span>= &quot;</span><span style="color:#a3be8c;">github:nix-community/disko</span><span>&quot;;
+</span><span>  </span><span style="color:#d08770;">inputs</span><span>.</span><span style="color:#d08770;">nixpkgs</span><span>.</span><span style="color:#d08770;">follows </span><span>= &quot;</span><span style="color:#a3be8c;">nixpkgs</span><span>&quot;;
+</span><span>}</span><span style="background-color:#bf616a;color:#2b303b;">;</span><span>
+</span></code></pre>
+<p>and configure an encrypted partition, for example:</p>
+<pre data-lang="nix" style="background-color:#2b303b;color:#c0c5ce;" class="language-nix "><code class="language-nix" data-lang="nix"><span style="color:#bf616a;">disko</span><span>.</span><span style="color:#bf616a;">devices</span><span>.</span><span style="color:#bf616a;">disk</span><span>.</span><span style="color:#bf616a;">clawsiecats</span><span>.</span><span style="color:#bf616a;">device </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> </span><span style="color:#bf616a;">lib</span><span>.</span><span style="color:#bf616a;">mkDefault </span><span>&quot;</span><span style="color:#a3be8c;">/dev/vda</span><span>&quot;</span><span style="background-color:#bf616a;color:#2b303b;">;</span><span>
+</span><span style="color:#bf616a;">disko</span><span>.</span><span style="color:#bf616a;">devices</span><span>.</span><span style="color:#bf616a;">disk</span><span>.</span><span style="color:#bf616a;">clawsiecats</span><span>.</span><span style="color:#bf616a;">content </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> {
+</span><span>  </span><span style="color:#d08770;">type </span><span>= &quot;</span><span style="color:#a3be8c;">gpt</span><span>&quot;;
+</span><span>  </span><span style="color:#d08770;">partitions</span><span>.</span><span style="color:#d08770;">esp </span><span>= {
+</span><span>    </span><span style="color:#d08770;">size </span><span>= &quot;</span><span style="color:#a3be8c;">200M</span><span>&quot;;
+</span><span>    </span><span style="color:#d08770;">type </span><span>= &quot;</span><span style="color:#a3be8c;">EF00</span><span>&quot;;
+</span><span>    </span><span style="color:#d08770;">content </span><span>= {
+</span><span>      </span><span style="color:#d08770;">type </span><span>= &quot;</span><span style="color:#a3be8c;">filesystem</span><span>&quot;;
+</span><span>      </span><span style="color:#d08770;">format </span><span>= &quot;</span><span style="color:#a3be8c;">vfat</span><span>&quot;;
+</span><span>      </span><span style="color:#d08770;">mountpoint </span><span>= &quot;</span><span style="color:#a3be8c;">/boot</span><span>&quot;;
+</span><span>    };
+</span><span>  };
+</span><span>  </span><span style="color:#d08770;">partitions</span><span>.</span><span style="color:#d08770;">luks </span><span>= {
+</span><span>    </span><span style="color:#d08770;">content </span><span>= {
+</span><span>      </span><span style="color:#d08770;">type </span><span>= &quot;</span><span style="color:#a3be8c;">luks</span><span>&quot;;
+</span><span>      </span><span style="color:#d08770;">name </span><span>= &quot;</span><span style="color:#a3be8c;">cryptnix</span><span>&quot;;
+</span><span>      </span><span style="color:#d08770;">settings</span><span>.</span><span style="color:#d08770;">allowDiscards </span><span>= </span><span style="color:#d08770;">true</span><span>;
+</span><span>      </span><span style="color:#65737e;"># We&#39;ll be providing this key when invoking nixos-anywhere.
+</span><span>      </span><span style="color:#d08770;">passwordFile </span><span>= &quot;</span><span style="color:#a3be8c;">/tmp/disk.key</span><span>&quot;;
+</span><span>      </span><span style="color:#65737e;"># NOTE: Use `pbkdf2` instead of `argon2id` for a lower
+</span><span>      </span><span style="color:#65737e;">#       memory footprint.
+</span><span>      </span><span style="color:#65737e;"># extraFormatArgs = [ &quot;--pbkdf pbkdf2&quot; ];
+</span><span>      </span><span style="color:#d08770;">content </span><span>= {
+</span><span>        </span><span style="color:#d08770;">type </span><span>= &quot;</span><span style="color:#a3be8c;">btrfs</span><span>&quot;;
+</span><span>        </span><span style="color:#d08770;">mountpoint </span><span>= &quot;</span><span style="color:#a3be8c;">/nix</span><span>&quot;;
+</span><span>        </span><span style="color:#d08770;">mountOptions </span><span>= [
+</span><span>          &quot;</span><span style="color:#a3be8c;">noatime</span><span>&quot;
+</span><span>          &quot;</span><span style="color:#a3be8c;">compress-force=zstd:3</span><span>&quot;
+</span><span>        ];
+</span><span>        </span><span style="color:#d08770;">extraArgs </span><span>= [ &quot;</span><span style="color:#a3be8c;">-Lcryptnix -f</span><span>&quot; ];
+</span><span>      };
+</span><span>    };
+</span><span>  };
+</span><span>}</span><span style="background-color:#bf616a;color:#2b303b;">;</span><span>
+</span></code></pre>
+<p>The way I currently deploy nixos-anywhere to handle LUKS using my configuration is - I first
+generate a random SSH key pair and store the private key from this key pair on the target
+NixOS machine, specifically here <code>/boot/ssh_host_ed25519_key</code>.</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> install</span><span style="color:#bf616a;"> -d -m755 </span><span>&quot;$</span><span style="color:#bf616a;">BASEDIR</span><span>&quot;/boot/
+</span><span style="color:#bf616a;">$</span><span> ssh-keygen</span><span style="color:#bf616a;"> -t</span><span> ed25519</span><span style="color:#bf616a;"> -a</span><span> 100</span><span style="color:#bf616a;"> -N </span><span>&quot;&quot;</span><span style="color:#bf616a;"> -f </span><span>&quot;$</span><span style="color:#bf616a;">BASEDIR</span><span>&quot;/boot/ssh_host_ed25519_key
+</span></code></pre>
+<p>This private SSH key will be used for hosting a dropbear SSH server on initrd.
+I'll connect to this server and provide the key to decrypt my LUKS block device. This will
+allow the machine to boot into stage 2.</p>
+<p>Add the following configuration to your target machine to setup the dropbear SSH server:</p>
+<pre data-lang="nix" style="background-color:#2b303b;color:#c0c5ce;" class="language-nix "><code class="language-nix" data-lang="nix"><span style="color:#bf616a;">boot</span><span>.</span><span style="color:#bf616a;">initrd</span><span>.</span><span style="color:#bf616a;">availableKernelModules </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> [ &quot;</span><span style="color:#a3be8c;">ahci</span><span>&quot; &quot;</span><span style="color:#a3be8c;">xhci_pci</span><span>&quot; &quot;</span><span style="color:#a3be8c;">sr_mod</span><span>&quot; &quot;</span><span style="color:#a3be8c;">virtio_blk</span><span>&quot; &quot;</span><span style="color:#a3be8c;">virtio_pci</span><span>&quot; &quot;</span><span style="color:#a3be8c;">virtio_net</span><span>&quot; ]</span><span style="background-color:#bf616a;color:#2b303b;">;</span><span>
+</span><span style="color:#bf616a;">boot</span><span>.</span><span style="color:#bf616a;">initrd</span><span>.</span><span style="color:#bf616a;">kernelModules </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> [ ]</span><span style="background-color:#bf616a;color:#2b303b;">;</span><span>
+</span><span style="color:#bf616a;">boot</span><span>.</span><span style="color:#bf616a;">initrd</span><span>.</span><span style="color:#bf616a;">network </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> {
+</span><span>  </span><span style="color:#d08770;">enable </span><span>= </span><span style="color:#d08770;">true</span><span>;
+</span><span>  </span><span style="color:#d08770;">ssh </span><span>= {
+</span><span>    </span><span style="color:#d08770;">enable </span><span>= </span><span style="color:#d08770;">true</span><span>;
+</span><span>    </span><span style="color:#d08770;">port </span><span>= </span><span style="color:#d08770;">2222</span><span>;
+</span><span>    </span><span style="color:#d08770;">hostKeys </span><span>= [ &quot;</span><span style="color:#a3be8c;">/boot/ssh_host_ed25519_key</span><span>&quot; ];
+</span><span>    </span><span style="color:#d08770;">authorizedKeys </span><span>= </span><span style="color:#bf616a;">config</span><span>.</span><span style="color:#bf616a;">users</span><span>.</span><span style="color:#bf616a;">users</span><span>.</span><span style="color:#bf616a;">your_username</span><span>.</span><span style="color:#bf616a;">openssh</span><span>.</span><span style="color:#bf616a;">authorizedKeys</span><span>.</span><span style="color:#bf616a;">keys</span><span>;
+</span><span>  };
+</span><span>  </span><span style="color:#d08770;">postCommands </span><span>= &#39;&#39;
+</span><span style="color:#a3be8c;">    echo &#39;cryptsetup-askpass&#39; &gt;&gt; /root/.profile
+</span><span style="color:#a3be8c;">  </span><span>&#39;&#39;;
+</span><span>}</span><span style="background-color:#bf616a;color:#2b303b;">;</span><span>
+</span></code></pre>
+<p>I fetch my private SSH key for this machine which is also stored encrypted in my repository -
+<code>./machines/secrets.yaml</code>. This file would look something like this:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;"># ./machines/secrets.yaml
+</span><span style="color:#65737e;">#
+</span><span style="color:#65737e;"># My version of this file can be found here:
+</span><span style="color:#65737e;"># https://github.com/ritiek/dotfiles/blob/2d99108/machines/secrets.yaml
+</span><span>
+</span><span style="color:#bf616a;">clawsiecats_ssh_host_ed25519_key:</span><span> ENC</span><span style="color:#b48ead;">[</span><span>AES256_GCM,data:abcde...=,tag:xyz...==,type:str</span><span style="color:#b48ead;">]
+</span></code></pre>
+<p>The file is encrypted through sops:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ nix run nixpkgs#sops -- edit ./machines/secrets.yaml
+</span></code></pre>
+<p>I'll extract the private SSH key for the target configuration that I am to be deploying,
+and also store it a file:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> export BASEDIR=&quot;$</span><span style="color:#a3be8c;">(</span><span style="color:#bf616a;">pwd</span><span style="color:#a3be8c;">)</span><span>&quot;/mnt
+</span></code></pre>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> nix run nixpkgs#sops -- decrypt ./machines/secrets.yaml \
+</span><span>  --extract &#39;</span><span style="color:#a3be8c;">[&quot;clawsiecats_ssh_host_ed25519_key&quot;]</span><span>&#39; \
+</span><span>  --output &quot;$</span><span style="color:#bf616a;">BASEDIR</span><span>&quot;/nix/persist/system/etc/ssh/ssh_host_ed25519_key
+</span><span style="color:#bf616a;">$</span><span> chmod 600 &quot;$</span><span style="color:#bf616a;">BASEDIR</span><span>&quot;/nix/persist/system/etc/ssh/ssh_host_ed25519_key
+</span></code></pre>
+<p>We'll also store the public key corresponding to this private key:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> ssh-keygen</span><span style="color:#bf616a;"> -y -f </span><span>\
+</span><span>  &quot;$</span><span style="color:#bf616a;">BASEDIR</span><span>&quot;/nix/persist/system/etc/ssh/ssh_host_ed25519_key \
+</span><span>  &gt; &quot;$</span><span style="color:#bf616a;">BASEDIR</span><span>&quot;/nix/persist/system/etc/ssh/ssh_host_ed25519_key.pub
+</span></code></pre>
+<p>We want NixOS on target machine to be able to access this decrypted private SSH key.
+This step is important as this private key provides access to target machine configuration
+specific secrets, listed in ./machines/clawsiecats/secrets.yaml</p>
+<p>We'll need to push our LUKS key to the target machine so that the target machine can use it
+to encrypt the disk. Looks like nixos-anywhere has an option for this
+<code>--disk-encryption-keys</code>.</p>
+<h2 id="invoke-nixos-anywhere">Invoke nixos-anywhere</h2>
+<p>We'll be installing NixOS on a Vultr instance with only 1 GB RAM. When booting our 1 GB
+instance with Debian, I've noticed that nixos-anywhere fails half-way due to target
+machine running out of available memory.</p>
+<p>This issue also happens if I boot the machine with official NixOS installer image, which is a
+bit surprising since in this case nixos-anywhere doesn't even call <code>kexec</code>. My idea was that
+since <code>kexec</code> tends to load NixOS in memory when the base OS is not NixOS (the case with
+Debian), this leaves a bigger memory footprint. I was hoping it would be enough to start off
+with the base OS as NixOS so that <code>kexec</code> doesn't get called, but alas.</p>
+<p>With neither of these methods working, I tried writing my own minimal NixOS configuration with
+ZRAM setup as linked below, which seems to work!
+<a href="https://github.com/ritiek/dotfiles/blob/2d99108/generators/minimal.nix">https://github.com/ritiek/dotfiles/blob/2d99108/generators/minimal.nix</a></p>
+<p>Replace <code>users.users.root.openssh.authorizedKeys.keys</code> in the above configuration with how
+you'll be identifying yourself.</p>
+<p>I build an ISO out of this configuration. This can be done by adding nix-generators as an
+input in your flake.nix:</p>
+<pre data-lang="nix" style="background-color:#2b303b;color:#c0c5ce;" class="language-nix "><code class="language-nix" data-lang="nix"><span style="color:#bf616a;">nixos-generators </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> {
+</span><span>  </span><span style="color:#d08770;">url </span><span>= &quot;</span><span style="color:#a3be8c;">github:nix-community/nixos-generators</span><span>&quot;;
+</span><span>  </span><span style="color:#d08770;">inputs</span><span>.</span><span style="color:#d08770;">nixpkgs</span><span>.</span><span style="color:#d08770;">follows </span><span>= &quot;</span><span style="color:#a3be8c;">nixpkgs</span><span>&quot;;
+</span><span>}</span><span style="background-color:#bf616a;color:#2b303b;">;</span><span>
+</span></code></pre>
+<p>and defining an output target, such as:</p>
+<pre data-lang="nix" style="background-color:#2b303b;color:#c0c5ce;" class="language-nix "><code class="language-nix" data-lang="nix"><span style="color:#65737e;"># My version of this file can be found here:
+</span><span style="color:#65737e;"># https://github.com/ritiek/dotfiles/blob/2d99108/flake.nix#L265-L270
+</span><span>
+</span><span style="color:#bf616a;">minimal-iso </span><span style="background-color:#bf616a;color:#2b303b;">=</span><span> </span><span style="color:#bf616a;">inputs</span><span>.</span><span style="color:#bf616a;">nixos-generators</span><span>.</span><span style="color:#bf616a;">nixosGenerate </span><span>{
+</span><span>  </span><span style="color:#d08770;">system </span><span>= &quot;</span><span style="color:#a3be8c;">x86_64-linux</span><span>&quot;;
+</span><span>  </span><span style="color:#d08770;">modules </span><span>= [ </span><span style="color:#a3be8c;">./generators/minimal.nix </span><span>];
+</span><span>  </span><span style="color:#d08770;">specialArgs </span><span>= { </span><span style="color:#b48ead;">inherit </span><span style="color:#d08770;">inputs</span><span>; };
+</span><span>  </span><span style="color:#d08770;">format </span><span>= &quot;</span><span style="color:#a3be8c;">iso</span><span>&quot;;
+</span><span>}</span><span style="background-color:#bf616a;color:#2b303b;">;</span><span>
+</span></code></pre>
+<p>and invoking:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> nix build .#minimal-iso
+</span></code></pre>
+<p>should generate an image in <code>./result/iso/nixos-25.05.20250117.08a54ef-x86_64-linux.iso</code>.</p>
+<p>It's possible to upload and boot from a custom ISO image through the Vultr dashboard and that's
+what we'll do here with this generated image. We'll need to publicly host our image file
+somehow since Vultr takes a URL to the custom image. Not covering this here.</p>
+<p>We'll also need to remount the writable tmpfs nix store on our target machine to allocate more
+space, otherwise nixos-anywhere tends to run out of space:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> ssh root@12.121.212.121 &quot;</span><span style="color:#a3be8c;">mount -o remount,size=512M /nix/.rw-store</span><span>&quot;
+</span></code></pre>
+<p>With all of this in place, invoking nixos-anywhere should now successfully do its thing!</p>
+<p>This is how we'll invoke it so that it pushes the disk encryption key as well as the files
+that we'd like to persist on our target NixOS machine:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> export LUKS_PASSPHRASE=&quot;</span><span style="color:#a3be8c;">my_strong_password</span><span>&quot;
+</span><span>
+</span><span style="color:#bf616a;">$</span><span> nix run github:nix-community/nixos-anywhere -- \
+</span><span>  --extra-files &quot;$</span><span style="color:#bf616a;">BASEDIR</span><span>&quot; \
+</span><span>  --flake .#clawsiecats root@12.121.212.121 \
+</span><span>  --disk-encryption-keys /tmp/disk.key &lt;(</span><span style="color:#96b5b4;">echo </span><span>&quot;$</span><span style="color:#bf616a;">LUKS_PASSPHRASE</span><span>&quot;)
+</span></code></pre>
+<p>To avoid this work every time we are to be deploying the configuration on a new machine, I've
+made a script that'll automatically create SSH keys and other necessary files, remount the nix
+store, push the files on to our target machine, and invoke nixos-anywhere with the right
+parameters:
+<a href="https://github.com/ritiek/dotfiles/blob/2d99108/machines/clawsiecats/anywhere.sh">https://github.com/ritiek/dotfiles/blob/2d99108/machines/clawsiecats/anywhere.sh</a></p>
+<p>Once we've the target machine booted into minimal NixOS ISO, we can call this script locally
+using:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> ./machines/clawsiecats/anywhere.sh .#clawsiecats-luks root@12.121.212.121</span><span style="color:#bf616a;"> --luks
+</span></code></pre>
+<p>The installation should succeed and the machine should reboot automatically. We can now detach
+our minimal ISO image using the Vultr dashboard and have the machine boot into the NixOS we
+just installed. We'll need to SSH into port 2222 and enter the decryption key to move further
+into the boot process:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> ssh root@12.121.212.121</span><span style="color:#bf616a;"> -p</span><span> 2222
+</span></code></pre>
+<p>We should now be dropped onto all the tooling and fluffiness defined in our flake:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> ssh your_username@12.121.212.121
+</span></code></pre>
+<p>That should be all!</p>
+
+        </article>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  
+    
+<footer class="footer text-muted">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 order-last order-lg-first">
+				<ul class="list-inline">
+					
+						<li class="list-inline-item">Powered by <a href="https://www.getzola.org/">Zola</a></li>
+					
+				</ul>
+			</div>
+			<div class="col-lg-8 order-first order-lg-last text-lg-end">
+				<ul class="list-inline">
+					
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+  
+
+  
+<script type="text/javascript" src="https://ritiek.github.io/js/main.js" defer></script>
+
+  <script type="text/javascript" src="https://ritiek.github.io/plugins/elasticlunr.min.js" defer></script>
+  <script type="text/javascript" src="https://ritiek.github.io/search_index.en.js" defer></script>
+  <script type="text/javascript" src="https://ritiek.github.io/js/search.js" defer></script>
+
+  
+</body>
+</html>

@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="preload" as="font" href="https://ritiek.github.io/fonts/vendor/jost/jost-v4-latin-regular.woff2" type="font/woff2" crossorigin>
+  <link rel="preload" as="font" href="https://ritiek.github.io/fonts/vendor/jost/jost-v4-latin-700.woff2"  type="font/woff2" crossorigin>
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://ritiek.github.io/main.css">
+<link rel="stylesheet" href="https://ritiek.github.io/custom.css">
+
+
+
+  
+  
+    
+  
+
+  
+  
+    
+    
+  
+  
+  
+    
+  
+  
+  
+  
+    
+  
+  
+  
+
+
+  <meta name="robots" content="index, follow">
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
+
+	
+
+
+	
+
+<title>Debugging WiFi on a headless Raspberry Pi | Ritiek Malhotra</title>
+<meta name="description" content="Just some of my adventures!">
+<link rel="canonical" href="https://ritiek.github.io/2023/12/09/debugging-wifi-on-a-headless-raspberry-pi/">
+
+
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <meta name="twitter:title" content="Debugging WiFi on a headless Raspberry Pi">
+  <meta name="twitter:description" content="Just some of my adventures!">
+  <meta name="twitter:site" content="@">
+  <meta name="twitter:creator" content="@">
+  
+  <meta property="og:title" content="Debugging WiFi on a headless Raspberry Pi">
+  <meta property="og:description" content="Just some of my adventures!">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://ritiek.github.io/2023/12/09/debugging-wifi-on-a-headless-raspberry-pi/">
+
+  
+
+  <meta property="og:updated_time" content="">
+  <meta property="og:site_name" content="Debugging WiFi on a headless Raspberry Pi">
+
+  
+
+  
+
+  
+  <meta property="article:publisher" content="https://www.facebook.com/">
+  <meta property="article:author" content="https://www.facebook.com/">
+  <meta property="og:locale" content="en_US">
+
+
+
+
+
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BreadcrumbList",
+    
+      
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          {
+            "@type": "ListItem",
+            "position":  1 ,
+            "name": "Home",
+            "item": "https://ritiek.github.io/"
+          },
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  2 ,
+            "name": "2023",
+            "item": "https://ritiek.github.io/2023/"
+          },
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  3 ,
+            "name": "12",
+            "item": "https://ritiek.github.io/2023/12/"
+          },
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  4 ,
+            "name": "09",
+            "item": "https://ritiek.github.io/2023/12/09/"
+          },
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  5 ,
+            "name": "Debugging Wifi On A Headless Raspberry Pi",
+            "item": "https://ritiek.github.io/2023/12/09/debugging-wifi-on-a-headless-raspberry-pi/"
+          },
+        
+      
+    
+  }
+</script>
+
+
+
+
+
+
+  <meta name="theme-color" content="#fff">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://ritiek.github.io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://ritiek.github.io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://ritiek.github.io/favicon-16x16.png">
+  
+    <link rel="manifest" href="https://ritiek.github.io/site.webmanifest" crossorigin>
+  
+
+
+  
+
+</head>
+
+  
+    
+  
+
+<body class="page single">
+  
+    
+<div class="header-bar fixed-top"></div>
+<header class="navbar fixed-top navbar-expand-md navbar-light">
+	<div class="container">
+		<input class="menu-btn order-0" type="checkbox" id="menu-btn">
+		<label class="menu-icon d-md-none" for="menu-btn"><span class="navicon"></span></label>
+		<a class="navbar-brand order-1 order-md-0 me-auto" href="https://ritiek.github.io">Ritiek Malhotra</a>
+		<button id="mode" class="btn btn-link order-2 order-md-4" type="button" aria-label="Toggle mode">
+			<span class="toggle-dark"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></span>
+			<span class="toggle-light"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg></span>
+		</button>
+		<ul class="navbar-nav fork-me order-3 order-md-5">
+			
+				
+					<li class="nav-item">
+						<a class="nav-link" href="https://github.com/ritiek"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg><span class="ms-2 visually-hidden">GitHub</span></a>
+					</li>
+				
+			
+		</ul>
+		<div class="collapse navbar-collapse order-4 order-md-1">
+			<ul class="navbar-nav main-nav me-auto order-5 order-md-2">
+				
+					
+				
+				
+				
+					
+						<li class="nav-item">
+							<a class="nav-link" href="/posts/">Archive</a>
+						</li>
+					
+						<li class="nav-item">
+							<a class="nav-link" href="/about/">About</a>
+						</li>
+					
+				
+			</ul>
+			<div class="break order-6 d-md-none"></div>
+			
+				<form class="navbar-form flex-grow-1 order-7 order-md-3">
+					<input id="userinput" class="form-control is-search" type="search" placeholder="Search posts..."
+						aria-label="Search posts..." autocomplete="off">
+					<div id="suggestions" class="shadow bg-white rounded"></div>
+				</form>
+			
+		</div>
+	</div>
+
+</header>
+
+  
+
+  
+<div class="wrap container" role="document">
+  <div class="content">
+    <div class="row justify-content-center">
+      <div class="col-md-12 col-lg-10 col-xxl-8">
+        <article>
+          <div class="page-header">
+            <h1>Debugging WiFi on a headless Raspberry Pi</h1>
+          </div>
+          
+          <h3 id="unsupported-wifi-channels">Unsupported WiFi channels</h3>
+<p>My place gets minor power outages time to time and without having a power backup to rely on, my home router
+and machines tend to go off. One peculiar thing I noticed is that about half the times when power did come
+back, my Raspberry Pi 4 would fail to connect back to my WiFi router, even when my other machines connected to
+WiFi just fine. Also my Pi runs headless with no immediate access to a monitor or an ethernet cable combined
+with laziness didn't help debugging in what could've been going wrong.</p>
+<p>Initial few times I shrugged it off about WiFi being WiFi, as rebooting my router/Pi would usually bring my Pi
+back online. It was annoying nonetheless, say I was outside and wanted to monitor some sensors in my house, a
+lil power trip would end up causing problem with this. I tried disabling WiFi power saving settings on my
+Pi. There's resources on this issue, such as
+<a href="https://photobyte.org/raspberry-pi-unreliable-wifi-power-saving/">this</a>.
+The problem still remained but I can't say for sure if it may or may have not have helped with a different
+but a related problem.</p>
+<p>Giving some thought, I realized I have a USB to TTL
+adapter and few jumper cables around which'll allow me to access Pi's serial console through my lappy, all
+without having my Pi on network. This seemed like a good enough first step to figure out what could've been
+going wrong with my Pi not connecting back to my home WiFi after a power outage.</p>
+<p align="center">
+  <img src="/assets/l2HYjdi.png" width="200">
+  <i>USB to TTL adapter</i>
+</p>
+<p>There's lots of resources out there on how to set up UART to access the serial console on Pi using USB to TTL.</p>
+<!-- -------------------- -->
+<h4 id="the-culprit">The Culprit</h4>
+<p>Once I got the above all set up. The next time Pi refused to connect to my home WiFi, I logged into my Pi using:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> screen /dev/ttyUSB0 115200
+</span></code></pre>
+<p>and tried doing the usual network checkups.</p>
+<p><code>ping google.com</code> fails.</p>
+<p><code>ifconfig</code> says no IP assigned to <code>wlan0</code>.</p>
+<p>Seems Pi isn't connected to WiFi after all.</p>
+<p>I tried scanning for WiFi networks around me using:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ sudo nmcli device wifi list --rescan yes
+</span></code></pre>
+<p>I think <code>nmcli</code> <code>nmtui</code> commands do not work unless you're using <code>NetworkManager</code>. So make sure to switch
+to <code>NetworkManager</code> from <code>dhcpcd</code> (which is the default as of writing) using <code>sudo raspi-config</code>.</p>
+<p>And my home WiFi doesn't show up.</p>
+<p>Turned on my phone's WiFi access point mode, rescanned WiFi networks, okay this showed up in nmcli, but for
+some reason home WiFi still didn't.</p>
+<p>At this point, it almost felt as if my Pi got so tired of always having to connect to my home WiFi that it
+evolved in ways to intentionally ignore my home WiFi.</p>
+<p>Rebooted my Pi, still seemed mad at WiFi. Again. Still mad.</p>
+<p>No nothing. So eventually also brought in my WiFi router into this reboot chaos.</p>
+<p>Eventually eventually after a couple power cycles each, yess it connected happy!</p>
+<p>I got suspicious of what radio channel was my home's WiFi access point listening for clients to connect on,
+since this seemed a thing that fit into the signs and also that on what WiFi channel a router listens on
+usually defaults to automatic. This could mean the channel my router preferred to listen on could change post
+every power cycle.</p>
+<p>Researching up a bit, it seems I can check out what WiFi channels my Pi 4 supports using:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> sudo iwlist wlan0 freq
+</span><span style="color:#bf616a;">wlan0</span><span>     32 channels in total; </span><span style="color:#bf616a;">available</span><span> frequencies :
+</span><span>          </span><span style="color:#bf616a;">Channel</span><span> 01 : 2.412 GHz
+</span><span>          </span><span style="color:#bf616a;">Channel</span><span> 02 : 2.417 GHz
+</span><span>          </span><span style="color:#bf616a;">Channel</span><span> 03 : 2.422 GHz
+</span><span>          </span><span style="color:#bf616a;">Channel</span><span> 04 : 2.427 GHz
+</span><span>          </span><span style="color:#bf616a;">Channel</span><span> 05 : 2.432 GHz
+</span><span>          </span><span style="color:#bf616a;">Channel</span><span> 06 : 2.437 GHz
+</span><span>          </span><span style="color:#bf616a;">Channel</span><span> 07 : 2.442 GHz
+</span><span>          </span><span style="color:#bf616a;">Channel</span><span> 08 : 2.447 GHz
+</span><span>          </span><span style="color:#bf616a;">Channel</span><span> 09 : 2.452 GHz
+</span><span>          </span><span style="color:#bf616a;">Channel</span><span> 10 : 2.457 GHz
+</span><span>          </span><span style="color:#bf616a;">Channel</span><span> 11 : 2.462 GHz
+</span><span>          </span><span style="color:#bf616a;">Channel</span><span> 36 : 5.18 GHz
+</span><span>          </span><span style="color:#bf616a;">Channel</span><span> 40 : 5.2 GHz
+</span><span>          </span><span style="color:#bf616a;">Channel</span><span> 44 : 5.22 GHz
+</span><span>          </span><span style="color:#bf616a;">Channel</span><span> 48 : 5.24 GHz
+</span><span>          </span><span style="color:#bf616a;">Channel</span><span> 52 : 5.26 GHz
+</span><span>          </span><span style="color:#bf616a;">Channel</span><span> 56 : 5.28 GHz
+</span><span>          </span><span style="color:#bf616a;">Channel</span><span> 60 : 5.3 GHz
+</span><span>          </span><span style="color:#bf616a;">Channel</span><span> 64 : 5.32 GHz
+</span><span>          </span><span style="color:#bf616a;">Channel</span><span> 100 : 5.5 GHz
+</span><span>          </span><span style="color:#bf616a;">Channel</span><span> 104 : 5.52 GHz
+</span><span>          </span><span style="color:#bf616a;">Channel</span><span> 108 : 5.54 GHz
+</span><span>          </span><span style="color:#bf616a;">Channel</span><span> 112 : 5.56 GHz
+</span><span>          </span><span style="color:#bf616a;">Channel</span><span> 116 : 5.58 GHz
+</span><span>          </span><span style="color:#bf616a;">Channel</span><span> 120 : 5.6 GHz
+</span><span>          </span><span style="color:#bf616a;">Channel</span><span> 124 : 5.62 GHz
+</span><span>          </span><span style="color:#bf616a;">Channel</span><span> 128 : 5.64 GHz
+</span><span>          </span><span style="color:#bf616a;">Channel</span><span> 132 : 5.66 GHz
+</span><span>          </span><span style="color:#bf616a;">Channel</span><span> 136 : 5.68 GHz
+</span><span>          </span><span style="color:#bf616a;">Channel</span><span> 140 : 5.7 GHz
+</span><span>          </span><span style="color:#bf616a;">Channel</span><span> 144 : 5.72 GHz
+</span><span>          </span><span style="color:#bf616a;">Channel</span><span> 149 : 5.745 GHz
+</span><span>          </span><span style="color:#bf616a;">Current</span><span> Frequency:5.24 GHz (Channel 48)
+</span></code></pre>
+<p>and comparing these what my router provides:</p>
+<p align="center">
+  <img src="/assets/tqz4TMn.png" width="500">
+  <i>2.4GHz channels</i>
+  <br>
+  <br>
+  <img src="/assets/Gsg2Wty.png" width="500">
+  <i>5GHz channels</i>
+</p>
+<p>It looks there are some channels my router can listen on to but which aren't supported by Pi.</p>
+<p>I was able to replicate the problem of Pi not "seeing" my home WiFi after I set my router to listen on a
+channel unsupported by my Pi.</p>
+<p>I also read around that setting your WLAN country in <code>sudo raspi-config</code> should make it so that my Pi
+listens only on WiFi channels legalized in my country. This was already set to my country code. I tried
+skimming in my router settings to find something similar but no avail here. But it's ok, my router allows
+me to bind it to listen on a specific WiFi channel, and anything that the Pi is capable of listening on
+should be fine for my case. So I did it. And having me closely keep a track of this for about a week or a two,
+didn't notice the problem of my Pi not connecting my WiFi after a power outage cycle happen again.</p>
+<h3 id="conflicting-docker-interfaces">Conflicting Docker Interfaces</h3>
+<p>After I set up some Docker stacks, I noticed a similar problem of my Pi losing WiFi connection would happen
+randomly at times. Looking up, it seems Docker is notorious for this problem where it messes with the default
+network routes (that provide actual Internet). It seemed the problem went away once I replaced my
+<code>NetworkManager.conf</code> to ignore virtual network interfaces created by Docker and Tailscale, using the following
+contents:</p>
+<pre data-lang="yaml" style="background-color:#2b303b;color:#c0c5ce;" class="language-yaml "><code class="language-yaml" data-lang="yaml"><span style="color:#65737e;"># /etc/NetworkManager/NetworkManager.conf
+</span><span>
+</span><span>[</span><span style="color:#a3be8c;">main</span><span>]
+</span><span style="color:#a3be8c;">plugins=ifupdown,keyfile
+</span><span>
+</span><span>[</span><span style="color:#a3be8c;">ifupdown</span><span>]
+</span><span style="color:#a3be8c;">managed=true
+</span><span>
+</span><span>[</span><span style="color:#a3be8c;">keyfile</span><span>]
+</span><span style="color:#a3be8c;">unmanaged-devices=interface-name:docker0;interface-name:veth*;interface-name:br*;interface-name:tailscale0
+</span></code></pre>
+<p>Make sure you're using <code>NetworkManager</code> to manager network interfaces (and not <code>dhcpcd</code> or anything else)
+for this to work.</p>
+<hr />
+<p>WiFi is still WiFi, so until next time.</p>
+
+        </article>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  
+    
+<footer class="footer text-muted">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 order-last order-lg-first">
+				<ul class="list-inline">
+					
+						<li class="list-inline-item">Powered by <a href="https://www.getzola.org/">Zola</a></li>
+					
+				</ul>
+			</div>
+			<div class="col-lg-8 order-first order-lg-last text-lg-end">
+				<ul class="list-inline">
+					
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+  
+
+  
+<script type="text/javascript" src="https://ritiek.github.io/js/main.js" defer></script>
+
+  <script type="text/javascript" src="https://ritiek.github.io/plugins/elasticlunr.min.js" defer></script>
+  <script type="text/javascript" src="https://ritiek.github.io/search_index.en.js" defer></script>
+  <script type="text/javascript" src="https://ritiek.github.io/js/search.js" defer></script>
+
+  
+</body>
+</html>

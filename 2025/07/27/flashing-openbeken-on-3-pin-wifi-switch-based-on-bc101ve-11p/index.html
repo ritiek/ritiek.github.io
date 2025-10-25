@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="preload" as="font" href="https://ritiek.github.io/fonts/vendor/jost/jost-v4-latin-regular.woff2" type="font/woff2" crossorigin>
+  <link rel="preload" as="font" href="https://ritiek.github.io/fonts/vendor/jost/jost-v4-latin-700.woff2"  type="font/woff2" crossorigin>
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://ritiek.github.io/main.css">
+<link rel="stylesheet" href="https://ritiek.github.io/custom.css">
+
+
+
+  
+  
+    
+  
+
+  
+  
+    
+    
+  
+  
+  
+    
+  
+  
+  
+  
+    
+  
+  
+  
+
+
+  <meta name="robots" content="index, follow">
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
+
+	
+
+
+	
+
+<title>Flashing OpenBeken on 3-pin Wi-Fi switch based on BC101VE-11P (BK7238) | Ritiek Malhotra</title>
+<meta name="description" content="Just some of my adventures!">
+<link rel="canonical" href="https://ritiek.github.io/2025/07/27/flashing-openbeken-on-3-pin-wifi-switch-based-on-bc101ve-11p/">
+
+
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <meta name="twitter:title" content="Flashing OpenBeken on 3-pin Wi-Fi switch based on BC101VE-11P (BK7238)">
+  <meta name="twitter:description" content="Just some of my adventures!">
+  <meta name="twitter:site" content="@">
+  <meta name="twitter:creator" content="@">
+  
+  <meta property="og:title" content="Flashing OpenBeken on 3-pin Wi-Fi switch based on BC101VE-11P (BK7238)">
+  <meta property="og:description" content="Just some of my adventures!">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://ritiek.github.io/2025/07/27/flashing-openbeken-on-3-pin-wifi-switch-based-on-bc101ve-11p/">
+
+  
+
+  <meta property="og:updated_time" content="">
+  <meta property="og:site_name" content="Flashing OpenBeken on 3-pin Wi-Fi switch based on BC101VE-11P (BK7238)">
+
+  
+
+  
+
+  
+  <meta property="article:publisher" content="https://www.facebook.com/">
+  <meta property="article:author" content="https://www.facebook.com/">
+  <meta property="og:locale" content="en_US">
+
+
+
+
+
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BreadcrumbList",
+    
+      
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          {
+            "@type": "ListItem",
+            "position":  1 ,
+            "name": "Home",
+            "item": "https://ritiek.github.io/"
+          },
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  2 ,
+            "name": "2025",
+            "item": "https://ritiek.github.io/2025/"
+          },
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  3 ,
+            "name": "07",
+            "item": "https://ritiek.github.io/2025/07/"
+          },
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  4 ,
+            "name": "27",
+            "item": "https://ritiek.github.io/2025/07/27/"
+          },
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  5 ,
+            "name": "Flashing Openbeken On 3 Pin Wifi Switch Based On Bc101ve 11p",
+            "item": "https://ritiek.github.io/2025/07/27/flashing-openbeken-on-3-pin-wifi-switch-based-on-bc101ve-11p/"
+          },
+        
+      
+    
+  }
+</script>
+
+
+
+
+
+
+  <meta name="theme-color" content="#fff">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://ritiek.github.io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://ritiek.github.io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://ritiek.github.io/favicon-16x16.png">
+  
+    <link rel="manifest" href="https://ritiek.github.io/site.webmanifest" crossorigin>
+  
+
+
+  
+
+</head>
+
+  
+    
+  
+
+<body class="page single">
+  
+    
+<div class="header-bar fixed-top"></div>
+<header class="navbar fixed-top navbar-expand-md navbar-light">
+	<div class="container">
+		<input class="menu-btn order-0" type="checkbox" id="menu-btn">
+		<label class="menu-icon d-md-none" for="menu-btn"><span class="navicon"></span></label>
+		<a class="navbar-brand order-1 order-md-0 me-auto" href="https://ritiek.github.io">Ritiek Malhotra</a>
+		<button id="mode" class="btn btn-link order-2 order-md-4" type="button" aria-label="Toggle mode">
+			<span class="toggle-dark"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></span>
+			<span class="toggle-light"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg></span>
+		</button>
+		<ul class="navbar-nav fork-me order-3 order-md-5">
+			
+				
+					<li class="nav-item">
+						<a class="nav-link" href="https://github.com/ritiek"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg><span class="ms-2 visually-hidden">GitHub</span></a>
+					</li>
+				
+			
+		</ul>
+		<div class="collapse navbar-collapse order-4 order-md-1">
+			<ul class="navbar-nav main-nav me-auto order-5 order-md-2">
+				
+					
+				
+				
+				
+					
+						<li class="nav-item">
+							<a class="nav-link" href="/posts/">Archive</a>
+						</li>
+					
+						<li class="nav-item">
+							<a class="nav-link" href="/about/">About</a>
+						</li>
+					
+				
+			</ul>
+			<div class="break order-6 d-md-none"></div>
+			
+				<form class="navbar-form flex-grow-1 order-7 order-md-3">
+					<input id="userinput" class="form-control is-search" type="search" placeholder="Search posts..."
+						aria-label="Search posts..." autocomplete="off">
+					<div id="suggestions" class="shadow bg-white rounded"></div>
+				</form>
+			
+		</div>
+	</div>
+
+</header>
+
+  
+
+  
+<div class="wrap container" role="document">
+  <div class="content">
+    <div class="row justify-content-center">
+      <div class="col-md-12 col-lg-10 col-xxl-8">
+        <article>
+          <div class="page-header">
+            <h1>Flashing OpenBeken on 3-pin Wi-Fi switch based on BC101VE-11P (BK7238)</h1>
+          </div>
+          
+          <p>I received this 3-pin Wi-Fi switch costing INR 500 that lets me control power to the connected appliance
+through the vendor's proprietary Android app. It works fine. It looks to be based on Tuya as I am also
+able to pair up the switch to the Smart Life Android app.</p>
+<p align="center">
+  <img src="/assets/1-3_preview.jpeg" width="300">
+  <i>The switch</i>
+</p>
+<p align="center">
+  <img src="/assets/Screenshot_2025-07-05-13-43-50-167_com.livsmartautomation.livsmart_cropped_preview.jpeg" width="300">
+  <i>Vendor's Android app<br>(The switch doesn't have energy monitoring circuitry<br>but the app shows 1W as a placeholder anyway)</i>
+</p>
+<p>I wanted to see I could cut the cloud as well as flash a more open firmware to it.
+I started off with <a href="https://github.com/ct-Open-Source/tuya-convert">tuya-convert</a>.
+It didn't work cause the peripheral is based on a newer firmware that
+<a href="https://github.com/ct-Open-Source/tuya-convert?tab=readme-ov-file#procedure">isn't supported</a>
+by tuya-convert. I went ahead to disassemble it to inspect it better.</p>
+<h2 id="disassembly">Disassembly</h2>
+<p>I basically did something like this:</p>
+<p align="center">
+  <img src="/assets/IMG_20250721_205551_preview.jpeg" width="300">
+  <i>Insert and run a knife or a sharp object around the<br>edges to cut through any hardened glue</i>
+</p>
+<p align="center">
+  <img src="/assets/IMG_20250721_211032_preview.jpeg" width="300">
+  <i>Apply pressure on both the exposed ends with a blunt<br>object and pry it open carefully</i>
+</p>
+<p align="center">
+  <img src="/assets/IMG_20250705_145416_preview.jpeg" width="500">
+  <i>Opened carefully</i>
+</p>
+<p align="center">
+  <img src="/assets/IMG_20250705_145115_cropped_preview.jpeg" width="500">
+  <i>Clearer</i>
+</p>
+<p align="center">
+  <img src="/assets/IMG_20250705_145834_cropped_preview.jpeg" width="500">
+  <i>
+    Lift the circuit board by inserting a screwdriver or a small<br>
+    object through the small gap and applying force<br>
+    just above the plastic casing
+  </i>
+</p>
+<p align="center">
+  <img src="/assets/IMG_20250705_150442_preview.jpeg" width="900">
+  <i>Ok, lifted successfully</i>
+</p>
+<p>The sticker on the SoC reads "BC101VE-11P".</p>
+<h2 id="beken-bc101ve-11p">Beken BC101VE-11P</h2>
+<p>Looking up on this SoC, I found this page by Cionlabs, who looks to be the manufacturer
+of the BC101VE-11P SoC:
+<br>
+<a href="https://cionlabs.com/product/bc101ve-11p/">https://cionlabs.com/product/bc101ve-11p/</a></p>
+<p>Interesting points to note on the page:
+<br></p>
+<blockquote>
+<p>BC101VE-11P based on BK7238</p>
+</blockquote>
+<blockquote>
+<p>ESP8685-WROOM-03 Pin compatible</p>
+</blockquote>
+<p>Digging further into these points, it looks like the SoC isn't an ESP MCU (which I'm
+previously familiar with). It also looks like Tasmota doesn't support BK7238 at the time
+of writing this. However, it does mention about pins being compatible with
+ESP8685-WROOM-03 and there's a Tasmota-like alternative called
+<a href="https://github.com/openshwprojects/OpenBK7231T_App">OpenBeken</a> available for
+this SoC.</p>
+<p>I also found this datasheet on the BC101VE-01-11P from cionlabs here (wonder if it's for
+the same MCU, cause mine just mentions BC101VE-11P):
+<br>
+<a href="https://cionlabs.com/wp-content/uploads/2025/06/BC101VE-01-11P-V1.4.pdf">https://cionlabs.com/wp-content/uploads/2025/06/BC101VE-01-11P-V1.4.pdf</a></p>
+<p>It features this pin layout:</p>
+<p align="center">
+  <img src="/assets/image_preview.jpeg" width="600">
+  <i>Pin layout of the BC101VE-01-11P from the official datasheet</i>
+</p>
+<p>Also looking up on the ESP8685-WROOM-03, I found this PDF datasheet from Espressif which
+illustrates its pin layout schematic:
+<br>
+<a href="https://www.espressif.com/sites/default/files/documentation/esp8685-wroom-03_datasheet_en.pdf">https://www.espressif.com/sites/default/files/documentation/esp8685-wroom-03_datasheet_en.pdf</a></p>
+<p align="center">
+  <img src="/assets/image_preview.jpeg.1" width="1000">
+  <i>Illustration of ESP8685-WROOM-03's pin layout schematic</i>
+</p>
+<p><strong>Note:</strong> It looks like this SoC by Espressif was previously referred to as ESP8685-WROOM-03
+but has since joined the ranks of ESP32 fam and this same SoC is now also known as ESP32-C3.</p>
+<p>The top and bottom pin layout on the official datasheet as well as the ESP8685-WROOM-03 seems
+to match with what I have on my BC101VE-11P (5 pins on the top side and 6 pins on the bottom
+side) as in the picture:</p>
+<p align="center">
+  <img src="/assets/IMG_20250705_202349_cropped_preview.jpeg" width="500">
+  <i>Top and bottom pin layout on my BC101VE-11P</i>
+</p>
+<p>However, the layout of the test pins on the bottom side neither matches with what I have on
+my BC101VE-11P from the switch (mine aren't aligned in the same way as <code>TX2</code>, <code>RX2</code>, <code>TDO</code>
+are in this picture), nor does it match with the ESP8685-WROOM-03.</p>
+<p align="center">
+  <img src="/assets/IMG_20250705_185511_preview.jpeg" width="500">
+  <i>Test pin layout on my BC101VE-11P</i>
+</p>
+<h2 id="uart">UART</h2>
+<p>On the first glance, it looks all the pins on the SoC that we need to have in contact to form
+a UART serial connection are consistent in the pin layout:
+<br></p>
+<ol>
+<li>3v3
+<br></li>
+<li>GND
+<br></li>
+<li>RX
+<br></li>
+<li>TX</li>
+</ol>
+<p>All the 4 pins are present on bottom side on both the SoCs.</p>
+<p>UART can be established using another machine through a USB to TTL adapter.</p>
+<p>
+<!-- <p align="center"> -->
+  <img src="/assets/l2HYjdi.png" width="200">
+  <i>USB to TTL adapter</i>
+</p>
+<p>It's a good idea to power up BC101VE-11P module now using the USB to TTL adapter to make sure
+it's still operable after the plastic surgery. Don't need to solder anything yet.
+Get a few jumper cables and form up connections through temporary contact as described:</p>
+<table><thead><tr><th>BC101VE-11P</th><th>USB to TTL</th></tr></thead><tbody>
+<tr><td>3V3</td><td>3V3</td></tr>
+<tr><td>GND</td><td>GND</td></tr>
+</tbody></table>
+<p>This should power up the module and I could see the blue onboard LED on the smart switch board
+flash once and turn off. It's got some life, cool!</p>
+<p>Ok, let's try if we can see anything over UART. May want to consider soldering wires to the
+BC101VE-11P at this point. For now I had a coworker help me out with making temporary contacts
+(buying out some buffer tehee):</p>
+<table><thead><tr><th>BC101VE-11P</th><th>USB to TTL</th></tr></thead><tbody>
+<tr><td>3V3</td><td>3V3</td></tr>
+<tr><td>GND</td><td>GND</td></tr>
+<tr><td>RX</td><td>TX</td></tr>
+<tr><td>TX</td><td>RX</td></tr>
+</tbody></table>
+<p>On my Linux laptop connected over UART, the device showed up as <code>/dev/ttyACM0</code>. It could
+instead also show up as <code>/dev/USB0</code> or something. Verify once.</p>
+<p>Setting the baud rate to 115200 with picocom seems to have worked:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> picocom</span><span style="color:#bf616a;"> -b</span><span> 115200 /dev/ttyACM0
+</span></code></pre>
+<p>It also helps that my (and most other) USB to TTL devices flash a different LED whenever
+data is being emitted over serial.</p>
+<p>I noticed my BC101VE-11P module flash the blue LED once and spew these logs over serial
+everytime I powered it up:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">go</span><span> os_addr(0x10000)</span><span style="color:#bf616a;">..........
+</span><span style="color:#bf616a;">BK7238_1.0.14
+</span><span style="color:#bf616a;">REG:cpsr</span><span>        spsr        r13      BK7238_1.0.14
+</span><span style="color:#bf616a;">REG:cpsr</span><span>        spsr        r13         r14
+</span><span style="color:#bf616a;">SVC:0x000000D3</span><span>              0x00401C1C  0x000033A0
+</span><span style="color:#bf616a;">IRQ:0x000000D2</span><span>  0x00000010  0x00401E0C  0x2C00B449
+</span><span style="color:#bf616a;">FIR:0x000000D1</span><span>  0x00000010  0x00401FFC  0x3289416B
+</span><span style="color:#bf616a;">SYS:0x000000DF</span><span>              0x0040192C  0x00000158
+</span><span style="color:#bf616a;">ST:0x00000000
+</span><span style="color:#bf616a;">[I/FAL]</span><span> Fal(V0.4.0)</span><span style="color:#bf616a;">success
+</span><span>                          </span><span style="color:#bf616a;">[I/OTA]</span><span> RT-Thread OTA package(V0.2.8-beken-1133282d-20220604) </span><span style="color:#bf616a;">initialize</span><span> success.
+</span><span>
+</span><span>
+</span><span style="color:#bf616a;">go</span><span> os_addr(0x10000)</span><span style="color:#bf616a;">..........
+</span><span>
+</span><span style="color:#bf616a;">FATAL:</span><span> read zero bytes from port
+</span><span style="color:#bf616a;">term_exitfunc:</span><span> reset failed for dev UNKNOWN: Input/output error
+</span></code></pre>
+<p>And then it'd go silent afterwards and <code>/dev/ttyACM0</code> device file would disappear.</p>
+<p>I guessed it to be a power issue or a bad USB to TTL adapter. I had a spare NodeMCU ESP8266
+development board that I had flashed Tasmota onto a while ago but hadn't configured it any
+further, so it'd still be broadcasting tasmota's default AP when it's powered on properly.</p>
+<!-- <p> -->
+<p align="center">
+  <img src="/assets/image_preview.jpeg.2" width="400">
+  <i>NodeMCU ESP8266 Development Board</i>
+</p>
+<p>I tried to power up the NodeMCU through the 3v3 rail:</p>
+<table><thead><tr><th>NodeMCU ESP8266</th><th>USB to TTL</th></tr></thead><tbody>
+<tr><td>3V3</td><td>3V3</td></tr>
+<tr><td>GND</td><td>GND</td></tr>
+</tbody></table>
+<p>And the tasmota's AP didn't show up either! Although, powering it up through the 5V rail
+seems to have worked and I could see tasmota's AP and connect over to 192.168.4.1 on the
+AP just fine:</p>
+<table><thead><tr><th>NodeMCU ESP8266</th><th>USB to TTL</th></tr></thead><tbody>
+<tr><td>5V</td><td>5V</td></tr>
+<tr><td>GND</td><td>GND</td></tr>
+</tbody></table>
+<p>So, it's very likely a power issue where my machine's USB port or the USB to TTL adapter
+isn't able to compensate for the additional demand in current when the voltage is lowered
+to 3.3V, in order to supply the same power as on a 5V rail.</p>
+<p>Sadly the BC101VE-11P accepts only 3.3V input and not a 5V input. For the sake of it, I decided
+to power up the BC101VE-11P module over 3.3V but with the USB to TTL now connected to a wall
+adapter:</p>
+<table><thead><tr><th>BC101VE-11P</th><th>USB to TTL</th></tr></thead><tbody>
+<tr><td>3V3</td><td>3V3</td></tr>
+<tr><td>GND</td><td>GND</td></tr>
+</tbody></table>
+<p>Noticed a slight change in the behaviour of the blue onboard LED this time. The LED now blinked
+every second instead of previously flashing once and shutting down when connected to my machine
+over USB. This behaviour was consistent.</p>
+<hr />
+<p>Decided to give another try to power up my spare NodeMCU ESP8266 through the 5V rail on my USB
+to TTY adapter connected to my machine's USB port where the NodeMCU would in-turn power up the
+BC101VE-11P through one of the 3V3 output pins present on the development board:</p>
+<table><thead><tr><th>NodeMCU ESP8266</th><th>USB to TTL</th></tr></thead><tbody>
+<tr><td>5V</td><td>5V</td></tr>
+<tr><td>GND</td><td>GND</td></tr>
+</tbody></table>
+<table><thead><tr><th>NodeMCU ESP8266</th><th>BC101VE-11P</th></tr></thead><tbody>
+<tr><td>3V3</td><td>3V3</td></tr>
+<tr><td>GND</td><td>GND</td></tr>
+</tbody></table>
+<p>This gave me a solid light up of blue LED onboard. Additionally, hooking up the RX and TX connections
+directly to the BC101VE-11 from my USB to TTL looked to be giving logs properly over serial now:</p>
+<table><thead><tr><th>BC101VE-11P</th><th>USB to TTL</th></tr></thead><tbody>
+<tr><td>RX</td><td>TX</td></tr>
+<tr><td>TX</td><td>RX</td></tr>
+</tbody></table>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> picocom</span><span style="color:#bf616a;"> -b</span><span> 115200 /dev/ttyACM0
+</span><span>
+</span><span style="color:#bf616a;">go</span><span> os_addr(0x10000)</span><span style="color:#bf616a;">..........
+</span><span style="color:#bf616a;">[garbled</span><span> output]start addr:0x4114d0, size:191280
+</span><span style="color:#bf616a;">[Flash]id:0x854215
+</span><span style="color:#bf616a;">--write</span><span> status reg:4004,1--
+</span><span style="color:#bf616a;">[Flash]init</span><span> over
+</span><span style="color:#bf616a;">sctrl_sta_ps_init
+</span><span style="color:#bf616a;">SDK</span><span> Rev: 3.0.70 d414331
+</span><span style="color:#bf616a;">[THD]app:[tcb]4127b0 </span><span style="color:#b48ead;">[</span><span>stack</span><span style="color:#b48ead;">]</span><span>4117a8-4127a8:4096:0
+</span><span style="color:#bf616a;">[THD]extended_app:[tcb]413020 </span><span style="color:#b48ead;">[</span><span>stack</span><span style="color:#b48ead;">]</span><span>412818-413018:2048:4
+</span><span style="color:#bf616a;">[THD]idle:[tcb]413490 </span><span style="color:#b48ead;">[</span><span>stack</span><span style="color:#b48ead;">]</span><span>413088-413488:1024:0
+</span><span style="color:#bf616a;">[THD]timer_thd:[tcb]414218 </span><span style="color:#b48ead;">[</span><span>stack</span><span style="color:#b48ead;">]</span><span>413610-414210:3072:2
+</span><span style="color:#bf616a;">OSK</span><span> Rev: F-3.0.44 d414331
+</span><span style="color:#bf616a;">cset:0</span><span> 0 0 0
+</span><span style="color:#bf616a;">[FUNC]rwnxl_init
+</span><span style="color:#bf616a;">chip</span><span> id=7238 device id=22068000
+</span><span style="color:#bf616a;">IP</span><span> Rev: W4-3.0.70-P0
+</span><span style="color:#bf616a;">txdesc</span><span> flush
+</span><span style="color:#bf616a;">[FUNC]intc_init
+</span><span style="color:#bf616a;">[FUNC]calibration_main
+</span><span style="color:#bf616a;">device_id</span><span>=</span><span style="color:#a3be8c;">0x22068000
+</span><span style="color:#bf616a;">calibration_main</span><span> over
+</span><span style="color:#bf616a;">flash</span><span> txpwr table:0xf
+</span><span style="color:#bf616a;">dif</span><span> g and n20 ID in flash:4
+</span><span style="color:#96b5b4;">read</span><span> txpwr tab from flash success
+</span><span style="color:#bf616a;">uncali</span><span> adc value:</span><span style="color:#b48ead;">[</span><span>00 00 00</span><span style="color:#b48ead;">]
+</span><span style="color:#bf616a;">temp</span><span> in flash is:253
+</span><span style="color:#bf616a;">[THD]temp_detct:[tcb]414830 </span><span style="color:#b48ead;">[</span><span>stack</span><span style="color:#b48ead;">]</span><span>414428-414828:1024:3
+</span><span style="color:#bf616a;">lpf_i </span><span>&amp; </span><span style="color:#bf616a;">q</span><span> in flash is:76, 78
+</span><span style="color:#bf616a;">xtal</span><span> in flash is:83
+</span><span style="color:#bf616a;">xtal_cali:83
+</span><span style="color:#bf616a;">--init_xtal</span><span> = 83
+</span><span style="color:#bf616a;">[FUNC]ps_init
+</span><span style="color:#bf616a;">int</span><span> watchdog enabled, period=10000
+</span><span style="color:#bf616a;">task</span><span> watchdog enabled, period=60000
+</span><span style="color:#bf616a;">[FUNC]func_init_extended</span><span> OVER!!!
+</span><span>
+</span><span style="color:#bf616a;">start_type:0
+</span><span style="color:#bf616a;">[THD]kmsgbk:[tcb]4158f8 </span><span style="color:#b48ead;">[</span><span>stack</span><span style="color:#b48ead;">]</span><span>4148f0-4158f0:4096:6
+</span><span style="color:#bf616a;">[THD]init_thread:[tcb]416138 </span><span style="color:#b48ead;">[</span><span>stack</span><span style="color:#b48ead;">]</span><span>415960-416130:2000:0
+</span><span style="color:#bf616a;">[THD]core_thread:[tcb]417000 </span><span style="color:#b48ead;">[</span><span>stack</span><span style="color:#b48ead;">]</span><span>4167f8-416ff8:2048:7
+</span><span style="color:#bf616a;">[THD]rf_arbitrate:[tcb]417968 </span><span style="color:#b48ead;">[</span><span>stack</span><span style="color:#b48ead;">]</span><span>417160-417960:2048:8
+</span><span style="color:#bf616a;">rf_thread_init</span><span> ok
+</span><span style="color:#bf616a;">[THD]ble:[tcb]418a80 </span><span style="color:#b48ead;">[</span><span>stack</span><span style="color:#b48ead;">]</span><span>417a78-418a78:4096:5
+</span><span style="color:#bf616a;">ble</span><span> mac:a0-24-42-0b-32-81
+</span><span style="color:#bf616a;">rwip_heap_env</span><span> addr:0x418ae8 size:4044
+</span><span style="color:#bf616a;">rwip_heap_db</span><span> addr:0x419ac0 size:3084
+</span><span style="color:#bf616a;">rwip_heap_msg</span><span> addr:0x41a6d8 size:10364
+</span><span style="color:#bf616a;">rwip_heap_non_ret</span><span> addr:0x41cf60 size:668
+</span><span style="color:#bf616a;">xvr_reg_init
+</span><span style="color:#bf616a;">tx_pwr_idx:20
+</span><span style="color:#bf616a;">enter</span><span> normal mode
+</span><span style="color:#bf616a;">[gapm_cmp_evt_handler]</span><span> conidx:0,operation:0x1,status:0x0
+</span><span style="color:#bf616a;">cmd-</span><span>&gt;addr.addr</span><span style="color:#b48ead;">[</span><span>5</span><span style="color:#b48ead;">]</span><span> :0
+</span><span style="color:#bf616a;">[gapm_cmp_evt_handler]</span><span> conidx:0,operation:0x3,status:0x0
+</span><span style="color:#bf616a;">gapm_cmp_evt:GAPM_SET_DEV_CONFIG
+</span><span style="color:#bf616a;">gapm_cmp_evt:wait</span><span> GAPM_GEN_RAND_NB
+</span><span style="color:#bf616a;">[gapm_cmp_evt_handler]</span><span> conidx:0,operation:0x33,status:0x0
+</span><span style="color:#bf616a;">gapm_cmp_evt:GAPM_GEN_RAND_NB
+</span><span style="color:#bf616a;">[gapm_cmp_evt_handler]</span><span> conidx:0,operation:0x33,status:0x0
+</span><span style="color:#bf616a;">gapm_cmp_evt:GAPM_GEN_RAND_NB
+</span><span style="color:#bf616a;">[gapm_cmp_evt_handler]</span><span> conidx:0,operation:0x5,status:0x0
+</span><span style="color:#bf616a;">gapm_cmp_evt:BLE_STACK_OK
+</span><span style="color:#bf616a;">[THD]cli:[tcb]41fc50 </span><span style="color:#b48ead;">[</span><span>stack</span><span style="color:#b48ead;">]</span><span>41ec48-41fc48:4096:3
+</span><span style="color:#bf616a;">Initializing</span><span> TCP/IP stack
+</span><span style="color:#bf616a;">tcp_port:60670
+</span><span style="color:#bf616a;">[THD]tcp/ip:[tcb]4129d8 </span><span style="color:#b48ead;">[</span><span>stack</span><span style="color:#b48ead;">]</span><span>417160-417960:2048:7
+</span><span style="color:#bf616a;">[THD]wp�BK7238_1.0.14
+</span><span style="color:#bf616a;">REG:cpsr</span><span>        spsr        r13         r14
+</span><span style="color:#bf616a;">SVC:0x000000D3</span><span>              0x00401C1C  0x000033A0
+</span><span style="color:#bf616a;">IRQ:0x000000D2</span><span>  0x00000010  0x00401E0C  0x2C049409
+</span><span style="color:#bf616a;">FIR:0x000000D1</span><span>  0x00000010  0x00401FFC  0x3289506B
+</span><span style="color:#bf616a;">SYS:0x000000DF</span><span>              0x0040192C  0x00000158
+</span><span style="color:#bf616a;">ST:0x00000000
+</span><span style="color:#bf616a;">[I/FAL]</span><span> Fal(V0.4.0)</span><span style="color:#bf616a;">success
+</span><span>                          </span><span style="color:#bf616a;">[I/OTA]</span><span> RT-Thread OTA package(V0.2.8-beken-1133282d-20220604) </span><span style="color:#bf616a;">initialize</span><span> success.
+</span></code></pre>
+<p>I got the above logs from the stock vendor firmware present on thGe BC101VE-11P. It mentions
+<code>Initializing TCP/IP stack</code> and <code>tcp_port:60670</code> (pretty much used by Tuya) which hints that
+the module is powered up and operating properly. I could also see the module showing up as
+"online" in the vendor shipped Android app at this point.</p>
+<h2 id="flashing-openbeken">Flashing OpenBeken</h2>
+<p>So far so good with the pins on BC101VE-11P matching with the ones mentioned in the official
+documentation as well as present on ESP8685-WROOM-03.</p>
+<p>Now to find out what pin boots the BC101VE-11P into UART flash/download mode. This doesn't
+seem to be clearly documented in the official datasheet.</p>
+<p>The datasheet on the ESP8685-WROOM-03 by Espressif mentions the following:</p>
+<p align="center">
+  <img src="/assets/image_preview.jpeg.3" width="1000">
+  <i>Chip Boot Mode Control on ESP8685-WROOM-03</i>
+</p>
+<p>Which doesn't make much sense as there's no pin labelled as GPIO8 on my BC101VE-11P (what pin
+should I pull-up/provide 3.3V to for booting into joint download boot mode?).</p>
+<p>I also came across this document on ESP8685-WROOM-03:
+<br>
+<a href="https://fcc.report/FCC-ID/2AC7Z-ESP868503/5612045.pdf">https://fcc.report/FCC-ID/2AC7Z-ESP868503/5612045.pdf</a></p>
+<p>It mentions:</p>
+<blockquote>
+<p>IO9 is internally logic high. If IO9 is set to pull-up, the Boot mode is selected. If this
+pin is pull-down or left floating, the Download mode is selected. For more information on
+ESP8685-WROOM-03, please refer to ESP8685-WROOM-03 Datasheet.</p>
+</blockquote>
+<p>Okay, both the above sources mention about pulling-down GPIO9 to for download mode. Let's just
+try this and forget about the GPIO8 for now. However, as I mentioned before, the test pin points
+present in the middle of the SoC do not the match between both the modules.
+This is inconvenient because now I'm not sure what pin on the BC101VE-11P corresponds to
+GPIO9.</p>
+<p>I got the top and bottom pins soldered on the module from a local shop to make everything
+manageable. The necessary ones are 3V3, GND, RX, TX.</p>
+<p align="center">
+  <img src="/assets/IMG_20250719_171151_preview.jpeg" width="425">
+  <i></i>
+</p>
+<p align="center">
+  <img src="/assets/IMG_20250719_171139_preview.jpeg" width="425">
+  <i>Some nice soldering!</i>
+</p>
+<p>And then connecting the pins all over again:</p>
+<table><thead><tr><th>NodeMCU ESP8266</th><th>USB to TTL</th></tr></thead><tbody>
+<tr><td>5V</td><td>5V</td></tr>
+<tr><td>GND</td><td>GND</td></tr>
+</tbody></table>
+<table><thead><tr><th>NodeMCU ESP8266</th><th>BC101VE-11P</th></tr></thead><tbody>
+<tr><td>3V3</td><td>3V3</td></tr>
+<tr><td>GND</td><td>GND</td></tr>
+</tbody></table>
+<table><thead><tr><th>BC101VE-11P</th><th>USB to TTL</th></tr></thead><tbody>
+<tr><td>RX</td><td>TX</td></tr>
+<tr><td>TX</td><td>RX</td></tr>
+</tbody></table>
+<p align="center">
+  <img src="/assets/IMG_20250719_174553_preview.jpeg" width="600">
+  <i>Yay it works!</i>
+</p>
+<p align="center">
+  <img src="/assets/IMG_20250719_174715_preview.jpeg" width="600">
+  <i>UART logs show up fine as well</i>
+</p>
+<p>I had to do some experimenting to try to boot the module into download mode. I connected the
+module to my lappy through UART and ran a loop to try dump the firmware from the flash:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> while true; </span><span style="color:#b48ead;">do </span><span style="color:#bf616a;">sudo</span><span> bk7231tools read_flash</span><span style="color:#bf616a;"> -d</span><span> /dev/ttyACM0</span><span style="color:#bf616a;"> -s</span><span> 0</span><span style="color:#bf616a;"> -l</span><span> 0x200000 switch_stock_fw.bin; </span><span style="color:#bf616a;">sleep</span><span> 1s; </span><span style="color:#b48ead;">done
+</span></code></pre>
+<p>The <code>0x200000</code> because BC101VE-11P is mentioned to have 2MB of flash storage.</p>
+<p>Then I pulled-down each of the test pins using my fingers to bring one end of the jumper cable
+in contact with GND temporarily, and then rebooting the module (by re-connecting 3V3 or GND).
+One pin at a time.</p>
+<p>After some fighting, I found that pulling-down one of the following points (as circled orange
+in the picture below) allowed my lappy to dump the flash! This means the module went into
+download mode.</p>
+<p align="center">
+  <img src="/assets/IMG_20250727_024344_marked_preview.jpeg" width="500">
+  <i>Pulling-down one of these pins causes the<br>module to boot into download mode</i>
+</p>
+<p>So to boot into download mode, additionally make one of these contacts:</p>
+<table><thead><tr><th>NodeMCU ESP8266</th><th>BC101VE-11P</th></tr></thead><tbody>
+<tr><td>GND</td><td>&lt;Unknown Pin-1&gt;</td></tr>
+<tr><td>GND</td><td>&lt;Unknown Pin-2&gt;</td></tr>
+</tbody></table>
+<p>Sometimes if one of the encircled pin didn't work, then the other encircled pin worked into
+booting the module into download mode most times.</p>
+<p>Once I had a backup of the stock firmware done, I downloaded the latest OpenBeken release for
+BK7238 for UART Flash from:
+<br>
+<a href="https://github.com/openshwprojects/OpenBK7231T_App/releases">https://github.com/openshwprojects/OpenBK7231T_App/releases</a></p>
+<p>and flashed it onto my module using:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> sudo bk7231tools write_flash</span><span style="color:#bf616a;"> -d</span><span> /dev/ttyACM0</span><span style="color:#bf616a;"> -s</span><span> 0</span><span style="color:#bf616a;"> -S</span><span> 0 OpenBK7238_QIO_1.18.138.bin
+</span></code></pre>
+<p>I had to also to pass <code>-B</code> flag to overwrite the bootloader. Before deciding to overwrite the
+bootloader, make sure you've taken a dump of the stock firmware. This is supposed to be risky.</p>
+<p>After the flashing was performed successfully, I rebooted the module into normal mode.
+Post this I am unable to see any logs through UART. However, an access point with its SSID
+"OpenBK7238_xxxxxxxx" did start to show up. Connecting to it and accessing 192.168.4.1
+in the webbrowser looks to have worked!</p>
+<h2 id="tbd-configuration">[TBD] Configuration</h2>
+<p>[Need to work on this section]</p>
+<p>I configured OpenBeken to connect to my Wi-Fi router. OpenBeken offers a GPIO testing tool
+under the Launch Web Application option accessible through the OpenBeken webserver running
+on the module. I figured the blue LED is connected invertedly to GPIO6 and the push button
+on the switch is connected to GPIO10.</p>
+<p>I still need to figure out what GPIO pin the relay is connected to, something I'll be
+able to do when I can get the plastic enclosure up and connect it 220V AC using pogo pins,
+which I believe should power up the relay.</p>
+<p align="center">
+  <img src="/assets/IMG_20250720_162523_preview.jpeg" width="600">
+  <i>My switch running OpenBeken v1.18.138</i>
+</p>
+<p>This is the configuration that shows up on my Web Application as of now:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>{
+</span><span>  &quot;vendor&quot;: &quot;Tuya&quot;,
+</span><span>  &quot;bDetailed&quot;: &quot;0&quot;,
+</span><span>  &quot;name&quot;: &quot;Full Device Name Here&quot;,
+</span><span>  &quot;model&quot;: &quot;enter short model name here&quot;,
+</span><span>  &quot;chip&quot;: &quot;BK7238&quot;,
+</span><span>  &quot;board&quot;: &quot;TODO&quot;,
+</span><span>  &quot;flags&quot;: &quot;1024&quot;,
+</span><span>  &quot;keywords&quot;: [
+</span><span>    &quot;TODO&quot;,
+</span><span>    &quot;TODO&quot;,
+</span><span>    &quot;TODO&quot;
+</span><span>  ],
+</span><span>  &quot;pins&quot;: {
+</span><span>    &quot;6&quot;: &quot;LED_n;57&quot;,
+</span><span>    &quot;10&quot;: &quot;Btn;53&quot;
+</span><span>  },
+</span><span>  &quot;command&quot;: &quot;&quot;,
+</span><span>  &quot;image&quot;: &quot;https://obrazki.elektroda.pl/YOUR_IMAGE.jpg&quot;,
+</span><span>  &quot;wiki&quot;: &quot;https://www.elektroda.com/rtvforum/topic_YOUR_TOPIC.html&quot;
+</span><span>}
+</span></code></pre>
+
+        </article>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  
+    
+<footer class="footer text-muted">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 order-last order-lg-first">
+				<ul class="list-inline">
+					
+						<li class="list-inline-item">Powered by <a href="https://www.getzola.org/">Zola</a></li>
+					
+				</ul>
+			</div>
+			<div class="col-lg-8 order-first order-lg-last text-lg-end">
+				<ul class="list-inline">
+					
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+  
+
+  
+<script type="text/javascript" src="https://ritiek.github.io/js/main.js" defer></script>
+
+  <script type="text/javascript" src="https://ritiek.github.io/plugins/elasticlunr.min.js" defer></script>
+  <script type="text/javascript" src="https://ritiek.github.io/search_index.en.js" defer></script>
+  <script type="text/javascript" src="https://ritiek.github.io/js/search.js" defer></script>
+
+  
+</body>
+</html>
