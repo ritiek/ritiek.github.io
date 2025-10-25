@@ -1,0 +1,27 @@
+[submodule "themes/anemone"]
+	path = themes/anemone
+	url = https://github.com/Speyll/anemone
+[submodule "themes/papermod"]
+	path = themes/papermod
+	url = https://github.com/cydave/zola-theme-papermod.git
+[submodule "themes/serene"]
+	path = themes/serene
+	url = https://github.com/isunjn/serene.git
+[submodule "themes/coffee"]
+	path = themes/coffee
+	url = https://github.com/Myxogastria0808/coffee.git
+[submodule "themes/boring"]
+	path = themes/boring
+	url = https://github.com/ssiyad/boring
+[submodule "themes/tabi"]
+	path = themes/tabi
+	url = https://github.com/welpo/tabi.git
+[submodule "themes/apollo"]
+	path = themes/apollo
+	url = https://github.com/not-matthias/apollo.git
+[submodule "themes/abridge"]
+	path = themes/abridge
+	url = https://github.com/jieiku/abridge
+[submodule "themes/adidoks"]
+	path = themes/adidoks
+	url = https://github.com/aaranxu/adidoks.git

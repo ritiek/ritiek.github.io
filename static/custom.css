@@ -1,0 +1,315 @@
+@media (min-width: 1200px) {
+    .wrap.container {
+        max-width: 1400px !important;
+    }
+
+    header .container,
+    footer .container {
+        max-width: 1240px !important;
+    }
+}
+
+@media (min-width: 1400px) {
+    .wrap.container {
+        max-width: 1600px !important;
+    }
+
+    header .container,
+    footer .container {
+        max-width: 1320px !important;
+    }
+}
+
+/* Fix image captions to appear below images */
+.figure {
+    display: block !important;
+}
+
+.figure-img {
+    margin-bottom: 0.5rem !important;
+    display: block !important;
+    width: 100% !important;
+}
+
+.figure-caption {
+    display: block !important;
+    text-align: center !important;
+    font-size: 0.875em !important;
+    color: #6c757d !important;
+    margin-top: 0.5rem !important;
+}
+
+/* Also target images that might not be in figure elements */
+img {
+    display: block !important;
+    margin: 0 auto 1rem auto !important;
+    max-width: 100% !important;
+    height: auto !important;
+    float: none !important;
+    clear: both !important;
+}
+
+/* Target any image with captions or in blog content */
+.blog img,
+article img,
+p img {
+    display: block !important;
+    margin: 0 auto 1rem auto !important;
+    max-width: 100% !important;
+    height: auto !important;
+    float: none !important;
+}
+
+/* Ensure any text after images (captions) also displays correctly */
+.blog p,
+article p {
+    clear: both !important;
+}
+
+/* Override any floating or inline styles for images and captions */
+img + p,
+img + span,
+img + em,
+img + strong {
+    display: block !important;
+    text-align: center !important;
+    margin-top: 0.5rem !important;
+    clear: both !important;
+}
+
+/* Remove the purple gradient line at the top */
+.header-bar {
+    display: none !important;
+}
+
+/* Remove gap between header and top of page */
+.navbar {
+    margin-top: 0 !important;
+}
+
+/* Tag styles */
+.badge {
+    background-color: #6c757d;
+    color: #fff;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    text-decoration: none;
+    font-size: 0.75rem;
+    margin-right: 0.25rem;
+}
+
+.badge:hover {
+    background-color: #5d2f86;
+    color: #fff;
+}
+
+.badge-sm {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.4rem;
+}
+
+/* Add border below header on homepage */
+.home .navbar {
+    border-bottom: 1px solid #495057 !important;
+}
+
+/* Reduce gap on homepage */
+.home .wrap.container {
+    margin-top: -3rem !important;
+}
+
+/* Social links styles */
+.social-links-bar {
+    background-color: transparent;
+    padding: 1.5rem 0;
+}
+
+body.dark .social-links-bar {
+    background-color: #212529;
+    border-bottom: 1px solid #495057;
+}
+
+body.dark .social-links .fa {
+    color: #adb5bd;
+}
+
+body.dark .social-links .fa:hover {
+    color: #fff;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.social-links .list-inline-item {
+    margin: 0;
+}
+
+.social-links .fa {
+    font-size: 1.2rem;
+    color: #000;
+}
+
+.social-links .fa:hover {
+    color: #333;
+}
+
+/* Left align page titles */
+body.page.single .page-header h1,
+body.page.single .page-header {
+    text-align: left !important;
+}
+
+/* Change post title links to teal in light mode */
+body:not(.dark) .card a,
+body:not(.dark) .blog-post-item a,
+body:not([class*="dark"]) .card a,
+body:not([class*="dark"]) .blog-post-item a {
+    color: #17a2b8 !important;
+}
+
+body:not(.dark) .card a:hover,
+body:not(.dark) .blog-post-item a:hover,
+body:not([class*="dark"]) .card a:hover,
+body:not([class*="dark"]) .blog-post-item a:hover {
+    color: #138496 !important;
+}
+
+/* Change navbar links to black in light mode */
+body:not(.dark) .navbar .nav-link,
+body:not([class*="dark"]) .navbar .nav-link {
+    color: #000 !important;
+}
+
+body:not(.dark) .navbar .nav-link:hover,
+body:not([class*="dark"]) .navbar .nav-link:hover {
+    color: #17a2b8 !important;
+}
+
+/* Change "View All Posts" button to teal in light mode */
+body:not(.dark) .btn-outline-primary,
+body:not([class*="dark"]) .btn-outline-primary {
+    color: #17a2b8 !important;
+    border-color: #17a2b8 !important;
+}
+
+body:not(.dark) .btn-outline-primary:hover,
+body:not([class*="dark"]) .btn-outline-primary:hover {
+    background-color: #17a2b8 !important;
+    border-color: #17a2b8 !important;
+    color: #fff !important;
+}
+
+/* Lighter code blocks in light mode */
+body:not(.dark) pre,
+body:not(.dark) code,
+body:not([class*="dark"]) pre,
+body:not([class*="dark"]) code {
+    background-color: #f8f8f8 !important;
+    border: 1px solid #e0e0e0 !important;
+}
+
+body:not(.dark) pre code,
+body:not([class*="dark"]) pre code {
+    background-color: transparent !important;
+    border: none !important;
+}
+
+body:not(.dark) pre,
+body:not(.dark) code,
+body:not(.dark) .z-code,
+body:not([class*="dark"]) pre,
+body:not([class*="dark"]) code,
+body:not([class*="dark"]) .z-code {
+    color: #000 !important;
+}
+
+body:not(.dark) .content code,
+body:not([class*="dark"]) .content code {
+    color: #000 !important;
+}
+
+/* Fix green text in code blocks for better readability */
+body:not(.dark) .z-string,
+body:not(.dark) .z-constant.z-other.z-symbol,
+body:not([class*="dark"]) .z-string,
+body:not([class*="dark"]) .z-constant.z-other.z-symbol {
+    color: #005cc5 !important;
+}
+
+body:not(.dark) .z-markup.z-inserted,
+body:not([class*="dark"]) .z-markup.z-inserted {
+    color: #22863a !important;
+}
+
+body:not(.dark) .z-entity.z-name.z-filename.z-find-in-files,
+body:not([class*="dark"]) .z-entity.z-name.z-filename.z-find-in-files {
+    color: #005cc5 !important;
+}
+
+/* Override fonts to match original Jekyll site */
+body {
+    font-family: 'PT Sans', sans-serif !important;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: 'Inter', sans-serif !important;
+}
+
+.navbar-brand {
+    font-family: 'Inter', sans-serif !important;
+}
+
+/* Remove hover effects on cards */
+.card:hover {
+    transform: none !important;
+    transition: none !important;
+}
+
+.card-body:hover {
+    transform: none !important;
+    transition: none !important;
+}
+
+/* Reduce table width */
+.content .table,
+.wrap .table,
+article .table {
+    width: 80% !important;
+    max-width: 800px !important;
+    margin: 0 auto !important;
+}
+
+.content .table th,
+.content .table td,
+.wrap .table th,
+.wrap .table td,
+article .table th,
+article .table td {
+    white-space: nowrap !important;
+    padding: 0.5rem !important;
+}
+
+/* Style the blog list */
+.blog-list {
+    margin-top: 2rem;
+}
+
+.blog-post-item {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    line-height: 1.4;
+}
+
+.blog-post-item a {
+    color: #5d2f86;
+    text-decoration: none;
+}
+
+.blog-post-item a:hover {
+    text-decoration: underline;
+}

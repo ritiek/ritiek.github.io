@@ -1,0 +1,42 @@
+{% extends "section.html" %}
+
+{% block body %}
+  {% set page_class = "blog list" %}
+{% endblock body %}
+
+{% block header %}
+  {# This value is matched by the config.extra.menu.main->section #}
+  {% set current_section = "blog" %}
+  {{ macros_header::header(current_section=current_section)}}
+{% endblock header %}
+
+{% block content %}
+<div class="wrap container" role="document">
+  <div class="content">
+    <div class="row justify-content-center">
+      <div class="col-md-12 col-lg-10 col-xxl-8">
+        <article>
+          <h1>{{ section.title }}</h1>
+          <div class="blog-list">
+            {% for page in paginator.pages %}
+            <div class="blog-post-item">
+              {{ page.date | date(format="%d %b %Y") }} » <a href="{{ page.path | safe }}">{{ page.title }}</a>
+              {% if page.taxonomies.tags %}
+              <div class="tags mt-1">
+                {% for tag in page.taxonomies.tags %}
+                  <a href="{{ get_taxonomy_url(kind='tags', name=tag) | safe }}" class="badge badge-secondary badge-sm">{{ tag }}</a>
+                {% endfor %}
+              </div>
+              {% endif %}
+            </div>
+            {% endfor %}
+          </div>
+          {% if paginator.previous or paginator.next %}
+            {{ macros_section_nav::navigation(paginator=paginator) }}
+          {% endif %}
+        </article>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
