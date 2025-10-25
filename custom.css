@@ -313,3 +313,26 @@ article .table td {
 .blog-post-item a:hover {
     text-decoration: underline;
 }
+
+/* Fix search suggestions menu in dark mode */
+body.dark #suggestions {
+    background-color: #2d3748 !important;
+    color: #e2e8f0 !important;
+}
+
+body.dark #suggestions div {
+    padding: 0.5rem 1rem;
+}
+
+body.dark #suggestions a {
+    color: #e2e8f0 !important;
+}
+
+body.dark #suggestions a:hover {
+    background-color: #4a5568 !important;
+    color: #fff !important;
+}
+
+body.dark #suggestions span {
+    color: #cbd5e0 !important;
+}
