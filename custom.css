@@ -275,16 +275,6 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     transition: none !important;
 }
 
-/* Remove or lighten card borders in dark mode */
-body.dark .card {
-    border-color: transparent !important;
-}
-
-/* Remove or lighten card borders in light mode */
-body:not(.dark) .card {
-    border-color: transparent !important;
-}
-
 /* Reduce table width */
 .content .table,
 .wrap .table,
@@ -345,4 +335,13 @@ body.dark #suggestions a:hover {
 
 body.dark #suggestions span {
     color: #cbd5e0 !important;
+}
+
+/* Remove card borders */
+body.dark .card {
+    border-color: transparent !important;
+}
+
+body:not(.dark) .card {
+    border-color: transparent !important;
 }
