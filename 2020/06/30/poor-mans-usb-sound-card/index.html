@@ -344,9 +344,28 @@ on the Linux machine so strangers won't connect:</p>
   
 <script type="text/javascript" src="https://ritiek.github.io/js/main.js" defer></script>
 
-  <script type="text/javascript" src="https://ritiek.github.io/plugins/elasticlunr.min.js" defer></script>
-  <script type="text/javascript" src="https://ritiek.github.io/search_index.en.js" defer></script>
-  <script type="text/javascript" src="https://ritiek.github.io/js/search.js" defer></script>
+  <script type="text/javascript" src="https://ritiek.github.io/plugins/elasticlunr.min.js"></script>
+  <script type="text/javascript">
+    console.log("Loading search index...");
+    fetch("https://ritiek.github.io/search_index.en.json")
+      .then(response => {
+        console.log("Search index response:", response.status);
+        if (!response.ok) {
+          throw new Error('Search index not found');
+        }
+        return response.json();
+      })
+      .then(data => { 
+        console.log("Search index loaded successfully");
+        window.searchIndex = data;
+        var script = document.createElement('script');
+        script.src = "https://ritiek.github.io/js/search.js";
+        document.body.appendChild(script);
+      })
+      .catch(error => {
+        console.error("Error loading search index:", error);
+      });
+  </script>
 
   
 </body>
