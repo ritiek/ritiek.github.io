@@ -131,6 +131,7 @@ header {
 /* Ensure consistent navbar border color in dark mode */
 body.dark .navbar {
     border-bottom-color: #495057 !important;
+    opacity: 1 !important;
 }
 
 /* Reduce gap on homepage */
@@ -334,6 +335,12 @@ article .table td {
     text-decoration: underline;
 }
 
+/* Bring search results to front */
+#suggestions {
+    position: fixed !important;
+    z-index: 9999 !important;
+}
+
 /* Fix search suggestions menu in dark mode */
 body.dark #suggestions {
     background-color: #2d3748 !important;
@@ -355,12 +362,6 @@ body.dark #suggestions a:hover {
 
 body.dark #suggestions span {
     color: #cbd5e0 !important;
-}
-
-/* Bring search results to front */
-#suggestions {
-    position: absolute !important;
-    z-index: 1000 !important;
 }
 
 /* Remove card borders */
