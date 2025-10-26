@@ -132,6 +132,11 @@ header {
 body.dark .navbar {
     border-bottom-color: #495057 !important;
     opacity: 1 !important;
+    z-index: 1040 !important;
+}
+
+body.dark header {
+    z-index: 1040 !important;
 }
 
 /* Reduce gap on homepage */
@@ -337,14 +342,14 @@ article .table td {
 
 /* Bring search results to front */
 #suggestions {
-    position: fixed !important;
-    z-index: 9999 !important;
+    z-index: 1050 !important;
 }
 
 /* Fix search suggestions menu in dark mode */
 body.dark #suggestions {
     background-color: #2d3748 !important;
     color: #e2e8f0 !important;
+    z-index: 1050 !important;
 }
 
 body.dark #suggestions div {
