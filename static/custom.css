@@ -131,6 +131,7 @@ header {
 /* Ensure consistent navbar border color in dark mode */
 body.dark .navbar {
     border-bottom-color: #495057 !important;
+    opacity: 1 !important;
 }
 
 /* Reduce gap on homepage */
@@ -332,6 +333,12 @@ article .table td {
 
 .blog-post-item a:hover {
     text-decoration: underline;
+}
+
+/* Bring search results to front */
+#suggestions {
+    position: fixed !important;
+    z-index: 9999 !important;
 }
 
 /* Fix search suggestions menu in dark mode */
