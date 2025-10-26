@@ -357,6 +357,12 @@ body.dark #suggestions span {
     color: #cbd5e0 !important;
 }
 
+/* Bring search results to front */
+#suggestions {
+    position: absolute !important;
+    z-index: 1000 !important;
+}
+
 /* Remove card borders */
 .card {
     border: none !important;
