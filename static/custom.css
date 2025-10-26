@@ -82,9 +82,24 @@ img + strong {
     display: none !important;
 }
 
-/* Remove gap between header and top of page */
+/* Slight gap at top of page */
 .navbar {
+    margin-top: 1rem !important;
+}
+
+/* Make header static (not sticky) so it disappears when scrolling */
+.navbar {
+    position: static !important;
+}
+
+/* Remove extra space at top of page */
+body {
+    padding-top: 0 !important;
+}
+
+header {
     margin-top: 0 !important;
+    padding-top: 0 !important;
 }
 
 /* Tag styles */
@@ -108,9 +123,14 @@ img + strong {
     padding: 0.2rem 0.4rem;
 }
 
-/* Add border below header on homepage */
+/* Add border below header on homepage - match blog post page */
 .home .navbar {
     border-bottom: 1px solid #495057 !important;
+}
+
+/* Ensure consistent navbar border color in dark mode */
+body.dark .navbar {
+    border-bottom-color: #495057 !important;
 }
 
 /* Reduce gap on homepage */
@@ -335,4 +355,9 @@ body.dark #suggestions a:hover {
 
 body.dark #suggestions span {
     color: #cbd5e0 !important;
+}
+
+/* Remove card borders */
+.card {
+    border: none !important;
 }
