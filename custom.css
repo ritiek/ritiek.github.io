@@ -125,7 +125,7 @@ header {
 
 /* Add border below header on homepage - match blog post page */
 .home .navbar {
-    border-bottom: 1px solid #495057 !important;
+    border-bottom: 1px solid #e9ecef !important;
 }
 
 /* Ensure consistent navbar border color in dark mode */
