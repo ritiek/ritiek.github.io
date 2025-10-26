@@ -2,7 +2,7 @@
 title = "Extendable 170-point breadboard on Pimoroni Explorer HAT Pro"
 date = 2025-10-01
 path = "2025/10/01/extendable-170-point-breadboard-on-pimoroni-explorer-hat-pro"
-template = "page.html"
+template = "blog/page.html"
 [taxonomies]
 tags = []
 +++

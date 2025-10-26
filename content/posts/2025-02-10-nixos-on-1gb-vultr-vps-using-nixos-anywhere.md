@@ -2,7 +2,7 @@
 title = "NixOS on 1 GB Vultr VPS using nixos-anywhere"
 date = 2025-02-10
 path = "2025/02/10/nixos-on-1gb-vultr-vps-using-nixos-anywhere"
-template = "page.html"
+template = "blog/page.html"
 [taxonomies]
 tags = []
 +++

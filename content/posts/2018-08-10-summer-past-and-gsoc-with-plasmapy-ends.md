@@ -2,7 +2,7 @@
 title = "Summer past and GSoC ends"
 date = 2018-08-10
 path = "2018/08/10/summer-past-and-gsoc-with-plasmapy-ends"
-template = "page.html"
+template = "blog/page.html"
 [taxonomies]
 tags = []
 +++

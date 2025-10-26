@@ -2,7 +2,7 @@
 title = "Capturing and piping audio output from a process in Linux"
 date = 2023-06-12
 path = "2023/06/12/capturing-and-piping-audio-output-from-a-process-in-linux"
-template = "page.html"
+template = "blog/page.html"
 [taxonomies]
 tags = []
 +++

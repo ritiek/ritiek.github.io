@@ -2,7 +2,7 @@
 title = "Sharing Yubikey over the network"
 date = 2023-11-14
 path = "2023/11/14/sharing-yubikey-over-the-network"
-template = "page.html"
+template = "blog/page.html"
 [taxonomies]
 tags = []
 +++

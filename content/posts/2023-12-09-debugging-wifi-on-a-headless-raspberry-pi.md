@@ -2,7 +2,7 @@
 title = "Debugging WiFi on a headless Raspberry Pi"
 date = 2023-12-09
 path = "2023/12/09/debugging-wifi-on-a-headless-raspberry-pi"
-template = "page.html"
+template = "blog/page.html"
 [taxonomies]
 tags = []
 +++

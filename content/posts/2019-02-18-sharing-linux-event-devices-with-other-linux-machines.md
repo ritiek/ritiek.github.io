@@ -2,7 +2,7 @@
 title = "Sharing Linux event devices with other Linux machines"
 date = 2019-02-18
 path = "2019/02/18/sharing-linux-event-devices-with-other-linux-machines"
-template = "page.html"
+template = "blog/page.html"
 [taxonomies]
 tags = []
 +++

@@ -2,7 +2,7 @@
 title = "Completing our Plasma factory implementation"
 date = 2018-06-13
 path = "2018/06/13/completing-our-plasma-factory-implementation"
-template = "page.html"
+template = "blog/page.html"
 [taxonomies]
 tags = []
 +++

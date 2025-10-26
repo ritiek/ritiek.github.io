@@ -2,7 +2,7 @@
 title = "Poor man's USB sound card"
 date = 2020-06-30
 path = "2020/06/30/poor-mans-usb-sound-card"
-template = "page.html"
+template = "blog/page.html"
 [taxonomies]
 tags = []
 +++

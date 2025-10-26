@@ -2,7 +2,7 @@
 title = "Re-doing my Homelab with NixOS"
 date = 2025-09-09
 path = "2025/09/09/re-doing-my-homelab-with-nixos"
-template = "page.html"
+template = "blog/page.html"
 [taxonomies]
 tags = []
 +++

@@ -2,7 +2,7 @@
 title = "Flashing Tasmota on a Tuya based Bulb"
 date = 2022-10-04
 path = "2022/10/04/flashing-tasmota-on-a-tuya-based-bulb"
-template = "page.html"
+template = "blog/page.html"
 [taxonomies]
 tags = []
 +++

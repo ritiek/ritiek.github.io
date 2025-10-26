@@ -2,7 +2,7 @@
 title = "Adding support for JHTD in PlasmaPy"
 date = 2018-07-11
 path = "2018/07/11/adding-support-for-jhtd-in-plasmapy"
-template = "page.html"
+template = "blog/page.html"
 [taxonomies]
 tags = []
 +++

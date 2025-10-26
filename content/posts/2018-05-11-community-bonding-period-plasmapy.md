@@ -2,7 +2,7 @@
 title = "Community Bonding Period"
 date = 2018-05-11
 path = "2018/05/11/community-bonding-period-plasmapy"
-template = "page.html"
+template = "blog/page.html"
 [taxonomies]
 tags = []
 +++

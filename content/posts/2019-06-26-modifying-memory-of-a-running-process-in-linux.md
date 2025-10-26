@@ -2,7 +2,7 @@
 title = "Modifying memory of a running process in Linux"
 date = 2019-06-26
 path = "2019/06/26/modifying-memory-of-a-running-process-in-linux"
-template = "page.html"
+template = "blog/page.html"
 [taxonomies]
 tags = []
 +++

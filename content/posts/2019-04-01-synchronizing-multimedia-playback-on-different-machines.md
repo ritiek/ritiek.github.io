@@ -2,7 +2,7 @@
 title = "Synchronizing multimedia playback on different machines"
 date = 2019-04-01
 path = "2019/04/01/synchronizing-multimedia-playback-on-different-machines"
-template = "page.html"
+template = "blog/page.html"
 [taxonomies]
 tags = []
 +++

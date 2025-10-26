@@ -2,7 +2,7 @@
 title = "I installed Linux on my USB flash drive!"
 date = 2019-05-31
 path = "2019/05/31/i-installed-linux-on-my-usb-flash-drive"
-template = "page.html"
+template = "blog/page.html"
 [taxonomies]
 tags = []
 +++

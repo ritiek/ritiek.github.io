@@ -2,7 +2,7 @@
 title = "GSoC with MetaBrainz (in Rust!)"
 date = 2021-07-15
 path = "2021/07/15/gsoc-with-metabrainz-in-rust"
-template = "page.html"
+template = "blog/page.html"
 [taxonomies]
 tags = []
 +++

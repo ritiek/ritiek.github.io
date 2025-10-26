@@ -2,7 +2,7 @@
 title = "Setup local network hostname resolution through Pi-hole"
 date = 2025-10-02
 path = "2025/10/02/setup-local-network-hostname-resolution-through-pihole"
-template = "page.html"
+template = "blog/page.html"
 [taxonomies]
 tags = []
 +++

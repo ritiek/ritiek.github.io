@@ -2,7 +2,7 @@
 title = "Further work and thoughts on PlasmaPy"
 date = 2018-07-23
 path = "2018/07/23/further-work-and-thoughts-on-plasmapy"
-template = "page.html"
+template = "blog/page.html"
 [taxonomies]
 tags = []
 +++

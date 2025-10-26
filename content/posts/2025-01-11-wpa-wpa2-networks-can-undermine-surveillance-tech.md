@@ -2,7 +2,7 @@
 title = "WPA/WPA2 networks can undermine surveillance tech"
 date = 2025-01-11
 path = "2025/01/11/wpa-wpa2-networks-can-undermine-surveillance-tech"
-template = "page.html"
+template = "blog/page.html"
 [taxonomies]
 tags = []
 +++

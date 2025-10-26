@@ -2,7 +2,7 @@
 title = "Installing Manjaro on ASUS Zenbook 14 (with ScreenPad 2.0)"
 date = 2022-01-03
 path = "2022/01/03/manjaro-on-asus-zenbook-14-screenpad-v2"
-template = "page.html"
+template = "blog/page.html"
 [taxonomies]
 tags = []
 +++

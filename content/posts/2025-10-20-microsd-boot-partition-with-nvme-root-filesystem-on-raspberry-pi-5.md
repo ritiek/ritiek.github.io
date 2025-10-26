@@ -2,7 +2,7 @@
 title = "MicroSD Boot Partition with NVMe Root Filesystem on Raspberry Pi 5"
 date = 2025-10-20
 path = "2025/10/20/microsd-boot-partition-with-nvme-root-filesystem-on-raspberry-pi-5"
-template = "page.html"
+template = "blog/page.html"
 [taxonomies]
 tags = []
 +++

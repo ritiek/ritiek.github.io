@@ -2,7 +2,7 @@
 title = "Final GSoC update on musicbrainz_rs"
 date = 2021-08-20
 path = "2021/08/20/final-gsoc-update-on-musicbrainz-rs"
-template = "page.html"
+template = "blog/page.html"
 [taxonomies]
 tags = []
 +++

@@ -2,7 +2,7 @@
 title = "Flashing OpenBeken on 3-pin Wi-Fi switch based on BC101VE-11P (BK7238)"
 date = 2025-07-27
 path = "2025/07/27/flashing-openbeken-on-3-pin-wifi-switch-based-on-bc101ve-11p"
-template = "page.html"
+template = "blog/page.html"
 [taxonomies]
 tags = []
 +++

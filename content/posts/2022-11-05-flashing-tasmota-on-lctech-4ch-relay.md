@@ -2,7 +2,7 @@
 title = "Flashing Tasmota on LC Tech 5V 4CH Relay"
 date = 2022-11-05
 path = "2022/11/05/flashing-tasmota-on-lctech-4ch-relay"
-template = "page.html"
+template = "blog/page.html"
 [taxonomies]
 tags = []
 +++

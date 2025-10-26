@@ -2,7 +2,7 @@
 title = "Docker freezes machine by spiking up CPU I/O to 100"
 date = 2024-08-10
 path = "2024/08/10/docker-freezes-machine-by-spiking-up-cpu-io-to-100"
-template = "page.html"
+template = "blog/page.html"
 [taxonomies]
 tags = []
 +++

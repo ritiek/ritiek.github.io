@@ -2,7 +2,7 @@
 title = "Homelabbing on a Raspberry Pi 4"
 date = 2023-12-26
 path = "2023/12/26/homelabbing-on-a-raspberry-pi-4"
-template = "page.html"
+template = "blog/page.html"
 [taxonomies]
 tags = []
 +++

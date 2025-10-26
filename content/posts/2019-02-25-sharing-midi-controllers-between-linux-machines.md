@@ -2,7 +2,7 @@
 title = "Sharing MIDI controllers between Linux machines"
 date = 2019-02-25
 path = "2019/02/25/sharing-midi-controllers-between-linux-machines"
-template = "page.html"
+template = "blog/page.html"
 [taxonomies]
 tags = []
 +++

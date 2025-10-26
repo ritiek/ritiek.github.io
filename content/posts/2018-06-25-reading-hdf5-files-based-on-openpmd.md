@@ -2,7 +2,7 @@
 title = "Reading HDF5 files based on OpenPMD"
 date = 2018-06-25
 path = "2018/06/25/reading-hdf5-files-based-on-openpmd"
-template = "page.html"
+template = "blog/page.html"
 [taxonomies]
 tags = []
 +++

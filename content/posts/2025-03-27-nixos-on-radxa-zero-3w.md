@@ -2,7 +2,7 @@
 title = "NixOS on Radxa Zero 3W"
 date = 2025-03-27
 path = "2025/03/27/nixos-on-radxa-zero-3w"
-template = "page.html"
+template = "blog/page.html"
 [taxonomies]
 tags = []
 +++

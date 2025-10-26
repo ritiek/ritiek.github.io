@@ -2,7 +2,7 @@
 title = "Fixing the annoying static noise from my Raspberry Pi's 3.5mm jack"
 date = 2018-12-17
 path = "2018/12/17/fixing-the-annoying-static-noise-from-my-raspberry-pis-3.5mm-jack"
-template = "page.html"
+template = "blog/page.html"
 [taxonomies]
 tags = []
 +++
