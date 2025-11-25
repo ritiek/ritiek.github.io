@@ -85,5 +85,29 @@ pre = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0
 url = "https://github.com/ritiek"
 weight = 10
 
+[[extra.menu.social]]
+name = "Stack Overflow"
+pre = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20"/><path d="M4 16h16"/><path d="M6 12h12"/><path d="M8 8h8"/><path d="M10 4h4"/></svg>'
+url = "https://stackoverflow.com/users/6554943/ritiek"
+weight = 20
+
+[[extra.menu.social]]
+name = "Reddit"
+pre = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/><path d="M9 15c.5.7 1.5 1 3 1s2.5-.3 3-1"/></svg>'
+url = "https://www.reddit.com/user/Ritiek"
+weight = 30
+
+[[extra.menu.social]]
+name = "LinkedIn"
+pre = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>'
+url = "https://www.linkedin.com/in/ritiek"
+weight = 40
+
+[[extra.menu.social]]
+name = "RSS"
+pre = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>'
+url = "/atom.xml"
+weight = 50
+
 [extra.footer]
 info = 'Powered by <a href="https://www.getzola.org/">Zola</a>'
