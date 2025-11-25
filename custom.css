@@ -373,3 +373,9 @@ body.dark #suggestions span {
 .card {
     border: none !important;
 }
+
+/* Increase search bar width by 1.3 times to the left */
+.form-control.is-search {
+    width: 130% !important;
+    transform: translateX(-23%) !important;
+}
