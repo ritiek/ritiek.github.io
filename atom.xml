@@ -29,8 +29,8 @@ decoding, it still lacks H.264 hardware encoding. For me to play my HEVC encoded
 Stick, I need to transcode my media from HEVC to H.264. I&#x27;ve tried out software transcoding to H.264 through my RPi5
 itself, but RPi5 isn&#x27;t performant enough to re-encode in real-time, more so after
 &lt;a href=&quot;https:&#x2F;&#x2F;jellyfin.org&#x2F;docs&#x2F;general&#x2F;post-install&#x2F;transcoding&#x2F;hardware-acceleration&#x2F;#raspberry-pi-hardware-acceleration-support-deprecation&quot;&gt;Jellyfin deprecated support for hardware decoding on RPi5&lt;&#x2F;a&gt;
-likely even for hardware decoding of HEVC media, which the Pi5 itself is capable of. I could pre-transcode everything
-HEVC to H.264, but I also like the storage space savings I get from storing my media encoded as HEVC.&lt;&#x2F;p&gt;
+likely even for hardware decoding of HEVC media, which the Pi5 itself is capable of. I could pre-transcode and store
+everything HEVC to H.264, but then I also like the storage space savings I get from storing my media encoded as HEVC.&lt;&#x2F;p&gt;
 &lt;p&gt;The Fire TV Stick variant I own is also end-of-life in regards to software updates and the last official (and
 unofficial) released Android version for it is 5.x. While Jellyfin installs fine on the stick, the problem is that
 my RPi5 and my stick aren&#x27;t on the same local network. I originally planned to tunnel my stick to reach my RPi5&#x27;s
@@ -60,7 +60,7 @@ supports covering the case of transcoding Jellyfin media as mentioned in the pro
 &lt;p&gt;Setting up rffmpeg to work properly with Jellyfin turned out to be quite an adventure (as we&#x27;ll see below) which is
 what prompted me to write this post. It did end up working nicely for my use case once everything was into place.&lt;&#x2F;p&gt;
 &lt;h3 id=&quot;my-jellyfin-setup&quot;&gt;My Jellyfin setup&lt;&#x2F;h3&gt;
-&lt;p&gt;I run a containerized version of Jellyfin (image provided by linuxserver) through Docker on my RPi5 through OCI
+&lt;p&gt;I run a containerized version of Jellyfin (image provided by linuxserver) using Docker on my RPi5 through OCI
 containers on NixOS. My RPi5&#x27;s NixOS config for this Jellyfin server before setting up rffmpeg can be found
 &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;ritiek&#x2F;dotfiles&#x2F;blob&#x2F;6a4d93af53f6ec7f46397baf38a9aea5948a2f91&#x2F;machines&#x2F;pilab&#x2F;compose&#x2F;jellyfin.nix&quot;&gt;here&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
 &lt;h3 id=&quot;integrating-rffmpeg&quot;&gt;Integrating rffmpeg&lt;&#x2F;h3&gt;

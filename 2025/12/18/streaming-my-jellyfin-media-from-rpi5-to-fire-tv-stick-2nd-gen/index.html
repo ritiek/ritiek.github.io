@@ -13,8 +13,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://ritiek.github.io/main.css?v=1766088739">
-<link rel="stylesheet" href="https://ritiek.github.io/custom.css?v=1766088739">
+<link rel="stylesheet" href="https://ritiek.github.io/main.css?v=1766089229">
+<link rel="stylesheet" href="https://ritiek.github.io/custom.css?v=1766089229">
 
 
 
@@ -326,8 +326,8 @@ decoding, it still lacks H.264 hardware encoding. For me to play my HEVC encoded
 Stick, I need to transcode my media from HEVC to H.264. I've tried out software transcoding to H.264 through my RPi5
 itself, but RPi5 isn't performant enough to re-encode in real-time, more so after
 <a href="https://jellyfin.org/docs/general/post-install/transcoding/hardware-acceleration/#raspberry-pi-hardware-acceleration-support-deprecation">Jellyfin deprecated support for hardware decoding on RPi5</a>
-likely even for hardware decoding of HEVC media, which the Pi5 itself is capable of. I could pre-transcode everything
-HEVC to H.264, but I also like the storage space savings I get from storing my media encoded as HEVC.</p>
+likely even for hardware decoding of HEVC media, which the Pi5 itself is capable of. I could pre-transcode and store
+everything HEVC to H.264, but then I also like the storage space savings I get from storing my media encoded as HEVC.</p>
 <p>The Fire TV Stick variant I own is also end-of-life in regards to software updates and the last official (and
 unofficial) released Android version for it is 5.x. While Jellyfin installs fine on the stick, the problem is that
 my RPi5 and my stick aren't on the same local network. I originally planned to tunnel my stick to reach my RPi5's
@@ -357,7 +357,7 @@ supports covering the case of transcoding Jellyfin media as mentioned in the pro
 <p>Setting up rffmpeg to work properly with Jellyfin turned out to be quite an adventure (as we'll see below) which is
 what prompted me to write this post. It did end up working nicely for my use case once everything was into place.</p>
 <h3 id="my-jellyfin-setup">My Jellyfin setup</h3>
-<p>I run a containerized version of Jellyfin (image provided by linuxserver) through Docker on my RPi5 through OCI
+<p>I run a containerized version of Jellyfin (image provided by linuxserver) using Docker on my RPi5 through OCI
 containers on NixOS. My RPi5's NixOS config for this Jellyfin server before setting up rffmpeg can be found
 <a href="https://github.com/ritiek/dotfiles/blob/6a4d93af53f6ec7f46397baf38a9aea5948a2f91/machines/pilab/compose/jellyfin.nix">here</a>.</p>
 <h3 id="integrating-rffmpeg">Integrating rffmpeg</h3>
