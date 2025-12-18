@@ -8,7 +8,7 @@
     <updated>2025-12-18T00:00:00+00:00</updated>
     <id>https://ritiek.github.io/posts/atom.xml</id>
     <entry xml:lang="en">
-        <title>Streaming my Jellyfin media from RPi5 to Fire TV Stick (2nd Gen)</title>
+        <title>Streaming my Jellyfin media from RPi5 to a decade old Fire TV Stick (2nd Gen)</title>
         <published>2025-12-18T00:00:00+00:00</published>
         <updated>2025-12-18T00:00:00+00:00</updated>
         
@@ -20,10 +20,10 @@
           </name>
         </author>
         
-        <link rel="alternate" type="text/html" href="https://ritiek.github.io/2025/12/18/streaming-my-jellyfin-media-from-rpi5-to-fire-tv-stick-2nd-gen/"/>
-        <id>https://ritiek.github.io/2025/12/18/streaming-my-jellyfin-media-from-rpi5-to-fire-tv-stick-2nd-gen/</id>
+        <link rel="alternate" type="text/html" href="https://ritiek.github.io/2025/12/18/streaming-my-jellyfin-media-from-rpi5-to-a-decade-old-fire-tv-stick-2nd-gen/"/>
+        <id>https://ritiek.github.io/2025/12/18/streaming-my-jellyfin-media-from-rpi5-to-a-decade-old-fire-tv-stick-2nd-gen/</id>
         
-        <content type="html" xml:base="https://ritiek.github.io/2025/12/18/streaming-my-jellyfin-media-from-rpi5-to-fire-tv-stick-2nd-gen/">&lt;p&gt;I own a decade old Amazon Fire TV Stick (Gen 2) which only supports H.264 hardware decoding. I&#x27;ve a couple of HEVC
+        <content type="html" xml:base="https://ritiek.github.io/2025/12/18/streaming-my-jellyfin-media-from-rpi5-to-a-decade-old-fire-tv-stick-2nd-gen/">&lt;p&gt;I own a decade old Amazon Fire TV Stick (Gen 2) which only supports H.264 hardware decoding. I&#x27;ve a couple of HEVC
 encoded media files on my self-hosted Jellyfin instance which runs on my RPi5. RPi5 although supports HEVC hardware
 decoding, it still lacks H.264 hardware encoding. For me to play my HEVC encoded Jellyfin media files on my Fire TV
 Stick, I need to transcode my media from HEVC to H.264. I&#x27;ve tried out software transcoding to H.264 through my RPi5
