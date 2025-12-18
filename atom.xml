@@ -152,8 +152,7 @@ the Video engine a little more as seen in &lt;code&gt;intel_gpu_top&lt;&#x2F;cod
 &lt;p&gt;This I like, since it frees up the Render&#x2F;3D engine for other tasks (web browsing and all).&lt;&#x2F;p&gt;
 &lt;h3 id=&quot;security-concerns&quot;&gt;Security concerns&lt;&#x2F;h3&gt;
 &lt;p&gt;Right now, I&#x27;ve been telling rffmpeg to login into my personal lappy as my default user via SSH. I need to create
-a jellyfin specific user on my lappy with limited permissions and scope, and re-configure rffmpeg to login as this
-user instead.&lt;&#x2F;p&gt;
+a jellyfin specific user on my lappy with limited permissions, and re-configure rffmpeg to login as this user instead.&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;thoughts&quot;&gt;Thoughts&lt;&#x2F;h2&gt;
 &lt;p&gt;That&#x27;s pretty much it and I&#x27;m happy with this implementation. Although, it requires me to keep my lappy on anytime I
 am streaming to my Fire TV Stick but I think I&#x27;m okay with the trade-offs as of writing this. Happy scavenging!&lt;&#x2F;p&gt;
