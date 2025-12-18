@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="preload" as="font" href="https://ritiek.github.io/fonts/vendor/jost/jost-v4-latin-regular.woff2" type="font/woff2" crossorigin>
+  <link rel="preload" as="font" href="https://ritiek.github.io/fonts/vendor/jost/jost-v4-latin-700.woff2"  type="font/woff2" crossorigin>
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://ritiek.github.io/main.css?v=1766088677">
+<link rel="stylesheet" href="https://ritiek.github.io/custom.css?v=1766088677">
+
+
+
+  
+  
+  
+  
+  
+    
+  
+
+  
+  
+    
+    
+  
+  
+  
+    
+  
+  
+  
+  
+    
+  
+  
+  
+
+
+  <meta name="robots" content="index, follow">
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
+
+	
+
+
+	
+
+<title>Streaming my Jellyfin media from RPi5 to Fire TV Stick (2nd Gen) | Ritiek Malhotra</title>
+<meta name="description" content="Just some of my adventures!">
+<link rel="canonical" href="https://ritiek.github.io/2025/12/18/streaming-my-jellyfin-media-from-rpi5-to-fire-tv-stick-2nd-gen/">
+
+
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <meta name="twitter:title" content="Streaming my Jellyfin media from RPi5 to Fire TV Stick (2nd Gen)">
+  <meta name="twitter:description" content="Just some of my adventures!">
+  <meta name="twitter:site" content="@">
+  <meta name="twitter:creator" content="@">
+  
+  <meta property="og:title" content="Streaming my Jellyfin media from RPi5 to Fire TV Stick (2nd Gen)">
+  <meta property="og:description" content="Just some of my adventures!">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://ritiek.github.io/2025/12/18/streaming-my-jellyfin-media-from-rpi5-to-fire-tv-stick-2nd-gen/">
+
+  
+
+  <meta property="og:updated_time" content="">
+  <meta property="og:site_name" content="Streaming my Jellyfin media from RPi5 to Fire TV Stick (2nd Gen)">
+
+  
+
+  
+
+  
+  <meta property="article:publisher" content="https://www.facebook.com/">
+  <meta property="article:author" content="https://www.facebook.com/">
+  <meta property="og:locale" content="en_US">
+
+
+
+
+
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BreadcrumbList",
+    
+      
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          {
+            "@type": "ListItem",
+            "position":  1 ,
+            "name": "Home",
+            "item": "https://ritiek.github.io/"
+          },
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  2 ,
+            "name": "2025",
+            "item": "https://ritiek.github.io/2025/"
+          },
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  3 ,
+            "name": "12",
+            "item": "https://ritiek.github.io/2025/12/"
+          },
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  4 ,
+            "name": "18",
+            "item": "https://ritiek.github.io/2025/12/18/"
+          },
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  5 ,
+            "name": "Streaming My Jellyfin Media From Rpi5 To Fire Tv Stick 2nd Gen",
+            "item": "https://ritiek.github.io/2025/12/18/streaming-my-jellyfin-media-from-rpi5-to-fire-tv-stick-2nd-gen/"
+          },
+        
+      
+    
+  }
+</script>
+
+
+
+
+
+
+
+  <meta name="theme-color" content="#fff">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://ritiek.github.io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://ritiek.github.io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://ritiek.github.io/favicon-16x16.png">
+  
+    <link rel="manifest" href="https://ritiek.github.io/site.webmanifest" crossorigin>
+  
+
+
+  
+
+</head>
+
+  
+
+<body class="blog single">
+  
+  
+<div class="header-bar fixed-top"></div>
+<header class="navbar fixed-top navbar-expand-md navbar-light">
+	<div class="container">
+		<input class="menu-btn order-0" type="checkbox" id="menu-btn">
+		<label class="menu-icon d-md-none" for="menu-btn"><span class="navicon"></span></label>
+		<a class="navbar-brand order-1 order-md-0 me-auto" href="https://ritiek.github.io">Ritiek Malhotra</a>
+		<button id="mode" class="btn btn-link order-2 order-md-4" type="button" aria-label="Toggle mode">
+			<span class="toggle-dark"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></span>
+			<span class="toggle-light"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg></span>
+		</button>
+		<ul class="navbar-nav fork-me order-3 order-md-5">
+			
+				
+					<li class="nav-item">
+						<a class="nav-link" href="https://github.com/ritiek"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg><span class="ms-2 visually-hidden">GitHub</span></a>
+					</li>
+				
+					<li class="nav-item">
+						<a class="nav-link" href="https://stackoverflow.com/users/6554943/ritiek"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20"/><path d="M4 16h16"/><path d="M6 12h12"/><path d="M8 8h8"/><path d="M10 4h4"/></svg><span class="ms-2 visually-hidden">Stack Overflow</span></a>
+					</li>
+				
+					<li class="nav-item">
+						<a class="nav-link" href="https://www.reddit.com/user/Ritiek"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/><path d="M9 15c.5.7 1.5 1 3 1s2.5-.3 3-1"/></svg><span class="ms-2 visually-hidden">Reddit</span></a>
+					</li>
+				
+					<li class="nav-item">
+						<a class="nav-link" href="https://www.linkedin.com/in/ritiek"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg><span class="ms-2 visually-hidden">LinkedIn</span></a>
+					</li>
+				
+					<li class="nav-item">
+						<a class="nav-link" href="/atom.xml"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg><span class="ms-2 visually-hidden">RSS</span></a>
+					</li>
+				
+			
+		</ul>
+		<div class="collapse navbar-collapse order-4 order-md-1">
+			<ul class="navbar-nav main-nav me-auto order-5 order-md-2">
+				
+					
+				
+				
+				
+					
+						<li class="nav-item">
+							<a class="nav-link" href="/posts/">Archive</a>
+						</li>
+					
+						<li class="nav-item">
+							<a class="nav-link" href="/about/">About</a>
+						</li>
+					
+				
+			</ul>
+			<div class="break order-6 d-md-none"></div>
+			
+				<form class="navbar-form flex-grow-1 order-7 order-md-3">
+					<input id="userinput" class="form-control is-search" type="search" placeholder="Search posts..."
+						aria-label="Search posts..." autocomplete="off">
+					<div id="suggestions" class="shadow bg-white rounded"></div>
+				</form>
+			
+		</div>
+	</div>
+
+</header>
+
+
+
+  
+<div class="wrap container" role="document">
+  <div class="content">
+    <div class="row justify-content-center">
+      <div class="col-md-12 col-lg-10 col-xxl-8">
+        <article>
+          <div class="blog-header">
+            <h1>Streaming my Jellyfin media from RPi5 to Fire TV Stick (2nd Gen)</h1>
+            
+<p><small>18 Dec 2025</small><p>
+
+          </div>
+          
+          <p>I own a decade old Amazon Fire TV Stick (Gen 2) which only supports H.264 hardware decoding. I've a couple of HEVC
+encoded media files on my self-hosted Jellyfin instance which runs on my RPi5. RPi5 although supports HEVC hardware
+decoding, it still lacks H.264 hardware encoding. For me to play my HEVC encoded Jellyfin media files on my Fire TV
+Stick, I need to transcode my media from HEVC to H.264. I've tried out software transcoding to H.264 through my RPi5
+itself, but RPi5 isn't performant enough to re-encode in real-time, more so after
+<a href="https://jellyfin.org/docs/general/post-install/transcoding/hardware-acceleration/#raspberry-pi-hardware-acceleration-support-deprecation">Jellyfin deprecated support for hardware decoding on RPi5</a>
+likely even for hardware decoding of HEVC media, which the Pi5 itself is capable of. I could pre-transcode everything
+HEVC to H.264, but I also like the storage space savings I get from storing my media encoded as HEVC.</p>
+<p>The Fire TV Stick variant I own is also end-of-life in regards to software updates and the last official (and
+unofficial) released Android version for it is 5.x. While Jellyfin installs fine on the stick, the problem is that
+my RPi5 and my stick aren't on the same local network. I originally planned to tunnel my stick to reach my RPi5's
+Jellyfin instance over VPN through Tailscale. However, Tailscale doesn't run on my stick since Tailscale doesn't
+support Android 5 due to security concerns and the older Tailscale android releases that did support Android 5 do
+not work on Android TV. I tried this and researched around, so this is coming from first-hand experience. And I'm
+currently not daring enough to host my Jellyfin instance exposed to the public Internet.</p>
+<h2 id="streaming-media-from-jellyfin-to-my-fire-tv-stick">Streaming media from Jellyfin to my Fire TV Stick</h2>
+<p>The problem being it's not possible to install Tailscale app onto my Fire TV Stick, at least not any I could think
+of or come across on the Internet. Since my Jellyfin instance is hosted in a different subnet,
+I've to figure out a way to expose my Jellyfin instance to my Fire TV Stick without exposing my Jellyfin instance
+to the public Internet.</p>
+<p>I have a spare RPi400 in the same local network as my Fire TV Stick already in my Tailnet. I figured I could setup
+Nginx to forward Jellyfin instance from my RPi5 onto my RPi400 and then feed in my RPi400's local IP address into
+Fire TV Stick's Jellyfin client. <a href="https://github.com/ritiek/dotfiles/commit/51e0004ec96e6fa7ca038a1e53c0caa8fba420f4">I did just that</a>
+and it seems to work fine! I was able to access my Jellyfin content on the Fire TV Stick with this. However, there
+is still the problem of me not being able to utilize hardware transcoding on my RPi5. Playing my media on the stick
+suffered from long and frequent stutters that I couldn't overlook. Looking into btop on my RPi5, ffmpeg was bringing
+up my CPU usage to 100%. I really needed something better.</p>
+<h2 id="remote-transcoding">Remote transcoding</h2>
+<p>Looking around I came across <a href="https://github.com/joshuaboniface/rffmpeg">rffmpeg</a> which simply wraps any ffmpeg
+invocations to run on a remote machine through SSH. This seemed ideal for my case. My personal lappy is a somewhat
+capable machine that supports hardware encoding and decoding for various media formats, at the very least it does
+so for both H.264 and HEVC which I am dealing with here. I imagined I could use rffmpeg to offload transcoding onto
+my personal lappy (inside my Tailnet) instead of performing it natively on my RPi5. It also looks rffmpeg primarily
+supports covering the case of transcoding Jellyfin media as mentioned in the project's README, which looked promising.</p>
+<p>Setting up rffmpeg to work properly with Jellyfin turned out to be quite an adventure (as we'll see below) which is
+what prompted me to write this post. It did end up working nicely for my use case once everything was into place.</p>
+<h3 id="my-jellyfin-setup">My Jellyfin setup</h3>
+<p>I run a containerized version of Jellyfin (image provided by linuxserver) through Docker on my RPi5 through OCI
+containers on NixOS. My RPi5's NixOS config for this Jellyfin server before setting up rffmpeg can be found
+<a href="https://github.com/ritiek/dotfiles/blob/6a4d93af53f6ec7f46397baf38a9aea5948a2f91/machines/pilab/compose/jellyfin.nix">here</a>.</p>
+<h3 id="integrating-rffmpeg">Integrating rffmpeg</h3>
+<p>It looks the image I'm using <a href="https://lscr.io/linuxserver/jellyfin">lscr.io/linuxserver/jellyfin</a> supports
+rffmpeg through this mod:
+<a href="https://github.com/linuxserver/docker-mods/tree/jellyfin-rffmpeg">https://github.com/linuxserver/docker-mods/tree/jellyfin-rffmpeg</a>.</p>
+<p>This mod can be used through docker-compose with the Jellyfin image provided by linuxserver by adding in the following
+environment variables:</p>
+<pre data-lang="yaml" style="background-color:#2b303b;color:#c0c5ce;" class="language-yaml "><code class="language-yaml" data-lang="yaml"><span style="color:#bf616a;">services</span><span>:
+</span><span>  </span><span style="color:#bf616a;">jellyfin</span><span>:
+</span><span>    </span><span style="color:#bf616a;">image</span><span>: </span><span style="color:#a3be8c;">lscr.io/linuxserver/jellyfin:latest
+</span><span>    </span><span style="color:#d08770;">...
+</span><span>    </span><span style="color:#bf616a;">environment</span><span>:
+</span><span>      </span><span style="color:#d08770;">...
+</span><span>      - </span><span style="color:#a3be8c;">DOCKER_MODS=linuxserver/mods:jellyfin-rffmpeg
+</span><span>      - </span><span style="color:#a3be8c;">RFFMPEG_USER=ritiek
+</span><span>      - </span><span style="color:#a3be8c;">RFFMPEG_HOST=mishy.lion-zebra.ts.net
+</span><span>      - </span><span style="color:#a3be8c;">FFMPEG_PATH=/usr/local/bin/ffmpeg
+</span></code></pre>
+<p>The other part of the setup (setting up SSH keys, etc.) is explained in detail over at rffmpeg's SETUP.md:
+<a href="https://github.com/joshuaboniface/rffmpeg/blob/master/docs/SETUP.md">https://github.com/joshuaboniface/rffmpeg/blob/master/docs/SETUP.md</a></p>
+<p>All what rffmpeg seems to do is pass the arguments over to the remote machine transparently, including the <code>-i</code>
+parameter for the path to the input file. This is also a bit problematic. I'll have to replicate the file structure
+for the input files from the Jellyfin container which runs on my RPi5, onto my personal lappy, so that ffmpeg
+doesn't have trouble finding the path to input pieces when invoked through rffmpeg. I did try out rffmpeg without
+these changes first and it indeed complains about missing path to the input file. I was able to look into these
+logs using:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> docker exec</span><span style="color:#bf616a;"> -it</span><span> jellyfin rffmpeg log</span><span style="color:#bf616a;"> -f
+</span></code></pre>
+<p>To make the paths consistent inside of both the Jellyfin's docker container and my personal lappy, I could think of
+a few options:</p>
+<ol>
+<li>
+<p>Run ffmpeg on my personal lappy inside of a Docker container and have path to input files in this container
+mapped exactly as how it is so in linuxserver's Jellyfin Docker image. I'll have to figure out what devices
+under <code>/dev/</code> would have to be passthrough'd inside of this Docker container from my host machine (I guess
+<code>/dev/dri</code> should be enough).</p>
+</li>
+<li>
+<p>Run ffmpeg on my personal lappy in a chroot environment. In this case, say if my Jellyfin container expects media
+files to be present in <code>/data/movies</code>, then my lappy could have a path like <code>/home/ritiek/nfs/data/movies</code> and
+then I could wrap my ffmpeg binary to chroot into <code>/home/ritiek/nfs</code> as the first thing it does when invoked.
+That would make the paths consistent between the Jellyfin's Docker container and my lappy.</p>
+</li>
+<li>
+<p>Create the paths from Jellyfin's Docker container onto my personal lappy. I don't want to make things messy on
+my personal lappy by creating random <code>/data/</code> or <code>/config/</code> directories on my root filesystem. I could however,
+update these paths into the container first to something like <code>/var/lib/jellyfin/data/</code> and then create these
+same paths onto my lappy.</p>
+</li>
+</ol>
+<p>I went with the third option. Just seemed a little less complex to maintain in comparison to other options once I
+was to be done with adapting the paths to not look messy.</p>
+<p>And so I had to update the paths where Jellyfin stores its Cache, Metadata, and Transcodes inside the <code>encoding.xml</code>
+and <code>system.xml</code> config files created by Jellyfin. There also look to be options to update these paths from the WebUI
+itself but I didn't try them. I also had to update the paths inside of my .nfo files for my saved music in Jellyfin
+from <code>/config/data/metadata</code> to <code>/var/lib/jellyfin/data/metadata</code>:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> sd &quot;</span><span style="color:#a3be8c;">/config/data/metadata/</span><span>&quot; &quot;</span><span style="color:#a3be8c;">/var/lib/jellyfin/data/metadata/</span><span>&quot; /media/HOMELAB_MEDIA/services/jellyfin/data/metadata/artists/*/artist.nfo
+</span></code></pre>
+<p>Be careful, this renaming of directories should be done after bringing the Jellyfin container down. Performing these
+changes and then restarting the Jellyfin container, I had to re-specify the paths to my library items through the
+Jellyfin WebUI to the newly mounted locations under <code>/var/lib/jellyfin/</code>.</p>
+<p>There was still one last piece left - I had to somehow mount or share these filesystem paths from my RPi5 to my
+personal lappy. For my case, I went ahead with setting up NFS between my RPi5 and lappy. This can also be done using
+SSHFS but NFS seemed slightly more mature to use on NixOS with it having its own NixOS module (couldn't find one for
+SSHFS) when looking up on the Internet. Expect some tinkering but there's information on the Internet on how to set
+these up.</p>
+<p>The diff of what changed when integrating rffmpeg into my NixOS config can be found
+<a href="https://github.com/ritiek/dotfiles/commit/dea99c792e1bdd0c10a952655eacf7ed6f79679f">here</a>.</p>
+<p>rffmpeg worked nicely after all of these things were into place and it was correctly invoking ffmpeg on my lappy instead
+of running natively on my RPi5 as I could monitor using btop on my lappy - ffmpeg spawned up and was eating CPU on
+my lappy as soon as I played anything on my Fire TV stick!</p>
+<h3 id="hardware-transcoding">Hardware transcoding</h3>
+<p>My lappy has an Nvidia MX450 chip but this chip doesn't support Nvidia NVENC so I can't use it to help with hardware
+acceleration in Jellyfin sadly. The list of supported hardware acceleration methods can be found under Transcoding
+settings in the Jellyfin WebUI. Nonetheless, I've an Intel processor in my lappy with Iris Xe graphics and I found
+that Intel QuickSync (QSV) and Video Acceleration API (VAAPI) indeed work!</p>
+<p>I can specify the path to QSV device on the Jellyfin WebUI as per how it's present on my lappy: <code>/dev/dri/renderD128</code>.
+This works since this path is passed as a parameter to ffmpeg when invoked, and the ffmpeg present on my lappy gets
+invoked thanks to rffmpeg.</p>
+<p>I decided to stick with Intel QSV as the general consensus on the Internet seemed that it's a little more performant
+in comparison to VAAPI. I also enabled the "Enable Intel Low-Power H.264 hardware encoder" and "Enable Intel Low-Power
+HEVC hardware encoder" settings in Jellyfin WebUI and those seem to work as well.</p>
+<p>I noticed that enabling this setting made Intel's Render/3D engine not work as hard and instead seemed to drive up
+the Video engine a little more as seen in <code>intel_gpu_top</code>.</p>
+<p>
+  <img src="/assets/intel_gpu_top.png" width="750">
+</p>
+<p>This I like, since it frees up the Render/3D engine for other tasks (web browsing and all).</p>
+<h3 id="security-concerns">Security concerns</h3>
+<p>Right now, I've been telling rffmpeg to login into my personal lappy as my default user via SSH. I need to create
+a jellyfin specific user on my lappy with limited permissions and scope, and re-configure rffmpeg to login as this
+user instead.</p>
+<h2 id="thoughts">Thoughts</h2>
+<p>That's pretty much it and I'm happy with this implementation. Although, it requires me to keep my lappy on anytime I
+am streaming to my Fire TV Stick but I think I'm okay with the trade-offs as of writing this. Happy scavenging!</p>
+
+        </article>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  
+    
+<footer class="footer text-muted">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 order-last order-lg-first">
+				<ul class="list-inline">
+					
+						<li class="list-inline-item">Powered by <a href="https://www.getzola.org/">Zola</a></li>
+					
+				</ul>
+			</div>
+			<div class="col-lg-8 order-first order-lg-last text-lg-end">
+				<ul class="list-inline">
+					
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+  
+
+  
+<script type="text/javascript" src="https://ritiek.github.io/js/main.js" defer></script>
+
+  <script type="text/javascript" src="https://ritiek.github.io/plugins/elasticlunr.min.js"></script>
+  <script type="text/javascript">
+    console.log("Loading search index...");
+    fetch("https://ritiek.github.io/search_index.en.json")
+      .then(response => {
+        console.log("Search index response:", response.status);
+        if (!response.ok) {
+          throw new Error('Search index not found');
+        }
+        return response.json();
+      })
+      .then(data => { 
+        console.log("Search index loaded successfully");
+        window.searchIndex = data;
+        var script = document.createElement('script');
+        script.src = "https://ritiek.github.io/js/search.js";
+        document.body.appendChild(script);
+      })
+      .catch(error => {
+        console.error("Error loading search index:", error);
+      });
+  </script>
+
+  
+</body>
+</html>

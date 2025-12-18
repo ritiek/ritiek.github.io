@@ -5,8 +5,161 @@
     <link rel="self" type="application/atom+xml" href="https://ritiek.github.io/posts/atom.xml"/>
     <link rel="alternate" type="text/html" href="https://ritiek.github.io/posts/"/>
     <generator uri="https://www.getzola.org/">Zola</generator>
-    <updated>2025-10-20T00:00:00+00:00</updated>
+    <updated>2025-12-18T00:00:00+00:00</updated>
     <id>https://ritiek.github.io/posts/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Streaming my Jellyfin media from RPi5 to Fire TV Stick (2nd Gen)</title>
+        <published>2025-12-18T00:00:00+00:00</published>
+        <updated>2025-12-18T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://ritiek.github.io/2025/12/18/streaming-my-jellyfin-media-from-rpi5-to-fire-tv-stick-2nd-gen/"/>
+        <id>https://ritiek.github.io/2025/12/18/streaming-my-jellyfin-media-from-rpi5-to-fire-tv-stick-2nd-gen/</id>
+        
+        <content type="html" xml:base="https://ritiek.github.io/2025/12/18/streaming-my-jellyfin-media-from-rpi5-to-fire-tv-stick-2nd-gen/">&lt;p&gt;I own a decade old Amazon Fire TV Stick (Gen 2) which only supports H.264 hardware decoding. I&#x27;ve a couple of HEVC
+encoded media files on my self-hosted Jellyfin instance which runs on my RPi5. RPi5 although supports HEVC hardware
+decoding, it still lacks H.264 hardware encoding. For me to play my HEVC encoded Jellyfin media files on my Fire TV
+Stick, I need to transcode my media from HEVC to H.264. I&#x27;ve tried out software transcoding to H.264 through my RPi5
+itself, but RPi5 isn&#x27;t performant enough to re-encode in real-time, more so after
+&lt;a href=&quot;https:&#x2F;&#x2F;jellyfin.org&#x2F;docs&#x2F;general&#x2F;post-install&#x2F;transcoding&#x2F;hardware-acceleration&#x2F;#raspberry-pi-hardware-acceleration-support-deprecation&quot;&gt;Jellyfin deprecated support for hardware decoding on RPi5&lt;&#x2F;a&gt;
+likely even for hardware decoding of HEVC media, which the Pi5 itself is capable of. I could pre-transcode everything
+HEVC to H.264, but I also like the storage space savings I get from storing my media encoded as HEVC.&lt;&#x2F;p&gt;
+&lt;p&gt;The Fire TV Stick variant I own is also end-of-life in regards to software updates and the last official (and
+unofficial) released Android version for it is 5.x. While Jellyfin installs fine on the stick, the problem is that
+my RPi5 and my stick aren&#x27;t on the same local network. I originally planned to tunnel my stick to reach my RPi5&#x27;s
+Jellyfin instance over VPN through Tailscale. However, Tailscale doesn&#x27;t run on my stick since Tailscale doesn&#x27;t
+support Android 5 due to security concerns and the older Tailscale android releases that did support Android 5 do
+not work on Android TV. I tried this and researched around, so this is coming from first-hand experience. And I&#x27;m
+currently not daring enough to host my Jellyfin instance exposed to the public Internet.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;streaming-media-from-jellyfin-to-my-fire-tv-stick&quot;&gt;Streaming media from Jellyfin to my Fire TV Stick&lt;&#x2F;h2&gt;
+&lt;p&gt;The problem being it&#x27;s not possible to install Tailscale app onto my Fire TV Stick, at least not any I could think
+of or come across on the Internet. Since my Jellyfin instance is hosted in a different subnet,
+I&#x27;ve to figure out a way to expose my Jellyfin instance to my Fire TV Stick without exposing my Jellyfin instance
+to the public Internet.&lt;&#x2F;p&gt;
+&lt;p&gt;I have a spare RPi400 in the same local network as my Fire TV Stick already in my Tailnet. I figured I could setup
+Nginx to forward Jellyfin instance from my RPi5 onto my RPi400 and then feed in my RPi400&#x27;s local IP address into
+Fire TV Stick&#x27;s Jellyfin client. &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;ritiek&#x2F;dotfiles&#x2F;commit&#x2F;51e0004ec96e6fa7ca038a1e53c0caa8fba420f4&quot;&gt;I did just that&lt;&#x2F;a&gt;
+and it seems to work fine! I was able to access my Jellyfin content on the Fire TV Stick with this. However, there
+is still the problem of me not being able to utilize hardware transcoding on my RPi5. Playing my media on the stick
+suffered from long and frequent stutters that I couldn&#x27;t overlook. Looking into btop on my RPi5, ffmpeg was bringing
+up my CPU usage to 100%. I really needed something better.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;remote-transcoding&quot;&gt;Remote transcoding&lt;&#x2F;h2&gt;
+&lt;p&gt;Looking around I came across &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;joshuaboniface&#x2F;rffmpeg&quot;&gt;rffmpeg&lt;&#x2F;a&gt; which simply wraps any ffmpeg
+invocations to run on a remote machine through SSH. This seemed ideal for my case. My personal lappy is a somewhat
+capable machine that supports hardware encoding and decoding for various media formats, at the very least it does
+so for both H.264 and HEVC which I am dealing with here. I imagined I could use rffmpeg to offload transcoding onto
+my personal lappy (inside my Tailnet) instead of performing it natively on my RPi5. It also looks rffmpeg primarily
+supports covering the case of transcoding Jellyfin media as mentioned in the project&#x27;s README, which looked promising.&lt;&#x2F;p&gt;
+&lt;p&gt;Setting up rffmpeg to work properly with Jellyfin turned out to be quite an adventure (as we&#x27;ll see below) which is
+what prompted me to write this post. It did end up working nicely for my use case once everything was into place.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;my-jellyfin-setup&quot;&gt;My Jellyfin setup&lt;&#x2F;h3&gt;
+&lt;p&gt;I run a containerized version of Jellyfin (image provided by linuxserver) through Docker on my RPi5 through OCI
+containers on NixOS. My RPi5&#x27;s NixOS config for this Jellyfin server before setting up rffmpeg can be found
+&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;ritiek&#x2F;dotfiles&#x2F;blob&#x2F;6a4d93af53f6ec7f46397baf38a9aea5948a2f91&#x2F;machines&#x2F;pilab&#x2F;compose&#x2F;jellyfin.nix&quot;&gt;here&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;integrating-rffmpeg&quot;&gt;Integrating rffmpeg&lt;&#x2F;h3&gt;
+&lt;p&gt;It looks the image I&#x27;m using &lt;a href=&quot;https:&#x2F;&#x2F;lscr.io&#x2F;linuxserver&#x2F;jellyfin&quot;&gt;lscr.io&#x2F;linuxserver&#x2F;jellyfin&lt;&#x2F;a&gt; supports
+rffmpeg through this mod:
+&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;linuxserver&#x2F;docker-mods&#x2F;tree&#x2F;jellyfin-rffmpeg&quot;&gt;https:&#x2F;&#x2F;github.com&#x2F;linuxserver&#x2F;docker-mods&#x2F;tree&#x2F;jellyfin-rffmpeg&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;This mod can be used through docker-compose with the Jellyfin image provided by linuxserver by adding in the following
+environment variables:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;yaml&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-yaml &quot;&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;services&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;jellyfin&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;image&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;lscr.io&#x2F;linuxserver&#x2F;jellyfin:latest
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;...
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;environment&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;...
+&lt;&#x2F;span&gt;&lt;span&gt;      - &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;DOCKER_MODS=linuxserver&#x2F;mods:jellyfin-rffmpeg
+&lt;&#x2F;span&gt;&lt;span&gt;      - &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;RFFMPEG_USER=ritiek
+&lt;&#x2F;span&gt;&lt;span&gt;      - &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;RFFMPEG_HOST=mishy.lion-zebra.ts.net
+&lt;&#x2F;span&gt;&lt;span&gt;      - &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;FFMPEG_PATH=&#x2F;usr&#x2F;local&#x2F;bin&#x2F;ffmpeg
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The other part of the setup (setting up SSH keys, etc.) is explained in detail over at rffmpeg&#x27;s SETUP.md:
+&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;joshuaboniface&#x2F;rffmpeg&#x2F;blob&#x2F;master&#x2F;docs&#x2F;SETUP.md&quot;&gt;https:&#x2F;&#x2F;github.com&#x2F;joshuaboniface&#x2F;rffmpeg&#x2F;blob&#x2F;master&#x2F;docs&#x2F;SETUP.md&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;All what rffmpeg seems to do is pass the arguments over to the remote machine transparently, including the &lt;code&gt;-i&lt;&#x2F;code&gt;
+parameter for the path to the input file. This is also a bit problematic. I&#x27;ll have to replicate the file structure
+for the input files from the Jellyfin container which runs on my RPi5, onto my personal lappy, so that ffmpeg
+doesn&#x27;t have trouble finding the path to input pieces when invoked through rffmpeg. I did try out rffmpeg without
+these changes first and it indeed complains about missing path to the input file. I was able to look into these
+logs using:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; docker exec&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -it&lt;&#x2F;span&gt;&lt;span&gt; jellyfin rffmpeg log&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -f
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;To make the paths consistent inside of both the Jellyfin&#x27;s docker container and my personal lappy, I could think of
+a few options:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Run ffmpeg on my personal lappy inside of a Docker container and have path to input files in this container
+mapped exactly as how it is so in linuxserver&#x27;s Jellyfin Docker image. I&#x27;ll have to figure out what devices
+under &lt;code&gt;&#x2F;dev&#x2F;&lt;&#x2F;code&gt; would have to be passthrough&#x27;d inside of this Docker container from my host machine (I guess
+&lt;code&gt;&#x2F;dev&#x2F;dri&lt;&#x2F;code&gt; should be enough).&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Run ffmpeg on my personal lappy in a chroot environment. In this case, say if my Jellyfin container expects media
+files to be present in &lt;code&gt;&#x2F;data&#x2F;movies&lt;&#x2F;code&gt;, then my lappy could have a path like &lt;code&gt;&#x2F;home&#x2F;ritiek&#x2F;nfs&#x2F;data&#x2F;movies&lt;&#x2F;code&gt; and
+then I could wrap my ffmpeg binary to chroot into &lt;code&gt;&#x2F;home&#x2F;ritiek&#x2F;nfs&lt;&#x2F;code&gt; as the first thing it does when invoked.
+That would make the paths consistent between the Jellyfin&#x27;s Docker container and my lappy.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Create the paths from Jellyfin&#x27;s Docker container onto my personal lappy. I don&#x27;t want to make things messy on
+my personal lappy by creating random &lt;code&gt;&#x2F;data&#x2F;&lt;&#x2F;code&gt; or &lt;code&gt;&#x2F;config&#x2F;&lt;&#x2F;code&gt; directories on my root filesystem. I could however,
+update these paths into the container first to something like &lt;code&gt;&#x2F;var&#x2F;lib&#x2F;jellyfin&#x2F;data&#x2F;&lt;&#x2F;code&gt; and then create these
+same paths onto my lappy.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;I went with the third option. Just seemed a little less complex to maintain in comparison to other options once I
+was to be done with adapting the paths to not look messy.&lt;&#x2F;p&gt;
+&lt;p&gt;And so I had to update the paths where Jellyfin stores its Cache, Metadata, and Transcodes inside the &lt;code&gt;encoding.xml&lt;&#x2F;code&gt;
+and &lt;code&gt;system.xml&lt;&#x2F;code&gt; config files created by Jellyfin. There also look to be options to update these paths from the WebUI
+itself but I didn&#x27;t try them. I also had to update the paths inside of my .nfo files for my saved music in Jellyfin
+from &lt;code&gt;&#x2F;config&#x2F;data&#x2F;metadata&lt;&#x2F;code&gt; to &lt;code&gt;&#x2F;var&#x2F;lib&#x2F;jellyfin&#x2F;data&#x2F;metadata&lt;&#x2F;code&gt;:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; sd &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&#x2F;config&#x2F;data&#x2F;metadata&#x2F;&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&#x2F;var&#x2F;lib&#x2F;jellyfin&#x2F;data&#x2F;metadata&#x2F;&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; &#x2F;media&#x2F;HOMELAB_MEDIA&#x2F;services&#x2F;jellyfin&#x2F;data&#x2F;metadata&#x2F;artists&#x2F;*&#x2F;artist.nfo
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Be careful, this renaming of directories should be done after bringing the Jellyfin container down. Performing these
+changes and then restarting the Jellyfin container, I had to re-specify the paths to my library items through the
+Jellyfin WebUI to the newly mounted locations under &lt;code&gt;&#x2F;var&#x2F;lib&#x2F;jellyfin&#x2F;&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;There was still one last piece left - I had to somehow mount or share these filesystem paths from my RPi5 to my
+personal lappy. For my case, I went ahead with setting up NFS between my RPi5 and lappy. This can also be done using
+SSHFS but NFS seemed slightly more mature to use on NixOS with it having its own NixOS module (couldn&#x27;t find one for
+SSHFS) when looking up on the Internet. Expect some tinkering but there&#x27;s information on the Internet on how to set
+these up.&lt;&#x2F;p&gt;
+&lt;p&gt;The diff of what changed when integrating rffmpeg into my NixOS config can be found
+&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;ritiek&#x2F;dotfiles&#x2F;commit&#x2F;dea99c792e1bdd0c10a952655eacf7ed6f79679f&quot;&gt;here&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;rffmpeg worked nicely after all of these things were into place and it was correctly invoking ffmpeg on my lappy instead
+of running natively on my RPi5 as I could monitor using btop on my lappy - ffmpeg spawned up and was eating CPU on
+my lappy as soon as I played anything on my Fire TV stick!&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;hardware-transcoding&quot;&gt;Hardware transcoding&lt;&#x2F;h3&gt;
+&lt;p&gt;My lappy has an Nvidia MX450 chip but this chip doesn&#x27;t support Nvidia NVENC so I can&#x27;t use it to help with hardware
+acceleration in Jellyfin sadly. The list of supported hardware acceleration methods can be found under Transcoding
+settings in the Jellyfin WebUI. Nonetheless, I&#x27;ve an Intel processor in my lappy with Iris Xe graphics and I found
+that Intel QuickSync (QSV) and Video Acceleration API (VAAPI) indeed work!&lt;&#x2F;p&gt;
+&lt;p&gt;I can specify the path to QSV device on the Jellyfin WebUI as per how it&#x27;s present on my lappy: &lt;code&gt;&#x2F;dev&#x2F;dri&#x2F;renderD128&lt;&#x2F;code&gt;.
+This works since this path is passed as a parameter to ffmpeg when invoked, and the ffmpeg present on my lappy gets
+invoked thanks to rffmpeg.&lt;&#x2F;p&gt;
+&lt;p&gt;I decided to stick with Intel QSV as the general consensus on the Internet seemed that it&#x27;s a little more performant
+in comparison to VAAPI. I also enabled the &quot;Enable Intel Low-Power H.264 hardware encoder&quot; and &quot;Enable Intel Low-Power
+HEVC hardware encoder&quot; settings in Jellyfin WebUI and those seem to work as well.&lt;&#x2F;p&gt;
+&lt;p&gt;I noticed that enabling this setting made Intel&#x27;s Render&#x2F;3D engine not work as hard and instead seemed to drive up
+the Video engine a little more as seen in &lt;code&gt;intel_gpu_top&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;
+  &lt;img src=&quot;&#x2F;assets&#x2F;intel_gpu_top.png&quot; width=&quot;750&quot;&gt;
+&lt;&#x2F;p&gt;
+&lt;p&gt;This I like, since it frees up the Render&#x2F;3D engine for other tasks (web browsing and all).&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;security-concerns&quot;&gt;Security concerns&lt;&#x2F;h3&gt;
+&lt;p&gt;Right now, I&#x27;ve been telling rffmpeg to login into my personal lappy as my default user via SSH. I need to create
+a jellyfin specific user on my lappy with limited permissions and scope, and re-configure rffmpeg to login as this
+user instead.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;thoughts&quot;&gt;Thoughts&lt;&#x2F;h2&gt;
+&lt;p&gt;That&#x27;s pretty much it and I&#x27;m happy with this implementation. Although, it requires me to keep my lappy on anytime I
+am streaming to my Fire TV Stick but I think I&#x27;m okay with the trade-offs as of writing this. Happy scavenging!&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
     <entry xml:lang="en">
         <title>MicroSD Boot Partition with NVMe Root Filesystem on Raspberry Pi 5</title>
         <published>2025-10-20T00:00:00+00:00</published>
