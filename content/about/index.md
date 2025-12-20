@@ -10,6 +10,10 @@ Happy expluwuring!
 
 --------------------
 
+If you're working on a hobby or a professional project and feel you could have a use for me, reach me out through any of the methods mentioned at the top of this page!
+
+--------------------
+
 ### PGP Public Key
 
 You can import my PGP public key using:
