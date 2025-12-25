@@ -13,8 +13,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://ritiek.github.io/main.css?v=1766251598">
-<link rel="stylesheet" href="https://ritiek.github.io/custom.css?v=1766251598">
+<link rel="stylesheet" href="https://ritiek.github.io/main.css?v=1766671532">
+<link rel="stylesheet" href="https://ritiek.github.io/custom.css?v=1766671532">
 
 
 
@@ -463,6 +463,7 @@ the Video engine a little more as seen in <code>intel_gpu_top</code>.</p>
 <h3 id="security-concerns">Security concerns</h3>
 <p>Right now, I've been telling rffmpeg to login into my personal lappy as my default user via SSH. I need to create
 a jellyfin specific user on my lappy with limited permissions, and re-configure rffmpeg to login as this user instead.</p>
+<p><strong>UPDATE:</strong> I've accounted for this after a few days later. I created a Jellyfin-specific user on my lappy with its own SSH key for authentication. Diff of my NixOS config for this change can be found <a href="https://github.com/ritiek/dotfiles/commit/b9cc6eb15d74ba9f3b75d5b6be22b6bdd5ec7a81">here</a>.</p>
 <h2 id="thoughts">Thoughts</h2>
 <p>That's pretty much it and I'm happy with this implementation. Although, it requires me to keep my lappy on anytime I
 am streaming to my Fire TV Stick but I think I'm okay with the trade-offs as of writing this. Happy scavenging!</p>
