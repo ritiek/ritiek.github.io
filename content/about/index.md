@@ -8,11 +8,13 @@ Hwello, wild hooman! My name is Ritiek Malhotra. I'm mostly into software and el
 
 Happy expluwuring!
 
---------------------
+----------------------------------------
 
-If you're working on a hobby or a professional project and feel you could have a use for me, reach me out through any of the methods mentioned at the top of this page!
+### Reach out
 
---------------------
+If you're working on a hobby or a professional project and feel you could have a use for me, feel free to reach me out through any of the methods mentioned at the top of this page. If you just wanna vibe along on rando stuff, that's perfectly fine too! I won't bite either way. :P
+
+----------------------------------------
 
 ### PGP Public Key
 
