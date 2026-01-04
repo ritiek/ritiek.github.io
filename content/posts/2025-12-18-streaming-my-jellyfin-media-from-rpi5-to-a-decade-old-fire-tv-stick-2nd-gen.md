@@ -170,7 +170,9 @@ This I like, since it frees up the Render/3D engine for other tasks (web browsin
 Right now, I've been telling rffmpeg to login into my personal lappy as my default user via SSH. I need to create
 a jellyfin specific user on my lappy with limited permissions, and re-configure rffmpeg to login as this user instead.
 
-**UPDATE:** I've accounted for this after a few days later. I created a Jellyfin-specific user on my lappy with its own SSH key for authentication. Diff of my NixOS config for this change can be found [here](https://github.com/ritiek/dotfiles/commit/b9cc6eb15d74ba9f3b75d5b6be22b6bdd5ec7a81).
+**UPDATE:** I've accounted for this after a few days later. I created a Jellyfin-specific user on my lappy with its own
+SSH key for authentication. Diff of my NixOS config for this change can be found [here](https://github.com/ritiek/dotfiles/commit/b9cc6eb15d74ba9f3b75d5b6be22b6bdd5ec7a81). I also had to [enable libfdk_aac
+support in ffmpeg](https://github.com/ritiek/dotfiles/commit/e2389bab8ec2feffc30ddf85414c03b619fd2178) to be able to transcode some media files properly.
 
 ## Thoughts
 
