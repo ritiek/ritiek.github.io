@@ -2,7 +2,9 @@
  *   Extra - Put your extra SASS/CSS here, it will get bundled with abridge.css
  *****************************************************************************/
 
-/* Increase search bar width by 1.3 times */
-.form-control.is-search {
-  width: 130% !important;
+/* Increase search bar width by 1.3 times - only on desktop */
+@media (min-width: 768px) {
+  .form-control.is-search {
+    width: 130% !important;
+  }
 }

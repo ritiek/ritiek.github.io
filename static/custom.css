@@ -374,8 +374,28 @@ body.dark #suggestions span {
     border: none !important;
 }
 
-/* Increase search bar width by 1.3 times to the left */
-.form-control.is-search {
-    width: 130% !important;
-    transform: translateX(-23%) !important;
+/* Increase search bar width by 1.3 times to left - only on desktop */
+@media (min-width: 768px) {
+    .form-control.is-search {
+        width: 130% !important;
+        transform: translateX(-23%) !important;
+    }
+}
+
+/* Hide social links on mobile, show only when menu is open */
+@media (max-width: 767px) {
+    .navbar-nav.fork-me {
+        display: none !important;
+    }
+
+    .navbar .menu-btn:checked ~ .navbar-nav.fork-me {
+        display: flex !important;
+        margin-top: 0.5rem;
+        padding-top: 1rem;
+        border-top: 1px solid #e9ecef;
+    }
+
+    body.dark .navbar .menu-btn:checked ~ .navbar-nav.fork-me {
+        border-top-color: #495057;
+    }
 }
