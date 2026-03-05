@@ -26,7 +26,7 @@
         };
 
          packages.default = pkgs.writeShellScriptBin "serve" ''
-           ${pkgs.zola}/bin/zola serve
+           ${pkgs.zola}/bin/zola serve --interface 0.0.0.0 --base-url ''${BASE_URL:-localhost}
          '';
 
          packages.build = pkgs.writeShellScriptBin "build" ''
