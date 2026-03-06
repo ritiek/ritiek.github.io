@@ -54,27 +54,27 @@
 
 	
 
-<title>GSoC with MetaBrainz (in Rust!) | Ritiek Malhotra</title>
+<title>Quirks of self-hosting an overlay networking tool (ft. Headscale) | Ritiek Malhotra</title>
 <meta name="description" content="Just some of my adventures!">
-<link rel="canonical" href="https://ritiek.github.io/2021/07/15/gsoc-with-metabrainz-in-rust/">
+<link rel="canonical" href="https://ritiek.github.io/2026/03/06/quirks-of-self-hosting-an-overlay-networking-tool-ft-headscale/">
 
 
   <meta name="twitter:card" content="summary_large_image">
   
-  <meta name="twitter:title" content="GSoC with MetaBrainz (in Rust!)">
+  <meta name="twitter:title" content="Quirks of self-hosting an overlay networking tool (ft. Headscale)">
   <meta name="twitter:description" content="Just some of my adventures!">
   <meta name="twitter:site" content="@">
   <meta name="twitter:creator" content="@">
   
-  <meta property="og:title" content="GSoC with MetaBrainz (in Rust!)">
+  <meta property="og:title" content="Quirks of self-hosting an overlay networking tool (ft. Headscale)">
   <meta property="og:description" content="Just some of my adventures!">
   <meta property="og:type" content="article">
-  <meta property="og:url" content="https://ritiek.github.io/2021/07/15/gsoc-with-metabrainz-in-rust/">
+  <meta property="og:url" content="https://ritiek.github.io/2026/03/06/quirks-of-self-hosting-an-overlay-networking-tool-ft-headscale/">
 
   
 
   <meta property="og:updated_time" content="">
-  <meta property="og:site_name" content="GSoC with MetaBrainz (in Rust!)">
+  <meta property="og:site_name" content="Quirks of self-hosting an overlay networking tool (ft. Headscale)">
 
   
 
@@ -119,8 +119,8 @@
           {
             "@type": "ListItem",
             "position":  2 ,
-            "name": "2021",
-            "item": "https://ritiek.github.io/2021/"
+            "name": "2026",
+            "item": "https://ritiek.github.io/2026/"
           },
         
       
@@ -137,8 +137,8 @@
           {
             "@type": "ListItem",
             "position":  3 ,
-            "name": "07",
-            "item": "https://ritiek.github.io/2021/07/"
+            "name": "03",
+            "item": "https://ritiek.github.io/2026/03/"
           },
         
       
@@ -155,11 +155,26 @@
           {
             "@type": "ListItem",
             "position":  4 ,
-            "name": "15",
-            "item": "https://ritiek.github.io/2021/07/15/"
+            "name": "06",
+            "item": "https://ritiek.github.io/2026/03/06/"
           },
         
       
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         
@@ -185,8 +200,8 @@
           {
             "@type": "ListItem",
             "position":  5 ,
-            "name": "Gsoc With Metabrainz In Rust",
-            "item": "https://ritiek.github.io/2021/07/15/gsoc-with-metabrainz-in-rust/"
+            "name": "Quirks Of Self Hosting An Overlay Networking Tool Ft Headscale",
+            "item": "https://ritiek.github.io/2026/03/06/quirks-of-self-hosting-an-overlay-networking-tool-ft-headscale/"
           },
         
       
@@ -301,140 +316,47 @@
       <div class="col-md-12 col-lg-10 col-xxl-8">
         <article>
           <div class="blog-header">
-            <h1>GSoC with MetaBrainz (in Rust!)</h1>
+            <h1>Quirks of self-hosting an overlay networking tool (ft. Headscale)</h1>
             
-<p><small>15 Jul 2021</small><p>
+<p><small>06 Mar 2026</small><p>
 
           </div>
           
-          <p>So, my GSoC project proposal got selected this year! I've been working with the
-<a href="https://metabrainz.org/">MetaBrainz Foundation</a> on extending the Rust wrapper around
-the MusicBrainz Web-API, named <a href="https://github.com/oknozor/musicbrainz_rs">musicbrainz_rs</a>.</p>
-<p>For all the folks who have no idea what <a href="https://musicbrainz.org/">MusicBrainz</a> is -
-MusicBrainz is an openly accessible database maintained by the community, which contains
-records on music metadata. If you've ever worked with the Spotify Web-API, you'll know
-you can make API calls to access information on some of the metadata on artists, albums
-and songs that Spotify exposes. MusicBrainz has been built on the same idea with a laser
-focus only on music metadata (unlike Spotify, where you can also control music playback
-through their API) and offers a lot more detail on this metadata compared to other
-services like Spotify.</p>
-<h2 id="accessing-the-metadata">Accessing the metadata</h2>
-<p>You can go right now and explore this metadata through <a href="https://musicbrainz.org/search">their web search</a>!
-For the context, let's say we look up on the music artist Green Day, we'll get to the <a href="https://musicbrainz.org/artist/084308bd-1654-436f-ba03-df6697104e19">artist's page</a>,
-neatly showcasing the albums that the artist has released. If you look at this page's URL,
-you'll notice this long alphanumeric string - <code>084308bd-1654-436f-ba03-df6697104e19</code>. This is
-the artist's MBID (short for MusicBrainz ID). MusicBrainz supports <a href="https://musicbrainz.org/doc/MusicBrainz_Entity">many entities</a>
-and every entity is associated with a unique MBID. So, every artist, track, or any other
-entity in MusicBrainz is associated with a unique MBID.</p>
-<p>You can even download the complete database onto your local disk from
-<a href="https://musicbrainz.org/doc/MusicBrainz_Database">here</a>, anytime!</p>
-<h3 id="the-web-api">The Web-API</h3>
-<p>MusicBrainz also offers a <a href="https://musicbrainz.org/doc/MusicBrainz_API">Web-API</a> to
-programatically access this metadata. Let's say to access metadata for the artist Green Day
-through the API, you'll need to know the artist's MBID (which we already have from the
-last section) and then make a GET request to the endpoint:<br>
-<a href="https://musicbrainz.org/ws/2/artist/084308bd-1654-436f-ba03-df6697104e19">https://musicbrainz.org/ws/2/artist/084308bd-1654-436f-ba03-df6697104e19</a></p>
-<p>You'll notice that we're missing a lot of information here compared to what we saw in the web
-interface in the last section. This is because the API returns minimal information by default.
-You need to pass additional parameters to access any further information.</p>
-<p>Let's say to also access the artist's albums (which is termed as <code>release-groups</code> in MusicBrainz) -
-we pass <code>?inc=release-groups</code> when making the request:<br>
-<a href="https://musicbrainz.org/ws/2/artist/084308bd-1654-436f-ba03-df6697104e19?inc=release-groups">https://musicbrainz.org/ws/2/artist/084308bd-1654-436f-ba03-df6697104e19?inc=release-groups</a></p>
-<p>See <a href="https://musicbrainz.org/doc/MusicBrainz_API#Subqueries">Subqueries</a> for the complete list
-of supported parameters. There are many more things that you can do through the Web-API (see the <a href="https://musicbrainz.org/doc/MusicBrainz_API">API documentation</a>).
-I won't be covering them here.</p>
-<h3 id="language-libraries">Language libraries</h3>
-<p>People have created library wrappers around the Web-API for many programming languages. The list
-of recognized of libraries can be found <a href="https://musicbrainz.org/doc/MusicBrainz_API#Libraries">here</a>,
-and this is where I come in. This summer, I've been working on one such library for the Rust
-programming language, named <a href="https://github.com/oknozor/musicbrainz_rs">musicbrainz_rs</a>.</p>
-<p>For example, you can make queries using musicbrainz_rs this way:</p>
-<pre data-lang="swift" style="background-color:#2b303b;color:#c0c5ce;" class="language-swift "><code class="language-swift" data-lang="swift"><span>extern crate musicbrainz_rs;
-</span><span>
-</span><span>use musicbrainz_rs::entity::artist::Artist;
-</span><span>use musicbrainz_rs::prelude::*;
-</span><span>
-</span><span>fn main() {
-</span><span>    </span><span style="color:#b48ead;">let</span><span> green_day = Artist::fetch()
-</span><span>        .id(</span><span style="color:#a3be8c;">&quot;084308bd-1654-436f-ba03-df6697104e19&quot;</span><span>)
-</span><span>        .with_release_groups()
-</span><span>        .execute()
-</span><span>        .unwrap();
-</span><span>
-</span><span>    </span><span style="color:#b48ead;">let</span><span> release_groups = green_day.release_groups.unwrap();
-</span><span>
-</span><span>    assert!(release_groups
-</span><span>        .iter()
-</span><span>        .any(|release_group| release_group.title == </span><span style="color:#a3be8c;">&quot;Dookie&quot;</span><span>));
-</span><span>}
-</span></code></pre>
-<p>musicbrainz_rs isn't listed as a recognized library by MusicBrainz, since the library does
-not completely wrap around the Web-API at the moment. Off the top of my head, we're mainly missing
-on Non-MBID Lookups, Search and Submitting Data.
-There are also parts of the library that need to be addressed before it being suitable for use in
-production. Anyway, I've been working with Paul (creator of musicbrainz_rs) to build new features in the library.
-We've had some cool things going on since the last month, which I'll talk about in the next sections!</p>
-<h4 id="coverart">Coverart</h4>
-<ul>
-<li>The library can now fetch for coverart for the release and release-group entities. An
-example covering all of these methods can be found in - <a href="https://github.com/oknozor/musicbrainz_rs/blob/648215ad5e7661ac48016c9627507818c8345928/examples/fetch_release_coverart.rs">fetch_release_coverart.rs</a>.
-<br><br></li>
-</ul>
-<h4 id="auto-retries">Auto-retries</h4>
-<ul>
-<li>The library will now auto-retry on queries failed due to rate-limiting by the MusicBrainz
-servers. In case of a failed query due to rate-limiting, we're returned with the time duration in the
-response header until the next query would be accepted the MusicBrainz servers. The library
-now automatically sleeps the current thread for this received duration and retries the
-query by default. The default is set to 2 retries per failed query and this can be changed with:</li>
-</ul>
-<pre data-lang="swift" style="background-color:#2b303b;color:#c0c5ce;" class="language-swift "><code class="language-swift" data-lang="swift"><span>musicbrainz_rs::config::set_default_retries(</span><span style="color:#d08770;">3</span><span>);
-</span></code></pre>
-<ul>
-<li>We've also previously had trouble running our test-suite due to this. Our test-suite is
-constantly making queries to MusicBrainz servers and the queries would start to fail after
-a while. So we had ugly hacks in-place to get our test-suite to pass. We had introduced
-a one second sleep in our test-suite after every call to the MusicBrainz servers to not trigger
-their rate-limitations, and this had been greatly increasing our test-suite run times. I'm glad
-this is no longer the case after introducing auto-retries!
-<br><br></li>
-</ul>
-<h4 id="relationship-includes">Relationship Includes</h4>
-<ul>
-<li>
-<p>I mentioned earlier about how we can request for additional information when making queries
-by passing the <code>?inc=</code> subquery parameter. Relationship includes can be considered as one such
-category of parameters that can be passed to <code>?inc=</code>.</p>
-</li>
-<li>
-<p>I've been involved with refactoring the already implemented subquery include parameters
-and further implemented the relationship include parameters. This involved some manual
-work on my part to figure out what include parameters are accepted by what entities
-(since this doesn't seem to have been documented <a href="https://musicbrainz.org/doc/MusicBrainz_API#Relationships">in the docs</a>
-and I couldn't find it anywhere else either). Anyway, requests to relationship
-includes can now be made simliar to how subquery includes are requested for:</p>
-</li>
-<li>
-<p><del>(This hasn't been merged into the main codebase yet, we'll get there soon!)</del> We're there now!</p>
-</li>
-</ul>
-<pre data-lang="swift" style="background-color:#2b303b;color:#c0c5ce;" class="language-swift "><code class="language-swift" data-lang="swift"><span>    </span><span style="color:#b48ead;">let</span><span> ninja_tune = Label::fetch()
-</span><span>        .id(</span><span style="color:#a3be8c;">&quot;dc940013-b8a8-4362-a465-291026c04b42&quot;</span><span>)
-</span><span>        .with_recording_relations()
-</span><span>        .execute()
-</span><span>        .unwrap();
-</span><span>
-</span><span>    </span><span style="color:#b48ead;">let</span><span> relations = ninja_tune.relations.unwrap();
-</span><span>
-</span><span>    assert!(relations
-</span><span>        .iter()
-</span><span>        .any(|rel| rel.relation_type == </span><span style="color:#a3be8c;">&quot;phonographic copyright&quot;</span><span>));
-</span></code></pre>
-<h2 id="this-is-fun">This is fun!</h2>
-<p>I've been enjoying so far. This GSoC has given me a chance to extend the reaches of MusicBrainz
-to Rust and also get better at writing Rust code, something that I've always been excited about
-ever since I first tried it out. :P</p>
-<p>I'm happy I got this opportunity. Thank you, Paul, and the MetaBrainz Foundation!</p>
+          <p>I self-host headscale on a VPS through the built-in NixOS module to remotely access a handful of personal devices
+and I find it works well. Within the last month, my headscale stopped working somehow due to a database migration
+issue resulting in a schema mismatch after I updated my nixpkgs flake input. Looking up, I wasn't able to find anyone
+with a similar issue recently, so it seemed like a one-off issue that happened to me somehow. Also, booting into
+a previous generation or rebuilding the config from the previous commit didn't help as it wouldn't revert the
+migration (which is expected since headscale's <code>db.sqlite</code> isn't tracked by the NixOS module). I track the <code>master</code>
+branch on nixpkgs for my updates. I had to purge headscale's database to start over and re-connect all my personal
+devices through a new pre-authkey. Luckily I had physical access or alternate means to reach all my personal
+devices that I wanted to re-connect, but this could've otherwise ended up badly for me.</p>
+<h2 id="lack-of-complete-declarability">Lack of complete declarability</h2>
+<p>The core idea of why I lean towards NixOS is the ability to reproduce the machine state entirely through my flake
+config. I guess this comes down to a matter of perspective and the gray area of what one considers as machine state
+versus runtime state.</p>
+<p>The headscale NixOS module defines its options <a href="https://search.nixos.org/options?channel=unstable&amp;query=headscale">here</a> and this module lacks the options to declare clients, which
+makes sense since it's currently not even possible to declare clients in headscale itself. It seems this capability
+is not currently planned for after going through headscale's issue tracker (<a href="https://github.com/juanfont/headscale/issues/662">#662</a>, <a href="https://github.com/juanfont/headscale/pull/666">#666</a>, <a href="https://github.com/juanfont/headscale/issues/1855">#1855</a>).</p>
+<p>This makes things a lil problematic to me. It means I cannot immediately re-spin another VPS exactly as it was in
+case my VPS goes down for whatever reason. I could keep a backup of my headscale DB (as well as <code>derp_server_private.key</code>
+and <code>noise_private.key</code> which are used for identification purposes) somewhere. But I don't wanna introduce another
+component into my homelab environment entirely for the sake of storing a DB that takes up few hundred KBs of storage.
+And I also can’t store the DB backup on my personal devices. Reaching those devices remotely requires Headscale itself,
+which creates a chicken-and-egg problem. It looks like at the moment there is no overlay networking tool around that
+provides complete declarability except for <a href="https://github.com/slackhq/nebula">Nebula</a>, which unfortunately doesn't provide MagicDNS-like functionality and exit-node relays convenience features which I really like (happy to learn if there exists one that is both declarable
+enough and provides these convenience functionality!). I guess I could glue my own DNS and iptables rules but I think
+I'd rather lean on a battle-tested solution for now. I also got to try out NetBird and read about Netmaker and ZeroTier
+but these suffer from same lack of client-level declarability.</p>
+<p>So for now, I decided to sops-nix encrypt my <code>db.sqlite</code> as well headscale keys into my NixOS config (<a href="https://github.com/ritiek/dotfiles/blob/171a942263668558000207dcde8b52e195a8dca5/machines/clawsiecats/services/headscale/default.nix">here</a>) which works well for now! I've tried setting up my personal devices into my headscale network and then deleting
+my <code>/var/lib/headscale</code>. This brings the control plane back online after a reboot, and my client devices reconnect
+without any manual intervention.</p>
+<h2 id="cloud-based-overlay-networking-tool-as-a-fallback">Cloud-based overlay networking tool as a fallback</h2>
+<p>This incident scared me off a little. So I decided to have a cloud-based overlay networking tool as a fallback just
+in case something goes wrong with my self-hosted headscale. I've been using NetBird for this and I like it. This is
+a nice-to-have as there may be more scenarios that I may not have thought of or have accounted for at present. This to
+me seems like a nice balance between not relying entirely on a cloud-based overlay networking tool while also having
+complete control of my own networks.</p>
 
         </article>
       </div>
