@@ -13,8 +13,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://ritiek.github.io/main.css?v=1775339543">
-<link rel="stylesheet" href="https://ritiek.github.io/custom.css?v=1775339543">
+<link rel="stylesheet" href="https://ritiek.github.io/main.css?v=1775340146">
+<link rel="stylesheet" href="https://ritiek.github.io/custom.css?v=1775340146">
 
 
 
@@ -392,7 +392,7 @@ The PR gets a green checkmark iff all the packages build successfully for all my
 <li>Revert just the problematic package by pinning it to an older nixpkgs version.</li>
 </ol>
 <p>This whole thing helps me with getting access to newest packages and versions with somewhat confidence that they'll work fine.</p>
-<h2 id="re-doing-by-backups-with-restic">Re-doing by backups with Restic</h2>
+<h2 id="re-doing-my-backups-with-restic">Re-doing my backups with Restic</h2>
 <p>I moved from Kopia to Restic for backups because a single Kopia instance doesn't support backing up to multiple repositories, and I didn't want to maintain multiple Kopia instances. NixOS also has a native Restic module that gives fine control over backup schedules, snapshot pruning, compression levels, and more.</p>
 <h3 id="restic-seems-to-work-nice">Restic seems to work nice</h3>
 <p>My Restic backup server and clients run on different machines, but they stay compatible because my machines use the same <code>flake.lock</code> file. All my machines run the same Restic version (server version stays in sync with client version), so I don't have to worry about client-server version mismatches.</p>
@@ -404,7 +404,7 @@ up in a corrupted state due to race issues if I were to run backups on a live fi
 might get flushed during the database backup leading to inconsistency).</p>
 <p>Check out my restic.nix to see all this in practice <a href="https://github.com/ritiek/dotfiles/blob/3b898749f45a61fceb04be11513ec1a6169f3e7a/machines/pilab/services/restic.nix">here</a>.</p>
 <h2 id="lazy-loading-services-to-save-memory">Lazy-loading services to save memory</h2>
-<p>At the time of writing this, I have curated 50+ independent Docker compose stacks (resulting in over 75+ Docker containers) as seen <a href="https://github.com/ritiek/dotfiles/tree/3b898749f45a61fceb04be11513ec1a6169f3e7a/machines/pilab/compose">here</a>.
+<p>At the time of writing this, I have curated over 50 independent Docker compose stacks (resulting in 75+ Docker containers) as seen <a href="https://github.com/ritiek/dotfiles/tree/3b898749f45a61fceb04be11513ec1a6169f3e7a/machines/pilab/compose">here</a>.
 This is too much for my RPi5 8GB RAM variant to run all at once, even with zram compression. I've ruminated on getting better hardware, but it looks
 like it's possible to lazy-load non-essential services on-demand (only when someone actually tries to access them) which saves memory usage when such
 non-essential services aren't being used.</p>
@@ -418,7 +418,7 @@ non-essential services aren't being used.</p>
 <li><strong>Automatic shutdown</strong>: A monitor checks for active connections every ~10 minutes. If there are none, the service stops and socat resumes listening.</li>
 </ol>
 <p>For example, see this implemented for Navidrome <a href="https://github.com/ritiek/dotfiles/blob/main/machines/pilab/compose/navidrome.nix#L12-L24">here</a>
-using a custom module for implmentation <a href="https://github.com/ritiek/dotfiles/blob/3b898749f45a61fceb04be11513ec1a6169f3e7a/machines/pilab/compose/lib/lazy-loading.nix">here</a>.</p>
+using a custom module for implementation <a href="https://github.com/ritiek/dotfiles/blob/3b898749f45a61fceb04be11513ec1a6169f3e7a/machines/pilab/compose/lib/lazy-loading.nix">here</a>.</p>
 <p>I've extended this pattern to several other services like Mealie (recipe management) and HomeBox (inventory tracking).</p>
 <p>The user experience is alrightish. These services usually start fast enough. Anyway, I'm still on a memory crunch since at times kernel starts
 page swapping pretty aggressively which ends up eating up all my CPU for quite a while.</p>
@@ -429,17 +429,17 @@ it with my approach.</p>
 <p>The VPS also runs NixOS. I can hand out a subdomain to friends, and they can access my service without needing special software or VPN access. More details about my VPS setup and how I use nixos-anywhere to install NixOS on providers that don't officially support it are <a href="https://github.com/ritiek/dotfiles/tree/f5b87e8fcd23ca6eb05ac79a2143319dbd9967a6/machines/clawsiecats">here</a> (Vultr and HostVDS for now).</p>
 <h2 id="future-plans-wi-fi-router-functionality">Future plans: Wi-Fi router functionality</h2>
 <p>This is still an idea needing research, but I'm considering running a wireless access point from my RPi5. The goal would be to route all connected devices through a VPN automatically, avoiding the need to configure VPN on each device individually. I'd also like to explore OpenWRT-style features like VLANs for isolating sketchy IoT devices.</p>
-<p>This appeals to me because I have a basic router and would rather avoid buying new hardware if I can integrate something like this into my RPi5 itself. It's currently connected to the Internet via an Ethernet cable anyway, so an access point off with this setup shouldn't be so bad I guess. NixOS on top should help me keep router-specific configuration manageable. I might do a post if this ever happens.</p>
+<p>This appeals to me because I have a basic router and would rather avoid buying new hardware if I can integrate something like this into my RPi5 itself. It's currently connected to the Internet via an Ethernet cable anyway, so an access point with this setup shouldn't be so bad I guess. NixOS on top should help me keep router-specific configuration manageable. I might do a post if this ever happens.</p>
 <h2 id="power-consumption">Power consumption</h2>
 <p>My current setup includes three NVMe drives connected to my RPi5 and a few other peripherals as listed:</p>
 <ol>
-<li>Two NVMe drives using Seeed Studio's PCIe3.0 Switch to dual M.2 hat (one for primary data storage, other for OS and attic cache).</li>
-<li>Third NVMe in a USB enclosure via USB 3.0 (for on-site backups).</li>
+<li>Two NVMe drives using Seeed Studio's PCIe3.0 Switch to dual M.2 hat (one for primary data storage, the other for OS and attic cache).</li>
+<li>A third NVMe in a USB enclosure via USB 3.0 (for on-site backups).</li>
 <li>Official RPi5 active cooler.</li>
 <li>Pimoroni Explorer HAT Pro connected through GPIO pins. Has LEDs and a mini 170-point breadboard that I've wired up with a BME680 sensor
 to collect environmental readings.</li>
 <li>NRF52840 with a SX1262 transceiver and a dedicated LoRa antenna connected to USB 2.0 for running a Meshtastic node.</li>
-<li>Occassionally a USB 2.0 Wi-Fi dongle (for experimental Wi-Fi router functionality).</li>
+<li>Occasionally a USB 2.0 Wi-Fi dongle (for experimental Wi-Fi router functionality).</li>
 <li>A dummy HDMI adapter cause why not.</li>
 </ol>
 <p>This entire setup consumes about 9-10W at idle and peaks around 16-19W under heavy CPU load and disk-usage, as measured using my locality's

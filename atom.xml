@@ -105,7 +105,7 @@ The PR gets a green checkmark iff all the packages build successfully for all my
 &lt;li&gt;Revert just the problematic package by pinning it to an older nixpkgs version.&lt;&#x2F;li&gt;
 &lt;&#x2F;ol&gt;
 &lt;p&gt;This whole thing helps me with getting access to newest packages and versions with somewhat confidence that they&#x27;ll work fine.&lt;&#x2F;p&gt;
-&lt;h2 id=&quot;re-doing-by-backups-with-restic&quot;&gt;Re-doing by backups with Restic&lt;&#x2F;h2&gt;
+&lt;h2 id=&quot;re-doing-my-backups-with-restic&quot;&gt;Re-doing my backups with Restic&lt;&#x2F;h2&gt;
 &lt;p&gt;I moved from Kopia to Restic for backups because a single Kopia instance doesn&#x27;t support backing up to multiple repositories, and I didn&#x27;t want to maintain multiple Kopia instances. NixOS also has a native Restic module that gives fine control over backup schedules, snapshot pruning, compression levels, and more.&lt;&#x2F;p&gt;
 &lt;h3 id=&quot;restic-seems-to-work-nice&quot;&gt;Restic seems to work nice&lt;&#x2F;h3&gt;
 &lt;p&gt;My Restic backup server and clients run on different machines, but they stay compatible because my machines use the same &lt;code&gt;flake.lock&lt;&#x2F;code&gt; file. All my machines run the same Restic version (server version stays in sync with client version), so I don&#x27;t have to worry about client-server version mismatches.&lt;&#x2F;p&gt;
@@ -117,7 +117,7 @@ up in a corrupted state due to race issues if I were to run backups on a live fi
 might get flushed during the database backup leading to inconsistency).&lt;&#x2F;p&gt;
 &lt;p&gt;Check out my restic.nix to see all this in practice &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;ritiek&#x2F;dotfiles&#x2F;blob&#x2F;3b898749f45a61fceb04be11513ec1a6169f3e7a&#x2F;machines&#x2F;pilab&#x2F;services&#x2F;restic.nix&quot;&gt;here&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;lazy-loading-services-to-save-memory&quot;&gt;Lazy-loading services to save memory&lt;&#x2F;h2&gt;
-&lt;p&gt;At the time of writing this, I have curated 50+ independent Docker compose stacks (resulting in over 75+ Docker containers) as seen &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;ritiek&#x2F;dotfiles&#x2F;tree&#x2F;3b898749f45a61fceb04be11513ec1a6169f3e7a&#x2F;machines&#x2F;pilab&#x2F;compose&quot;&gt;here&lt;&#x2F;a&gt;.
+&lt;p&gt;At the time of writing this, I have curated over 50 independent Docker compose stacks (resulting in 75+ Docker containers) as seen &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;ritiek&#x2F;dotfiles&#x2F;tree&#x2F;3b898749f45a61fceb04be11513ec1a6169f3e7a&#x2F;machines&#x2F;pilab&#x2F;compose&quot;&gt;here&lt;&#x2F;a&gt;.
 This is too much for my RPi5 8GB RAM variant to run all at once, even with zram compression. I&#x27;ve ruminated on getting better hardware, but it looks
 like it&#x27;s possible to lazy-load non-essential services on-demand (only when someone actually tries to access them) which saves memory usage when such
 non-essential services aren&#x27;t being used.&lt;&#x2F;p&gt;
@@ -131,7 +131,7 @@ non-essential services aren&#x27;t being used.&lt;&#x2F;p&gt;
 &lt;li&gt;&lt;strong&gt;Automatic shutdown&lt;&#x2F;strong&gt;: A monitor checks for active connections every ~10 minutes. If there are none, the service stops and socat resumes listening.&lt;&#x2F;li&gt;
 &lt;&#x2F;ol&gt;
 &lt;p&gt;For example, see this implemented for Navidrome &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;ritiek&#x2F;dotfiles&#x2F;blob&#x2F;main&#x2F;machines&#x2F;pilab&#x2F;compose&#x2F;navidrome.nix#L12-L24&quot;&gt;here&lt;&#x2F;a&gt;
-using a custom module for implmentation &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;ritiek&#x2F;dotfiles&#x2F;blob&#x2F;3b898749f45a61fceb04be11513ec1a6169f3e7a&#x2F;machines&#x2F;pilab&#x2F;compose&#x2F;lib&#x2F;lazy-loading.nix&quot;&gt;here&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+using a custom module for implementation &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;ritiek&#x2F;dotfiles&#x2F;blob&#x2F;3b898749f45a61fceb04be11513ec1a6169f3e7a&#x2F;machines&#x2F;pilab&#x2F;compose&#x2F;lib&#x2F;lazy-loading.nix&quot;&gt;here&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
 &lt;p&gt;I&#x27;ve extended this pattern to several other services like Mealie (recipe management) and HomeBox (inventory tracking).&lt;&#x2F;p&gt;
 &lt;p&gt;The user experience is alrightish. These services usually start fast enough. Anyway, I&#x27;m still on a memory crunch since at times kernel starts
 page swapping pretty aggressively which ends up eating up all my CPU for quite a while.&lt;&#x2F;p&gt;
@@ -142,17 +142,17 @@ it with my approach.&lt;&#x2F;p&gt;
 &lt;p&gt;The VPS also runs NixOS. I can hand out a subdomain to friends, and they can access my service without needing special software or VPN access. More details about my VPS setup and how I use nixos-anywhere to install NixOS on providers that don&#x27;t officially support it are &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;ritiek&#x2F;dotfiles&#x2F;tree&#x2F;f5b87e8fcd23ca6eb05ac79a2143319dbd9967a6&#x2F;machines&#x2F;clawsiecats&quot;&gt;here&lt;&#x2F;a&gt; (Vultr and HostVDS for now).&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;future-plans-wi-fi-router-functionality&quot;&gt;Future plans: Wi-Fi router functionality&lt;&#x2F;h2&gt;
 &lt;p&gt;This is still an idea needing research, but I&#x27;m considering running a wireless access point from my RPi5. The goal would be to route all connected devices through a VPN automatically, avoiding the need to configure VPN on each device individually. I&#x27;d also like to explore OpenWRT-style features like VLANs for isolating sketchy IoT devices.&lt;&#x2F;p&gt;
-&lt;p&gt;This appeals to me because I have a basic router and would rather avoid buying new hardware if I can integrate something like this into my RPi5 itself. It&#x27;s currently connected to the Internet via an Ethernet cable anyway, so an access point off with this setup shouldn&#x27;t be so bad I guess. NixOS on top should help me keep router-specific configuration manageable. I might do a post if this ever happens.&lt;&#x2F;p&gt;
+&lt;p&gt;This appeals to me because I have a basic router and would rather avoid buying new hardware if I can integrate something like this into my RPi5 itself. It&#x27;s currently connected to the Internet via an Ethernet cable anyway, so an access point with this setup shouldn&#x27;t be so bad I guess. NixOS on top should help me keep router-specific configuration manageable. I might do a post if this ever happens.&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;power-consumption&quot;&gt;Power consumption&lt;&#x2F;h2&gt;
 &lt;p&gt;My current setup includes three NVMe drives connected to my RPi5 and a few other peripherals as listed:&lt;&#x2F;p&gt;
 &lt;ol&gt;
-&lt;li&gt;Two NVMe drives using Seeed Studio&#x27;s PCIe3.0 Switch to dual M.2 hat (one for primary data storage, other for OS and attic cache).&lt;&#x2F;li&gt;
-&lt;li&gt;Third NVMe in a USB enclosure via USB 3.0 (for on-site backups).&lt;&#x2F;li&gt;
+&lt;li&gt;Two NVMe drives using Seeed Studio&#x27;s PCIe3.0 Switch to dual M.2 hat (one for primary data storage, the other for OS and attic cache).&lt;&#x2F;li&gt;
+&lt;li&gt;A third NVMe in a USB enclosure via USB 3.0 (for on-site backups).&lt;&#x2F;li&gt;
 &lt;li&gt;Official RPi5 active cooler.&lt;&#x2F;li&gt;
 &lt;li&gt;Pimoroni Explorer HAT Pro connected through GPIO pins. Has LEDs and a mini 170-point breadboard that I&#x27;ve wired up with a BME680 sensor
 to collect environmental readings.&lt;&#x2F;li&gt;
 &lt;li&gt;NRF52840 with a SX1262 transceiver and a dedicated LoRa antenna connected to USB 2.0 for running a Meshtastic node.&lt;&#x2F;li&gt;
-&lt;li&gt;Occassionally a USB 2.0 Wi-Fi dongle (for experimental Wi-Fi router functionality).&lt;&#x2F;li&gt;
+&lt;li&gt;Occasionally a USB 2.0 Wi-Fi dongle (for experimental Wi-Fi router functionality).&lt;&#x2F;li&gt;
 &lt;li&gt;A dummy HDMI adapter cause why not.&lt;&#x2F;li&gt;
 &lt;&#x2F;ol&gt;
 &lt;p&gt;This entire setup consumes about 9-10W at idle and peaks around 16-19W under heavy CPU load and disk-usage, as measured using my locality&#x27;s
