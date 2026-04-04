@@ -378,7 +378,7 @@ body.dark #suggestions span {
 @media (min-width: 768px) {
     .form-control.is-search {
         width: 130% !important;
-        transform: translateX(-23%) !important;
+        transform: translateX(-80%) !important;
     }
 }
 
