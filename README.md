@@ -15,6 +15,7 @@ A personal blog and website built with [Zola](https://www.getzola.org/), a fast 
 ### Prerequisites
 
 - [Zola](https://www.getzola.org/) installed, or use [Nix](https://nixos.org/) for a reproducible environment
+- Git submodules initialized (`git submodule update --init`)
 
 ### Building
 
