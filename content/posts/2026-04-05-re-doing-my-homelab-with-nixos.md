@@ -111,7 +111,7 @@ If there's a runtime bug in a package, I find myself going ahead with one of the
 
 This whole thing helps me with getting access to newest packages and versions with somewhat confidence that they'll work fine.
 
-## Re-doing by backups with Restic
+## Re-doing my backups with Restic
 
 I moved from Kopia to Restic for backups because a single Kopia instance doesn't support backing up to multiple repositories, and I didn't want to maintain multiple Kopia instances. NixOS also has a native Restic module that gives fine control over backup schedules, snapshot pruning, compression levels, and more.
 
@@ -132,7 +132,7 @@ Check out my restic.nix to see all this in practice [here](https://github.com/ri
 
 ## Lazy-loading services to save memory
 
-At the time of writing this, I have curated 50+ independent Docker compose stacks (resulting in over 75+ Docker containers) as seen [here](https://github.com/ritiek/dotfiles/tree/3b898749f45a61fceb04be11513ec1a6169f3e7a/machines/pilab/compose).
+At the time of writing this, I have curated over 50 independent Docker compose stacks (resulting in 75+ Docker containers) as seen [here](https://github.com/ritiek/dotfiles/tree/3b898749f45a61fceb04be11513ec1a6169f3e7a/machines/pilab/compose).
 This is too much for my RPi5 8GB RAM variant to run all at once, even with zram compression. I've ruminated on getting better hardware, but it looks
 like it's possible to lazy-load non-essential services on-demand (only when someone actually tries to access them) which saves memory usage when such
 non-essential services aren't being used.
@@ -149,7 +149,7 @@ Here's what I've been able to come up with to achieve lazy-loading:
 4. **Automatic shutdown**: A monitor checks for active connections every ~10 minutes. If there are none, the service stops and socat resumes listening.
 
 For example, see this implemented for Navidrome [here](https://github.com/ritiek/dotfiles/blob/main/machines/pilab/compose/navidrome.nix#L12-L24)
-using a custom module for implmentation [here](https://github.com/ritiek/dotfiles/blob/3b898749f45a61fceb04be11513ec1a6169f3e7a/machines/pilab/compose/lib/lazy-loading.nix).
+using a custom module for implementation [here](https://github.com/ritiek/dotfiles/blob/3b898749f45a61fceb04be11513ec1a6169f3e7a/machines/pilab/compose/lib/lazy-loading.nix).
 
 I've extended this pattern to several other services like Mealie (recipe management) and HomeBox (inventory tracking).
 
@@ -169,19 +169,19 @@ The VPS also runs NixOS. I can hand out a subdomain to friends, and they can acc
 
 This is still an idea needing research, but I'm considering running a wireless access point from my RPi5. The goal would be to route all connected devices through a VPN automatically, avoiding the need to configure VPN on each device individually. I'd also like to explore OpenWRT-style features like VLANs for isolating sketchy IoT devices.
 
-This appeals to me because I have a basic router and would rather avoid buying new hardware if I can integrate something like this into my RPi5 itself. It's currently connected to the Internet via an Ethernet cable anyway, so an access point off with this setup shouldn't be so bad I guess. NixOS on top should help me keep router-specific configuration manageable. I might do a post if this ever happens.
+This appeals to me because I have a basic router and would rather avoid buying new hardware if I can integrate something like this into my RPi5 itself. It's currently connected to the Internet via an Ethernet cable anyway, so an access point with this setup shouldn't be so bad I guess. NixOS on top should help me keep router-specific configuration manageable. I might do a post if this ever happens.
 
 ## Power consumption
 
 My current setup includes three NVMe drives connected to my RPi5 and a few other peripherals as listed:
 
-1. Two NVMe drives using Seeed Studio's PCIe3.0 Switch to dual M.2 hat (one for primary data storage, other for OS and attic cache).
-2. Third NVMe in a USB enclosure via USB 3.0 (for on-site backups).
+1. Two NVMe drives using Seeed Studio's PCIe3.0 Switch to dual M.2 hat (one for primary data storage, the other for OS and attic cache).
+2. A third NVMe in a USB enclosure via USB 3.0 (for on-site backups).
 3. Official RPi5 active cooler.
 4. Pimoroni Explorer HAT Pro connected through GPIO pins. Has LEDs and a mini 170-point breadboard that I've wired up with a BME680 sensor
    to collect environmental readings.
 5. NRF52840 with a SX1262 transceiver and a dedicated LoRa antenna connected to USB 2.0 for running a Meshtastic node.
-6. Occassionally a USB 2.0 Wi-Fi dongle (for experimental Wi-Fi router functionality).
+6. Occasionally a USB 2.0 Wi-Fi dongle (for experimental Wi-Fi router functionality).
 7. A dummy HDMI adapter cause why not.
 
 This entire setup consumes about 9-10W at idle and peaks around 16-19W under heavy CPU load and disk-usage, as measured using my locality's
