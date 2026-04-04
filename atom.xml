@@ -5,8 +5,161 @@
     <link rel="self" type="application/atom+xml" href="https://ritiek.github.io/atom.xml"/>
     <link rel="alternate" type="text/html" href="https://ritiek.github.io"/>
     <generator uri="https://www.getzola.org/">Zola</generator>
-    <updated>2026-03-06T00:00:00+00:00</updated>
+    <updated>2026-04-05T00:00:00+00:00</updated>
     <id>https://ritiek.github.io/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Re-doing my Homelab with NixOS</title>
+        <published>2026-04-05T00:00:00+00:00</published>
+        <updated>2026-04-05T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://ritiek.github.io/2026/04/05/re-doing-my-homelab-with-nixos/"/>
+        <id>https://ritiek.github.io/2026/04/05/re-doing-my-homelab-with-nixos/</id>
+        
+        <content type="html" xml:base="https://ritiek.github.io/2026/04/05/re-doing-my-homelab-with-nixos/">&lt;p&gt;It&#x27;s been a little more than 2 years since my earlier homelab post (&lt;a href=&quot;&#x2F;2023&#x2F;12&#x2F;26&#x2F;homelabbing-on-a-raspberry-pi-4&#x2F;&quot;&gt;here&lt;&#x2F;a&gt;).
+I moved onto a shiny 8GB Raspberry Pi 5 shortly afterwards (from an RPi4) and worked on a few things. This
+post is a continuity to how things have evolved in terms of my requirements and the solutions I now see
+as a better fit.&lt;&#x2F;p&gt;
+&lt;p&gt;The most interesting change for me has been migrating most of my machines to NixOS.&lt;&#x2F;p&gt;
+&lt;p align=&quot;center&quot;&gt;
+  &lt;img src=&quot;&#x2F;assets&#x2F;IMG_20260404_215353_preview_rot.jpeg&quot; width=&quot;700&quot;&gt;
+  &lt;i&gt;Wall mounted&lt;&#x2F;i&gt; (^&gt;⩊&lt;^)⟆
+&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;migrating-from-raspberry-pi-os&quot;&gt;Migrating from Raspberry Pi OS&lt;&#x2F;h2&gt;
+&lt;p&gt;When I first started self-hosting, I had been managing services mostly manually: installing packages directly on the system, editing config files scattered across &lt;code&gt;&#x2F;etc&#x2F;&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;NixOS seems to help with this by defining all such nitty-gritties into system configuration files. This means I can completely recreate my self-hosting setup on a fresh RPi just by &quot;copying&quot; over my configuration files (in quotes because there&#x27;s been more to just copying as I continue to dig more into the ecosystem; discovering nixos-anywhere and many more interesting tools).&lt;&#x2F;p&gt;
+&lt;p&gt;I&#x27;ve slowly migrated most of my machines to run NixOS, including my RPi5 role-playing as homelab. Diving
+into NixOS has been one of the few significant investments that I&#x27;m really happy about. Beyond the reproducibility benefits, it&#x27;s helped me gain a different perspective to how I think about system complexity.&lt;&#x2F;p&gt;
+&lt;p&gt;My NixOS configuration as of writing this post can be found &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;ritiek&#x2F;dotfiles&#x2F;tree&#x2F;3b898749f45a61fceb04be11513ec1a6169f3e7a&quot;&gt;here&lt;&#x2F;a&gt;. All the stuff I talk about below are implemented in this config.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;ideas-behind-self-hosting&quot;&gt;Ideas behind self-hosting&lt;&#x2F;h2&gt;
+&lt;p&gt;I got into self-hosting mostly because it seemed fun and tinkerable. However, with time it&#x27;s become
+pretty important to me, more so to resist stashing away more of my digital identity within walled gardens.&lt;&#x2F;p&gt;
+&lt;p&gt;I try to approach hosting services for personal use with a long-term perspective whenever feasible. I&#x27;ve got services
+like Immich (photo management) and paperless-ngx (document organization) that I&#x27;ve spent time on carefully curating them. They hold important paperwork and memories of loved ones. Lately I&#x27;ve been trying to approach preserving them in a way I hope will outlive me, at least for a while. Maybe loved ones who care enough would be able to get LLMs to help them extract whatever&#x27;s left of it.&lt;&#x2F;p&gt;
+&lt;p&gt;I mainly run a few scheduled jobs and otherwise host services that tend to run idle most of the time, so
+a low-powered and power-efficient machine like RPis seem attractive to my use-cases. In the cases I
+could use more power (such as local LLM inference or Sunshine game streaming), I&#x27;m okay with
+offloading processing to a beefier machine (that isn&#x27;t up 24&#x2F;7) and a little bit of wait as it boots up and gets to crunching.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;for-when-i-bork-up-my-installation&quot;&gt;For when I bork up my installation&lt;&#x2F;h2&gt;
+&lt;p&gt;I like how I can generate a complete system image from my configuration. Here&#x27;s what needs to be done in my case to get back to the original system state afresh:&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;system-image&quot;&gt;System image&lt;&#x2F;h3&gt;
+&lt;p&gt;I generate an image file of my entire configuration which I then &lt;code&gt;dd&lt;&#x2F;code&gt;&#x2F;&lt;code&gt;cat&lt;&#x2F;code&gt;&#x2F;&lt;code&gt;pv&lt;&#x2F;code&gt; to a microSD card. It&#x27;ll boot up on my Pi with all my
+favorite packages pre-installed and my environment exactly as defined. However, since I use sops-nix to
+store encrypted secrets directly in my config, there are a few additional steps I have to perform to get my homelab-specific private SSH key in place (this key allows sops-nix to decrypt secrets like my Headscale auth keys, etc.).&lt;&#x2F;p&gt;
+&lt;p&gt;The process looks like this to be precise:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Build the system image (preferably using an ARM64 machine for native compilation):&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; cd &#x2F;etc&#x2F;nixos
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; nix build .#pilab-sd
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Write the image to microSD:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; pv .&#x2F;result&#x2F;sd-image&#x2F;*.img.zst | &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;unzstd &lt;&#x2F;span&gt;&lt;span&gt;| &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;sudo&lt;&#x2F;span&gt;&lt;span&gt; tee &#x2F;dev&#x2F;sdc &amp;gt; &#x2F;dev&#x2F;null
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Plug the microSD into my Pi and power it up.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Wait 3-4 minutes for the Pi to set up its directory structure, then power off and mount the microSD on
+another machine to place my private SSH key into Pi&#x27;s &lt;code&gt;&#x2F;etc&#x2F;ssh&#x2F;ssh_host_ed25519_key&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;(I wonder if it&#x27;s possible to automate this step by inserting in a Yubikey at boot)&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Plug the microSD back into the Pi and boot it up.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;That&#x27;s it! I can now SSH into my Pi and be greeted with my complete environment. I then start my services manually with &lt;code&gt;sudo homelab-start&lt;&#x2F;code&gt;,
+since I get prompted for my LUKS decryption key at this step which I like feeding in manually, as I&#x27;ve defined in my flake config.&lt;&#x2F;p&gt;
+&lt;p&gt;At this point, I&#x27;m pretty much back to how everything needs to be.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;software-updates&quot;&gt;Software updates&lt;&#x2F;h2&gt;
+&lt;p&gt;One challenge I faced early on was keeping my NixOS system updated. I initially started with NixOS stable channels, but quickly realized my favorite new features in tools like Hyprland (a tiling window manager) sometimes take a while to hit stable channels. I also had issues with screen-sharing.&lt;&#x2F;p&gt;
+&lt;p&gt;I moved to unstable channels, but had a similar feeling of being a bit behind. Eventually, I decided to track nixpkgs master branch directly to get everything as close to latest. This might not be feasible for everyone since software builds tend to break on master branch at times and nixpkgs cache doesn&#x27;t track
+the master branch for build artifacts. I&#x27;ve spent quite a bit of time and electricity on updates trying to compile everything locally on my machine when
+tracking the master branch.&lt;&#x2F;p&gt;
+&lt;p&gt;It&#x27;s gotten better over time however, after figuring out my pain points. Mainly:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;Don&#x27;t start a system update if packages will break halfway through.&lt;&#x2F;li&gt;
+&lt;li&gt;Avoid compiling everything on my local machines (since NixOS builds up official cache only once the packages reach unstable channels).&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;h3 id=&quot;automating-software-updates-using-github-actions&quot;&gt;Automating software updates using GitHub actions&lt;&#x2F;h3&gt;
+&lt;p&gt;Here&#x27;s what I do now and it seems to help with the pain points noted above.&lt;&#x2F;p&gt;
+&lt;p&gt;I have GitHub actions create a pull request to my dotfiles repository every day with the most current up-to-date package versions in my &lt;code&gt;flake.lock&lt;&#x2F;code&gt;. For every such update, GitHub actions attempts to build packages for all my machines and pushes the resulting build cache to my RPi5.
+My RPi5 hosts a public &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;zhaofengli&#x2F;attic&quot;&gt;attic&lt;&#x2F;a&gt; server (a self-hosted binary cache for Nix packages). It&#x27;s read-only by default
+but I store write keys into my repository secrets so GitHub actions has push-access to my cache.
+The PR gets a green checkmark iff all the packages build successfully for all my machines. This means the update will go through successfully everywhere since I share my &lt;code&gt;flake.lock&lt;&#x2F;code&gt; between my machines.&lt;&#x2F;p&gt;
+&lt;p&gt;For an example, check out PRs on my dotfiles repo (&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;ritiek&#x2F;dotfiles&#x2F;pull&#x2F;33&quot;&gt;such as this one&lt;&#x2F;a&gt;).&lt;&#x2F;p&gt;
+&lt;p&gt;I can then accept updates by merging PRs with green passing checks. After merging, I manually run &lt;code&gt;git pull&lt;&#x2F;code&gt; and &lt;code&gt;sudo nixos-rebuild switch --flake .#my-machine&lt;&#x2F;code&gt; on each machine. The build cache gets pulled from my RPi5&#x27;s attic server, so updates are fast.&lt;&#x2F;p&gt;
+&lt;p&gt;If there&#x27;s a runtime bug in a package, I find myself going ahead with one of these two options usually:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;Rollback to the previous NixOS generation and wait for the bug to be fixed upstream.&lt;&#x2F;li&gt;
+&lt;li&gt;Revert just the problematic package by pinning it to an older nixpkgs version.&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;This whole thing helps me with getting access to newest packages and versions with somewhat confidence that they&#x27;ll work fine.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;re-doing-by-backups-with-restic&quot;&gt;Re-doing by backups with Restic&lt;&#x2F;h2&gt;
+&lt;p&gt;I moved from Kopia to Restic for backups because a single Kopia instance doesn&#x27;t support backing up to multiple repositories, and I didn&#x27;t want to maintain multiple Kopia instances. NixOS also has a native Restic module that gives fine control over backup schedules, snapshot pruning, compression levels, and more.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;restic-seems-to-work-nice&quot;&gt;Restic seems to work nice&lt;&#x2F;h3&gt;
+&lt;p&gt;My Restic backup server and clients run on different machines, but they stay compatible because my machines use the same &lt;code&gt;flake.lock&lt;&#x2F;code&gt; file. All my machines run the same Restic version (server version stays in sync with client version), so I don&#x27;t have to worry about client-server version mismatches.&lt;&#x2F;p&gt;
+&lt;p&gt;Restic NixOS module lets me read repository credentials through sops-nix so I&#x27;m able to store these creds into my flake config itself declaratively.&lt;&#x2F;p&gt;
+&lt;p&gt;The module also offers &lt;code&gt;backupPrepareCommand&lt;&#x2F;code&gt; and &lt;code&gt;backupCleanupCommand&lt;&#x2F;code&gt; options which help me light up an LED on my Pimoroni Explorer HAT Pro when the snapshot backup is in progress (just some nice visual indicators I enjoy seeing) and lets me send success&#x2F;failure notifications to my self-hosted Uptime Kuma monitoring server (also running on the RPi5) after a snapshot is done.&lt;&#x2F;p&gt;
+&lt;p&gt;Since I store all my self-hosted stuff on a BTRFS filesystem, I take a BTRFS snapshot to freeze the filesystem state and then I backup this BTRFS
+snapshot through Restic. This helps with backing up my SQLite3 and PostgreSQL databases correctly which otherwise may end
+up in a corrupted state due to race issues if I were to run backups on a live filesystem (these databases use WAL to store state which
+might get flushed during the database backup leading to inconsistency).&lt;&#x2F;p&gt;
+&lt;p&gt;Check out my restic.nix to see all this in practice &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;ritiek&#x2F;dotfiles&#x2F;blob&#x2F;3b898749f45a61fceb04be11513ec1a6169f3e7a&#x2F;machines&#x2F;pilab&#x2F;services&#x2F;restic.nix&quot;&gt;here&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;lazy-loading-services-to-save-memory&quot;&gt;Lazy-loading services to save memory&lt;&#x2F;h2&gt;
+&lt;p&gt;At the time of writing this, I have curated 50+ independent Docker compose stacks (resulting in over 75+ Docker containers) as seen &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;ritiek&#x2F;dotfiles&#x2F;tree&#x2F;3b898749f45a61fceb04be11513ec1a6169f3e7a&#x2F;machines&#x2F;pilab&#x2F;compose&quot;&gt;here&lt;&#x2F;a&gt;.
+This is too much for my RPi5 8GB RAM variant to run all at once, even with zram compression. I&#x27;ve ruminated on getting better hardware, but it looks
+like it&#x27;s possible to lazy-load non-essential services on-demand (only when someone actually tries to access them) which saves memory usage when such
+non-essential services aren&#x27;t being used.&lt;&#x2F;p&gt;
+&lt;p&gt;Services like Navidrome (music streaming), TubeArchivist (YouTube archival), and Memos (note-taking) don&#x27;t need to run 24&#x2F;7. I&#x27;m okay waiting a few seconds for these to start up when I want to use them.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;socat-to-lazy-load&quot;&gt;Socat to lazy-load&lt;&#x2F;h3&gt;
+&lt;p&gt;Here&#x27;s what I&#x27;ve been able to come up with to achieve lazy-loading:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Port monitoring&lt;&#x2F;strong&gt;: socat listens for connections on the service&#x27;s normal port.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Service startup&lt;&#x2F;strong&gt;: When a connection is detected, the actual service launches on an internal port  .&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Proxy mode&lt;&#x2F;strong&gt;: socat forwards requests to the now-running service.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Automatic shutdown&lt;&#x2F;strong&gt;: A monitor checks for active connections every ~10 minutes. If there are none, the service stops and socat resumes listening.&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;For example, see this implemented for Navidrome &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;ritiek&#x2F;dotfiles&#x2F;blob&#x2F;main&#x2F;machines&#x2F;pilab&#x2F;compose&#x2F;navidrome.nix#L12-L24&quot;&gt;here&lt;&#x2F;a&gt;
+using a custom module for implmentation &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;ritiek&#x2F;dotfiles&#x2F;blob&#x2F;3b898749f45a61fceb04be11513ec1a6169f3e7a&#x2F;machines&#x2F;pilab&#x2F;compose&#x2F;lib&#x2F;lazy-loading.nix&quot;&gt;here&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;I&#x27;ve extended this pattern to several other services like Mealie (recipe management) and HomeBox (inventory tracking).&lt;&#x2F;p&gt;
+&lt;p&gt;The user experience is alrightish. These services usually start fast enough. Anyway, I&#x27;m still on a memory crunch since at times kernel starts
+page swapping pretty aggressively which ends up eating up all my CPU for quite a while.&lt;&#x2F;p&gt;
+&lt;p&gt;I later also discovered &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;sablierapp&#x2F;sablier&quot;&gt;sablier&lt;&#x2F;a&gt; which does something similar. I haven&#x27;t been able to dig in deeper to compare
+it with my approach.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;exposing-services-to-friends&quot;&gt;Exposing services to friends&lt;&#x2F;h2&gt;
+&lt;p&gt;Sometimes I need to share a service running on my RPi5 with friends or family who aren&#x27;t part of my Headscale network. For these cases, I run a reverse proxy using Nginx on my personal VPS, which routes requests through my RPi5 over my Headscale connection.&lt;&#x2F;p&gt;
+&lt;p&gt;The VPS also runs NixOS. I can hand out a subdomain to friends, and they can access my service without needing special software or VPN access. More details about my VPS setup and how I use nixos-anywhere to install NixOS on providers that don&#x27;t officially support it are &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;ritiek&#x2F;dotfiles&#x2F;tree&#x2F;f5b87e8fcd23ca6eb05ac79a2143319dbd9967a6&#x2F;machines&#x2F;clawsiecats&quot;&gt;here&lt;&#x2F;a&gt; (Vultr and HostVDS for now).&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;future-plans-wi-fi-router-functionality&quot;&gt;Future plans: Wi-Fi router functionality&lt;&#x2F;h2&gt;
+&lt;p&gt;This is still an idea needing research, but I&#x27;m considering running a wireless access point from my RPi5. The goal would be to route all connected devices through a VPN automatically, avoiding the need to configure VPN on each device individually. I&#x27;d also like to explore OpenWRT-style features like VLANs for isolating sketchy IoT devices.&lt;&#x2F;p&gt;
+&lt;p&gt;This appeals to me because I have a basic router and would rather avoid buying new hardware if I can integrate something like this into my RPi5 itself. It&#x27;s currently connected to the Internet via an Ethernet cable anyway, so an access point off with this setup shouldn&#x27;t be so bad I guess. NixOS on top should help me keep router-specific configuration manageable. I might do a post if this ever happens.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;power-consumption&quot;&gt;Power consumption&lt;&#x2F;h2&gt;
+&lt;p&gt;My current setup includes three NVMe drives connected to my RPi5 and a few other peripherals as listed:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;Two NVMe drives using Seeed Studio&#x27;s PCIe3.0 Switch to dual M.2 hat (one for primary data storage, other for OS and attic cache).&lt;&#x2F;li&gt;
+&lt;li&gt;Third NVMe in a USB enclosure via USB 3.0 (for on-site backups).&lt;&#x2F;li&gt;
+&lt;li&gt;Official RPi5 active cooler.&lt;&#x2F;li&gt;
+&lt;li&gt;Pimoroni Explorer HAT Pro connected through GPIO pins. Has LEDs and a mini 170-point breadboard that I&#x27;ve wired up with a BME680 sensor
+to collect environmental readings.&lt;&#x2F;li&gt;
+&lt;li&gt;NRF52840 with a SX1262 transceiver and a dedicated LoRa antenna connected to USB 2.0 for running a Meshtastic node.&lt;&#x2F;li&gt;
+&lt;li&gt;Occassionally a USB 2.0 Wi-Fi dongle (for experimental Wi-Fi router functionality).&lt;&#x2F;li&gt;
+&lt;li&gt;A dummy HDMI adapter cause why not.&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;This entire setup consumes about 9-10W at idle and peaks around 16-19W under heavy CPU load and disk-usage, as measured using my locality&#x27;s
+Kill-A-Watt equivalent.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
     <entry xml:lang="en">
         <title>Quirks of self-hosting an overlay networking tool (ft. Headscale)</title>
         <published>2026-03-06T00:00:00+00:00</published>
@@ -500,142 +653,6 @@ lying around which have latching points. So I got one of them stickied onto my E
     &lt;i&gt;Mounted breadboard. Yay!&lt;&#x2F;i&gt;
   &lt;&#x2F;div&gt;
 &lt;&#x2F;div&gt;
-</content>
-        
-    </entry>
-    <entry xml:lang="en">
-        <title>Re-doing my Homelab with NixOS</title>
-        <published>2025-09-09T00:00:00+00:00</published>
-        <updated>2025-09-09T00:00:00+00:00</updated>
-        
-        <author>
-          <name>
-            
-              Unknown
-            
-          </name>
-        </author>
-        
-        <link rel="alternate" type="text/html" href="https://ritiek.github.io/2025/09/09/re-doing-my-homelab-with-nixos/"/>
-        <id>https://ritiek.github.io/2025/09/09/re-doing-my-homelab-with-nixos/</id>
-        
-        <content type="html" xml:base="https://ritiek.github.io/2025/09/09/re-doing-my-homelab-with-nixos/">&lt;p&gt;It&#x27;s been close to 2 years since my earlier homelab post (&lt;a href=&quot;&#x2F;2023&#x2F;12&#x2F;26&#x2F;homelabbing-on-a-raspberry-pi-4&#x2F;&quot;&gt;here&lt;&#x2F;a&gt;).
-I moved onto a shiny Raspberry Pi 5 shortly afterwards (from an RPi4) and worked on a few things. This
-post is a continuity to how things have evolved in terms of my requirements and the solutions I now see
-as a better fit.&lt;&#x2F;p&gt;
-&lt;p&gt;The biggest change has been me migrating everything to NixOS, and it&#x27;s been transformative for how I think about managing my homelab infrastructure.&lt;&#x2F;p&gt;
-&lt;h2 id=&quot;why-nixos-for-a-homelab&quot;&gt;Why NixOS for a homelab?&lt;&#x2F;h2&gt;
-&lt;p&gt;When I first started self-hosting, I was managing services the traditional way: installing packages directly on the system, editing config files scattered across &lt;code&gt;&#x2F;etc&#x2F;&lt;&#x2F;code&gt;, and hoping I&#x27;d remember all the changes I made when something broke.&lt;&#x2F;p&gt;
-&lt;p&gt;NixOS seems to help with this. Instead of imperatively configuring your system, you declare what you want in a configuration file, and NixOS builds the entire system through it. This means I can completely recreate my homelab setup on a fresh Raspberry Pi just by copying over my configuration files.&lt;&#x2F;p&gt;
-&lt;p&gt;I&#x27;ve slowly migrated most of my machines to run NixOS, including my RPi5 role-playing as homelab. Diving
-into NixOS has been one of the few significant investments that I&#x27;m really happy about. Beyond the obvious reproducibility benefits, NixOS fundamentally changes how I think about system complexity.&lt;&#x2F;p&gt;
-&lt;p&gt;My current NixOS configuration can be found &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;ritiek&#x2F;dotfiles&#x2F;tree&#x2F;f5b87e8fcd23ca6eb05ac79a2143319dbd9967a6&quot;&gt;here&lt;&#x2F;a&gt;. All the techniques I discuss below are implemented in this config, so you can see exactly how they work in practice.&lt;&#x2F;p&gt;
-&lt;h2 id=&quot;my-approach-to-self-hosting&quot;&gt;My approach to self-hosting&lt;&#x2F;h2&gt;
-&lt;p&gt;I got into self-hosting mostly because it seemed fun and tinkerable. However, with time it&#x27;s become
-pretty important to me, more so to resist stashing away more of my digital identity within walled gardens.&lt;&#x2F;p&gt;
-&lt;p&gt;I tend to approach hosting services for personal use with a very long-term perspective. I&#x27;ve got services
-like Immich (photo management) and paperless-ngx (document organization) that I&#x27;ve spent time curating carefully. They hold important paperwork and memories of loved ones. Lately I try to approach preserving them in a way I hope will outlive me, at least for a while.&lt;&#x2F;p&gt;
-&lt;p&gt;I mainly run a few scheduled jobs and otherwise host services that tend to run idle most of the time, so
-a low-powered and power-efficient machine like Raspberry Pis seems like a good deal to me. In the cases I
-could use more power (such as AI inference or gaming with Sunshine game streaming), I&#x27;m okay with a little bit of wait and
-offloading processing to a beefier machine.&lt;&#x2F;p&gt;
-&lt;h2 id=&quot;setting-up-a-nixos-homelab-from-scratch&quot;&gt;Setting up a NixOS homelab from scratch&lt;&#x2F;h2&gt;
-&lt;p&gt;One of the most satisfying aspects of NixOS is how I can generate a complete system image from my configuration. Here&#x27;s my typical workflow when setting up or rebuilding my homelab:&lt;&#x2F;p&gt;
-&lt;h3 id=&quot;building-and-deploying-the-system&quot;&gt;Building and deploying the system&lt;&#x2F;h3&gt;
-&lt;p&gt;NixOS lets me generate an image file of my entire configuration that I can
-then write directly to a microSD card. It&#x27;ll boot up on my Pi with all my
-favorite packages pre-installed and my environment exactly as defined. However, since I use sops-nix to
-store encrypted secrets directly in my config, there are a few additional steps I need to perform to get my homelab-specific private SSH key in place (this key allows sops-nix to decrypt my secrets).&lt;&#x2F;p&gt;
-&lt;p&gt;The process looks like this:&lt;&#x2F;p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Build the system image&lt;&#x2F;strong&gt; (preferably using an ARM64 machine for native compilation):&lt;&#x2F;p&gt;
-&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; cd &#x2F;etc&#x2F;nixos
-&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; nix build .#pilab-sd
-&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
-&lt;&#x2F;li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Write the image to microSD&lt;&#x2F;strong&gt;:&lt;&#x2F;p&gt;
-&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; pv .&#x2F;result&#x2F;sd-image&#x2F;*.img.zst | &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;unzstd &lt;&#x2F;span&gt;&lt;span&gt;| &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;sudo&lt;&#x2F;span&gt;&lt;span&gt; tee &#x2F;dev&#x2F;sdc &amp;gt; &#x2F;dev&#x2F;null
-&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
-&lt;&#x2F;li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Initial boot setup&lt;&#x2F;strong&gt;: Plug the microSD into my Pi and power it up.&lt;&#x2F;p&gt;
-&lt;&#x2F;li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Add the decryption key&lt;&#x2F;strong&gt;: Wait 3-4 minutes for the Pi to set up its directory structure, then power off and mount the microSD on another machine to place my private SSH key into Pi&#x27;s &lt;code&gt;&#x2F;etc&#x2F;ssh&#x2F;ssh_host_ed25519_key&lt;&#x2F;code&gt; (I wonder if it&#x27;s possible to automate this step by inserting in a Yubikey at boot).&lt;&#x2F;p&gt;
-&lt;&#x2F;li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Final boot&lt;&#x2F;strong&gt;: Plug the microSD back into the Pi and boot it up.&lt;&#x2F;p&gt;
-&lt;&#x2F;li&gt;
-&lt;&#x2F;ol&gt;
-&lt;p&gt;That&#x27;s it! I can now SSH into my Pi and be greeted with my complete environment. I can start my services using &lt;code&gt;sudo homelab-start&lt;&#x2F;code&gt;, which I&#x27;ve defined in my flake config.&lt;&#x2F;p&gt;
-&lt;p&gt;No more spending hours trying to remember how I configured something months ago.&lt;&#x2F;p&gt;
-&lt;h2 id=&quot;automating-software-updates-safely&quot;&gt;Automating software updates safely&lt;&#x2F;h2&gt;
-&lt;p&gt;One challenge I faced early on was keeping my NixOS system updated. I initially started with NixOS stable channels, but quickly realized my favorite new features in tools like Hyprland (a tiling window manager) sometimes take a while to hit stable channels. I also had issues with screen-sharing.&lt;&#x2F;p&gt;
-&lt;p&gt;I moved to unstable channels, but had a similar feeling of being a bit behind. Eventually, I decided to track nixpkgs master branch directly for the latest everything.&lt;&#x2F;p&gt;
-&lt;p&gt;This created three problems I needed to solve:&lt;&#x2F;p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;Staying current&lt;&#x2F;strong&gt;: Updates should track upstream as closely as possible&lt;&#x2F;li&gt;
-&lt;li&gt;&lt;strong&gt;Avoiding broken updates&lt;&#x2F;strong&gt;: Don&#x27;t start an update if packages will break halfway through&lt;&#x2F;li&gt;
-&lt;li&gt;&lt;strong&gt;Reducing compilation time&lt;&#x2F;strong&gt;: Avoid compiling everything on my local machines (since NixOS builds up official cache only once the packages reach unstable channels)&lt;&#x2F;li&gt;
-&lt;&#x2F;ol&gt;
-&lt;h3 id=&quot;my-automated-update-solution&quot;&gt;My automated update solution&lt;&#x2F;h3&gt;
-&lt;p&gt;Here&#x27;s the system I&#x27;ve developed and it&#x27;s been running rock-solid for months:&lt;&#x2F;p&gt;
-&lt;p&gt;&lt;strong&gt;Daily automated testing&lt;&#x2F;strong&gt;: GitHub Actions creates a pull request to my dotfiles repository every day with the most up-to-date package versions in my &lt;code&gt;flake.lock&lt;&#x2F;code&gt; file. For every such update, GitHub Actions attempts to build all packages for all my machines and pushes the resulting build cache to my RPi5.&lt;&#x2F;p&gt;
-&lt;p&gt;&lt;strong&gt;Binary cache hosting&lt;&#x2F;strong&gt;: My RPi5 hosts an &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;zhaofengli&#x2F;attic&quot;&gt;Attic&lt;&#x2F;a&gt; server (think of it as a self-hosted binary cache for Nix packages). GitHub Actions can reach my RPi5 through my Headscale network (my personal VPN control server hosted on a VPS).&lt;&#x2F;p&gt;
-&lt;p&gt;&lt;strong&gt;Checks&lt;&#x2F;strong&gt;: The PR only gets a green checkmark if all packages build successfully on all my machines. This means the update will go through successfully everywhere since I share my &lt;code&gt;flake.lock&lt;&#x2F;code&gt; between machines.&lt;&#x2F;p&gt;
-&lt;p&gt;You can see an example of this automated process in &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;ritiek&#x2F;dotfiles&#x2F;pull&#x2F;33&quot;&gt;this PR&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
-&lt;p&gt;&lt;strong&gt;Manual approval&lt;&#x2F;strong&gt;: I only accept updates by merging green PRs. After merging, I manually run &lt;code&gt;git pull&lt;&#x2F;code&gt; and &lt;code&gt;sudo nixos-rebuild switch --flake .#my-machine&lt;&#x2F;code&gt; on each machine. The build cache gets pulled from my RPi5&#x27;s Attic server, so updates are fast.&lt;&#x2F;p&gt;
-&lt;p&gt;&lt;strong&gt;Recovery options&lt;&#x2F;strong&gt;: If there&#x27;s a runtime bug (not caught at compile time), I have two options:&lt;&#x2F;p&gt;
-&lt;ol&gt;
-&lt;li&gt;Rollback to the previous NixOS generation and wait for the bug to be fixed upstream&lt;&#x2F;li&gt;
-&lt;li&gt;Revert just the problematic package by pinning it to an older nixpkgs version&lt;&#x2F;li&gt;
-&lt;&#x2F;ol&gt;
-&lt;p&gt;This setup gives me bleeding-edge packages with confidence that they&#x27;ll actually work. Since implementing this system a few months ago, I haven&#x27;t come across pushing any failing updates onto my machines.&lt;&#x2F;p&gt;
-&lt;h2 id=&quot;backups-with-restic&quot;&gt;Backups with Restic&lt;&#x2F;h2&gt;
-&lt;p&gt;I moved from Kopia to Restic for backups because a single Kopia instance doesn&#x27;t support backing up to multiple repositories, and I didn&#x27;t want to maintain multiple Kopia instances. NixOS has a native Restic module that gives fine control over backup schedules, snapshot pruning, compression levels, and more.&lt;&#x2F;p&gt;
-&lt;h3 id=&quot;why-restic-works-well-in-my-setup&quot;&gt;Why Restic works well in my setup&lt;&#x2F;h3&gt;
-&lt;p&gt;&lt;strong&gt;Version compatibility&lt;&#x2F;strong&gt;: My Restic backup servers and clients run on different machines, but they stay compatible because they use the same &lt;code&gt;flake.lock&lt;&#x2F;code&gt; file. All my machines run the same Restic version, so I never worry about client-server version mismatches.&lt;&#x2F;p&gt;
-&lt;p&gt;&lt;strong&gt;Encrypted credentials&lt;&#x2F;strong&gt;: I store backup passwords and repository credentials encrypted using sops-nix, so they&#x27;re version-controlled but secure.&lt;&#x2F;p&gt;
-&lt;p&gt;&lt;strong&gt;Monitoring integration&lt;&#x2F;strong&gt;: My backup jobs send success&#x2F;failure notifications to my self-hosted Uptime Kuma monitoring server (also running on the RPi5).&lt;&#x2F;p&gt;
-&lt;h3 id=&quot;testing-system-recovery&quot;&gt;Testing system recovery&lt;&#x2F;h3&gt;
-&lt;p&gt;For the system itself (not just data), I periodically test my disaster recovery process. I&#x27;ll use my RPi4 to build a fresh image for my RPi5, flash it to a new microSD card, and boot my RPi5 from the new card. This simulates a &quot;the microSD died&quot; scenario and ensures I can actually recover my complete system setup.&lt;&#x2F;p&gt;
-&lt;p&gt;My Restic configuration files are available in my dotfiles: &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;ritiek&#x2F;dotfiles&#x2F;blob&#x2F;f5b87e8fcd23ca6eb05ac79a2143319dbd9967a6&#x2F;machines&#x2F;pilab&#x2F;services&#x2F;restic.nix&quot;&gt;client config&lt;&#x2F;a&gt; and &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;ritiek&#x2F;dotfiles&#x2F;blob&#x2F;f5b87e8fcd23ca6eb05ac79a2143319dbd9967a6&#x2F;machines&#x2F;pilab&#x2F;services&#x2F;restic-server.nix&quot;&gt;server config&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
-&lt;h2 id=&quot;on-demand-services-to-save-memory&quot;&gt;On-demand services to save memory&lt;&#x2F;h2&gt;
-&lt;p&gt;Running lots of containers on my RPi5&#x27;s 8GB of RAM eventually became a bottleneck, even with zram compression. Rather than buying more hardware, I researched running non-essential services on-demand (when someone actually tries to access them).&lt;&#x2F;p&gt;
-&lt;h3 id=&quot;how-on-demand-services-work&quot;&gt;How on-demand services work&lt;&#x2F;h3&gt;
-&lt;p&gt;Services like Navidrome (music streaming), TubeArchivist (YouTube archival), and Memos (note-taking) don&#x27;t need to run 24&#x2F;7. I&#x27;m okay waiting a few seconds for these to start up when I want to use them.&lt;&#x2F;p&gt;
-&lt;p&gt;Here&#x27;s the technique I developed:&lt;&#x2F;p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;Port monitoring&lt;&#x2F;strong&gt;: socat listens for connections on the service&#x27;s normal port&lt;&#x2F;li&gt;
-&lt;li&gt;&lt;strong&gt;Service startup&lt;&#x2F;strong&gt;: When a connection is detected, the actual service launches on an internal port&lt;&#x2F;li&gt;
-&lt;li&gt;&lt;strong&gt;Proxy mode&lt;&#x2F;strong&gt;: socat forwards requests to the now-running service&lt;&#x2F;li&gt;
-&lt;li&gt;&lt;strong&gt;Automatic shutdown&lt;&#x2F;strong&gt;: A monitor checks for active connections every ~10 minutes. If there are none, the service stops and socat resumes listening&lt;&#x2F;li&gt;
-&lt;&#x2F;ol&gt;
-&lt;p&gt;You can see this implemented for Navidrome &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;ritiek&#x2F;dotfiles&#x2F;blob&#x2F;f5b87e8fcd23ca6eb05ac79a2143319dbd9967a6&#x2F;machines&#x2F;pilab&#x2F;compose&#x2F;navidrome.nix&quot;&gt;here&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
-&lt;p&gt;This setup has freed up 1-2GB of physical memory (or 7-8GB accounting for zram compression) when services are idle. That&#x27;s significant on an 8GB machine. I&#x27;ve extended this pattern to several other services like Mealie (recipe management) and HomeBox (inventory tracking).&lt;&#x2F;p&gt;
-&lt;p&gt;The user experience is alrightish. These services usually start fast enough.&lt;&#x2F;p&gt;
-&lt;h2 id=&quot;exposing-services-securely&quot;&gt;Exposing services securely&lt;&#x2F;h2&gt;
-&lt;p&gt;Sometimes I need to share a service running on my RPi5 with friends or family who aren&#x27;t part of my Tailscale network. For these cases, I run a reverse proxy using Nginx on my personal VPS, which routes requests through my RPi5 over my Headscale connection.&lt;&#x2F;p&gt;
-&lt;p&gt;The VPS also runs NixOS. I can hand out a subdomain to friends, and they can access my service without needing special software or VPN access. More details about my VPS setup and how I use nixos-anywhere to install NixOS on providers that don&#x27;t officially support it are &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;ritiek&#x2F;dotfiles&#x2F;tree&#x2F;f5b87e8fcd23ca6eb05ac79a2143319dbd9967a6&#x2F;machines&#x2F;clawsiecats&quot;&gt;here&lt;&#x2F;a&gt; (Vultr and HostVDS for now).&lt;&#x2F;p&gt;
-&lt;h2 id=&quot;future-plans-wi-fi-router-functionality&quot;&gt;Future plans: Wi-Fi router functionality&lt;&#x2F;h2&gt;
-&lt;p&gt;This is still an idea needing research, but I&#x27;m considering running a wireless access point from my RPi5. The goal would be to route all connected devices through a VPN automatically, avoiding the need to configure VPN on each device individually. I&#x27;d also like to explore OpenWrt-style features like VLANs for isolating sketchy IoT devices.&lt;&#x2F;p&gt;
-&lt;p&gt;This appeals to me because I have a basic router and would rather avoid buying new hardware if I can integrate something like this into my RPi5 itself. It&#x27;s currently connected to the Internet via an Ethernet cable anyway, so an access point off with this setup shouldn&#x27;t be so bad I guess. NixOS on top should help me keep router-specific configuration manageable. I might do a post if this ever happens.&lt;&#x2F;p&gt;
-&lt;h2 id=&quot;power-consumption-and-hardware-setup&quot;&gt;Power consumption and hardware setup&lt;&#x2F;h2&gt;
-&lt;p&gt;My current setup includes three SSDs attached to my RPi5 and a few other peripherals:&lt;&#x2F;p&gt;
-&lt;ol&gt;
-&lt;li&gt;First NVMe using the Pimoroni NVMe Base (for primary data storage)&lt;&#x2F;li&gt;
-&lt;li&gt;Second NVMe in a USB enclosure via USB 3.0 (for on-site backups)&lt;&#x2F;li&gt;
-&lt;li&gt;Third external SSD via USB 3.0 (for storing Attic build cache)&lt;&#x2F;li&gt;
-&lt;li&gt;Official active cooler (minimal power draw)&lt;&#x2F;li&gt;
-&lt;li&gt;USB 2.0 Wi-Fi dongle (for experimental Wi-Fi router functionality)&lt;&#x2F;li&gt;
-&lt;&#x2F;ol&gt;
-&lt;p&gt;This entire setup consumes about 7.5-8.0W at idle (measured with a local Kill-A-Watt equivalent) and peaks at 11-13W under load.&lt;&#x2F;p&gt;
-&lt;p&gt;When the two external drives suspend after periods of inactivity, power consumption further drops to around 6.5-7.2W at idle. I haven&#x27;t seen it exceed 14W under load in real-world usage, which I&#x27;m happy with for the compute it provides.&lt;&#x2F;p&gt;
-&lt;h2 id=&quot;the-nixos-advantage-for-homelabs&quot;&gt;The NixOS advantage for homelabs&lt;&#x2F;h2&gt;
-&lt;p&gt;Simple things that used to require research and manual setup are now just configuration options. Take zram (memory compression) as an example: on other distributions, I&#x27;d need to find a userspace program, set up systemd services, and hope it all works together.&lt;&#x2F;p&gt;
-&lt;p&gt;With NixOS, zram is a simple &lt;code&gt;zramSwap.enable = true;&lt;&#x2F;code&gt; or watchdog is &lt;code&gt;systemd.settings.Manager.RuntimeWatchdogSec = 360;&lt;&#x2F;code&gt; in my configuration. Although, this is not to say it&#x27;s all glitters. It definitely has it quirks, but those somewhat make sense too when looking at them through the lens of NixOS trying to be as reproducible as possible.&lt;&#x2F;p&gt;
 </content>
         
     </entry>
