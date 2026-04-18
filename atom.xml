@@ -115,7 +115,8 @@ The PR gets a green checkmark iff all the packages build successfully for all my
 snapshot through Restic. This helps with backing up my SQLite3 and PostgreSQL databases correctly which otherwise may end
 up in a corrupted state due to race issues if I were to run backups on a live filesystem (these databases use WAL to store state which
 might get flushed during the database backup leading to inconsistency).&lt;&#x2F;p&gt;
-&lt;p&gt;Check out my restic.nix to see all this in practice &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;ritiek&#x2F;dotfiles&#x2F;blob&#x2F;3b898749f45a61fceb04be11513ec1a6169f3e7a&#x2F;machines&#x2F;pilab&#x2F;services&#x2F;restic.nix&quot;&gt;here&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;For my offsite backups, I do &lt;code&gt;appendOnly&lt;&#x2F;code&gt; restic backups.&lt;&#x2F;p&gt;
+&lt;p&gt;Check out my restic.nix to see all this in practice &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;ritiek&#x2F;dotfiles&#x2F;blob&#x2F;dd1462c6ca263026eb736453585eda98678ede4f&#x2F;machines&#x2F;pilab&#x2F;services&#x2F;restic.nix&quot;&gt;here&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;lazy-loading-services-to-save-memory&quot;&gt;Lazy-loading services to save memory&lt;&#x2F;h2&gt;
 &lt;p&gt;At the time of writing this, I have curated over 50 independent Docker compose stacks (resulting in 75+ Docker containers) as seen &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;ritiek&#x2F;dotfiles&#x2F;tree&#x2F;3b898749f45a61fceb04be11513ec1a6169f3e7a&#x2F;machines&#x2F;pilab&#x2F;compose&quot;&gt;here&lt;&#x2F;a&gt;.
 This is too much for my RPi5 8GB RAM variant to run all at once, even with zram compression. I&#x27;ve ruminated on getting better hardware, but it looks

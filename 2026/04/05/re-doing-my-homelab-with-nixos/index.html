@@ -13,8 +13,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://ritiek.github.io/main.css?v=1775386798">
-<link rel="stylesheet" href="https://ritiek.github.io/custom.css?v=1775386798">
+<link rel="stylesheet" href="https://ritiek.github.io/main.css?v=1776534793">
+<link rel="stylesheet" href="https://ritiek.github.io/custom.css?v=1776534793">
 
 
 
@@ -402,7 +402,8 @@ The PR gets a green checkmark iff all the packages build successfully for all my
 snapshot through Restic. This helps with backing up my SQLite3 and PostgreSQL databases correctly which otherwise may end
 up in a corrupted state due to race issues if I were to run backups on a live filesystem (these databases use WAL to store state which
 might get flushed during the database backup leading to inconsistency).</p>
-<p>Check out my restic.nix to see all this in practice <a href="https://github.com/ritiek/dotfiles/blob/3b898749f45a61fceb04be11513ec1a6169f3e7a/machines/pilab/services/restic.nix">here</a>.</p>
+<p>For my offsite backups, I do <code>appendOnly</code> restic backups.</p>
+<p>Check out my restic.nix to see all this in practice <a href="https://github.com/ritiek/dotfiles/blob/dd1462c6ca263026eb736453585eda98678ede4f/machines/pilab/services/restic.nix">here</a>.</p>
 <h2 id="lazy-loading-services-to-save-memory">Lazy-loading services to save memory</h2>
 <p>At the time of writing this, I have curated over 50 independent Docker compose stacks (resulting in 75+ Docker containers) as seen <a href="https://github.com/ritiek/dotfiles/tree/3b898749f45a61fceb04be11513ec1a6169f3e7a/machines/pilab/compose">here</a>.
 This is too much for my RPi5 8GB RAM variant to run all at once, even with zram compression. I've ruminated on getting better hardware, but it looks
