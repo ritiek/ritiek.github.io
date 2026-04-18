@@ -128,7 +128,9 @@ snapshot through Restic. This helps with backing up my SQLite3 and PostgreSQL da
 up in a corrupted state due to race issues if I were to run backups on a live filesystem (these databases use WAL to store state which
 might get flushed during the database backup leading to inconsistency).
 
-Check out my restic.nix to see all this in practice [here](https://github.com/ritiek/dotfiles/blob/3b898749f45a61fceb04be11513ec1a6169f3e7a/machines/pilab/services/restic.nix).
+For my offsite backups, I do `appendOnly` restic backups.
+
+Check out my restic.nix to see all this in practice [here](https://github.com/ritiek/dotfiles/blob/dd1462c6ca263026eb736453585eda98678ede4f/machines/pilab/services/restic.nix).
 
 ## Lazy-loading services to save memory
 
