@@ -5,8 +5,68 @@
     <link rel="self" type="application/atom+xml" href="https://ritiek.github.io/atom.xml"/>
     <link rel="alternate" type="text/html" href="https://ritiek.github.io"/>
     <generator uri="https://www.getzola.org/">Zola</generator>
-    <updated>2026-04-05T00:00:00+00:00</updated>
+    <updated>2026-06-10T00:00:00+00:00</updated>
     <id>https://ritiek.github.io/atom.xml</id>
+    <entry xml:lang="en">
+        <title>I got myself an Xteink X3 e-reader</title>
+        <published>2026-06-10T00:00:00+00:00</published>
+        <updated>2026-06-10T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://ritiek.github.io/2026/06/10/i-got-myself-an-xteink-x3-e-reader/"/>
+        <id>https://ritiek.github.io/2026/06/10/i-got-myself-an-xteink-x3-e-reader/</id>
+        
+        <content type="html" xml:base="https://ritiek.github.io/2026/06/10/i-got-myself-an-xteink-x3-e-reader/">&lt;p&gt;My Kindle Paperwhite 3 is now more than a decade old. I remember jailbreaking it not long after I got it
+to see what else I could do outside the corpo wall. It runs a Linux-based OS, and we can add custom
+screensavers, run an SSH server, use KOReader, or use the &lt;a href=&quot;&#x2F;2019&#x2F;02&#x2F;18&#x2F;sharing-linux-event-devices-with-other-linux-machines&#x2F;&quot;&gt;display as a wireless mouse&lt;&#x2F;a&gt;, among other things. Besides the obvious used look now,
+it still works surprisingly well.&lt;&#x2F;p&gt;
+&lt;p&gt;Unfortunately, I&#x27;ve had a difficult time fitting the Kindle into my routine to read more books or anything
+that requires sustained attention. It doesn&#x27;t feel like a very portable device, and it makes me prefer reading on my phone over carrying a special device that takes twice the space of my phone. Lately,
+I&#x27;ve found myself doom-scrolling or just finding ways to kill time on my phone when I&#x27;m not in a physical
+or mental place to be productive, and the stimulation really does make me feel like a mindless being.
+I&#x27;ve been looking for replacements or excuses to nope out of that urge, and I&#x27;ve lately
+seen Xteink gaining popularity. Their devices seem to somewhat adhere to open software standards, which
+helps with fun tinkering. They also seem small enough to be pocketable and perhaps help me get some reading done, unlike with my Kindle.&lt;&#x2F;p&gt;
+&lt;p&gt;I got myself the Xteink X3 from the official website (&lt;a href=&quot;https:&#x2F;&#x2F;www.xteink.com&#x2F;&quot;&gt;https:&#x2F;&#x2F;www.xteink.com&#x2F;&lt;&#x2F;a&gt;).
+They ship from China, and it took around a week for it to reach me here in India. I&#x27;ve read about some people
+preferring the X4 (which is the older variant) over the X3 due to the X3 removing the USB-C charging port
+and using an obscure charging port instead. This wasn&#x27;t a problem for me since my SenseCAP Card Tracker
+T1000-E flashed with Meshtastic uses a similar charging port, and the data&#x2F;charging cables I received with the T1000-E and X3 have been cross-compatible.&lt;&#x2F;p&gt;
+&lt;p align=&quot;center&quot;&gt;
+  &lt;img src=&quot;&#x2F;assets&#x2F;IMG_20260531_211556.jpg&quot; width=&quot;700&quot;&gt;
+  &lt;i&gt;T1000-E and Xteink X3 Front Side&lt;&#x2F;i&gt;
+&lt;&#x2F;p&gt;
+&lt;p align=&quot;center&quot;&gt;
+  &lt;img src=&quot;&#x2F;assets&#x2F;IMG_20260531_211257.jpg&quot; width=&quot;700&quot;&gt;
+  &lt;i&gt;T1000-E and Xteink X3 Back Side (charging wire and port are cross-compatible)&lt;&#x2F;i&gt;
+&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;flashing-crossink&quot;&gt;Flashing CrossInk&lt;&#x2F;h2&gt;
+&lt;p&gt;The first thing I did was a sanity check to ensure all the hardware buttons, sensors, charging, etc. were
+working correctly on the stock firmware. I then flashed CrossPoint Reader (&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;crosspoint-reader&#x2F;crosspoint-reader&quot;&gt;https:&#x2F;&#x2F;github.com&#x2F;crosspoint-reader&#x2F;crosspoint-reader&lt;&#x2F;a&gt;) and played around with it for
+about a week. I then tried out a couple of alternative firmware options for the X3.&lt;&#x2F;p&gt;
+&lt;p&gt;I found out that CrossInk, which is a fork of CrossPoint, has more features
+(&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;uxjulia&#x2F;CrossInk&quot;&gt;https:&#x2F;&#x2F;github.com&#x2F;uxjulia&#x2F;CrossInk&lt;&#x2F;a&gt;). What in particular made me migrate from CrossPoint to CrossInk were the current page becoming the
+sleep screensaver when in a book and the ability to re-map hardware buttons to perform more operations compared
+to what CrossPoint allows (CrossInk v1.3.2 as of writing this).&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;browsing-via-opds&quot;&gt;Browsing via OPDS&lt;&#x2F;h2&gt;
+&lt;p&gt;CrossPoint (and by extension the CrossInk fork) supports OPDS, which lets me browse and download books and articles from the Internet.
+I found out &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;crocodilestick&#x2F;calibre-web-automated&quot;&gt;Calibre-Web-Automated&lt;&#x2F;a&gt; provides an OPDS endpoint, and I already self-host it. It works nicely with CrossInk and lets me browse my collection from the device
+itself. Due to the lack of OPDS support in &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;karakeep-app&#x2F;karakeep&quot;&gt;Karakeep&lt;&#x2F;a&gt; (as of writing
+this), I also switched to self-hosting &lt;a href=&quot;https:&#x2F;&#x2F;codeberg.org&#x2F;readeck&#x2F;readeck&quot;&gt;Readeck&lt;&#x2F;a&gt; to browse my saved
+archives of interesting articles I come across on the Internet. I also self-host
+&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;miniflux&#x2F;v2&quot;&gt;Miniflux&lt;&#x2F;a&gt; to subscribe to RSS feeds of people who write interesting stuff,
+and I was able to connect Miniflux to Readeck to archive a post as soon as it lands. Now I can browse
+and read on my X3. I really adore open ecosystems.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
     <entry xml:lang="en">
         <title>Re-doing my Homelab with NixOS</title>
         <published>2026-04-05T00:00:00+00:00</published>
@@ -4000,6 +4060,7 @@ the LD_LIBRARY_PATH for root user before executing the netevent binary via SSH. 
 command in &lt;code&gt;netevent-setup.ne2&lt;&#x2F;code&gt; with something like this:&lt;&#x2F;p&gt;
 &lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;output add myremote exec:ssh user@hostname -p 8022 su -c &amp;quot;LD_LIBRARY_PATH=&#x2F;data&#x2F;data&#x2F;com.termux&#x2F;files&#x2F;usr&#x2F;lib &#x2F;data&#x2F;data&#x2F;com.termux&#x2F;files&#x2F;usr&#x2F;bin&#x2F;applets&#x2F;netevent create&amp;quot;
 &lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;android-phone&quot;&gt;Android Phone&lt;&#x2F;h3&gt;
 &lt;p&gt;I was also able to make my Android Phone act the host machine and share my Phone&#x27;s power and volume buttons
 with my laptop to perform actions which is equivalent to pressing the power button &#x2F; changing the system
 volume on my laptop. However, the touch on my Android didn&#x27;t seem to perform anything on the laptop, not
@@ -4008,6 +4069,7 @@ created on my laptop and the Android touch on was being registered on my when I 
 event file on my laptop but it seems like my laptop has no idea what the event data it received is supposed to do. There might
 be some more things possible like sharing the fingerprint scanner with the Linux machine (I tried it but
 couldn&#x27;t get it to work, but someone more experienced might have a better chance).&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;kindle-paperwhite-3&quot;&gt;Kindle Paperwhite 3&lt;&#x2F;h3&gt;
 &lt;p&gt;I also have a jailbroken Kindle Paperwhite 3, so I decided to give it a try as well. Turns out I was able
 to cross-compile netevent for Kindle using &lt;code&gt;arm-linux-gnueabi-cpp-4.9&lt;&#x2F;code&gt; cross-compiler (seems like the apt
 package &lt;code&gt;g++-4.9-arm-linux-gnueabi&lt;&#x2F;code&gt; is only available on older distro versions like Ubuntu Xenial, so I

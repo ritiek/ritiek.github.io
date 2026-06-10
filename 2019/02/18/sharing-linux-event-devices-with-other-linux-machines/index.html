@@ -13,8 +13,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://ritiek.github.io/main.css?v=1776534793">
-<link rel="stylesheet" href="https://ritiek.github.io/custom.css?v=1776534793">
+<link rel="stylesheet" href="https://ritiek.github.io/main.css?v=1781120558">
+<link rel="stylesheet" href="https://ritiek.github.io/custom.css?v=1781120558">
 
 
 
@@ -420,6 +420,7 @@ the LD_LIBRARY_PATH for root user before executing the netevent binary via SSH. 
 command in <code>netevent-setup.ne2</code> with something like this:</p>
 <pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>output add myremote exec:ssh user@hostname -p 8022 su -c &quot;LD_LIBRARY_PATH=/data/data/com.termux/files/usr/lib /data/data/com.termux/files/usr/bin/applets/netevent create&quot;
 </span></code></pre>
+<h3 id="android-phone">Android Phone</h3>
 <p>I was also able to make my Android Phone act the host machine and share my Phone's power and volume buttons
 with my laptop to perform actions which is equivalent to pressing the power button / changing the system
 volume on my laptop. However, the touch on my Android didn't seem to perform anything on the laptop, not
@@ -428,6 +429,7 @@ created on my laptop and the Android touch on was being registered on my when I 
 event file on my laptop but it seems like my laptop has no idea what the event data it received is supposed to do. There might
 be some more things possible like sharing the fingerprint scanner with the Linux machine (I tried it but
 couldn't get it to work, but someone more experienced might have a better chance).</p>
+<h3 id="kindle-paperwhite-3">Kindle Paperwhite 3</h3>
 <p>I also have a jailbroken Kindle Paperwhite 3, so I decided to give it a try as well. Turns out I was able
 to cross-compile netevent for Kindle using <code>arm-linux-gnueabi-cpp-4.9</code> cross-compiler (seems like the apt
 package <code>g++-4.9-arm-linux-gnueabi</code> is only available on older distro versions like Ubuntu Xenial, so I
