@@ -135,6 +135,8 @@ command in `netevent-setup.ne2` with something like this:
 output add myremote exec:ssh user@hostname -p 8022 su -c "LD_LIBRARY_PATH=/data/data/com.termux/files/usr/lib /data/data/com.termux/files/usr/bin/applets/netevent create"
 ```
 
+### Android Phone
+
 I was also able to make my Android Phone act the host machine and share my Phone's power and volume buttons
 with my laptop to perform actions which is equivalent to pressing the power button / changing the system
 volume on my laptop. However, the touch on my Android didn't seem to perform anything on the laptop, not
@@ -143,6 +145,8 @@ created on my laptop and the Android touch on was being registered on my when I 
 event file on my laptop but it seems like my laptop has no idea what the event data it received is supposed to do. There might
 be some more things possible like sharing the fingerprint scanner with the Linux machine (I tried it but
 couldn't get it to work, but someone more experienced might have a better chance).
+
+### Kindle Paperwhite 3
 
 I also have a jailbroken Kindle Paperwhite 3, so I decided to give it a try as well. Turns out I was able
 to cross-compile netevent for Kindle using `arm-linux-gnueabi-cpp-4.9` cross-compiler (seems like the apt
